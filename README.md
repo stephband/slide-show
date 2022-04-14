@@ -4,7 +4,7 @@ A standalone `<slide-show>` custom element, whose content is displayed as scroll
 ### Build
 
 ```cli
-make
+> make
 ```
 
 Builds production files to the `build/` folder, and documentation to `index.html`. 
