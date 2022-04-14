@@ -1,2 +1,2 @@
-# slide-show
-Slideshow/carousel implemented as a standalone `<slide-show>` custom element
+# `<slide-show>`
+A standalone `<slide-show>` custom element whose content is displayed as scroll-snapped carousel slides. 
