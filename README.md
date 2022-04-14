@@ -3,7 +3,7 @@ A standalone `<slide-show>` custom element, whose content is displayed as scroll
 
 ### Build
 
-```
+```cli
 make
 ```
 
