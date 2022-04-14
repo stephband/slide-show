@@ -1,0 +1,58 @@
+
+/* Nav links */
+
+nav > [part*="link"] + [part*="link"] {
+    margin-left: var(--link-gap);
+}
+
+
+
+[part="pagination"] {
+    grid-row: 2;
+}
+
+@media print {
+    [part="pagination"] {
+        display: none !important;
+    }
+}
+
+
+/**
+::part(link)
+Style the navigation links.
+**/
+
+[part*="link"] {
+    display: inline-block;
+    position: relative;
+    line-height: 1.25rem;
+    text-indent: 2rem;
+    text-align: left;
+    width: 1.25rem;
+    overflow: hidden;
+    white-space: nowrap;
+    color: inherit;
+}
+
+[part*="link"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -0.3125rem;
+    margin-left: -0.3125rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    border: 1px solid currentcolor;
+}
+
+/*
+.on
+Style the navigation link for the currently active slide.
+*/
+
+[part="link on"]::before {
+    background: currentcolor;
+}

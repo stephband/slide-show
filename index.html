@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!-- Literal template "/Users/stephband/Sites/bolt/elements/slide-show/index.html.literal" -->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+<meta name="author" content="stephband" />
+<meta name="description" content="Documentation for Bolt. A front-end toolkit of classes, evented behaviours and custom elements." />
+<meta name="viewport" content="width=device-width" />
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@stephband">
+<meta property="og:url" content="http://stephen.band/bolt/" />
+<meta property="og:title" content="Bolt" />
+<meta property="og:description" content="A front-end toolkit of classes, evented behaviours and custom elements." />
+<meta property="og:image" content="undefined" />
+
+
+<title>Bolt</title>
+
+
+
+<script title="load">
+    document.documentElement.className += ' js loading';
+    // window.addEventListener('DOMContentLoaded', () => document.documentElement.classList.remove('content-loading'));
+    // Wait for other load handlers to run first - Bolt does a few things on
+    // load (eg. targetable scrolls) and we want them to run before the loading
+    // class is removed
+    window.addEventListener('load', () => window.requestAnimationFrame(() => document.documentElement.classList.remove('loading')));
+</script>
+
+
+    <script title="debug">
+        window.DEBUG = true;
+    </script>
+    
+    <link rel="stylesheet" href="../../module.css">
+    <link rel="stylesheet" href="../../documentation/prism-cruncher.css" />
+<link rel="stylesheet" href="../../documentation.css" />
+<link rel="stylesheet" href="../../debug.css" />
+
+
+    <style>
+    slide-show {
+        background: #cccccc;
+        margin: 0 auto;
+        max-width: 30rem;
+    }
+    </style>
+</head>
+
+<body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid">
+    <nav class="x1 x-stretch y1 @2-x1 @2-1x">
+        <a class="thumb thumb-1:1" width="400" height="400" style="background-image: url('../../images/logo.svg'); background-size: contain; width: 120%; padding-top: 120%; max-width: 6rem; margin-top: -16%; margin-left: -8%; margin-right: -12%;">Bolt</a>
+    </nav>
+
+    
+<header class="x1 3x @1-x3 @1-4x @2-x4">
+    
+    <h2 class="doctext-02">&lt;slide-show&gt;</h2>
+    <p>Import <code>&lt;slide-show&gt;</code> custom element. This registers the custom
+element and upgrades instances already in the DOM.</p>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/bolt/elements/slide-show/module.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>../images/lyngen-4.png<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>../images/lyngen-2.png<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>../images/lyngen-1.png<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>3<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>../images/lyngen-3.png<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>4<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<p>By default children of <code>&lt;slide-show&gt;</code> are interpreted as ‘slides’, but
+elements with a <code>slot</code> attribute are not. Slides have default style of
+<code>scroll-snap-align: center</code>. Apply <code>start</code> or <code>end</code> to change the alignment.</p>
+
+    
+</header>
+
+<form class="x1 3x @1-x1 @1-2x @2-x1 @2-3x x-stretch y-start">
+    <script type="module" src="/bolt/elements/slide-show/module.js"></script>
+
+<slide-show loop controls="navigation">
+   <img src="../../images/lyngen-4.png" id="1" draggable="false" />
+   <img src="../../images/lyngen-2.png" id="2" draggable="false" />
+   <img src="../../images/lyngen-1.png" id="3" draggable="false" />
+   <img src="../../images/lyngen-3.png" id="4" draggable="false" />
+</slide-show>
+    <!-- for testing form submission values -->
+    <input hidden class="button" type="submit" />
+</form>
+
+<div class="x1 3x @1-x3 @1-2x @2-x4 x-stretch y-start">
+    
+    <h3 class="doctext-03">Attributes</h3>
+    
+<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-autoplay">
+<h3 class="attribute-doctext-05 doctext-05">
+    <a href="#attribute-autoplay">
+        <code class="token language-html">autoplay</code>
+    </a>
+</h3>
+
+<p>Boolean attribute. When present the slide-show activates the next
+slide after a pause. The pause duration may be set in CSS via the
+<code>--duration</code> variable.</p>
+
+</div>
+
+ 
+<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-controls">
+<h3 class="attribute-doctext-05 doctext-05">
+    <a href="#attribute-controls">
+        <code class="token language-html">controls</code>
+    </a>
+</h3>
+
+<p>Treated as a boolean or a token list. If it is present but empty
+all tokens are considered to be true. Otherwise, possible tokens are:</p>
+<p><strong>navigation</strong> enables previous and next buttons. The
+buttons may be styled with <code>::part(previous)</code> and <code>::part(next)</code>
+selectors. To change their text content, import and modify
+<code>config.trans</code>:</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> config <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../templates/bolt/elements/slide-show/module.js'</span><span class="token punctuation">;</span>
+config<span class="token punctuation">.</span>trans<span class="token punctuation">[</span><span class="token string">'Previous'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'Précédent'</span><span class="token punctuation">;</span>
+config<span class="token punctuation">.</span>trans<span class="token punctuation">[</span><span class="token string">'Next'</span><span class="token punctuation">]</span>     <span class="token operator">=</span> <span class="token string">'Suivant'</span><span class="token punctuation">;</span></code></pre>
+<p><strong>pagination</strong> enables a row of pagination dots. The
+dots may be styled with <code>::part(page)</code>.</p>
+
+</div>
+
+ 
+<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-loop">
+<h3 class="attribute-doctext-05 doctext-05">
+    <a href="#attribute-loop">
+        <code class="token language-html">loop</code>
+    </a>
+</h3>
+
+<p>Boolean attribute. Makes the slideshow behave as a continuous loop.</p>
+
+</div>
+
+ 
+
+    
+    
+    
+
+    
+    <h3 class="doctext-03">Properties</h3>
+    
+<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-active">
+<h3 class="property-doctext-05 doctext-05">
+    <a href="#property|selector-active">
+        <code class="property language-js">.active</code>
+    </a>
+</h3>
+
+<p>Returns the currently active child element - the current slide.</p>
+<pre><code class="language-js"><span class="token keyword">const</span> activeSlideElement <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span></code></pre>
+<p>May be set to one of the child elements, or to the id of one of the
+child elements. Setting this property causes the slide to change.</p>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>active <span class="token operator">=</span> <span class="token string">'slide-1'</span><span class="token punctuation">;</span></code></pre>
+
+</div>
+
+ 
+<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-autoplay">
+<h3 class="property-doctext-05 doctext-05">
+    <a href="#property|selector-autoplay">
+        <code class="property language-js">.autoplay</code>
+    </a>
+</h3>
+
+<p>Boolean property. When <code>true</code> the slide-show activates the next
+slide after a pause. The pause duration may be set in CSS via the
+<code>--duration</code> variable.</p>
+
+</div>
+
+ 
+<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-loop">
+<h3 class="property-doctext-05 doctext-05">
+    <a href="#property|selector-loop">
+        <code class="property language-js">.loop</code>
+    </a>
+</h3>
+
+<p>Boolean property. Makes the slideshow behave as a continuous loop.</p>
+
+</div>
+
+ 
+    
+    
+    <h3 class="doctext-03">Events</h3>
+    
+<div class="string-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="string-slide-activate">
+<h3 class="string-doctext-05 doctext-05">
+    <a href="#string-slide-activate">
+        <code class=" language-js">"slide-activate"</code>
+    </a>
+</h3>
+
+<p>Emitted on a <code>slide-show</code> child when it become the active slide.</p>
+
+</div>
+
+ 
+</div>
+
+<div class="x1 3x @1-x5 @1-2x @2-x6 x-stretch y-start">
+    
+    <h3 class="doctext-03">Parts</h3>
+    
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-previous">
+<h3 class="part-doctext-05 doctext-05">
+    <a href="#part-previous">
+        <code class=" language-css">::part(previous)</code>
+    </a>
+</h3>
+
+<p>Style the ‘previous slide’ button.</p>
+
+</div>
+
+ 
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-next">
+<h3 class="part-doctext-05 doctext-05">
+    <a href="#part-next">
+        <code class=" language-css">::part(next)</code>
+    </a>
+</h3>
+
+<p>Style the ‘next slide’ button.</p>
+
+</div>
+
+ 
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-link">
+<h3 class="part-doctext-05 doctext-05">
+    <a href="#part-link">
+        <code class=" language-css">::part(link)</code>
+    </a>
+</h3>
+
+<p>Style the navigation links.</p>
+
+</div>
+
+ 
+
+    
+    <h3 class="doctext-03">Variables</h3>
+    
+<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-duration">
+<h3 class="var-doctext-05 doctext-05">
+    <a href="#var-duration">
+        <code class=" language-css">--duration</code>
+    </a>
+</h3>
+
+<p>Set the duration that a slide is displayed for when the slideshow is in
+autoplay mode. May be a CSS time value in <code>s</code> or <code>ms</code>.</p>
+
+</div>
+
+ 
+<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-padding-left">
+<h3 class="var-doctext-05 doctext-05">
+    <a href="#var-padding-left">
+        <code class=" language-css">--padding-left</code>
+    </a>
+</h3>
+
+<p>Adjusts the space to the left of the leftmost slide. Internally it sets
+<code>padding</code> and <code>scroll-padding</code>.</p>
+
+</div>
+
+ 
+<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-padding-right">
+<h3 class="var-doctext-05 doctext-05">
+    <a href="#var-padding-right">
+        <code class=" language-css">--padding-right</code>
+    </a>
+</h3>
+
+<p>Adjusts the space to the right of the rightmost slide. Internally it sets
+<code>padding</code> and <code>scroll-padding</code> (and hacks around browsers’ lack of respect
+for <code>padding-right</code> on scrollable grids).</p>
+
+</div>
+
+ 
+</div>
+
+
+    <script type="module" src="./module.js"></script>
+
+    <script type="module">
+    import '../../module.js';
+    import '../../documentation.js';
+</script>
+    
+    <script type="module">
+    // Log events
+    import events from '../../../dom/modules/events.js';
+    events('slide-activate', document).each((e) => console.log(e.type, e.target));
+    </script>
+</body>

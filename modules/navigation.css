@@ -1,0 +1,74 @@
+
+/**
+::part(previous)
+Style the 'previous slide' button.
+**/
+
+/**
+::part(next)
+Style the 'next slide' button.
+**/
+
+[part="previous"],
+[part="next"] {
+    display: inline-block;
+    vertical-align: baseline;
+    overflow: hidden;
+    position: relative;
+
+    /* Nullify stuff */
+    padding: 0;
+    width: 0;
+    min-width: 0;
+    line-height: inherit;
+    text-decoration: none;
+
+    /* Hide text by pushing it rightward */
+    padding-left: 1.875rem;
+    height: 1.875rem;
+
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-width: 0;
+    color: inherit;
+}
+
+[part="previous"]:focus,
+[part="next"]:focus {
+    color: white;
+    outline-width: 0;
+}
+
+[part="previous"]::before,
+[part="next"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid transparent;
+}
+
+[part="previous"]::before {
+    left: 50%;
+    margin-left: -0.25rem;
+    border-top-color: currentcolor;
+    border-left-color: currentcolor;
+    transform: rotate(-45deg);
+}
+
+[part="next"]::before {
+    right: 50%;
+    margin-right: -0.25rem;
+    border-top-color: currentcolor;
+    border-right-color: currentcolor;
+    transform: rotate(45deg);
+}
+
+[part="previous"]:not([href]),
+[part="next"]:not([href]) {
+    display: none;
+}
