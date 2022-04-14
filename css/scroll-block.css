@@ -60,13 +60,6 @@
     /* background-color:  red; */
 }
 
-:host([loop]) > [part="grid"]::after {
-    background-color: transparent !important;
-    /* There are 3 x as many slides in loop mode, as the same number are
-       added to the front and to the back */
-    grid-column: calc(3 * var(--children-count) + 1);
-}
-
 [part="grid"]::-webkit-scrollbar {
     /* Not convinced this is necessary */
     -webkit-appearance: none;

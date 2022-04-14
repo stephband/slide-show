@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="stephband" />
-    <meta name="description" content="Documentation for Bolt. A front-end toolkit of classes, evented behaviours and custom elements." />
+    <meta name="description" content="<slide-show> test" />
     <meta name="viewport" content="width=device-width" />
 
     <title>&lt;slide-show&gt;</title>
@@ -17,10 +17,92 @@
     <link rel="stylesheet" href="../../documentation.css" />
     <link rel="stylesheet" href="../../debug.css" /-->
 
-    <style></style>
+    <style>
+    * {
+        /* Here's what makes Bolt a little different. Border box.
+           It'a a breath of fresh air to work with. */
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+                box-sizing: border-box;
+
+        /* Set the dimensions of backgrounds to the limits of the
+           padding box. */
+        -webkit-background-origin: padding-box;
+           -moz-background-origin: padding;
+                background-origin: padding-box;
+
+        /* Default to backgrounds that don't repeat. */
+        background-repeat: no-repeat;
+
+        padding: 0;
+        margin: 0;
+    }
+
+    .block,
+    .slides,
+    .scroller {
+        display: block;
+        width: 100%;
+    }
+
+    .scroller {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        width: 80%;
+        background-color: red;
+
+
+        padding-left: 3rem;
+        padding-right: 3rem;
+        scroll-padding-left: 3rem;
+        scroll-padding-right: 3rem;
+
+        overflow: scroll;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        -ms-overflow-style: none; /* IE 11 */
+        scrollbar-width: none; /* Firefox 64 */
+
+        scroll-snap-type: x mandatory;
+        scroll-snap-stop: always;
+        -webkit-scroll-behavior: smooth;
+                scroll-behavior: smooth;
+
+        will-change: -webkit-scroll-behavior;
+        will-change: scroll-behavior;
+    }
+
+    .slides {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr;
+        grid-auto-columns: 100%;
+        grid-auto-rows: min-content;
+        justify-content: start !important;
+        margin-right: 3rem;
+    }
+
+    img {
+        width: 100%;
+        scroll-snap-align: center;
+    }
+    </style>
 </head>
 
 <body>
-
+    <div class="block">
+        <div class="scroller">
+            <div class="slides">
+                <img src="images/bourg.jpg" />
+                <img src="images/bourg.jpg" />
+                <img src="images/bourg.jpg" />
+                <img src="images/bourg.jpg" />
+                <img src="images/bourg.jpg" />
+            </div>
+        </div>
+    </div>
 </body>
 </html>
