@@ -29,8 +29,12 @@
             --padding-right: 3rem;
         }
 
+        slide-show > a,
+        slide-show > a > img,
         slide-show > img {
+            display: block;
             width: 100%;
+            max-width: 100%;
         }
 
         .centre-slide-show,
@@ -56,15 +60,15 @@
 </head>
 
 <body>
-    <slide-show>
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
+    <slide-show autoplay>
+        <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
     </slide-show>
 
-    <slide-show class="centre-slide-show">
+    <!--slide-show class="centre-slide-show">
         <img src="images/bourg.jpg" draggable="false" />
         <img src="images/tractor.jpg" draggable="false" />
         <img src="images/bourg.jpg" draggable="false" />
@@ -94,7 +98,7 @@
         <img src="images/bourg.jpg" draggable="false" />
         <img src="images/tractor.jpg" draggable="false" />
         <img src="images/bourg.jpg" draggable="false" />
-    </slide-show>
+    </slide-show-->
 
     <script src="../element.js" type="module"></script>
     <script>

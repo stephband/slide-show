@@ -1,64 +1,51 @@
 
-/* Autoplay */
 /*
-function change() {
-    this.timer   = null;
-    const target = next(this.view.active);
-
-    // Have we reached the end?
-    if (!target) { return; }
-
-    scrollSmooth(this.view.element, this.view.slot, target);
-}
+Autoplay
 */
-function updateAutoplay(data, active) {
-    console.log('updateAutoplay');
-/*
+
+import id         from 'https://stephen.band/fn/modules/id.js';
+import parseValue from 'https://stephen.band/fn/modules/parse-value.js';
+
+const parseTime = parseValue({
+   's':  id,
+   'ms': (n) => n / 1000
+});
+
+
+function change(data) {
+    const { active, children, host } = data;
+    const i = children.indexOf(active);
+    const target = children[i + 1] || children[0];
+
+    data.autoplayTimer = undefined;
+    if (!target) { return; }
+    host.active = target;
+}
+
+function update(data) {
+    const { active, host } = data;
+
+    clearTimeout(data.autoplayTimer);
+    data.autoplayTimer = undefined;
+
     if (!active) { return; }
 
-    if (this.timer) {
-        clearTimeout(this.timer);
-    }
-
-    // Set a new autoplay timeout
     const duration = parseTime(
         window
-        .getComputedStyle(this.view.active)
-        .getPropertyValue('--duration') || config.duration
+        .getComputedStyle(active)
+        .getPropertyValue('--duration') || host.duration
     );
 
-    this.timer = setTimeout(() => this.change(), duration * 1000);
-*/
+    data.autoplayTimer = setTimeout(change, duration * 1000, data);
 }
 
-export function setupAutoplay() {
-    const update = new Stream((stream) => stream.each(updateAutoplay));
-
-    data.reflows.pipe(update);
-    data.activates.pipe(render);
-    data.autoplay = { update, render };
-    /*
-    this.activates.on(this.activateFn = (active) => this.activate(active));
-
-    if (this.view.active) {
-        this.activate(this.view.active);
-    }
-
-    // Expose state as loop view needs to know about autoplay
-    this.state = true;
-    */
+export function enableAutoplay(data) {
+    data.actives.each((active) => update(data));
+    data.autoplay = true;
 }
 
-export function teardownAutoplay() {
-    const { update, render } = data.loop;
-    update.stop();
-    render.stop();
-    data.autoplay = undefined;
-
-    /*
-    this.timer && clearTimeout(this.timer);
-    this.activates.off(this.activateFn);
-    this.state  = false;
-    */
+export function disableAutoplay(data) {
+    clearTimeout(data.autoplayTimer);
+    data.autoplayTimer = undefined;
+    data.autoplay = false;
 }
-

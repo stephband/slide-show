@@ -1,4 +1,28 @@
 
+// Polyfill Element.scrollTo() for Safari - TODO: does not currently work, when did it stop working??
+//import 'https://stephen.band/dom/polyfills/element.scrollto.js';
+
+/** <slide-show>
+
+Import `<slide-show>` custom element. This registers the custom
+element and upgrades instances already in the DOM.
+
+```html
+<script type="module" src="/bolt/elements/slide-show/module.js"></script>
+
+<slide-show loop controls="navigation">
+   <img src="../images/lyngen-4.png" id="1" draggable="false" />
+   <img src="../images/lyngen-2.png" id="2" draggable="false" />
+   <img src="../images/lyngen-1.png" id="3" draggable="false" />
+   <img src="../images/lyngen-3.png" id="4" draggable="false" />
+</slide-show>
+```
+
+By default children of `<slide-show>` are interpreted as 'slides', but
+elements with a `slot` attribute are not. Slides have default style of
+`scroll-snap-align: center`. Apply `start` or `end` to change the alignment.
+**/
+
 import nothing     from 'https://stephen.band/fn/modules/nothing.js';
 import Distributor from 'https://stephen.band/fn/stream/distributor.js';
 import Stream      from 'https://stephen.band/fn/stream/stream.js';
@@ -13,7 +37,7 @@ import rect        from 'https://stephen.band/dom/modules/rect.js';
 import { trigger } from 'https://stephen.band/dom/modules/trigger.js';
 
 import { processSwipe } from './modules/swipe.js';
-import { setupAutoplay,   teardownAutoplay }   from './modules/autoplay.js';
+import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
 import { initialiseLoop, setupLoop, teardownLoop } from './modules/loop.js';
 import { setupNavigation, teardownNavigation } from './modules/navigation.js';
 import { setupPagination, teardownPagination } from './modules/pagination.js';
@@ -138,6 +162,7 @@ function updateActive(data) {
     if (active === data.active) { return; }
     data.active = active;
     if (active === undefined) { return; }
+    data.actives.push(active);
     trigger('slide-active', active);
 }
 
@@ -186,10 +211,12 @@ const lifecycle = {
 
         const slotchanges = events('slotchange', slides).pipe(new Distributor());
         const clicks      = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
+        const focuses     = events('focusin', this);
         const resizes     = events('resize', window).pipe(new Distributor());
         const fullscreens = events('fullscreenchange', window);
         const scrolls     = Scrolls(scroller);
         const swipes      = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
+        const actives     = Stream.of().pipe(new Distributor());
 
         // Private data
         const data = this[$data] = {
@@ -200,12 +227,16 @@ const lifecycle = {
             shadow,
             scroller,
             slides,
+            actives,
             scrolls,
             slotchanges,
             clicks,
             resizes,
             fullscreens,
-            swipes
+            swipes,
+            scrollTo: function(target) {
+                scrollTo(this.scroller, target);
+            }
         };
 
         /*const actives = new Stream((source) => {
@@ -295,6 +326,22 @@ const lifecycle = {
             .each(() => {})
             .done(() => updateActive(data))
         );
+
+        // Chrome behaves nicely when shifting focus between slides, Safari and
+        // FF not so much. Let's give them a helping hand at displaying the
+        // focused slide. Todo: FF not getting this.
+        focuses.each((e) => {
+            const target =
+                // Is e.target a slide
+                data.children.indexOf(e.target) !== -1 ? e.target :
+                // Or inside a slide
+                data.children.find((child) => child.contains(e.target)) ;
+
+            // Or in some other slot
+            if (!target) { return; }
+
+            scrollTo(data.scroller, target)
+        });
     },
 
     load: function (shadow) {
@@ -316,6 +363,22 @@ const lifecycle = {
 };
 
 const properties = {
+    duration: {
+        /**
+        .duration
+        Default duration to display a slide, in seconds, when `autoplay` is
+        enabled. Slide durations may be set on a per-slide basis in CSS:
+
+        ```css
+        .slide {
+            --duration: 4s;
+        }
+        ```
+        **/
+        value: 8,
+        writable: true
+    },
+
     active: {
         /**
         .active
@@ -379,8 +442,8 @@ const properties = {
             return !state === !data.autoplay ?
                 undefined :
                 state ?
-                    setupAutoplay(data) :
-                    teardownAutoplay(data) ;
+                    enableAutoplay(data) :
+                    disableAutoplay(data) ;
         },
 
         get: function() {
