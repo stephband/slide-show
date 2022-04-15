@@ -447,6 +447,7 @@ const properties = {
         },
 
         get: function() {
+
             return !!this[$data].autoplay;
         }
     },

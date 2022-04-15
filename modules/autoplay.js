@@ -11,41 +11,52 @@ const parseTime = parseValue({
    'ms': (n) => n / 1000
 });
 
+/*
+TODO: dont autoplay when hidden??
+
+events('visibilitychange', document).each((e) => {
+    if (document.hidden) {
+
+    }
+    else {
+
+    }
+});
+*/
 
 function change(data) {
     const { active, children, host } = data;
     const i = children.indexOf(active);
     const target = children[i + 1] || children[0];
 
-    data.autoplayTimer = undefined;
+    data.autoplay.timer = null;
     if (!target) { return; }
+
     host.active = target;
 }
 
 function update(data) {
     const { active, host } = data;
-
-    clearTimeout(data.autoplayTimer);
-    data.autoplayTimer = undefined;
-
-    if (!active) { return; }
-
     const duration = parseTime(
         window
         .getComputedStyle(active)
         .getPropertyValue('--duration') || host.duration
     );
 
-    data.autoplayTimer = setTimeout(change, duration * 1000, data);
+    clearTimeout(data.autoplay.timer);
+    data.autoplay.timer = setTimeout(change, duration * 1000, data);
 }
 
 export function enableAutoplay(data) {
-    data.actives.each((active) => update(data));
-    data.autoplay = true;
+    // Add an object to store autoplay state
+    data.autoplay = {
+        actives: data.actives.each(() => update(data)),
+        timer:   null
+    };
 }
 
 export function disableAutoplay(data) {
-    clearTimeout(data.autoplayTimer);
-    data.autoplayTimer = undefined;
-    data.autoplay = false;
+    clearTimeout(data.autoplay.timer);
+    data.autoplay.actives.stop();
+    data.autoplay = undefined;
 }
