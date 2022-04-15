@@ -34,47 +34,48 @@
     for `padding-right` on scrollable grids).
     **/
     --padding-right: 0;
+
     position: relative;
+
     /* Must override anything applied to :fullscreen, however must not be
        !important as that can't be overridden externally. I don't think. */
-    display: grid;
+    display: block !important;
 
-    /* Slot takes over viewport duties */
-    padding-left: 0 !important;
+    /* .scroller takes over viewport duties */
+    padding-left:  0 !important;
     padding-right: 0 !important;
-    scroll-padding-left: 0 !important;
-    scroll-padding-right: 0 !important;
 
     /* Put content in the center, useful when slide-show is bigger than content,
        such as in fullscreen mode. */
-    align-content: center !important;
-    align-items: stretch;
+    align-content:   center !important;
+    align-items:     stretch;
     justify-content: center !important;
-    justify-items: stretch;
-    column-gap: var(--column-gap, 0);
+    justify-items:   stretch;
 
     /* Reset style applied to un-upgraded slide-show  */
     grid-auto-flow: row !important;
-    grid-template-columns: 100% !important;
-    grid-template-rows: 1fr !important;
-    grid-auto-columns: 100%;
-    grid-auto-rows: min-content;
+
+    grid-auto-columns:     100%;
+    grid-template-columns: 100%;
+    column-gap:            0;
+
+    grid-auto-rows:        min-content;
+    grid-template-rows:    1fr;
+    row-gap:               0;
+
     scroll-snap-type: none !important;
     scroll-snap-stop: none !important;
-    -webkit-scroll-behavior: auto !important;
-    scroll-behavior: auto !important;
+
+    /* Inherited by .scroller, overridable from outer DOM */
+    -webkit-scroll-behavior: smooth;
+            scroll-behavior: smooth;
+
     overscroll-behavior-x: none !important;
     -ms-overflow-style: none !important; /* IE 11 */
     scrollbar-width: none !important; /* Firefox 64 */
     overflow: visible;
 }
 
-:host,
-:host * {
-    box-sizing: border-box;
-    background-origin: padding-box;
-    background-repeat: no-repeat;
-}
 
 /*
 Does not work

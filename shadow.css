@@ -1,7 +1,8 @@
 
 @import 'css/normalise.css';
 @import 'css/host.css';
-@import 'css/scroll-block.css';
+@import 'css/scroller.css';
+@import 'css/slides.css';
 @import 'modules/navigation.css';
 @import 'modules/pagination.css';
 @import 'modules/loop.css';

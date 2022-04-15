@@ -15,18 +15,19 @@ slide-show {
     justify-items: stretch;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
+
     -webkit-scroll-behavior: smooth;
-    scroll-behavior: smooth;
+            scroll-behavior: smooth;
+
     overscroll-behavior-x: contain;
     -ms-overflow-style: none; /* IE 11 */
     scrollbar-width: none; /* Firefox 64 */
 
     /* Overridden on upgrade */
-    column-gap:           var(--x-gap);
     padding-left:         var(--padding-left);
+    padding-right:        var(--padding-right);
     scroll-padding-left:  var(--padding-left);
-    padding-right:        var(--padding-left);
-    scroll-padding-right: var(--padding-left);
+    scroll-padding-right: var(--padding-right);
 }
 
 slide-show:not(:defined) {
@@ -34,6 +35,12 @@ slide-show:not(:defined) {
        upgraded  */
     overflow: scroll;
     overflow-y: hidden;
+}
+
+.loading slide-show {
+    /* During loading make scrolling instant */
+    -webkit-scroll-behavior: auto;
+            scroll-behavior: auto;
 }
 
 

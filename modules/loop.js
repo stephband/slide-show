@@ -1,4 +1,7 @@
 
+import Stream from 'https://stephen.band/fn/stream/stream.js';
+import rect   from 'https://stephen.band/dom/modules/rect.js';
+import { px } from 'https://stephen.band/dom/modules/parse-length.js';
 
 /* Loop */
 
@@ -44,6 +47,40 @@ function renderLoop(data, active) {
     */
 }
 
+function getWidth(host, scroller) {
+    const slides = host.querySelectorAll(':not([slot])');
+
+    let n = slides.length;
+    let p = 0;
+    while (n--) {
+        const box   = rect(slides[n]);
+        const right = box.x + box.width;
+        console.log('S', slides[n], box.x, box.width);
+        p = right > p ? right : p;
+    }
+
+    const box   = rect(scroller);
+    const style = getComputedStyle(scroller);
+    const pr    = px(style.paddingRight);
+
+    return p + pr - box.x;
+}
+
+export function initialiseLoop(data) {
+    const { host, scroller, slotchanges, resizes } = data;
+
+    function updateWidth(e) {
+        const width = getWidth(host, scroller);
+        scroller.style.setProperty('--scroll-width', width + 'px');
+    }
+
+    if (!host.getAttribute('loop')) {
+        data.loop = {
+            updateStream: Stream.merge([{}], slotchanges, resizes).each(updateWidth)
+        };
+    }
+}
+
 export function setupLoop() {
     const update = new Stream((stream) => stream.each(updateLoop));
     const render = new Stream((stream) => stream.each(renderLoop));
@@ -70,7 +107,7 @@ export function setupLoop() {
     */
 }
 
-export function teardownLoop() {
+export function teardownLoop(data) {
     const { update, render } = data.loop;
     update.stop();
     render.stop();
@@ -82,4 +119,12 @@ export function teardownLoop() {
     this.slotchangeFn = undefined;
     this.scrollends.stop();
     */
+
+    function updateWidth() {
+        const width = 1300;
+        scrollNode.style.setProperty('--width', width);
+    }
+
+    slotchanges.on(updateWidth);
+    resizes.on(updateWidth);
 }

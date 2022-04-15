@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="stephband" />
+    <meta name="description" content="<slide-show> test" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>&lt;slide-show&gt;</title>
+
+    <script title="debug">
+        window.DEBUG = true;
+    </script>
+
+    <link rel="stylesheet" href="../css/normalise.css">
+    <link rel="stylesheet" href="../css/host.css">
+    <link rel="stylesheet" href="../css/scroller.css">
+    <link rel="stylesheet" href="../css/slides.css">
+    <link rel="stylesheet" href="../element.css">
+    <!--link rel="stylesheet" href="../../documentation/prism-cruncher.css" />
+    <link rel="stylesheet" href="../../documentation.css" />
+    <link rel="stylesheet" href="../../debug.css" /-->
+
+    <style>
+    .block {
+        display: block;
+        width: 100%;
+        grid-auto-columns: 100%;
+        column-gap: 1rem;
+
+        --padding-left: 2rem;
+        --padding-right: 2rem;
+    }
+
+    .scroller {
+        width: 80%;
+        background-color: red;
+    }
+
+    img {
+        display: inline-block;
+        width: 100%;
+        scroll-snap-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="block">
+        <div class="scroller">
+            <slot part="slides">
+                <img src="images/bourg.jpg" />
+                <img src="images/tractor.jpg" />
+                <img src="images/bourg.jpg" />
+                <img src="images/tractor.jpg" />
+                <img src="images/bourg.jpg" />
+            </slot>
+        </div>
+    </div>
+</body>
+</html>

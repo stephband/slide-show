@@ -1,13 +1,19 @@
 
-import Stream  from 'https://stephen.band/fn/stream/stream.js';
-import element from 'https://stephen.band/dom/modules/element.js';
+import overload    from 'https://stephen.band/fn/modules/overload.js';
+import Distributor from 'https://stephen.band/fn/stream/distributor.js';
+import Stream      from 'https://stephen.band/fn/stream/stream.js';
+import create      from 'https://stephen.band/dom/modules/create.js';
+import delegate    from 'https://stephen.band/dom/modules/delegate.js';
+import element     from 'https://stephen.band/dom/modules/element.js';
+import events, { isPrimaryButton } from 'https://stephen.band/dom/modules/events.js';
+import gestures    from 'https://stephen.band/dom/modules/gestures.js';
 
 import { setupAutoplay,   teardownAutoplay }   from './modules/autoplay.js';
-import { setupLoop,       teardownLoop }       from './modules/loop.js';
+import { initialiseLoop, setupLoop, teardownLoop } from './modules/loop.js';
 import { setupNavigation, teardownNavigation } from './modules/navigation.js';
 import { setupPagination, teardownPagination } from './modules/pagination.js';
 
-
+const $data = Symbol('data');
 
 /* Slot */
 
@@ -117,34 +123,45 @@ const lifecycle = {
 
     construct: function(shadow) {
         // Shadow DOM
-        const slot     = create('slot', { part: 'grid' });
+        //const widener  = create('div',  { class: 'width' });
+        const slides   = create('slot', { part: 'slides' });
+        const scroller = create('div',  { class: 'scroller', children: [slides] });
+
         // A place to put optional UI (fullscreen close buttons etc)
-        const optional = create('slot', { name: 'optional', part: 'optional' });
+        //const optional = create('slot', { name: 'optional', part: 'optional' });
         // A place to put overflow menu stuff
-        const overflow = create('slot', { name: 'overflow', part: 'overflow' });
+        //const overflow = create('slot', { name: 'overflow', part: 'overflow' });
 
         // Add slots to shadow
-        shadow.append(slot, optional, overflow);
+        shadow.append(scroller/*, optional, overflow*/);
+
+        const scrolls     = events('scroll', scroller);
+        //const scrollends  = scrollends(slot);
+        const slotchanges = events('slotchange', slides);
+        const clicks      = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
+        const resizes     = events('resize', window);
+        const fullscreens = events('fullscreenchange', window);
+        const swipes      = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
 
         // Private data
         const data = this[$data] = {
             clickSuppressTime: -Infinity,
             children: [],
-            host:     this,
-            shadow:   shadow,
-            slot:     slot
+            host: this,
+            shadow,
+            scroller,
+            slides,
+            //widener,
+            scrolls,
+            slotchanges,
+            clicks,
+            resizes,
+            fullscreens,
+            swipes
         };
 
-        // Streams
         const activates   = Stream.of();
         const reflows     = Stream.of().reduce(reflow, data);
-        const scrolls     = events('scroll', slot);
-        const scrollends  = scrollends(slot);
-        const slotchanges = events('slotchange', slot);
-        const clicks      = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
-        const resizes     = events('resize', window);
-        const fullscreens = events('fullscreenchange', window);
-        const swipes      = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
 
         // Hijack links to slides to avoid the document scrolling, (but make
         // sure they go in the history anyway, or not)
@@ -186,15 +203,15 @@ const lifecycle = {
         });
 
         // Enable single finger scroll on mouse devices. Bad idea in my opinion,
-        // but users tend to want it.
+        // but designers tend to want it.
         swipes
         .each((pointers) => pointers.reduce(processPointerEvents, { data, pointers }));
 
         // Reposition everything on resize
-        resizes.each(() => {
+        /*resizes.each(() => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => reflows.push(data.active || this.firstElementChild), 120);
-        });
+        });*/
 
         fullscreens.each((e) => {
             // If this slide-show was involved in the fullscreen change
@@ -202,10 +219,13 @@ const lifecycle = {
                 //this.actives.push(this.active);
             }
         });
+
+        setTimeout(() => initialiseLoop(data), 1000);
     },
 
     load: function (shadow) {
-
+        //const data = this[$data];
+        //initialiseLoop(data);
     }
 };
 

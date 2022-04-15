@@ -1,19 +1,13 @@
 
 /* Basic element reset */
 
+:host,
 * {
-    /* Here's what makes Bolt a little different. Border box.
-       It'a a breath of fresh air to work with. */
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
 
     /* Set the dimensions of backgrounds to the limits of the
        padding box. */
-    -webkit-background-origin: padding-box;
-       -moz-background-origin: padding;
-            background-origin: padding-box;
+    background-origin: padding-box;
 
     /* Default to backgrounds that don't repeat. */
     background-repeat: no-repeat;
