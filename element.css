@@ -57,10 +57,12 @@ slide-show:not(:defined) > [slot] {
     display: none;
 }
 
-slide-show > :not([slot]) {
+slide-show > * {
+    /* Note that this also applies to content in slots other than the default,
+       but we don't worry about that too much, the aim is to have the selector
+       as easily overrideable as possible. This selector is overrideable with
+       a simple class, or with a complex child selector. */
     scroll-snap-align: center;
-    /* override slide hidden during load */
-    /*display: block;*/
 }
 
 slide-show:-webkit-full-screen {

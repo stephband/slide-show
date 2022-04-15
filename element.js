@@ -1,5 +1,5 @@
 
-import overload    from 'https://stephen.band/fn/modules/overload.js';
+import nothing     from 'https://stephen.band/fn/modules/nothing.js';
 import Distributor from 'https://stephen.band/fn/stream/distributor.js';
 import Stream      from 'https://stephen.band/fn/stream/stream.js';
 import create      from 'https://stephen.band/dom/modules/create.js';
@@ -7,13 +7,19 @@ import delegate    from 'https://stephen.band/dom/modules/delegate.js';
 import element     from 'https://stephen.band/dom/modules/element.js';
 import events, { isPrimaryButton } from 'https://stephen.band/dom/modules/events.js';
 import gestures    from 'https://stephen.band/dom/modules/gestures.js';
+import Scrolls     from 'https://stephen.band/dom/modules/scrolls.js';
+import { px }      from 'https://stephen.band/dom/modules/parse-length.js';
+import rect        from 'https://stephen.band/dom/modules/rect.js';
+import { trigger } from 'https://stephen.band/dom/modules/trigger.js';
 
+import { processSwipe } from './modules/swipe.js';
 import { setupAutoplay,   teardownAutoplay }   from './modules/autoplay.js';
 import { initialiseLoop, setupLoop, teardownLoop } from './modules/loop.js';
 import { setupNavigation, teardownNavigation } from './modules/navigation.js';
 import { setupPagination, teardownPagination } from './modules/pagination.js';
 
 const $data = Symbol('data');
+
 
 /* Slot */
 
@@ -42,57 +48,101 @@ function reflow(data, target) {
 }
 
 
-/* Element */
+/* Active slide */
 
-const processPointerEvents = overload((data, e) => e.type, {
-    pointerdown: function(data, e) {
-        // First event is touchstart or mousedown
-        data.e0 = e;
-        data.x0 = e.clientX;
-        data.y0 = e.clientY;
+function getPaddedBox(scroller) {
+    const box          = rect(scroller);
+    const computed     = window.getComputedStyle(scroller, null);
+    const paddingLeft  = px(computed.getPropertyValue('padding-left'));
+    const paddingRight = px(computed.getPropertyValue('padding-right'));
 
-        return data;
-    },
+    box.leftPadding   = box.left + paddingLeft;
+    box.rightPadding  = box.left + box.width - paddingRight;
+    box.centrePadding = box.leftPadding + (box.width - paddingLeft - paddingRight) / 2;
 
-    pointermove: function(data, e) {
-        const e1 = e;
-        const x1 = e.clientX;
-        const y1 = e.clientY;
+    return box;
+}
 
-        // If the gesture is more vertical than horizontal, don't count it
-        // as a swipe. Stop the stream and get out of here.
-        if (!data.isSwipe) {
-            if (Math.abs(x1 - data.x0) < Math.abs(y1 - data.y0)) {
-                data.pointers.stop();
-                return;
-            }
+function getSnapX(element) {
+    // Todo: do we need webkit property here?
+    const snap = window
+        .getComputedStyle(element, null)
+        .getPropertyValue('scroll-snap-align');
 
-            data.isSwipe = true;
-            data.scrollLeft0 = data.view.slot.scrollLeft;
-            data.view.slot.classList.add('gesturing');
-            data.view.gesturing = true;
+    // Imagine a detection line half a slides' width to the right of
+    // the left, the centre, or the right...
+    return snap.endsWith('start') ? 'left' :
+        snap.endsWith('end')   ? 'right' :
+        'centre' ;
+}
+
+function scrollTo(scroller, target) {
+    const scrollerBox = getPaddedBox(scroller);
+    const targetBox   = rect(target);
+    const snap        = getSnapX(target);
+
+    // Move scroll position to target slide, taking into account
+    // scroll-snap-align of the slide
+    scroller.scrollTo({
+        top:  scroller.scrollTop,
+        left: scroller.scrollLeft + (
+            snap === 'left' ? targetBox.left - scrollerBox.leftPadding :
+            snap === 'right' ? targetBox.right - scrollerBox.rightPadding :
+            targetBox.left + (targetBox.width / 2) - scrollerBox.centrePadding
+        ),
+        behavior: 'smooth'
+    });
+}
+
+function getActive(scroller, children) {
+    const { leftPadding, rightPadding, centrePadding } = getPaddedBox(scroller);
+
+    let n = children.length;
+    let slide;
+
+    while ((slide = children[--n])) {
+        const slideRect = rect(slide);
+        if (!slideRect) { continue; }
+
+        // Todo: do we need webkit property here?
+        const snap = getSnapX(slide);
+
+        // Imagine a detection line half a slides' width to the right of
+        // the left, the centre, or the right...
+        const detection = (slideRect.width / 2) + (
+            snap === 'left' ? leftPadding :
+            snap === 'right' ? rightPadding :
+            centrePadding
+        );
+
+        // ...and a slide registration position at it's corresponding left,
+        // centre or right position. Safari reports 2 values for
+        // scroll-snap-align it's the second that is the inline axis value
+        const x = snap === 'left' ? slideRect.left :
+            snap === 'right' ? slideRect.right :
+            slideRect.left + slideRect.width / 2 ;
+
+        // If position has crossed the detection going left, we're in the money
+        if (x <= detection) {
+            break;
         }
-
-        const dx = e.clientX - data.x0;
-        data.view.slot.scrollLeft = data.scrollLeft0 - dx;
-
-        return data;
-    },
-
-    default: function(data, e) {
-        //data.view.clickSuppressTime = window.performance.now();
-        data.view.clickSuppressTime = e.timeStamp;
-
-        // Dodgy. If we simple remove the class the end of the gesture
-        // jumps.
-        const scrollLeft = data.view.slot.scrollLeft;
-        data.view.slot.classList.remove('gesturing');
-        data.view.slot.scrollLeft = scrollLeft;
-        data.view.gesturing  = false;
-
-        return data;
     }
-});
+
+    // Return active slide
+    return slide;
+}
+
+function updateActive(data) {
+    const { scroller, children } = data;
+    const active = getActive(scroller, children);
+    if (active === data.active) { return; }
+    data.active = active;
+    if (active === undefined) { return; }
+    trigger('slide-active', active);
+}
+
+
+/* Element */
 
 const lifecycle = {
     // Get path to dir of this module
@@ -123,7 +173,6 @@ const lifecycle = {
 
     construct: function(shadow) {
         // Shadow DOM
-        //const widener  = create('div',  { class: 'width' });
         const slides   = create('slot', { part: 'slides' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
 
@@ -135,23 +184,22 @@ const lifecycle = {
         // Add slots to shadow
         shadow.append(scroller/*, optional, overflow*/);
 
-        const scrolls     = events('scroll', scroller);
-        //const scrollends  = scrollends(slot);
-        const slotchanges = events('slotchange', slides);
+        const slotchanges = events('slotchange', slides).pipe(new Distributor());
         const clicks      = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
-        const resizes     = events('resize', window);
+        const resizes     = events('resize', window).pipe(new Distributor());
         const fullscreens = events('fullscreenchange', window);
+        const scrolls     = Scrolls(scroller);
         const swipes      = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
 
         // Private data
         const data = this[$data] = {
             clickSuppressTime: -Infinity,
-            children: [],
+            nodes:    nothing,
+            children: nothing,
             host: this,
             shadow,
             scroller,
             slides,
-            //widener,
             scrolls,
             slotchanges,
             clicks,
@@ -160,8 +208,18 @@ const lifecycle = {
             swipes
         };
 
-        const activates   = Stream.of();
-        const reflows     = Stream.of().reduce(reflow, data);
+        /*const actives = new Stream((source) => {
+            source.push = function(node) {
+                console.log('PUSH ACTIVE');
+                trigger('slide-active', node);
+            };
+        });*/
+
+        const reflows = Stream.of().reduce(reflow, data);
+
+        slotchanges.each(() =>
+            data.children = slides.assignedElements()
+        );
 
         // Hijack links to slides to avoid the document scrolling, (but make
         // sure they go in the history anyway, or not)
@@ -204,8 +262,19 @@ const lifecycle = {
 
         // Enable single finger scroll on mouse devices. Bad idea in my opinion,
         // but designers tend to want it.
-        swipes
-        .each((pointers) => pointers.reduce(processPointerEvents, { data, pointers }));
+        function swipeDone() {
+            data.swipe = undefined;
+            console.log('SWIPE DONE');
+        }
+
+        swipes.each((swipe) => {
+            console.log('SWIPE START');
+            data.swipe = swipe;
+
+            swipe
+            .reduce(processSwipe, data)
+            .done(swipeDone);
+        });
 
         // Reposition everything on resize
         /*resizes.each(() => {
@@ -220,12 +289,29 @@ const lifecycle = {
             }
         });
 
-        setTimeout(() => initialiseLoop(data), 1000);
+        scrolls.each((stream) =>
+            stream
+            /* TEMP Only here so the stream is started, not needed when distributed */
+            .each(() => {})
+            .done(() => updateActive(data))
+        );
     },
 
     load: function (shadow) {
-        //const data = this[$data];
-        //initialiseLoop(data);
+        const data = this[$data];
+
+        // If loop is off we must set up the slider:before width hack now we
+        // have some style loaded.
+        if (!this.loop) {
+            initialiseLoop(data)
+        }
+
+        // Update and bind to slotchanges on load so that initial `slide-active`
+        // event is guaranteed to be sent after initialisation. (In Chrome and
+        // FF initial `slotchange` event is always sent before load, but not so
+        // in Safari where either order may happen.)
+        updateActive(data);
+        data.slotchanges.each(() => updateActive(data));
     }
 };
 
@@ -248,6 +334,8 @@ const properties = {
         **/
 
         set: function(id) {
+            const data = this[$data];
+
             // Accept a child node, get its id
             const child = typeof id !== 'object' ?
                 this.querySelector('#' + (/^\d/.test((id + '')[0]) ?
@@ -259,11 +347,11 @@ const properties = {
                 throw new Error('Cannot set active – not a child of slide-show');
             }
 
-            this[$data].show(child);
+            scrollTo(data.scroller, child);
         },
 
         get: function() {
-            return this[$data].original;
+            return this[$data].active;
         }
     },
 

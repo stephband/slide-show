@@ -49,13 +49,12 @@ function renderLoop(data, active) {
 
 function getWidth(host, scroller) {
     const slides = host.querySelectorAll(':not([slot])');
-
     let n = slides.length;
     let p = 0;
+
     while (n--) {
         const box   = rect(slides[n]);
         const right = box.x + box.width;
-        console.log('S', slides[n], box.x, box.width);
         p = right > p ? right : p;
     }
 
@@ -74,11 +73,9 @@ export function initialiseLoop(data) {
         scroller.style.setProperty('--scroll-width', width + 'px');
     }
 
-    if (!host.getAttribute('loop')) {
-        data.loop = {
-            updateStream: Stream.merge([{}], slotchanges, resizes).each(updateWidth)
-        };
-    }
+    data.loop = {
+        updateStream: Stream.merge([{}], slotchanges, resizes).each(updateWidth)
+    };
 }
 
 export function setupLoop() {

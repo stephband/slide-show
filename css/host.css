@@ -56,7 +56,7 @@
     grid-auto-flow: row !important;
 
     grid-auto-columns:     100%;
-    grid-template-columns: 100%;
+    grid-template-columns: none;
     column-gap:            0;
 
     grid-auto-rows:        min-content;
