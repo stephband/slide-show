@@ -320,16 +320,12 @@ const lifecycle = {
             }
         });
 
-        scrolls.each((stream) => {
-            console.log('SCROLL START');
-
+        scrolls.each((stream) =>
             stream
             /* TEMP Only here so the stream is started, not needed when distributed */
             .each(() => {})
-            .done(() => {
-                console.log('SCROLL DONE');
-                updateActive(data)})
-        });
+            .done(() => updateActive(data))
+        );
 
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the

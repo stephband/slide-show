@@ -31,7 +31,7 @@ function change(data) {
     const { active, children, host } = data;
     const i = children.indexOf(active);
     const target = children[i + 1] || children[0];
-    //console.log('AUTOPLAY CHANGE', target);
+    console.log('AUTOPLAY CHANGE', target);
     data.autoplay.timer = null;
     if (!target) { return; }
 
@@ -47,12 +47,12 @@ function update(data) {
     );
 
     clearTimeout(data.autoplay.timer);
-    //console.log('AUTOPLAY UPDATE', duration);
+    console.log('AUTOPLAY UPDATE', duration);
     data.autoplay.timer = setTimeout(change, duration * 1000, data);
 }
 
 function cancel(data) {
-    //console.log('AUTOPLAY CANCEL');
+    console.log('AUTOPLAY CANCEL');
     clearTimeout(data.autoplay.timer);
     data.autoplay.timer = null;
 }
@@ -64,6 +64,7 @@ export function enableAutoplay(data) {
     const autoplay = data.autoplay = {};
 
     // Create a new stream of actives starting with the current active
+    // TODO: Make distributor push initial value?
     const actives = Stream.merge(
         [data.active],
         // TEMP - needs .map() to create a new stream from the distributor
