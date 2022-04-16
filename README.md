@@ -14,8 +14,8 @@ assets. Then import `element.js`:
 
 This registers the `<slide-show>` custom element.
 
-You may also include `element.css`, which provides some minimal fallback style
-for the element before it is registered, and for those cases where JS fails completely:
+You may also include `element.css`, which provides minimal fallback style for
+the element before it is registered (or for those cases when JS fails completely):
 
 ```html
 <link rel="stylesheet" src="./path/to/slide-show/build/element.css"></link>
@@ -42,9 +42,14 @@ for the element before it is registered, and for those cases where JS fails comp
 
 ### Style
 
+- `--padding-left` - sets padding and scroll-padding inside the scroll area
+- `--padding-right` - sets padding and scroll-padding inside the scroll area
+
 - `::part(slides)`
 - `::part(prev-button)`
 - `::part(next-button)`
+- `::part(page-button)`
+- `::part(page-button-active)`
 
 
 ## Build

@@ -1,58 +1,40 @@
 
-/* Nav links */
-
-nav > [part*="link"] + [part*="link"] {
-    margin-left: var(--link-gap);
-}
-
-
+/**
+::part(pagination)
+Style the pagination wrapper.
+**/
 
 [part="pagination"] {
-    grid-row: 2;
-}
-
-@media print {
-    [part="pagination"] {
-        display: none !important;
-    }
+    display: flex;
+    justify-content: center;
 }
 
 
 /**
-::part(link)
-Style the navigation links.
+::part(page-button)
+Style the pagination buttons.
 **/
 
-[part*="link"] {
+[part*="page-button"] {
     display: inline-block;
-    position: relative;
-    line-height: 1.25rem;
-    text-indent: 2rem;
-    text-align: left;
-    width: 1.25rem;
-    overflow: hidden;
-    white-space: nowrap;
-    color: inherit;
+    padding-left: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+
+    border-width: 0;
+    background-color: transparent;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="gray" vector-effect="non-scaling-stroke"></circle>\
+    </svg>');
 }
 
-[part*="link"]::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -0.3125rem;
-    margin-left: -0.3125rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-radius: 50%;
-    border: 1px solid currentcolor;
-}
+/**
+::part(page-button-active)
+Style the pagination button pointing to the active slide.
+**/
 
-/*
-.on
-Style the navigation link for the currently active slide.
-*/
-
-[part="link on"]::before {
-    background: currentcolor;
+[part*="page-button-active"] {
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="black" vector-effect="non-scaling-stroke"></circle>\
+    </svg>');
 }

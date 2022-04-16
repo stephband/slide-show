@@ -1,112 +1,99 @@
 
+import nothing  from '../../fn/modules/nothing.js';
+import Stream   from '../../fn/stream/stream.js';
+import create   from '../../dom/modules/create.js';
+import delegate from '../../dom/modules/delegate.js';
 
-/* Pagination */
+import { enableControls } from './controls.js';
 
-const assign = Object.assign;
+function update(pagination, children, target) {
+    const { active, buttons, index } = pagination;
 
+    // Do nothing where target is already the active page-button
+    if (active === target) { return; }
 
-function addPartOn(node) {
-    node.part.add('on');
-}
-
-function removePartOn(node) {
-    node.part.remove('on');
-}
-
-function updatePagination(data, active) {
-    console.log('updatePagination');
-
-    /*
-    const shadow = this.shadow;
-
-    // Remove `on` class from currently highlighted links
-    if (this.active) {
-        const id = this.active.dataset && this.active.dataset.loopId || this.active.id;
-        select('[href="#' + id +'"]', shadow).forEach(removePartOn)
+    if (index > -1) {
+        buttons.children[index].part.remove('page-button-active');
     }
 
-    // Highlight links with `on` class
-    const id = active.dataset.loopId || active.id;
-    select('[href="#' + id +'"]', shadow).forEach(addPartOn);
+    const i = children.indexOf(target);
 
-    // Keep a note of currently active
-    this.active = active;
-    */
+    if (i === -1) {
+        return;
+    }
+    buttons.children[i].part.add('page-button-active');
+    pagination.index  = i;
+    pagination.active = target;
 }
 
-function renderPagination(data, active) {
-    console.log('renderPagination');
+function render(controls, pagination, shadow, children) {
+    if (pagination.buttons) {
+        pagination.buttons.remove();
+        pagination.buttons = undefined;
+    }
 
-    /*
-    const view     = this.view;
-    const children = view.children;
-
-    // Empty nav then create a dot link for each slide
-    this.pagination.innerHTML = '';
+    console.log('PAGINATION RENDER', children.length);
 
     // Don't generate pagination when there are 0 or 1 slides
-    if (items.length < 2) {
+    if (children.length < 2) {
         return;
     }
 
-    children.forEach((slide) => {
-        // Id other content and create nav links for them
-        const id = slide.id;
-        this.pagination.appendChild(create('a', {
-            part: view.active === slide ? 'link on' : 'link',
-            href: '#' + id,
-            html: id
-        }));
+    pagination.buttons = create('div', {
+        part: 'pagination',
+        children: children.map((slide, i) => create('button', {
+            part: 'page-button',
+            type: 'button',
+            name: 'pagination',
+            value: i
+        }))
     });
 
-    return items;
-    */
+    controls.append(pagination.buttons);
 }
 
 export function enablePagination(data, state) {
-    const { shadow, clicked } = data;
+    const { shadow, actives, clicks } = data;
 
-    //const update = new Stream((stream) => stream.each(updatePagination));
-    //const render = new Stream((stream) => stream.each(renderPagination));
+    enableControls(data);
 
-    data.reflows.pipe(update);
-    data.activates.pipe(render);
-    data.pagination = { update, render };
+    // Add an object to store autoplay state
+    const pagination = data.pagination = {};
 
+    // Render buttons when children change
+    pagination.slotchanges = Stream.merge(
+        [nothing],
+        data.slotchanges.map((o) => o)
+    )
+    .each(() => render(data.controls, pagination, shadow, data.children));
 
-    assign(clicked, {
-        // Pagination links always reference non-ghost slides
-        '[href]': function(link, e) {
-            //const id     = link.hash && link.hash.replace(/^#/, '');
-            //const target = elem.getRootNode().getElementById(id);
-            //if (elem.contains(target) && elem !== target) {
-            //    view.show(target);
-            //    e.preventDefault();
+    // Create a new stream of actives starting with the current active
+    // TODO: Make distributor push initial value?
+    pagination.actives = Stream.merge(
+        [data.active],
+        // TEMP - needs .map() to create a new stream from the distributor
+        actives.map((o) => o)
+    )
+    .each(() => update(pagination, data.children, data.active));
+
+    pagination.clicks = clicks.each(delegate({
+        '[name="pagination"]': function(button, e) {
+            const { children, host } = data;
+            const target = children[button.value];
+
+            if (!target) { return; }
+            host.active = target;
+
+            // Preemptively highlight pagination button
+            update(pagination, data.children, target);
         }
-    });
-
-    /*
-    this.pagination = create('nav', {
-        part: 'pagination'
-    });
-
-    this.slotchange(this.view.children);
-    this.shadow.appendChild(this.pagination);
-    this.actives.on(this.activateFn = (active) => this.activate(active));
-    this.slotchanges.on(this.slotchangeFn = (items) => this.slotchange(items));
-    */
+    }));
 }
 
-export function disablePagination() {
-    const { update, render } = data.pagination;
-    update.stop();
-    render.stop();
+export function disablePagination(data) {
+    data.pagination.buttons.remove();
+    data.pagination.slotchanges.stop();
+    data.pagination.actives.stop();
+    data.pagination.clicks.stop();
     data.pagination = undefined;
-
-    /*
-    this.pagination.remove();
-    this.pagination = undefined;
-    this.actives.off(this.activateFn);
-    this.slotchanges.off(this.slotchangeFn);
-    */
 }

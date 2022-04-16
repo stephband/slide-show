@@ -1,0 +1,10 @@
+
+/*
+controls
+*/
+
+@media print {
+    :host > nav {
+        display: none !important;
+    }
+}

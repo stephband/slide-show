@@ -3,7 +3,6 @@ import create   from '../../dom/modules/create.js';
 import Stream   from '../../fn/stream/stream.js';
 import delegate from '../../dom/modules/delegate.js';
 
-
 function update(data) {
     //console.log('NAVIGATION UPDATE');
 
@@ -36,8 +35,8 @@ export function enableNavigation(data, state) {
         data.actives.map((o) => o)
     );
 
-    const prev = create('button', { part: 'prev-button', name: "navigation", value: "-1", html: 'Previous' });
-    const next = create('button', { part: 'next-button', name: "navigation", value: "1", html: 'Next' });
+    const prev = create('button', { part: 'prev-button', type: "button", name: "navigation", value: "-1", html: 'Previous' });
+    const next = create('button', { part: 'next-button', type: "button", name: "navigation", value: "1", html: 'Next' });
     const nav  = data.nav || (data.nav = create('nav'));
     nav.append(prev, next);
     shadow.append(nav);
