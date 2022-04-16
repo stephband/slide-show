@@ -3,6 +3,9 @@ import create   from '../../dom/modules/create.js';
 import Stream   from '../../fn/stream/stream.js';
 import delegate from '../../dom/modules/delegate.js';
 
+import { enableControls } from './controls.js';
+
+
 function update(data) {
     //console.log('NAVIGATION UPDATE');
 
@@ -25,33 +28,30 @@ function update(data) {
 }
 
 export function enableNavigation(data, state) {
-    const { shadow, clicks } = data;
+    const { actives, clicks, slotchanges } = data;
 
-    // Create a new stream of actives starting with the current active
-    // TODO: Make distributor push initial value?
-    const actives = Stream.merge(
-        [data.active],
-        // TEMP - needs .map() to create a new stream from the distributor
-        data.actives.map((o) => o)
-    );
+    // Set up nav::part(controls) element
+    enableControls(data);
 
     const prev = create('button', { part: 'prev-button', type: "button", name: "navigation", value: "-1", html: 'Previous' });
     const next = create('button', { part: 'next-button', type: "button", name: "navigation", value: "1", html: 'Next' });
-    const nav  = data.nav || (data.nav = create('nav'));
-    nav.append(prev, next);
-    shadow.append(nav);
+    data.controls.prepend(prev, next);
 
     // Add an object to store autoplay state
-    const navigation = data.navigation = {
-        prev, next, nav
-    };
+    const navigation = data.navigation = { prev, next };
 
     // Add object for storing navigation state
-    navigation.slotchanges = data.slotchanges.each(() => update(data));
+    navigation.slotchanges = slotchanges.each(() => update(data));
 
-    navigation.actives     = actives.each(() => update(data));
+    // Create a new stream of actives starting with the current active
+    navigation.actives = Stream.merge(
+        [data.active],
+        // TEMP - needs .map() to create a new stream from the distributor
+        actives.map((o) => o)
+    )
+    .each(() => update(data));
 
-    navigation.clicks      = clicks.each(delegate({
+    navigation.clicks = clicks.each(delegate({
         '[name="navigation"]': function(button, e) {
             const { active, children, host } = data;
             const value  = parseFloat(button.value);

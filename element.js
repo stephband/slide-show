@@ -222,9 +222,9 @@ const lifecycle = {
         // Private data
         const data = this[$data] = {
             clickSuppressTime: -Infinity,
-            nodes:    nothing,
+            host:     this,
             children: nothing,
-            host: this,
+            style:    window.getComputedStyle(this),
             shadow,
             scroller,
             slides,
@@ -234,10 +234,7 @@ const lifecycle = {
             clicks,
             resizes,
             fullscreens,
-            swipes,
-            scrollTo: function(target) {
-                scrollTo(this.scroller, target);
-            }
+            swipes
         };
 
         /*const actives = new Stream((source) => {
@@ -356,15 +353,15 @@ const properties = {
         ```
         **/
 
-        set: function(id) {
+        set: function(target) {
             const data = this[$data];
 
-            // Accept a child node, get its id
-            const child = typeof id !== 'object' ?
+            // Accept an id
+            const child = typeof target !== 'object' ?
                 this.querySelector('#' + (/^\d/.test((id + '')[0]) ?
                     '\\3' + (id + '')[0] + ' ' + (id + '').slice(1) :
-                    id)
-                ) : id ;
+                    target)
+                ) : target ;
 
             if (!child) {
                 throw new Error('Cannot set active – not a child of slide-show');

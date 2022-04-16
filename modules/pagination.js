@@ -6,6 +6,7 @@ import delegate from '../../dom/modules/delegate.js';
 
 import { enableControls } from './controls.js';
 
+
 function update(pagination, children, target) {
     const { active, buttons, index } = pagination;
 
@@ -55,6 +56,7 @@ function render(controls, pagination, shadow, children) {
 export function enablePagination(data, state) {
     const { shadow, actives, clicks } = data;
 
+    // Set up nav::part(controls) element
     enableControls(data);
 
     // Add an object to store autoplay state
