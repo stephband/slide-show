@@ -33,8 +33,6 @@ function render(controls, pagination, shadow, children) {
         pagination.buttons = undefined;
     }
 
-    console.log('PAGINATION RENDER', children.length);
-
     // Don't generate pagination when there are 0 or 1 slides
     if (children.length < 2) {
         return;
