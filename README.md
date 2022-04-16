@@ -42,6 +42,9 @@ the element before it is registered (or for those cases when JS fails completely
 
 ### Style
 
+Style for the `slide-show`:
+
+- `--slide-duration` - a CSS time value in `s` or `ms`
 - `--padding-left` - padding and scroll-padding inside the scroll area
 - `--padding-right` - padding and scroll-padding inside the scroll area
 - `::part(slides)` - the slides container
@@ -50,6 +53,9 @@ the element before it is registered (or for those cases when JS fails completely
 - `::part(page-button)` - a pagination button
 - `::part(page-button-active)` - the currently active pagination button
 
+Style for child slides:
+
+- `--slide-duration` - a CSS time value in `s` or `ms`
 
 ## Build
 

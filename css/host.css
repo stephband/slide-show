@@ -1,17 +1,11 @@
 
 :host {
     /**
-    --duration
+    --slide-duration
     Set the duration that a slide is displayed for when the slideshow is in
     autoplay mode. May be a CSS time value in `s` or `ms`.
     **/
-    --duration: 8s;
-
-    /*
-    --link-gap
-    Adjusts the gap between links.
-    */
-    --link-gap: 0;
+    --slide-duration: 8s;
 
     /**
     --padding-left

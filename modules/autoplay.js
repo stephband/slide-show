@@ -43,7 +43,7 @@ function update(data) {
     const duration = parseTime(
         window
         .getComputedStyle(active)
-        .getPropertyValue('--duration') || host.duration
+        .getPropertyValue('--slide-duration') || host.duration
     );
 
     clearTimeout(data.autoplay.timer);

@@ -339,22 +339,6 @@ const lifecycle = {
 };
 
 const properties = {
-    duration: {
-        /**
-        .duration
-        Default duration to display a slide, in seconds, when `autoplay` is
-        enabled. Slide durations may be set on a per-slide basis in CSS:
-
-        ```css
-        .slide {
-            --duration: 4s;
-        }
-        ```
-        **/
-        value: 8,
-        writable: true
-    },
-
     active: {
         /**
         .active
@@ -399,7 +383,7 @@ const properties = {
         autoplay=""
         Boolean attribute. When present the slide-show activates the next
         slide after a pause. The pause duration may be set in CSS via the
-        `--duration` variable.
+        `--slide-duration` variable.
         **/
         attribute: function(value) {
             // Delegate to property
@@ -410,7 +394,7 @@ const properties = {
         .autoplay
         Boolean property. When `true` the slide-show activates the next
         slide after a pause. The pause duration may be set in CSS via the
-        `--duration` variable.
+        `--slide-duration` variable.
         **/
         set: function(state) {
             const data = this[$data];
