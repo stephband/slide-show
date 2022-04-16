@@ -32,7 +32,7 @@ the element before it is registered (or for those cases when JS fails completely
 
 ### Properties
 
-- `.active` - a reference to the current scroll-snap aligned child
+- `.active` - a reference to the current scroll-snap aligned (ie 'active') child
 - `.autoplay` - boolean indicating state of autoplay
 - `.loop` - a boolean indicating state of loop (Not yet implemented)
 
@@ -55,8 +55,9 @@ the element before it is registered (or for those cases when JS fails completely
 ## Build
 
 To build the `<slide-show>` component from its dependent modules, you must have
-_Deno_ installed. You then need to clone this git repository into the same
-directory as three repositories that contain dependent modules:
+[_Deno_](https://deno.land/) installed. You then need to clone this git
+repository into the same directory as three repositories that contain dependent
+modules:
 
 ```cli
 git clone git@gihub.com:stephband/fn
