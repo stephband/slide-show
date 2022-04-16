@@ -42,11 +42,8 @@ the element before it is registered (or for those cases when JS fails completely
 
 ### Style
 
-
 - `--padding-left` - padding and scroll-padding inside the scroll area
 - `--padding-right` - padding and scroll-padding inside the scroll area
-
-
 - `::part(slides)` - the slides container
 - `::part(prev-button)` - the 'previous' navigation button
 - `::part(next-button)` - the 'next' navigation button
