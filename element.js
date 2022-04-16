@@ -39,8 +39,8 @@ import { trigger } from 'https://stephen.band/dom/modules/trigger.js';
 import { processSwipe } from './modules/swipe.js';
 import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
 import { initialiseLoop, enableLoop, disableLoop } from './modules/loop.js';
-import { enableNavigation, disabledNavigation } from './modules/navigation.js';
-import { enablePagination, disabledPagination } from './modules/pagination.js';
+import { enableNavigation, disableNavigation } from './modules/navigation.js';
+import { enablePagination, disablePagination } from './modules/pagination.js';
 
 const $data = Symbol('data');
 
@@ -320,12 +320,16 @@ const lifecycle = {
             }
         });
 
-        scrolls.each((stream) =>
+        scrolls.each((stream) => {
+            console.log('SCROLL START');
+
             stream
             /* TEMP Only here so the stream is started, not needed when distributed */
             .each(() => {})
-            .done(() => updateActive(data))
-        );
+            .done(() => {
+                console.log('SCROLL DONE');
+                updateActive(data)})
+        });
 
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the

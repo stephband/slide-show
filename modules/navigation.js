@@ -55,7 +55,7 @@ function renderNavigation(data, active) {
     */
 }
 
-export function setupNavigation(data, state) {
+export function enableNavigation(data, state) {
     const { shadow } = data;
 
     const prev = create('a', { part: 'previous', html: config.trans['Previous'] });
@@ -73,7 +73,7 @@ export function setupNavigation(data, state) {
     };
 }
 
-export function teardownNavigation() {
+export function disableNavigation() {
     data.navigation.prev.remove();
     data.navigation.next.remove();
     data.navigation.slotchanges.stop();
