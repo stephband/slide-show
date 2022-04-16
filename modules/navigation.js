@@ -1,7 +1,10 @@
 
+import create      from 'https://stephen.band/dom/modules/create.js';
+
+
 /* Navigation */
 
-function updateNavigation(data, active) {
+function update(data, active) {
     console.log('updateNavigation');
 
     /*
@@ -53,36 +56,27 @@ function renderNavigation(data, active) {
 }
 
 export function setupNavigation(data, state) {
-    const update = new Stream((stream) => stream.each(updateNavigation));
-    const render = new Stream((stream) => stream.each(renderNavigation));
+    const { shadow } = data;
 
-    data.reflows.pipe(update);
-    data.activates.pipe(render);
-    data.navigation = { update, render };
-    /*
-    this.previous = create('a', { part: 'previous', html: config.trans['Previous'] });
-    this.next     = create('a', { part: 'next', html: config.trans['Next'] });
-    this.parent.appendChild(this.previous);
-    this.parent.appendChild(this.next);
-    this.activates.on(this.activateFn = (active) => this.activate(active));
-    this.changes.on(this.changesFn = (items) => this.slotchange(items));
-    */
+    const prev = create('a', { part: 'previous', html: config.trans['Previous'] });
+    const next = create('a', { part: 'next', html: config.trans['Next'] });
+    const nav  = data.nav || (data.nav = create('nav'));
+    nav.append(prev, next);
+    shadow.append(nav);
+
+    // Add object for storing navigation state
+    data.navigation = {
+        slotchanges: data.slotchanges.each(() => update(data)),
+        actives: data.actives.each(() => update(data)),
+        prev,
+        next
+    };
 }
 
 export function teardownNavigation() {
-    const { update, render } = data.navigation;
-    update.stop();
-    render.stop();
+    data.navigation.prev.remove();
+    data.navigation.next.remove();
+    data.navigation.slotchanges.stop();
+    data.navigation.actives.stop();
     data.navigation = undefined;
-
-    /*
-    this.previous.remove();
-    this.next.remove();
-    this.previous = undefined;
-    this.next = undefined;
-    this.activates.off(this.activateFn);
-    this.activateFn = undefined;
-    this.changes.off(this.changesFn);
-    this.changesFn = undefined;
-    */
 }

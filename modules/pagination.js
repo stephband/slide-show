@@ -60,9 +60,11 @@ function renderPagination(data, active) {
     */
 }
 
-export function setupPagination(data, state) {
-    const update = new Stream((stream) => stream.each(updatePagination));
-    const render = new Stream((stream) => stream.each(renderPagination));
+export function enablePagination(data, state) {
+    const { shadow } = data;
+
+    //const update = new Stream((stream) => stream.each(updatePagination));
+    //const render = new Stream((stream) => stream.each(renderPagination));
 
     data.reflows.pipe(update);
     data.activates.pipe(render);
@@ -80,7 +82,7 @@ export function setupPagination(data, state) {
     */
 }
 
-export function teardownPagination() {
+export function disablePagination() {
     const { update, render } = data.pagination;
     update.stop();
     render.stop();

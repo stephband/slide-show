@@ -38,9 +38,9 @@ import { trigger } from 'https://stephen.band/dom/modules/trigger.js';
 
 import { processSwipe } from './modules/swipe.js';
 import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
-import { initialiseLoop, setupLoop, teardownLoop } from './modules/loop.js';
-import { setupNavigation, teardownNavigation } from './modules/navigation.js';
-import { setupPagination, teardownPagination } from './modules/pagination.js';
+import { initialiseLoop, enableLoop, disableLoop } from './modules/loop.js';
+import { enableNavigation, disabledNavigation } from './modules/navigation.js';
+import { enablePagination, disabledPagination } from './modules/pagination.js';
 
 const $data = Symbol('data');
 
@@ -214,7 +214,7 @@ const lifecycle = {
         const focuses     = events('focusin', this);
         const resizes     = events('resize', window).pipe(new Distributor());
         const fullscreens = events('fullscreenchange', window);
-        const scrolls     = Scrolls(scroller);
+        const scrolls     = Scrolls(scroller).pipe(new Distributor());
         const swipes      = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
         const actives     = Stream.of().pipe(new Distributor());
 
@@ -438,7 +438,6 @@ const properties = {
         **/
         set: function(state) {
             const data = this[$data];
-
             return !state === !data.autoplay ?
                 undefined :
                 state ?
@@ -447,8 +446,8 @@ const properties = {
         },
 
         get: function() {
-
-            return !!this[$data].autoplay;
+            const data = this[$data];
+            return !!data.autoplay;
         }
     },
 
@@ -491,19 +490,19 @@ const properties = {
 
             if (!!navigationState !== !!data.navigation) {
                 if (navigationState) {
-                    setupNavigation(data);
+                    enableNavigation(data);
                 }
                 else {
-                    teardownNavigation(data);
+                    disableNavigation(data);
                 }
             }
 
             if (!!paginationState !== !!data.pagination) {
                 if (paginationState) {
-                    setupPagination(data);
+                    enablePagination(data);
                 }
                 else {
-                    teardownPagination(data);
+                    disablePagination(data);
                 }
             }
         }
@@ -528,12 +527,13 @@ const properties = {
             return !state === !data.loop ?
                 undefined :
                 state ?
-                    setupLoop(data) :
-                    teardownLoop(data) ;
+                    enableLoop(data) :
+                    disableLoop(data) ;
         },
 
         get: function() {
-            return !!this[$data].loop;
+            const data = this[$data];
+            return !!data.loop;
         }
     }
 };

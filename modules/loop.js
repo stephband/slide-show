@@ -78,7 +78,7 @@ export function initialiseLoop(data) {
     };
 }
 
-export function setupLoop() {
+export function enableLoop() {
     const update = new Stream((stream) => stream.each(updateLoop));
     const render = new Stream((stream) => stream.each(renderLoop));
 
@@ -104,7 +104,7 @@ export function setupLoop() {
     */
 }
 
-export function teardownLoop(data) {
+export function disableLoop(data) {
     const { update, render } = data.loop;
     update.stop();
     render.stop();
