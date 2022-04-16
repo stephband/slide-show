@@ -1,6 +1,6 @@
 # `<slide-show>`
 A standalone `<slide-show>` custom element for building horizontal scroll-snap
-carousels. Less than 10kB minified and gzipped.
+carousels. About 10kB minified and gzipped.
 
 
 ## Quick start
