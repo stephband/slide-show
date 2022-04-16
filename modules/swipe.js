@@ -1,5 +1,5 @@
 
-import overload from 'https://stephen.band/fn/modules/overload.js';
+import overload from '../../fn/modules/overload.js';
 
 export const processSwipe = overload((data, e) => e.type, {
     pointerdown: function(data, e) {

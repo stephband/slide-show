@@ -1,6 +1,6 @@
 
 // Polyfill Element.scrollTo() for Safari - TODO: does not currently work, when did it stop working??
-//import 'https://stephen.band/dom/polyfills/element.scrollto.js';
+//import '../dom/polyfills/element.scrollto.js';
 
 /** <slide-show>
 
@@ -23,18 +23,18 @@ elements with a `slot` attribute are not. Slides have default style of
 `scroll-snap-align: center`. Apply `start` or `end` to change the alignment.
 **/
 
-import nothing     from 'https://stephen.band/fn/modules/nothing.js';
-import Distributor from 'https://stephen.band/fn/stream/distributor.js';
-import Stream      from 'https://stephen.band/fn/stream/stream.js';
-import create      from 'https://stephen.band/dom/modules/create.js';
-import delegate    from 'https://stephen.band/dom/modules/delegate.js';
-import element     from 'https://stephen.band/dom/modules/element.js';
-import events, { isPrimaryButton } from 'https://stephen.band/dom/modules/events.js';
-import gestures    from 'https://stephen.band/dom/modules/gestures.js';
-import Scrolls     from 'https://stephen.band/dom/modules/scrolls.js';
-import { px }      from 'https://stephen.band/dom/modules/parse-length.js';
-import rect        from 'https://stephen.band/dom/modules/rect.js';
-import { trigger } from 'https://stephen.band/dom/modules/trigger.js';
+import nothing     from '../fn/modules/nothing.js';
+import Distributor from '../fn/stream/distributor.js';
+import Stream      from '../fn/stream/stream.js';
+import create      from '../dom/modules/create.js';
+import delegate    from '../dom/modules/delegate.js';
+import element     from '../dom/modules/element.js';
+import events, { isPrimaryButton } from '../dom/modules/events.js';
+import gestures    from '../dom/modules/gestures.js';
+import Scrolls     from '../dom/modules/scrolls.js';
+import { px }      from '../dom/modules/parse-length.js';
+import rect        from '../dom/modules/rect.js';
+import { trigger } from '../dom/modules/trigger.js';
 
 import { processSwipe } from './modules/swipe.js';
 import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
@@ -217,6 +217,7 @@ const lifecycle = {
         const scrolls     = Scrolls(scroller).pipe(new Distributor());
         const swipes      = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
         const actives     = Stream.of().pipe(new Distributor());
+        const clickables  = {};
 
         // Private data
         const data = this[$data] = {
@@ -254,32 +255,7 @@ const lifecycle = {
 
         // Hijack links to slides to avoid the document scrolling, (but make
         // sure they go in the history anyway, or not)
-        clicks.each(delegate({
-            // Previous and next links may not have hrefs if loop is on, and
-            // they also cannot reference ghosts. We hijack them and launch
-            // previous/next.
-            '[href][part="previous"]': function(link, e) {
-                // Show previous whether a ghost or not
-                //view.show(previous(view.active));
-                //e.preventDefault();
-            },
 
-            '[href][part="next"]': function(link, e) {
-                // Show next whether a ghost or not
-                //view.show(next(view.active));
-                //e.preventDefault();
-            },
-
-            // Pagination links always reference non-ghost slides
-            '[href]': function(link, e) {
-                //const id     = link.hash && link.hash.replace(/^#/, '');
-                //const target = elem.getRootNode().getElementById(id);
-                //if (elem.contains(target) && elem !== target) {
-                //    view.show(target);
-                //    e.preventDefault();
-                //}
-            }
-        }));
 
         // Prevent default on immediate clicks after a gesture, and don't let
         // them out: this is a gesture not a click

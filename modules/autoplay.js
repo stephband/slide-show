@@ -3,10 +3,10 @@
 Autoplay
 */
 
-import id         from 'https://stephen.band/fn/modules/id.js';
-import parseValue from 'https://stephen.band/fn/modules/parse-value.js';
-import Stream     from 'https://stephen.band/fn/stream/stream.js';
-import events     from 'https://stephen.band/dom/modules/events.js';
+import id         from '../../fn/modules/id.js';
+import parseValue from '../../fn/modules/parse-value.js';
+import Stream     from '../../fn/stream/stream.js';
+import events     from '../../dom/modules/events.js';
 
 
 const parseTime = parseValue({
@@ -31,7 +31,7 @@ function change(data) {
     const { active, children, host } = data;
     const i = children.indexOf(active);
     const target = children[i + 1] || children[0];
-    console.log('AUTOPLAY CHANGE', target);
+    //console.log('AUTOPLAY CHANGE', target);
     data.autoplay.timer = null;
     if (!target) { return; }
 
@@ -47,12 +47,12 @@ function update(data) {
     );
 
     clearTimeout(data.autoplay.timer);
-    console.log('AUTOPLAY UPDATE', duration);
+    //console.log('AUTOPLAY UPDATE', duration);
     data.autoplay.timer = setTimeout(change, duration * 1000, data);
 }
 
 function cancel(data) {
-    console.log('AUTOPLAY CANCEL');
+    //console.log('AUTOPLAY CANCEL');
     clearTimeout(data.autoplay.timer);
     data.autoplay.timer = null;
 }

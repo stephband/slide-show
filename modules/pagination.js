@@ -2,6 +2,9 @@
 
 /* Pagination */
 
+const assign = Object.assign;
+
+
 function addPartOn(node) {
     node.part.add('on');
 }
@@ -61,7 +64,7 @@ function renderPagination(data, active) {
 }
 
 export function enablePagination(data, state) {
-    const { shadow } = data;
+    const { shadow, clicked } = data;
 
     //const update = new Stream((stream) => stream.each(updatePagination));
     //const render = new Stream((stream) => stream.each(renderPagination));
@@ -69,6 +72,18 @@ export function enablePagination(data, state) {
     data.reflows.pipe(update);
     data.activates.pipe(render);
     data.pagination = { update, render };
+
+
+    assign(clicked, {
+        // Pagination links always reference non-ghost slides
+        '[href]': function(link, e) {
+            //const id     = link.hash && link.hash.replace(/^#/, '');
+            //const target = elem.getRootNode().getElementById(id);
+            //if (elem.contains(target) && elem !== target) {
+            //    view.show(target);
+            //    e.preventDefault();
+        }
+    });
 
     /*
     this.pagination = create('nav', {

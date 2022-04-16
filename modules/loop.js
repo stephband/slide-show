@@ -1,7 +1,7 @@
 
-import Stream from 'https://stephen.band/fn/stream/stream.js';
-import rect   from 'https://stephen.band/dom/modules/rect.js';
-import { px } from 'https://stephen.band/dom/modules/parse-length.js';
+import Stream from '../../fn/stream/stream.js';
+import rect   from '../../dom/modules/rect.js';
+import { px } from '../../dom/modules/parse-length.js';
 
 /* Loop */
 

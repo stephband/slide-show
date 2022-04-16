@@ -9,12 +9,13 @@ Style the 'previous slide' button.
 Style the 'next slide' button.
 **/
 
-[part="previous"],
-[part="next"] {
-    display: inline-block;
+[part="prev-button"],
+[part="next-button"] {
     vertical-align: baseline;
     overflow: hidden;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
 
     /* Nullify stuff */
     padding: 0;
@@ -23,9 +24,11 @@ Style the 'next slide' button.
     line-height: inherit;
     text-decoration: none;
 
-    /* Hide text by pushing it rightward */
+    /* Hide text by pushing it rightward, leaving background image to
+       'replace' it */
     padding-left: 1.875rem;
     height: 1.875rem;
+    margin-top: -0.9375rem;
 
     background-size: contain;
     background-position: 50% 50%;
@@ -35,40 +38,16 @@ Style the 'next slide' button.
     color: inherit;
 }
 
-[part="previous"]:focus,
-[part="next"]:focus {
-    color: white;
-    outline-width: 0;
+[part="prev-button"] {
+    left: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
+        <path d="M18,4 L8,15 L18,26" stroke="black" stroke-width="2" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"></path>\
+    </svg>');
 }
 
-[part="previous"]::before,
-[part="next"]::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    margin-top: -0.5rem;
-    width: 1rem;
-    height: 1rem;
-    border: 1px solid transparent;
-}
-
-[part="previous"]::before {
-    left: 50%;
-    margin-left: -0.25rem;
-    border-top-color: currentcolor;
-    border-left-color: currentcolor;
-    transform: rotate(-45deg);
-}
-
-[part="next"]::before {
-    right: 50%;
-    margin-right: -0.25rem;
-    border-top-color: currentcolor;
-    border-right-color: currentcolor;
-    transform: rotate(45deg);
-}
-
-[part="previous"]:not([href]),
-[part="next"]:not([href]) {
-    display: none;
+[part="next-button"] {
+    right: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
+        <path d="M12,4 L22,15 L12,26" stroke="black" stroke-width="2" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"></path>\
+    </svg>');
 }

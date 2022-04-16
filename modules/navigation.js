@@ -1,82 +1,93 @@
 
-import create      from 'https://stephen.band/dom/modules/create.js';
+import create   from '../../dom/modules/create.js';
+import Stream   from '../../fn/stream/stream.js';
+import delegate from '../../dom/modules/delegate.js';
 
 
-/* Navigation */
+function update(data) {
+    //console.log('NAVIGATION UPDATE');
 
-function update(data, active) {
-    console.log('updateNavigation');
+    const { active, children, navigation: { prev, next } } = data;
+    const i = children.indexOf(active);
 
-    /*
-    // Change href of prev and next buttons, and hide them where there are
-    // no previous or next siblings. Href updates are purely a help for the
-    // end user, as we pick up clicks on part(previous) and part(next)
-    // before we interrogate link hrefs.
-
-    if (this.slot.scrollWidth <= this.slot.clientWidth) {
-        // Nowhere to scroll to
-        this.previous.hidden = true;
-        this.next.hidden = true;
-        return;
-    }
-
-    const prevChild = previous(active);
-
-    if (prevChild) {
-        this.previous.hidden = false;
-        this.previous.href = '#' + (prevChild.id || prevChild.dataset.loopId);
+    if (i === 0) {
+        prev.hidden = true;
     }
     else {
-        this.previous.hidden = true;
+        prev.hidden = false;
     }
 
-    const nextChild = next(active);
-    if (nextChild) {
-        this.next.hidden = false;
-        this.next.href = '#' + (nextChild.id || nextChild.dataset.loopId);
+    if (i === children.length - 1) {
+        next.hidden = true;
     }
     else {
-        this.next.hidden = true;
+        next.hidden = false;
     }
-
-    /* console.log(
-        'previous', prevChild && Array.prototype.indexOf.call(prevChild.parentNode.children, prevChild),
-        'active', active && Array.prototype.indexOf.call(active.parentNode.children, active),
-        'next', nextChild && Array.prototype.indexOf.call(nextChild.parentNode.children, nextChild)
-    ); */
-}
-
-function renderNavigation(data, active) {
-    console.log('renderNavigation');
-    /*
-    this.previous.style.setProperty('display', items.length < 2 ? 'none' : '');
-    this.next.style.setProperty('display', items.length < 2 ? 'none' : '');
-    return items;
-    */
 }
 
 export function enableNavigation(data, state) {
-    const { shadow } = data;
+    const { shadow, clicks } = data;
 
-    const prev = create('a', { part: 'previous', html: config.trans['Previous'] });
-    const next = create('a', { part: 'next', html: config.trans['Next'] });
+    // Create a new stream of actives starting with the current active
+    // TODO: Make distributor push initial value?
+    const actives = Stream.merge(
+        [data.active],
+        // TEMP - needs .map() to create a new stream from the distributor
+        data.actives.map((o) => o)
+    );
+
+    const prev = create('button', { part: 'prev-button', name: "navigation", value: "-1", html: 'Previous' });
+    const next = create('button', { part: 'next-button', name: "navigation", value: "1", html: 'Next' });
     const nav  = data.nav || (data.nav = create('nav'));
     nav.append(prev, next);
     shadow.append(nav);
 
-    // Add object for storing navigation state
-    data.navigation = {
-        slotchanges: data.slotchanges.each(() => update(data)),
-        actives: data.actives.each(() => update(data)),
-        prev,
-        next
+    // Add an object to store autoplay state
+    const navigation = data.navigation = {
+        prev, next, nav
     };
+
+    // Add object for storing navigation state
+    navigation.slotchanges = data.slotchanges.each(() => update(data));
+
+    navigation.actives     = actives.each(() => update(data));
+
+    navigation.clicks      = clicks.each(delegate({
+        '[name="navigation"]': function(button, e) {
+            const { active, children, host } = data;
+            const value  = parseFloat(button.value);
+            const i      = children.indexOf(active) + value;
+            const target = children[i];
+
+            if (!target) { return; }
+
+            host.active = target;
+
+            // Preemptively hide buttons now (before new active is detected at
+            // end of scroll)
+            if (i === 0) {
+                prev.hidden = true;
+            }
+            else {
+                prev.hidden = false;
+            }
+
+            if (i === children.length - 1) {
+                next.hidden = true;
+            }
+            else {
+                next.hidden = false;
+            }
+        }
+    }));
 }
 
-export function disableNavigation() {
+export function disableNavigation(data) {
     data.navigation.prev.remove();
     data.navigation.next.remove();
+    data.navigation.nav.remove();
     data.navigation.slotchanges.stop();
     data.navigation.actives.stop();
+    data.navigation.clicks.stop();
     data.navigation = undefined;
 }

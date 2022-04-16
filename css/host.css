@@ -8,13 +8,6 @@
     --duration: 8s;
 
     /*
-    --link-top
-    Adjusts the vertical position of the list of links. Negative values make it
-    appear over the slides.
-    */
-    --link-top: -2.25rem;
-
-    /*
     --link-gap
     Adjusts the gap between links.
     */
@@ -129,5 +122,4 @@ Does not work
     margin-left: auto;
     margin-right: auto;
     z-index: 2;
-    margin-top: var(--link-top);
 }
