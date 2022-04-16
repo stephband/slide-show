@@ -42,22 +42,24 @@ the element before it is registered (or for those cases when JS fails completely
 
 ### Style
 
-- `--padding-left` - sets padding and scroll-padding inside the scroll area
-- `--padding-right` - sets padding and scroll-padding inside the scroll area
 
-- `::part(slides)`
-- `::part(prev-button)`
-- `::part(next-button)`
-- `::part(page-button)`
-- `::part(page-button-active)`
+- `--padding-left` - padding and scroll-padding inside the scroll area
+- `--padding-right` - padding and scroll-padding inside the scroll area
+
+
+- `::part(slides)` - the slides container
+- `::part(prev-button)` - the 'previous' navigation button
+- `::part(next-button)` - the 'next' navigation button
+- `::part(page-button)` - a pagination button
+- `::part(page-button-active)` - the currently active pagination button
 
 
 ## Build
 
 To build the `<slide-show>` component from its dependent modules, you must have
 [_Deno_](https://deno.land/) installed. You then need to clone this git
-repository into the same directory as three repositories that contain dependent
-modules:
+repository into the same directory as three other repositories that contain
+dependencies for building this module:
 
 ```cli
 git clone git@gihub.com:stephband/fn
