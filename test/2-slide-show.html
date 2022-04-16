@@ -61,46 +61,48 @@
 
 <body>
     <slide-show autoplay controls="pagination navigation">
-        <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="images/tractor.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="images/tractor.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../images/bourg.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../images/bourg.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../images/bourg.jpg" draggable="false" /></a>
     </slide-show>
 
     <!--slide-show class="centre-slide-show">
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../images/tractor.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../images/tractor.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
     </slide-show>
 
     <slide-show class="left-slide-show">
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../images/tractor.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../images/tractor.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
     </slide-show>
 
     <slide-show class="right-slide-show">
-        <img class="right-slide" src="images/bourg.jpg" draggable="false" />
-        <img class="right-slide" src="images/tractor.jpg" draggable="false" />
-        <img class="right-slide" src="images/bourg.jpg" draggable="false" />
-        <img class="right-slide" src="images/tractor.jpg" draggable="false" />
-        <img class="right-slide" src="images/bourg.jpg" draggable="false" />
+        <img class="right-slide" src="../images/bourg.jpg" draggable="false" />
+        <img class="right-slide" src="../images/tractor.jpg" draggable="false" />
+        <img class="right-slide" src="../images/bourg.jpg" draggable="false" />
+        <img class="right-slide" src="../images/tractor.jpg" draggable="false" />
+        <img class="right-slide" src="../images/bourg.jpg" draggable="false" />
     </slide-show>
 
     <slide-show class="grid-slide-show">
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
-        <img src="images/tractor.jpg" draggable="false" />
-        <img src="images/bourg.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../images/tractor.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../images/tractor.jpg" draggable="false" />
+        <img src="../images/bourg.jpg" draggable="false" />
     </slide-show-->
 
-    <script src="../element.js" type="module"></script>
+    <script type="module">
+        import '../element.js';
+    </script>
     <script>
         document.body.addEventListener('slide-active', (e) => {
             console.log('EVENT', e.type, e.target);

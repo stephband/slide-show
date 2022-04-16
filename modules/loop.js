@@ -47,44 +47,51 @@ function renderLoop(data, active) {
     */
 }
 
-function getWidth(host, scroller) {
-    const slides = host.querySelectorAll(':not([slot])');
-    let n = slides.length;
-    let p = 0;
+function getWidth(scroller, slides, children) {
+    let n = children.length;
+    let r = -Infinity;
 
     while (n--) {
-        const box   = rect(slides[n]);
+        const box   = rect(children[n]);
         const right = box.x + box.width;
-        p = right > p ? right : p;
+        r = right > r ? right : r;
     }
 
-    const box   = rect(scroller);
+    const box   = rect(slides);
     const style = getComputedStyle(scroller);
+    const pl    = px(style.paddingLeft);
     const pr    = px(style.paddingRight);
 
-    return p + pr - box.x;
+    return pl + pr + r - box.x;
 }
 
 export function initialiseLoop(data) {
-    const { host, scroller, slotchanges, resizes } = data;
+    const { children, scroller, slides, slotchanges, resizes } = data;
 
     function updateWidth(e) {
-        const width = getWidth(host, scroller);
+        const width = getWidth(scroller, slides, children);
         scroller.style.setProperty('--scroll-width', width + 'px');
     }
 
-    data.loop = {
-        updateStream: Stream.merge([{}], slotchanges, resizes).each(updateWidth)
+    data.noloop = {
+        slotchanges: Stream.merge([{}], slotchanges, resizes).each(updateWidth),
+        resizes:     resizes.each(updateWidth)
     };
 }
 
-export function enableLoop() {
-    const update = new Stream((stream) => stream.each(updateLoop));
-    const render = new Stream((stream) => stream.each(renderLoop));
+export function enableLoop(data) {
+    if (data.noloop) {
+        data.noloop.slotchanges.stop();
+        data.noloop.resizes.stop();
+        data.noloop = undefined;
+    }
 
-    data.reflows.pipe(update);
-    data.activates.pipe(render);
-    data.loop = { update, render };
+    //const update = new Stream((stream) => stream.each(updateLoop));
+    //const render = new Stream((stream) => stream.each(renderLoop));
+
+    //data.reflows.pipe(update);
+    //data.activates.pipe(render);
+    //data.loop = { update, render };
 
     /*
     const view     = this.view;
@@ -105,10 +112,10 @@ export function enableLoop() {
 }
 
 export function disableLoop(data) {
-    const { update, render } = data.loop;
-    update.stop();
-    render.stop();
-    data.loop = undefined;
+    //const { update, render } = data.loop;
+    //update.stop();
+    //render.stop();
+    //data.loop = undefined;
 
     /*
     this.remove();
@@ -117,11 +124,5 @@ export function disableLoop(data) {
     this.scrollends.stop();
     */
 
-    function updateWidth() {
-        const width = 1300;
-        scrollNode.style.setProperty('--width', width);
-    }
-
-    slotchanges.on(updateWidth);
-    resizes.on(updateWidth);
+    initialiseLoop(data);
 }

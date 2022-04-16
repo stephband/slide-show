@@ -1,6 +1,6 @@
 
-// Polyfill Element.scrollTo() for Safari - TODO: does not currently work, when did it stop working??
-//import '../dom/polyfills/element.scrollto.js';
+// Polyfill Element.scrollTo() for Safari
+import '../dom/polyfills/element.scrollto.js';
 
 /** <slide-show>
 
@@ -8,13 +8,13 @@ Import `<slide-show>` custom element. This registers the custom
 element and upgrades instances already in the DOM.
 
 ```html
-<script type="module" src="/bolt/elements/slide-show/module.js"></script>
+<script type="module" src="./build/element.js"></script>
 
 <slide-show loop controls="navigation">
-   <img src="../images/lyngen-4.png" id="1" draggable="false" />
-   <img src="../images/lyngen-2.png" id="2" draggable="false" />
-   <img src="../images/lyngen-1.png" id="3" draggable="false" />
-   <img src="../images/lyngen-3.png" id="4" draggable="false" />
+   <img src="./images/bourg.jpg" draggable="false" />
+   <img src="./images/tractor.jpg" draggable="false" />
+   <img src="./images/bourg.jpg" draggable="false" />
+   <img src="./images/bourg.jpg" draggable="false" />
 </slide-show>
 ```
 

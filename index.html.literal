@@ -2,38 +2,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    ${ include('../../templates/head.literal', '../../package.json') }
+    ${ include('../bolt/templates/head.literal', './package.json') }
 
     <script title="debug">
         window.DEBUG = true;
     </script>
-    
-    <link rel="stylesheet" href="../../module.css">
-    ${ include('../../templates/style.html') }
+
+    ${ include('../bolt/templates/style.html') }
+    <link rel="stylesheet" href="./build/element.css">
 
     <style>
     slide-show {
         background: #cccccc;
         margin: 0 auto;
-        max-width: 30rem;
     }
     </style>
 </head>
 
 <body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid">
     <nav class="x1 x-stretch y1 @2-x1 @2-1x">
-        <a class="thumb thumb-1:1" width="400" height="400" style="background-image: url('../../images/logo.svg'); background-size: contain; width: 120%; padding-top: 120%; max-width: 6rem; margin-top: -16%; margin-left: -8%; margin-right: -12%;">Bolt</a>
+        <a class="thumb thumb-1:1" width="400" height="400" style="background-image: url('./images/logo.svg'); background-size: contain; width: 120%; padding-top: 120%; max-width: 6rem; margin-top: -16%; margin-left: -8%; margin-right: -12%;">Bolt</a>
     </nav>
 
-    ${ include('../../templates/element.literal', comments("./module.js", "./shadow.css")) }
+    ${ include('../bolt/templates/element.literal', comments("./element.js", "./shadow.css")) }
 
-    <script type="module" src="./module.js"></script>
 
-    ${ include('../../templates/scripts.html') }
-    
+    <section class="x1 3x @1-x3 @1-4x @2-x4">
+        <h2>Examples</h2>
+
+        <slide-show autoplay controls="pagination navigation">
+            <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
+            <a href="/" draggable="false"><img src="images/tractor.jpg" draggable="false" /></a>
+            <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
+            <a href="/" draggable="false"><img src="images/tractor.jpg" draggable="false" /></a>
+            <a href="/" draggable="false"><img src="images/bourg.jpg" draggable="false" /></a>
+        </slide-show>
+
+        <slide-show class="centre-slide-show">
+            <img src="images/bourg.jpg" draggable="false" />
+            <img src="images/tractor.jpg" draggable="false" />
+            <img src="images/bourg.jpg" draggable="false" />
+            <img src="images/tractor.jpg" draggable="false" />
+            <img src="images/bourg.jpg" draggable="false" />
+        </slide-show>
+
+        <slide-show class="left-slide-show">
+            <img src="images/bourg.jpg" draggable="false" />
+            <img src="images/tractor.jpg" draggable="false" />
+            <img src="images/bourg.jpg" draggable="false" />
+            <img src="images/tractor.jpg" draggable="false" />
+            <img src="images/bourg.jpg" draggable="false" />
+        </slide-show>
+
+        <slide-show class="right-slide-show">
+            <img class="right-slide" src="images/bourg.jpg" draggable="false" />
+            <img class="right-slide" src="images/tractor.jpg" draggable="false" />
+            <img class="right-slide" src="images/bourg.jpg" draggable="false" />
+            <img class="right-slide" src="images/tractor.jpg" draggable="false" />
+            <img class="right-slide" src="images/bourg.jpg" draggable="false" />
+        </slide-show>
+
+        <slide-show class="grid-slide-show">
+            <img src="images/bourg.jpg" draggable="false" />
+            <img src="images/tractor.jpg" draggable="false" />
+            <img src="images/bourg.jpg" draggable="false" />
+            <img src="images/tractor.jpg" draggable="false" />
+            <img src="images/bourg.jpg" draggable="false" />
+        </slide-show>
+    </section>
+
+    <script type="module">
+        import '../dom/polyfills/element.scrollto.js';
+        import './build/element.js';
+    </script>
+
+    <!--$ { include('../bolt/templates/scripts.html') }-->
+
     <script type="module">
     // Log events
-    import events from '../../../dom/modules/events.js';
-    events('slide-activate', document).each((e) => console.log(e.type, e.target));
+    document.body.addEventListener('slide-active', (e) => console.log(e.type, e.target));
     </script>
 </body>

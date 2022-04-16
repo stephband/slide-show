@@ -57,6 +57,13 @@ Style for child slides:
 
 - `--slide-duration` - a CSS time value in `s` or `ms`
 
+### Polyfill for `element.scrollTo()`
+
+The script `element.js` includes a polyfill for `element.scrollTo()`, as the
+native version lacks support for smooth scrolling behaviour in Safari. The
+polyfill is ignored in other browsers.
+
+
 ## Build
 
 To build the `<slide-show>` component from its dependent modules, you must have
