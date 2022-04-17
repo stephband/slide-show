@@ -1,5 +1,4 @@
 archive/*
 node_modules/*
 assets/*
-build/*
 .nova
