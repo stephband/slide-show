@@ -35,7 +35,7 @@ function getSnapX(element) {
         'centre' ;
 }
 
-export function scrollTo(scroller, target) {
+export function scrollTo(scroller, target, behavior) {
     const scrollerBox = getPaddedBox(scroller);
     const targetBox   = rect(target);
     const snap        = getSnapX(target);
@@ -49,8 +49,14 @@ export function scrollTo(scroller, target) {
             snap === 'right' ? targetBox.right - scrollerBox.rightPadding :
             targetBox.left + (targetBox.width / 2) - scrollerBox.centrePadding
         ),
-        behavior: 'smooth'
+        behavior: behavior || 'smooth'
     });
+}
+
+export function jumpTo(scroller, target) {
+    scroller.style.setProperty('scroll-behavior', 'auto', 'important');
+    scrollTo(scroller, target, 'auto');
+    scroller.style.setProperty('scroll-behavior', '');
 }
 
 function getActive(scroller, children) {
@@ -91,9 +97,20 @@ function getActive(scroller, children) {
     return slide;
 }
 
+function notLoopGhost(slide) {
+    return !slide.dataset.slideIndex;
+}
+
 export function updateActive(data) {
     const { scroller, children } = data;
-    const active = getActive(scroller, children);
+    let active = getActive(scroller, children);
+console.log(active, children);
+    // For loop
+    if (active.dataset.slideIndex !== undefined) {
+        active = children.filter(notLoopGhost)[active.dataset.slideIndex];
+        jumpTo(scroller, active);
+    }
+
     if (active === data.active) { return; }
     data.active = active;
     if (active === undefined) { return; }

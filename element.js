@@ -35,8 +35,8 @@ import Scrolls     from '../dom/modules/scrolls.js';
 
 import { scrollTo, updateActive } from './modules/active.js';
 import { processPointers } from './modules/swipe.js';
-import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
-import { initialiseLoop, enableLoop, disableLoop } from './modules/loop.js';
+import { enableAutoplay,   disableAutoplay } from './modules/autoplay.js';
+import { enableLoop,       disableLoop } from './modules/loop.js';
 import { enableNavigation, disableNavigation } from './modules/navigation.js';
 import { enablePagination, disablePagination } from './modules/pagination.js';
 
@@ -112,7 +112,9 @@ const lifecycle = {
         // Add slots to shadow
         shadow.append(scroller/*, optional, overflow*/);
 
-        const slotchanges = events('slotchange', slides).pipe(new Distributor());
+        const slotchanges = events('slotchange', slides)
+            //.filter(() => !data.ignoreSLOTCHANGE)
+            .pipe(new Distributor());
         const clicks      = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
         const focuses     = events('focusin', this);
         const resizes     = events('resize', window).pipe(new Distributor());
@@ -215,11 +217,15 @@ const lifecycle = {
 
     load: function (shadow) {
         const data = this[$data];
+        data.loaded = true;
 
         // If loop is off we must set up the slider:before width hack now we
         // have some style loaded.
-        if (!this.loop) {
-            initialiseLoop(data)
+        if (this.loop) {
+            enableLoop(data);
+        }
+        else {
+            disableLoop(data);
         }
 
         // Update and bind to slotchanges on load so that initial `slide-active`
