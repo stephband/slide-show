@@ -10,8 +10,8 @@ import events     from '../../dom/modules/events.js';
 
 
 const parseTime = parseValue({
-   's':  id,
-   'ms': (n) => n / 1000
+    's':  id,
+    'ms': (n) => n / 1000
 });
 
 /*
@@ -34,7 +34,6 @@ function change(data) {
     //console.log('AUTOPLAY CHANGE', target);
     data.autoplay.timer = null;
     if (!target) { return; }
-
     host.active = target;
 }
 

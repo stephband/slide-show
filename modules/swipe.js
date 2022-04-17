@@ -1,7 +1,10 @@
 
+import events   from '../../dom/modules/events.js';
 import overload from '../../fn/modules/overload.js';
 
-export const processSwipe = overload((data, e) => e.type, {
+import { updateActive } from './active.js';
+
+export const processPointers = overload((data, e) => e.type, {
     pointerdown: function(data, e) {
         // First event is touchstart or mousedown
         data.e0 = e;
@@ -15,18 +18,23 @@ export const processSwipe = overload((data, e) => e.type, {
         const x1 = e.clientX;
         const y1 = e.clientY;
 
-        // If the gesture is more vertical than horizontal, don't count it
-        // as a swipe. Stop the stream and get out of here.
-        if (!data.isSwipe) {
+        // Determine whether to start a gesture
+        if (!data.gesturing) {
+            // If the movement is more vertical than horizontal, don't count it
+            // as a swipe. Stop the stream and get out of here.
             if (Math.abs(x1 - data.x0) < Math.abs(y1 - data.y0)) {
                 data.pointers.stop();
                 data.pointers = undefined;
+                data.e0 = undefined;
+                data.x0 = undefined;
+                data.y0 = undefined;
                 return;
             }
 
-            data.isSwipe = true;
             data.scrollLeft0 = data.scroller.scrollLeft;
-            data.scroller.classList.add('gesturing');
+            //data.scroller.classList.add('gesturing');
+            data.scroller.style.setProperty('scroll-snap-type', 'none', 'important');
+            data.scroller.style.setProperty('scroll-behavior', 'auto', 'important');
             data.gesturing = true;
         }
 
@@ -36,17 +44,69 @@ export const processSwipe = overload((data, e) => e.type, {
         return data;
     },
 
+    // Catches pointerup and pointercancel
     default: function(data, e) {
-        //data.view.clickSuppressTime = window.performance.now();
+        const scroller = data.scroller;
+
+        // Track the end of click to allow click suppression
         data.clickSuppressTime = e.timeStamp;
 
-        // Dodgy. If we simple remove the class the end of the gesture
-        // jumps.
-        const scrollLeft = data.scroller.scrollLeft;
-        data.scroller.classList.remove('gesturing');
-        data.scroller.scrollLeft = scrollLeft;
-        data.gesturing  = false;
-        data.pointers = undefined;
+        // Here we must go through a whole rigmarole in an attempt to avoid
+        // scroll jumps at the end of a swipe. Find out where it is, ...
+        const scrollLeft1 = scroller.scrollLeft;
+        scroller.style.setProperty('scroll-snap-type', '');
+
+        // and where it would snap to.
+        const scrollLeft2 = scroller.scrollLeft;
+
+        // If those numbers are the same we are probably in FF, where removing
+        // scroll-snap type doesn't seem to change much.
+        if (scrollLeft1 === scrollLeft2) {
+            // But FF has sensible smooth scroll behaviour, reset it.
+            scroller.style.setProperty('scroll-behavior', '');
+        }
+        else {
+            // We may as well preemptively update the active slide now, since we
+            // are sitting in the new position. This is not a crucial step, just
+            // makes the UI react a bit more quickly.
+            updateActive(data);
+
+            // Otherwise we have to do things the hard way. Switch scroll-snap
+            // off again and put scroll back to position 1, ...
+            scroller.style.setProperty('scroll-snap-type', 'none', 'important');
+            scroller.scrollLeft = scrollLeft1;
+
+            // then manually smooth scroll over to position 2, ...
+            scroller.style.setProperty('scroll-behavior', '');
+            scroller.scrollTo({
+                top:  scroller.scrollTop,
+                left: scrollLeft2,
+                behavior: 'smooth'
+            });
+
+            // and finally, switch scroll snapping back on when that scroll is
+            // over. Wait for two frames without a scroll event to pass before
+            // resetting scroll-snap.
+            let frame;
+            const scrolls = events('scroll', scroller).each(() => {
+                cancelAnimationFrame(frame);
+                frame = requestAnimationFrame(() =>
+                    frame = requestAnimationFrame(() => {
+                        scroller.style.setProperty('scroll-snap-type', '');
+                        scrolls.stop();
+                    })
+                );
+            });
+
+            // Ooof. What a polava.
+        }
+
+        data.gesturing = false;
+        data.e0 = undefined;
+        data.x0 = undefined;
+        data.y0 = undefined;
+        data.pointers  = undefined;
+        data.scrollLeft0 = undefined;
 
         return data;
     }

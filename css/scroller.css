@@ -40,15 +40,6 @@
     align-items:           inherit;
 }
 
-.scroller.gesturing {
-    /* Neuter scroll sticking while finger dragging */
-    scroll-snap-type: none !important;
-    scroll-snap-stop: normal !important;
-
-    -webkit-scroll-behavior: auto;
-            scroll-behavior: auto;
-}
-
 .scroller::before {
     /* The scroll element does not scroll to the extent of their right padding,
        as its child, the slides element, is max 100% wide – allowing the slides
