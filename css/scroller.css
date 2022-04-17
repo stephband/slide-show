@@ -65,18 +65,18 @@
     /* Make sure it's behind everything else */
     z-index: -1;
 }
-
+/*
 :host([loop]) > .scroller {
     /* Padding does not make sense when loop is on. */
-    padding-left:  0;
+/*    padding-left:  0;
     padding-right: 0;
 }
 
 :host([loop]) > .scroller::before {
     /* So neither does the width hack. */
-    content: none;
+/*    content: none;
 }
-
+*/
 .scroller::-webkit-scrollbar {
     /* Not convinced this is necessary */
     -webkit-appearance: none;

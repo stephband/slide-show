@@ -31,6 +31,8 @@ import delegate    from '../dom/modules/delegate.js';
 import element     from '../dom/modules/element.js';
 import events, { isPrimaryButton } from '../dom/modules/events.js';
 import gestures    from '../dom/modules/gestures.js';
+import { px }      from '../../dom/modules/parse-length.js';
+import rect        from '../../dom/modules/rect.js';
 import Scrolls     from '../dom/modules/scrolls.js';
 
 import { scrollTo, updateActive } from './modules/active.js';
@@ -43,30 +45,27 @@ import { enablePagination, disablePagination } from './modules/pagination.js';
 const $data = Symbol('data');
 
 
-/* Slot */
+function getWidth(scroller, slides, children) {
+    let n = children.length;
+    let r = -Infinity;
 
-function reflow(data, target) {
-    if (window.DEBUG) {
-        console.log('%c<slide-show>', 'color: #46789a; font-weight: 600;', 'reflow');
+    while (n--) {
+        const box   = rect(children[n]);
+        const right = box.x + box.width;
+        r = right > r ? right : r;
     }
 
-    /*
-    this.ignore = true;
-    */
+    const box   = rect(slides);
+    const style = getComputedStyle(scroller);
+    const pl    = px(style.paddingLeft);
+    const pr    = px(style.paddingRight);
 
-    scrollAuto(data.host, data.slot, target);
+    return pl + pr + r - box.x;
+}
 
-    // If scrollable, style accordingly. Currently this class simply updates
-    // the cursor to ew-resize
-    if (data.slot.scrollWidth <= data.slot.clientWidth) {
-        data.slot.classList.remove('scrollable')
-    }
-    else {
-        data.slot.classList.add('scrollable');
-    }
-
-    data.active = target;
-    return data;
+function updateWidth(scroller, slides, children) {
+    const width = getWidth(scroller, slides, children);
+    scroller.style.setProperty('--scroll-width', width + 'px');
 }
 
 
@@ -112,9 +111,7 @@ const lifecycle = {
         // Add slots to shadow
         shadow.append(scroller/*, optional, overflow*/);
 
-        const slotchanges = events('slotchange', slides)
-            //.filter(() => !data.ignoreSLOTCHANGE)
-            .pipe(new Distributor());
+        const slotchanges = events('slotchange', slides).pipe(new Distributor());
         const clicks      = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
         const focuses     = events('focusin', this);
         const resizes     = events('resize', window).pipe(new Distributor());
@@ -142,21 +139,13 @@ const lifecycle = {
             swipes
         };
 
-        /*const actives = new Stream((source) => {
-            source.push = function(node) {
-                console.log('PUSH ACTIVE');
-                trigger('slide-active', node);
-            };
-        });*/
-
-        const reflows = Stream.of().reduce(reflow, data);
-
-        slotchanges.each(() =>
-            data.children = slides.assignedElements()
-        );
+        slotchanges.each(() => {
+            data.children = slides.assignedElements();
+            updateWidth(data.scroller, data.slides, data.children);
+        });
 
         // Hijack links to slides to avoid the document scrolling, (but make
-        // sure they go in the history anyway, or not)
+        // sure they go in the history anyway, or not?)
 
 
         // Prevent default on immediate clicks after a gesture, and don't let
@@ -179,10 +168,9 @@ const lifecycle = {
         });
 
         // Reposition everything on resize
-        /*resizes.each(() => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => reflows.push(data.active || this.firstElementChild), 120);
-        });*/
+        resizes.each(() => {
+            updateWidth(data.scroller, data.slides, data.children);
+        });
 
         fullscreens.each((e) => {
             // If this slide-show was involved in the fullscreen change
@@ -393,6 +381,18 @@ const properties = {
         get: function() {
             const data = this[$data];
             return !!data.loop;
+        }
+    },
+
+    previous: {
+        value: function prev() {
+            console.log('Todo: advance slide');
+        }
+    },
+
+    next: {
+        value: function next() {
+            console.log('Todo: back slide');
         }
     }
 };

@@ -104,7 +104,7 @@ function notLoopGhost(slide) {
 export function updateActive(data) {
     const { scroller, children } = data;
     let active = getActive(scroller, children);
-console.log(active, children);
+//console.log(active, children);
     // For loop
     if (active.dataset.slideIndex !== undefined) {
         active = children.filter(notLoopGhost)[active.dataset.slideIndex];

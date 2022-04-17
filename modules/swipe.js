@@ -88,7 +88,7 @@ export const processPointers = overload((data, e) => e.type, {
             // over. Wait for two frames without a scroll event to pass before
             // resetting scroll-snap.
             let frame;
-            const scrolls = events('scroll', scroller).each(() => {
+            const scrolls = events({ type: 'scroll', passive: true }, scroller).each(() => {
                 cancelAnimationFrame(frame);
                 frame = requestAnimationFrame(() =>
                     frame = requestAnimationFrame(() => {

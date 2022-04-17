@@ -65,7 +65,7 @@ export function enablePagination(data, state) {
         [nothing],
         data.slotchanges.map((o) => o)
     )
-    .each(() => render(data.controls, pagination, shadow, data.children));
+    .each(() => render(data.controls, pagination, shadow, data.children.filter((slide) => !slide.dataset.slideIndex)));
 
     // Create a new stream of actives starting with the current active
     // TODO: Make distributor push initial value?
@@ -74,18 +74,19 @@ export function enablePagination(data, state) {
         // TEMP - needs .map() to create a new stream from the distributor
         actives.map((o) => o)
     )
-    .each(() => update(pagination, data.children, data.active));
+    .each(() => update(pagination, data.children.filter((slide) => !slide.dataset.slideIndex), data.active));
 
     pagination.clicks = clicks.each(delegate({
         '[name="pagination"]': function(button, e) {
-            const { children, host } = data;
+            const { host } = data;
+            const children = data.children.filter((slide) => !slide.dataset.slideIndex);
             const target = children[button.value];
 
             if (!target) { return; }
             host.active = target;
 
             // Preemptively highlight pagination button
-            update(pagination, data.children, target);
+            update(pagination, children, target);
         }
     }));
 }
