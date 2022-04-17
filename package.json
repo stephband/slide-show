@@ -1,7 +1,17 @@
 {
-    "title":   "<slide-show>",
+    "title": "<slide-show>",
     "version": "2.0.0",
+    "description": "A scroll-snapping slideshow/carousel, implemented as the custom element <slide-show>.",
+    "homepage": "https://stephen.band/slide-show/",
     "author": {
         "name": "Stephen Band"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stephband/slide-show.git"
+    },
+    "funding": {
+        "github": "https://github.com/sponsors/stephband"
+    },
+    "browser": "./build/element.js"
 }
