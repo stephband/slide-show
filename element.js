@@ -32,8 +32,8 @@ import delegate    from '../dom/modules/delegate.js';
 import element     from '../dom/modules/element.js';
 import events, { isPrimaryButton } from '../dom/modules/events.js';
 import gestures    from '../dom/modules/gestures.js';
-import { px }      from '../../dom/modules/parse-length.js';
-import rect        from '../../dom/modules/rect.js';
+import { px }      from '../dom/modules/parse-length.js';
+import rect        from '../dom/modules/rect.js';
 import Scrolls     from '../dom/modules/scrolls.js';
 
 import { scrollTo, updateActive } from './modules/active.js';
