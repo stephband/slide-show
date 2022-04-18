@@ -67,8 +67,7 @@ export function enableAutoplay(data) {
 
     // Create a stream of hover states starting with false. Note that this is
     // an assumption - the cursor may well be in hover state when autoplay is
-    // enabled. TODO: detect current hover state (move this stream to a 'permanent'
-    // stram in element.js? Make distributor push initial value?)
+    // enabled.
     const hovers = Stream.merge(
         [false],
         events('pointerenter pointerleave', host)

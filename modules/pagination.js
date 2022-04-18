@@ -67,7 +67,6 @@ export function enablePagination(data, state) {
     );
 
     // Create a new stream of actives starting with the current active
-    // TODO: Make distributor push initial value?
     pagination.actives = actives.each(() =>
         update(pagination, data.children.filter((slide) => !slide.dataset.slideIndex), data.active)
     );

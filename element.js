@@ -23,7 +23,6 @@ Children of a `<slide-show>` are displayed as slides in a horizontal grid.
 import equals      from '../fn/modules/equals.js';
 import noop        from '../fn/modules/noop.js';
 import nothing     from '../fn/modules/nothing.js';
-import Distributor from '../fn/modules/stream/distributor.js';
 import Stream      from '../fn/modules/stream.js';
 import create      from '../dom/modules/create.js';
 import delegate    from '../dom/modules/delegate.js';
@@ -90,15 +89,15 @@ const lifecycle = {
         // Add slots to shadow
         shadow.append(scroller);
 
-        const slotchanges  = events('slotchange', slides).distribute();
-        const mutations    = Stream.of().distribute({ memory: true });
-        const clicks       = events('click', shadow).filter(isPrimaryButton).distribute();
+        const slotchanges  = events('slotchange', slides).broadcast();
+        const mutations    = Stream.of().broadcast({ memory: true });
+        const clicks       = events('click', shadow).filter(isPrimaryButton).broadcast();
         const focuses      = events('focusin', this);
         const resizes      = events('resize', window);
         const fullscreens  = events('fullscreenchange', window);
         const scrolls      = Scrolls(scroller);
         const swipes       = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
-        const actives      = Stream.of().distribute({ memory: true });
+        const actives      = Stream.of().broadcast({ memory: true });
 
         // Private data
         const data = this[$data] = {
