@@ -24,10 +24,10 @@ slide-show {
     scrollbar-width: none; /* Firefox 64 */
 
     /* Overridden on upgrade */
-    padding-left:         var(--padding-left);
-    padding-right:        var(--padding-right);
-    scroll-padding-left:  var(--padding-left);
-    scroll-padding-right: var(--padding-right);
+    padding-left:         var(--padding-left,  0);
+    padding-right:        var(--padding-right, 0);
+    scroll-padding-left:  var(--padding-left,  0);
+    scroll-padding-right: var(--padding-right, 0);
 }
 
 slide-show:not(:defined) {
@@ -67,20 +67,15 @@ slide-show > * {
 
 slide-show:-webkit-full-screen {
     align-content: center;
-    column-gap: var(--x-gap);
-}
-
-slide-show:-ms-fullscreen {
-    align-content: center;
-    column-gap: var(--x-gap);
 }
 
 slide-show:fullscreen {
     align-content: center;
-    column-gap: var(--x-gap);
 }
 
+/*
+Simulate in iOS
 slide-show.fullscreen {
     align-content: center;
-    column-gap: var(--x-gap);
 }
+*/

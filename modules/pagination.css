@@ -7,7 +7,6 @@ Style the pagination wrapper.
 [part="pagination"] {
     display: flex;
     justify-content: center;
-    margin-top: 0.5rem;
 }
 
 
@@ -37,5 +36,17 @@ Style the pagination button pointing to the active slide.
 [part*="page-button-active"] {
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
         <circle cx="10" cy="10" r="6" stroke="none" fill="black" vector-effect="non-scaling-stroke"></circle>\
+    </svg>');
+}
+
+:host(:fullscreen) [part*="page-button-active"] {
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="white" vector-effect="non-scaling-stroke"></circle>\
+    </svg>');
+}
+
+:host(:-webkit-full-screen) [part*="page-button-active"], {
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="white" vector-effect="non-scaling-stroke"></circle>\
     </svg>');
 }

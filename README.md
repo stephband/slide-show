@@ -6,7 +6,7 @@ carousels. About 10kB minified and gzipped.
 ## Quick start
 
 Clone this repository, or copy the files in `build/`, into your front-end
-assets. Then import `element.js`:
+assets. Then import `build/element.js`:
 
 ```html
 <script type="module" src="./path/to/slide-show/build/element.js"></script>
@@ -14,27 +14,27 @@ assets. Then import `element.js`:
 
 This registers the `<slide-show>` custom element.
 
-You may also include `element.css`, which provides minimal fallback style for
-the element before it is registered (or for those cases when JS fails completely):
+You may also include `build/element.css`, which provides minimal fallback style for
+the element before it is registered, or for those times when JS fails completely:
 
 ```html
 <link rel="stylesheet" src="./path/to/slide-show/build/element.css"></link>
 ```
 
 
-## Features
+## API
 
 ### Attributes
 
-- `autoplay` - boolean attribute
-- `controls` - token list attribute, accepts the tokens `"pagination"` and/or `"navigation"`
-- `loop` - boolean attribute (Not yet implemented)
+- `autoplay` - boolean attribute, slide-show plays through slides
+- `controls` - token list attribute, accepts the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
+- `loop` - boolean attribute, causes slides to appear on a continuous carousel
 
 ### Properties
 
 - `.active` - a reference to the current scroll-snap aligned (ie 'active') child
-- `.autoplay` - boolean indicating state of autoplay
-- `.loop` - a boolean indicating state of loop (Not yet implemented)
+- `.autoplay` - boolean, get/set the state of autoplay
+- `.loop` - boolean, get/set the state of loop
 
 ### Events
 
@@ -47,11 +47,13 @@ Style for the `slide-show`:
 - `--slide-duration` - a CSS time value in `s` or `ms`
 - `--padding-left` - padding and scroll-padding inside the scroll area
 - `--padding-right` - padding and scroll-padding inside the scroll area
-- `::part(slides)` - the slides container
+- `::part(slides)` - the slides container, by default a grid layout
 - `::part(prev-button)` - the 'previous' navigation button
 - `::part(next-button)` - the 'next' navigation button
 - `::part(page-button)` - a pagination button
 - `::part(page-button-active)` - the currently active pagination button
+- `::part(fullscreen-button)` - the fullscreen toggle button
+- `::part(fullscreen-button-active)` - the fullscreen toggle button when in fullscreen
 
 Style for child slides:
 
@@ -59,8 +61,8 @@ Style for child slides:
 
 ### Polyfill for `element.scrollTo()`
 
-The script `element.js` includes a polyfill for `element.scrollTo()`, as the
-native version lacks support for smooth scrolling behaviour in Safari. The
+The script `element.js` includes a polyfill for `element.scrollTo()`, as
+Safari's native version lacks support for smooth scrolling behaviour. The
 polyfill is ignored in other browsers.
 
 
@@ -69,7 +71,7 @@ polyfill is ignored in other browsers.
 To build the `<slide-show>` component from its dependent modules, you must have
 [_Deno_](https://deno.land/) installed. You then need to clone this git
 repository into the same directory as three other repositories that contain
-dependencies for building this module:
+dependencies:
 
 ```cli
 git clone git@gihub.com:stephband/fn
@@ -83,6 +85,7 @@ Now the `slide-show` repo is ready to build:
 ```cli
 cd slide-show
 make modules
+make docs
 ```
 
 Builds production files to the `build/` folder, and documentation to `index.html`.

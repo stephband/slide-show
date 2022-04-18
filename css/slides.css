@@ -1,6 +1,7 @@
 
 [part="slides"] {
     display: grid;
+    height: 100%;
 
     margin-left: auto;
     margin-right: auto;

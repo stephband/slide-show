@@ -1,6 +1,6 @@
 
 import nothing  from '../../fn/modules/nothing.js';
-import Stream   from '../../fn/stream/stream.js';
+import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 
@@ -50,7 +50,7 @@ function render(controls, pagination, shadow, children) {
 }
 
 export function enablePagination(data, state) {
-    const { shadow, actives, clicks } = data;
+    const { shadow, actives, clicks, mutations } = data;
 
     // Set up nav::part(controls) element
     enableControls(data);
@@ -62,20 +62,15 @@ export function enablePagination(data, state) {
     };
 
     // Render buttons when children change
-    pagination.mutations = Stream.merge(
-        [nothing],
-        data.mutations.map((o) => o)
-    )
-    .each(() => render(data.controls, pagination, shadow, data.children.filter((slide) => !slide.dataset.slideIndex)));
+    pagination.mutations = mutations.each(() =>
+        render(data.controls, pagination, shadow, data.children.filter((slide) => !slide.dataset.slideIndex))
+    );
 
     // Create a new stream of actives starting with the current active
     // TODO: Make distributor push initial value?
-    pagination.actives = Stream.merge(
-        [data.active],
-        // TEMP - needs .map() to create a new stream from the distributor
-        actives.map((o) => o)
-    )
-    .each(() => update(pagination, data.children.filter((slide) => !slide.dataset.slideIndex), data.active));
+    pagination.actives = actives.each(() =>
+        update(pagination, data.children.filter((slide) => !slide.dataset.slideIndex), data.active)
+    );
 
     pagination.clicks = clicks.each(delegate({
         '[name="pagination"]': function(button, e) {

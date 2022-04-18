@@ -4,6 +4,7 @@
 @import 'css/scroller.css';
 @import 'css/slides.css';
 @import 'modules/controls.css';
+@import 'modules/fullscreen.css';
 @import 'modules/navigation.css';
 @import 'modules/pagination.css';
 @import 'modules/loop.css';

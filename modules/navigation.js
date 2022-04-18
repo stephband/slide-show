@@ -1,6 +1,6 @@
 
+import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
-import Stream   from '../../fn/stream/stream.js';
 import delegate from '../../dom/modules/delegate.js';
 
 import { enableControls } from './controls.js';
@@ -47,12 +47,7 @@ export function enableNavigation(data, state) {
     navigation.mutations = mutations.each(() => update(data));
 
     // Create a new stream of actives starting with the current active
-    navigation.actives = Stream.merge(
-        [data.active],
-        // TEMP - needs .map() to create a new stream from the distributor
-        actives.map((o) => o)
-    )
-    .each(() => update(data));
+    navigation.actives = actives.each(() => update(data));
 
     navigation.clicks = clicks.each(delegate({
         '[name="navigation"]': function(button, e) {
@@ -71,7 +66,6 @@ export function enableNavigation(data, state) {
 export function disableNavigation(data) {
     data.navigation.prev.remove();
     data.navigation.next.remove();
-    data.navigation.nav.remove();
     data.navigation.mutations.stop();
     data.navigation.actives.stop();
     data.navigation.clicks.stop();

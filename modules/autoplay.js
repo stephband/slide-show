@@ -7,7 +7,7 @@ import id         from '../../fn/modules/id.js';
 import get        from '../../fn/modules/get.js';
 import overload   from '../../fn/modules/overload.js';
 import parseValue from '../../fn/modules/parse-value.js';
-import Stream     from '../../fn/stream/stream.js';
+import Stream     from '../../fn/modules/stream.js';
 import events     from '../../dom/modules/events.js';
 
 
@@ -60,18 +60,10 @@ function cancel(data) {
 }
 
 export function enableAutoplay(data) {
-    const { host } = data;
+    const { actives, host } = data;
 
     // Add an object to store autoplay state
     const autoplay = data.autoplay = {};
-
-    // Create a new stream of actives starting with the current active
-    // TODO: Make distributor push initial value?
-    const actives = Stream.merge(
-        [data.active],
-        // TEMP - needs .map() to create a new stream from the distributor
-        data.actives.map((o) => o)
-    );
 
     // Create a stream of hover states starting with false. Note that this is
     // an assumption - the cursor may well be in hover state when autoplay is

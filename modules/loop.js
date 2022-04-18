@@ -1,6 +1,6 @@
 
 import nothing from '../../fn/modules/nothing.js';
-import Stream  from '../../fn/stream/stream.js';
+import Stream  from '../../fn/modules/stream.js';
 import rect    from '../../dom/modules/rect.js';
 
 import { jumpTo } from './active.js';
@@ -65,11 +65,9 @@ export function enableLoop(data) {
     }
 
     // Render buttons when children change
-    loop.mutations = Stream.merge(
-        [nothing],
-        mutations.map((o) => o)
-    )
-    .each(() => render(data));
+    loop.mutations = mutations
+        .map((o) => o)
+        .each(() => render(data));
 }
 
 export function disableLoop(data) {
@@ -77,7 +75,6 @@ export function disableLoop(data) {
         data.loop.prepends && data.loop.prepends.forEach((slide) => slide.remove());
         data.loop.appends  && data.loop.appends.forEach((slide) => slide.remove());
         data.loop.mutations.stop();
-        data.loop.actives.stop();
         data.loop = undefined;
     }
 }

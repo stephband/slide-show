@@ -11,22 +11,20 @@ element and upgrades instances already in the DOM.
 <script type="module" src="./build/element.js"></script>
 
 <slide-show loop controls="navigation">
-   <img src="./images/bourg.jpg" draggable="false" />
+   <img src="./images/donkeys.jpg" draggable="false" />
    <img src="./images/tractor.jpg" draggable="false" />
-   <img src="./images/bourg.jpg" draggable="false" />
-   <img src="./images/bourg.jpg" draggable="false" />
+   <img src="./images/mauverin.jpg" draggable="false" />
 </slide-show>
 ```
 
-By default children of `<slide-show>` are interpreted as 'slides', but
-elements with a `slot` attribute are not. Slides have default style of
-`scroll-snap-align: center`. Apply `start` or `end` to change the alignment.
+Children of a `<slide-show>` are displayed as slides in a horizontal grid.
 **/
 
 import equals      from '../fn/modules/equals.js';
+import noop        from '../fn/modules/noop.js';
 import nothing     from '../fn/modules/nothing.js';
-import Distributor from '../fn/stream/distributor.js';
-import Stream      from '../fn/stream/stream.js';
+import Distributor from '../fn/modules/stream/distributor.js';
+import Stream      from '../fn/modules/stream.js';
 import create      from '../dom/modules/create.js';
 import delegate    from '../dom/modules/delegate.js';
 import element     from '../dom/modules/element.js';
@@ -36,12 +34,13 @@ import { px }      from '../dom/modules/parse-length.js';
 import rect        from '../dom/modules/rect.js';
 import Scrolls     from '../dom/modules/scrolls.js';
 
-import { scrollTo, updateActive } from './modules/active.js';
+import { scrollTo, jumpTo, updateActive } from './modules/active.js';
 import { processPointers } from './modules/swipe.js';
 import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
 import { enableLoop, disableLoop, isSlide } from './modules/loop.js';
 import { enableNavigation, disableNavigation } from './modules/navigation.js';
 import { enablePagination, disablePagination } from './modules/pagination.js';
+import { enableFullscreen, disableFullscreen } from './modules/fullscreen.js';
 
 const $data = Symbol('data');
 
@@ -80,47 +79,26 @@ const lifecycle = {
         window.elementSlideShowStylesheet ||
         import.meta.url.replace(/\/[^\/]*([?#].*)?$/, '/') + 'shadow.css',
 
-    /**
-    Create a shadow DOM containing:
-
-    ```html
-    <!-- The main scrollable grid -->
-    <slot part="grid"></slot>
-    <!-- With controls="navigation" -->
-    <a part="previous" href=""></a>
-    <a part="next" href=""></a>
-    <!-- With controls="pagination" -->
-    <nav>
-        <a part="link" href="#id"></a>
-        <a part="link" href="#id"></a>
-    </nav>
-    <!-- With overflow script -->
-    <slot name="overflow"></slot>
-    ```
-    **/
-
     construct: function(shadow) {
         // Shadow DOM
         const slides   = create('slot', { part: 'slides' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
 
         // A place to put optional UI (fullscreen close buttons etc)
-        //const optional = create('slot', { name: 'optional', part: 'optional' });
-        // A place to put overflow menu stuff
-        //const overflow = create('slot', { name: 'overflow', part: 'overflow' });
+        //const optional = create('slot', { name: 'ui', part: 'ui' });
 
         // Add slots to shadow
-        shadow.append(scroller/*, optional, overflow*/);
+        shadow.append(scroller);
 
-        const slotchanges  = events('slotchange', slides).pipe(new Distributor());
-        const mutations    = new Distributor();
-        const clicks       = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
+        const slotchanges  = events('slotchange', slides).distribute();
+        const mutations    = Stream.of().distribute({ memory: true });
+        const clicks       = events('click', shadow).filter(isPrimaryButton).distribute();
         const focuses      = events('focusin', this);
-        const resizes      = events('resize', window).pipe(new Distributor());
+        const resizes      = events('resize', window);
         const fullscreens  = events('fullscreenchange', window);
-        const scrolls      = Scrolls(scroller).pipe(new Distributor());
+        const scrolls      = Scrolls(scroller);
         const swipes       = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
-        const actives      = new Distributor();
+        const actives      = Stream.of().distribute({ memory: true });
 
         // Private data
         const data = this[$data] = {
@@ -133,36 +111,26 @@ const lifecycle = {
             scroller,
             slides,
             actives,
-            scrolls,
             slotchanges,
             mutations,
-            clicks,
-            resizes,
-            fullscreens,
-            swipes
+            clicks
         };
 
         slotchanges.each(() => {
-            data.elements = slides.assignedElements();
+            const elements = slides.assignedElements();
+            data.elements = elements;
             updateWidth(data.scroller, data.slides, data.elements);
+
+            const children = data.elements.filter(isSlide);
+            if (!equals(data.children, children)) {
+                data.children = children;
+                mutations.push(children);
+            }
         });
 
         resizes.each(() =>
             updateWidth(data.scroller, data.slides, data.elements)
         );
-
-        slotchanges
-        .map(() => {
-            // Filter out loop ghosts and decide whether original slides mutated
-            const children = data.elements.filter(isSlide);
-            return equals(data.children, children) ?
-                undefined :
-                (data.children = children) ;
-        })
-        .pipe(mutations);
-
-        // Hijack links to slides to avoid the document scrolling, (but make
-        // sure they go in the history anyway, or not?)
 
         // Prevent default on immediate clicks after a gesture, and don't let
         // them out: this is a gesture not a click
@@ -177,55 +145,50 @@ const lifecycle = {
         // Enable single finger scroll on mouse devices. Bad idea in my opinion,
         // but designers tend to want it.
         swipes.each((pointers) => {
-            // We keep a reference to pointers so that it may be stopped inside
-            // processPointers
+            // Keep a reference to pointers, it's used inside processPointers
             data.pointers = pointers;
             pointers.reduce(processPointers, data);
         });
 
         fullscreens.each((e) => {
             // If this slide-show was involved in the fullscreen change
+            // reposition the active slide, it may have been shuftied.
             if (e.target === this || e.target.contains(this)) {
-                //this.actives.push(this.active);
+                jumpTo(scroller, data.active);
             }
         });
 
         scrolls.each((stream) =>
             stream
-            /* TEMP Only here so the stream is started, not needed when distributed */
-            .each(() => {})
+            .each(noop)
             .done(() => updateActive(data))
         );
 
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the
         // focused slide. Todo: FF not getting this.
-        focuses.each((e) => {
-            const target =
-                // Is e.target a slide
-                data.children.indexOf(e.target) !== -1 ? e.target :
-                // Or inside a slide
-                data.children.find((child) => child.contains(e.target)) ;
-
-            // Or in some other slot
-            if (!target) { return; }
-
-            scrollTo(data.scroller, target);
-        });
+        focuses.map((e) =>
+            // Is e.target a slide
+            data.children.indexOf(e.target) !== -1 ? e.target :
+            // Or inside a slide
+            data.children.find((child) => child.contains(e.target))
+        )
+        .each((target) => scrollTo(data.scroller, target));
     },
 
     load: function (shadow) {
         const data = this[$data];
         data.loaded = true;
 
-        // If loop is off we must set up the slider:before width hack now we
-        // have some style loaded.
         if (this.loop) {
             enableLoop(data);
         }
         else {
             disableLoop(data);
         }
+
+        // Update width hack now we have some style loaded
+        updateWidth(data.scroller, data.slides, data.elements);
 
         // Update and bind to slotchanges on load so that initial `slide-active`
         // event is guaranteed to be sent after initialisation. (In Chrome and
@@ -240,10 +203,10 @@ const properties = {
     active: {
         /**
         .active
-        Returns the currently active child element - the current slide.
+        Returns the currently scroll-snapped child element.
 
         ```js
-        const activeSlideElement = slideshow.active;
+        const activeSlide = slideshow.active;
         ```
 
         May be set to one of the child elements, or to the id of one of the
@@ -332,18 +295,20 @@ const properties = {
         **/
         attribute: function(value) {
             const data = this[$data];
-            let navigationState, paginationState;
+            let navigationState, paginationState, fullscreenState;
 
             // If value is a string of tokens
             if (typeof value === 'string' && value !== '') {
                 const state = value.split(/\s+/);
                 navigationState = state.includes('navigation');
                 paginationState = state.includes('pagination');
+                fullscreenState = state.includes('fullscreen');
             }
             else {
                 const state = value !== null;
                 navigationState = state;
                 paginationState = state;
+                fullscreenState = state;
             }
 
             if (!!navigationState !== !!data.navigation) {
@@ -361,6 +326,15 @@ const properties = {
                 }
                 else {
                     disablePagination(data);
+                }
+            }
+
+            if (!!fullscreenState !== !!data.fullscreen) {
+                if (fullscreenState) {
+                    enableFullscreen(data);
+                }
+                else {
+                    disableFullscreen(data);
                 }
             }
         }

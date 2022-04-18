@@ -4,11 +4,9 @@ DEBUG=
 .PHONY: modules docs literal
 
 # Must format with tabs not spaces
-literal:
-	deno run --allow-read --allow-env --allow-net --allow-write --allow-run --unstable --no-check ../literal/deno/make-literal.js ./ debug
-
 docs:
 	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build ./docs/docs.js ./docs/docs.css
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run --unstable --no-check ../literal/deno/make-literal.js ./ debug
 
 modules:
 	rm -r build

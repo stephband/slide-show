@@ -15,29 +15,3 @@
     padding: 0;
     margin: 0;
 }
-
-/* Make fullscreen elements fill the screen */
-
-:-webkit-full-screen {
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-}
-
-:-moz-full-screen {
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-}
-
-:-ms-fullscreen {
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-}
-
-:fullscreen {
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-}
