@@ -99,7 +99,7 @@ export function enableAutoplay(data) {
     // hovering, or at the end of the hover
     autoplay.updates = Stream
         .combine({ active: actives, hover: hovers, focus: focuses })
-        .each((state) => (console.log(state), state.hover || state.focus ?
+        .each((state) => (state.hover || state.focus ?
             cancel(data) :
             update(data)
         ));
