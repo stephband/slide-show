@@ -4,6 +4,8 @@ Autoplay
 */
 
 import id         from '../../fn/modules/id.js';
+import get        from '../../fn/modules/get.js';
+import overload   from '../../fn/modules/overload.js';
 import parseValue from '../../fn/modules/parse-value.js';
 import Stream     from '../../fn/stream/stream.js';
 import events     from '../../dom/modules/events.js';
@@ -81,11 +83,23 @@ export function enableAutoplay(data) {
         .map((e) => e.type === 'pointerenter')
     );
 
+    // Create a stream of focus inside state
+    const focuses = Stream.merge(
+        [host.contains(document.activeElement)],
+        events('focusin focusout', host)
+        .map(overload(get('type'), {
+            'focusin': (e) => true,
+            'focusout': (e) => host.contains(e.relatedTarget)
+        }))
+    )
+    // Deduplicate
+    .map(((v) => (value) => (v === value ? undefined : (v = value)))());
+
     // Schedule a change timer on every activate where the user is not
     // hovering, or at the end of the hover
     autoplay.updates = Stream
-        .combine({ active: actives, hover:  hovers })
-        .each((state) => (state.hover ?
+        .combine({ active: actives, hover: hovers, focus: focuses })
+        .each((state) => (console.log(state), state.hover || state.focus ?
             cancel(data) :
             update(data)
         ));

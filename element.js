@@ -210,7 +210,7 @@ const lifecycle = {
             // Or in some other slot
             if (!target) { return; }
 
-            scrollTo(data.scroller, target)
+            scrollTo(data.scroller, target);
         });
     },
 
