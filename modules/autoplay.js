@@ -30,9 +30,9 @@ events('visibilitychange', document).each((e) => {
 */
 
 function change(data) {
-    const { active, children, host } = data;
-    const i = children.indexOf(active);
-    const target = children[i + 1] || children[0];
+    const { active, children, elements, host } = data;
+    const i = elements.indexOf(active);
+    const target = elements[i + 1] || children[0];
     //console.log('AUTOPLAY CHANGE', target);
     data.autoplay.timer = null;
     if (!target) { return; }
