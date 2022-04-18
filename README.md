@@ -27,7 +27,7 @@ the element before it is registered (or for those cases when JS fails completely
 ### Attributes
 
 - `autoplay` - boolean attribute
-- `controls` - token list attribute
+- `controls` - token list attribute, accepts the tokens `"pagination"` and/or `"navigation"`
 - `loop` - boolean attribute (Not yet implemented)
 
 ### Properties
