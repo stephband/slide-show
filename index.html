@@ -4,8 +4,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-<meta name="author" content="" />
-<meta name="description" content="Documentation for <slide-show>. " />
+<meta name="author" content="Stephen Band" />
+<meta name="description" content="Documentation for <slide-show>. A scroll-snapping slideshow/carousel, implemented as the custom element <slide-show>." />
 <meta name="viewport" content="width=device-width" />
 
 
@@ -56,14 +56,11 @@ element and upgrades instances already in the DOM.</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/element.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/bourg.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/donkeys.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/tractor.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/bourg.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/bourg.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/mauverin.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
-<p>By default children of <code>&lt;slide-show&gt;</code> are interpreted as ‘slides’, but
-elements with a <code>slot</code> attribute are not. Slides have default style of
-<code>scroll-snap-align: center</code>. Apply <code>start</code> or <code>end</code> to change the alignment.</p>
+<p>Children of a <code>&lt;slide-show&gt;</code> are displayed as slides in a horizontal grid.</p>
 
     
 </header>
@@ -72,10 +69,9 @@ elements with a <code>slot</code> attribute are not. Slides have default style o
     <script type="module" src="../bolt/templates/build/element.js"></script>
 
 <slide-show loop controls="navigation">
-   <img src="../bolt/templates/images/bourg.jpg" draggable="false" />
+   <img src="../bolt/templates/images/donkeys.jpg" draggable="false" />
    <img src="../bolt/templates/images/tractor.jpg" draggable="false" />
-   <img src="../bolt/templates/images/bourg.jpg" draggable="false" />
-   <img src="../bolt/templates/images/bourg.jpg" draggable="false" />
+   <img src="../bolt/templates/images/mauverin.jpg" draggable="false" />
 </slide-show>
     <!-- for testing form submission values -->
     <input hidden class="button" type="submit" />
@@ -148,8 +144,8 @@ dots may be styled with <code>::part(page)</code>.</p>
     </a>
 </h3>
 
-<p>Returns the currently active child element - the current slide.</p>
-<pre><code class="language-js"><span class="token keyword">const</span> activeSlideElement <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span></code></pre>
+<p>Returns the currently scroll-snapped child element.</p>
+<pre><code class="language-js"><span class="token keyword">const</span> activeSlide <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span></code></pre>
 <p>May be set to one of the child elements, or to the id of one of the
 child elements. Setting this property causes the slide to change.</p>
 <pre><code class="language-js">slideshow<span class="token punctuation">.</span>active <span class="token operator">=</span> <span class="token string">'slide-1'</span><span class="token punctuation">;</span></code></pre>
