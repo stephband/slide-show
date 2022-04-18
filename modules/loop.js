@@ -42,9 +42,6 @@ function render(data) {
     while (boxes[--n] && boxes[n].right > right - loopOverflow);
     const prepends = children.slice(++n).map((slide, i) => toLoopGhost(slide, n + i));
 
-    // Will cause slotchange event
-console.log('LOOP RENDER', prepends.length, appends.length, active);
-
     host.prepend.apply(host, prepends);
     host.append.apply(host, appends);
 
