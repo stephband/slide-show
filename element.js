@@ -23,6 +23,7 @@ elements with a `slot` attribute are not. Slides have default style of
 `scroll-snap-align: center`. Apply `start` or `end` to change the alignment.
 **/
 
+import equals      from '../fn/modules/equals.js';
 import nothing     from '../fn/modules/nothing.js';
 import Distributor from '../fn/stream/distributor.js';
 import Stream      from '../fn/stream/stream.js';
@@ -37,8 +38,8 @@ import Scrolls     from '../dom/modules/scrolls.js';
 
 import { scrollTo, updateActive } from './modules/active.js';
 import { processPointers } from './modules/swipe.js';
-import { enableAutoplay,   disableAutoplay } from './modules/autoplay.js';
-import { enableLoop,       disableLoop } from './modules/loop.js';
+import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
+import { enableLoop, disableLoop, isSlide } from './modules/loop.js';
 import { enableNavigation, disableNavigation } from './modules/navigation.js';
 import { enablePagination, disablePagination } from './modules/pagination.js';
 
@@ -111,28 +112,30 @@ const lifecycle = {
         // Add slots to shadow
         shadow.append(scroller/*, optional, overflow*/);
 
-        const slotchanges = events('slotchange', slides).pipe(new Distributor());
-        const clicks      = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
-        const focuses     = events('focusin', this);
-        const resizes     = events('resize', window).pipe(new Distributor());
-        const fullscreens = events('fullscreenchange', window);
-        const scrolls     = Scrolls(scroller).pipe(new Distributor());
-        const swipes      = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
-        const actives     = Stream.of().pipe(new Distributor());
-        const clickables  = {};
+        const slotchanges  = events('slotchange', slides).pipe(new Distributor());
+        const mutations    = new Distributor();
+        const clicks       = events('click', shadow).filter(isPrimaryButton).pipe(new Distributor());
+        const focuses      = events('focusin', this);
+        const resizes      = events('resize', window).pipe(new Distributor());
+        const fullscreens  = events('fullscreenchange', window);
+        const scrolls      = Scrolls(scroller).pipe(new Distributor());
+        const swipes       = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
+        const actives      = new Distributor();
 
         // Private data
         const data = this[$data] = {
             clickSuppressTime: -Infinity,
             host:     this,
-            children: nothing,
             style:    window.getComputedStyle(this),
+            elements: nothing,
+            children: nothing,
             shadow,
             scroller,
             slides,
             actives,
             scrolls,
             slotchanges,
+            mutations,
             clicks,
             resizes,
             fullscreens,
@@ -140,13 +143,26 @@ const lifecycle = {
         };
 
         slotchanges.each(() => {
-            data.children = slides.assignedElements();
-            updateWidth(data.scroller, data.slides, data.children);
+            data.elements = slides.assignedElements();
+            updateWidth(data.scroller, data.slides, data.elements);
         });
+
+        resizes.each(() =>
+            updateWidth(data.scroller, data.slides, data.elements)
+        );
+
+        slotchanges
+        .map(() => {
+            // Filter out loop ghosts and decide whether original slides mutated
+            const children = data.elements.filter(isSlide);
+            return equals(data.children, children) ?
+                undefined :
+                (data.children = children) ;
+        })
+        .pipe(mutations);
 
         // Hijack links to slides to avoid the document scrolling, (but make
         // sure they go in the history anyway, or not?)
-
 
         // Prevent default on immediate clicks after a gesture, and don't let
         // them out: this is a gesture not a click
@@ -165,11 +181,6 @@ const lifecycle = {
             // processPointers
             data.pointers = pointers;
             pointers.reduce(processPointers, data);
-        });
-
-        // Reposition everything on resize
-        resizes.each(() => {
-            updateWidth(data.scroller, data.slides, data.children);
         });
 
         fullscreens.each((e) => {

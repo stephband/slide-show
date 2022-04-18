@@ -14,15 +14,15 @@ function update(pagination, children, target) {
     if (active === target) { return; }
 
     if (index > -1) {
+        pagination.activeSpan.remove();
         buttons.children[index].part.remove('page-button-active');
     }
 
     const i = children.indexOf(target);
+    if (i === -1) { return; }
 
-    if (i === -1) {
-        return;
-    }
     buttons.children[i].part.add('page-button-active');
+    buttons.children[i].append(pagination.activeSpan);
     pagination.index  = i;
     pagination.active = target;
 }
@@ -34,9 +34,7 @@ function render(controls, pagination, shadow, children) {
     }
 
     // Don't generate pagination when there are 0 or 1 slides
-    if (children.length < 2) {
-        return;
-    }
+    if (children.length < 2) { return; }
 
     pagination.buttons = create('div', {
         part: 'pagination',
@@ -58,12 +56,15 @@ export function enablePagination(data, state) {
     enableControls(data);
 
     // Add an object to store autoplay state
-    const pagination = data.pagination = {};
+    const pagination = data.pagination = {
+        // Element containing accessibility text marking a button as active
+        activeSpan: create('span', { class: 'invisible', text: '(Current slide)' })
+    };
 
     // Render buttons when children change
-    pagination.slotchanges = Stream.merge(
+    pagination.mutations = Stream.merge(
         [nothing],
-        data.slotchanges.map((o) => o)
+        data.mutations.map((o) => o)
     )
     .each(() => render(data.controls, pagination, shadow, data.children.filter((slide) => !slide.dataset.slideIndex)));
 
@@ -93,7 +94,7 @@ export function enablePagination(data, state) {
 
 export function disablePagination(data) {
     data.pagination.buttons.remove();
-    data.pagination.slotchanges.stop();
+    data.pagination.mutations.stop();
     data.pagination.actives.stop();
     data.pagination.clicks.stop();
     data.pagination = undefined;

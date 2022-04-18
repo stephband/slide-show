@@ -5,13 +5,9 @@ import delegate from '../../dom/modules/delegate.js';
 
 import { enableControls } from './controls.js';
 
-
-function update(data) {
-    //console.log('NAVIGATION UPDATE');
-
-    const { active, children, navigation: { prev, next } } = data;
-    const i = children.indexOf(active);
-
+function updateButtons(prev, next, elements, i) {
+    // Preemptively hide buttons now (before new active is detected at
+    // end of scroll)
     if (i === 0) {
         prev.hidden = true;
     }
@@ -19,7 +15,7 @@ function update(data) {
         prev.hidden = false;
     }
 
-    if (i === children.length - 1) {
+    if (i === elements.length - 1) {
         next.hidden = true;
     }
     else {
@@ -27,21 +23,28 @@ function update(data) {
     }
 }
 
+function update(data) {
+    const { active, elements, navigation: { prev, next } } = data;
+    const i = elements.indexOf(active);
+    updateButtons(prev, next, elements, i)
+}
+
 export function enableNavigation(data, state) {
-    const { actives, clicks, slotchanges } = data;
+    const { host, actives, clicks, mutations } = data;
 
     // Set up nav::part(controls) element
     enableControls(data);
 
-    const prev = create('button', { part: 'prev-button', type: "button", name: "navigation", value: "-1", html: 'Previous' });
-    const next = create('button', { part: 'next-button', type: "button", name: "navigation", value: "1", html: 'Next' });
-    data.controls.prepend(prev, next);
+    // Add an object to store navigation state
+    const navigation = data.navigation = {
+        prev: create('button', { part: 'prev-button', type: "button", name: "navigation", value: "-1", html: 'Previous' }),
+        next: create('button', { part: 'next-button', type: "button", name: "navigation", value: "1", html: 'Next' })
+    };
 
-    // Add an object to store autoplay state
-    const navigation = data.navigation = { prev, next };
+    data.controls.prepend(navigation.prev, navigation.next);
 
     // Add object for storing navigation state
-    navigation.slotchanges = slotchanges.each(() => update(data));
+    navigation.mutations = mutations.each(() => update(data));
 
     // Create a new stream of actives starting with the current active
     navigation.actives = Stream.merge(
@@ -53,30 +56,14 @@ export function enableNavigation(data, state) {
 
     navigation.clicks = clicks.each(delegate({
         '[name="navigation"]': function(button, e) {
-            const { active, children, host } = data;
             const value  = parseFloat(button.value);
-            const i      = children.indexOf(active) + value;
-            const target = children[i];
+            const i      = data.elements.indexOf(data.active) + value;
+            const target = data.elements[i];
 
             if (!target) { return; }
 
             host.active = target;
-
-            // Preemptively hide buttons now (before new active is detected at
-            // end of scroll)
-            if (i === 0) {
-                prev.hidden = true;
-            }
-            else {
-                prev.hidden = false;
-            }
-
-            if (i === children.length - 1) {
-                next.hidden = true;
-            }
-            else {
-                next.hidden = false;
-            }
+            updateButtons(navigation.prev, navigation.next, data.elements, i);
         }
     }));
 }
@@ -85,7 +72,7 @@ export function disableNavigation(data) {
     data.navigation.prev.remove();
     data.navigation.next.remove();
     data.navigation.nav.remove();
-    data.navigation.slotchanges.stop();
+    data.navigation.mutations.stop();
     data.navigation.actives.stop();
     data.navigation.clicks.stop();
     data.navigation = undefined;

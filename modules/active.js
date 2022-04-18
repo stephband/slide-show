@@ -35,7 +35,7 @@ function getSnapX(element) {
         'centre' ;
 }
 
-export function scrollTo(scroller, target, behavior) {
+function scrollToTarget(scroller, target, behavior) {
     const scrollerBox = getPaddedBox(scroller);
     const targetBox   = rect(target);
     const snap        = getSnapX(target);
@@ -49,13 +49,17 @@ export function scrollTo(scroller, target, behavior) {
             snap === 'right' ? targetBox.right - scrollerBox.rightPadding :
             targetBox.left + (targetBox.width / 2) - scrollerBox.centrePadding
         ),
-        behavior: behavior || 'smooth'
+        behavior: behavior
     });
+}
+
+export function scrollTo(scroller, target, behavior) {
+    scrollToTarget(scroller, target, 'smooth');
 }
 
 export function jumpTo(scroller, target) {
     scroller.style.setProperty('scroll-behavior', 'auto', 'important');
-    scrollTo(scroller, target, 'auto');
+    scrollToTarget(scroller, target, 'auto');
     scroller.style.setProperty('scroll-behavior', '');
 }
 
@@ -97,18 +101,22 @@ function getActive(scroller, children) {
     return slide;
 }
 
-function notLoopGhost(slide) {
-    return !slide.dataset.slideIndex;
+function isGhost(slide) {
+    return !!slide.dataset.slideIndex;
 }
 
 export function updateActive(data) {
-    const { scroller, children } = data;
-    let active = getActive(scroller, children);
-//console.log(active, children);
-    // For loop
-    if (active.dataset.slideIndex !== undefined) {
-        active = children.filter(notLoopGhost)[active.dataset.slideIndex];
+    const { scroller, children, elements } = data;
+    const current = getActive(scroller, elements);
+    let active;
+
+    // If current is a loop ghost jump to the actual slide it references
+    if (isGhost(current)) {
+        active = children[current.dataset.slideIndex];
         jumpTo(scroller, active);
+    }
+    else {
+        active = current;
     }
 
     if (active === data.active) { return; }

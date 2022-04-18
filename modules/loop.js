@@ -5,7 +5,7 @@ import rect    from '../../dom/modules/rect.js';
 
 import { jumpTo } from './active.js';
 
-const loopOverflow = 1600;
+const loopOverflow = 2400;
 
 
 function toLoopGhost(slide, i) {
@@ -17,11 +17,12 @@ function toLoopGhost(slide, i) {
     return ghost;
 }
 
-function render(data) {
-    if (data.ignoreSLOTCHANGE) {
-        return;
-    }
+export function isSlide(slide) {
+    // Filter out loop ghosts
+    return !slide.dataset.slideIndex;
+}
 
+function render(data) {
     const { active, children, host, scroller } = data;
 
     if (children.length < 2) {
@@ -41,8 +42,6 @@ function render(data) {
     while (boxes[--n] && boxes[n].right > right - loopOverflow);
     const prepends = children.slice(++n).map((slide, i) => toLoopGhost(slide, n + i));
 
-    data.ignoreSLOTCHANGE = true;
-
     // Will cause slotchange event
 console.log('LOOP RENDER', prepends.length, appends.length, active);
 
@@ -56,7 +55,7 @@ console.log('LOOP RENDER', prepends.length, appends.length, active);
 }
 
 export function enableLoop(data) {
-    const { slotchanges } = data;
+    const { mutations } = data;
 
     // Add an object to store loop state
     const loop = data.loop = {};
@@ -66,9 +65,9 @@ export function enableLoop(data) {
     }
 
     // Render buttons when children change
-    loop.slotchanges = Stream.merge(
+    loop.mutations = Stream.merge(
         [nothing],
-        slotchanges.map((o) => o)
+        mutations.map((o) => o)
     )
     .each(() => render(data));
 }
@@ -77,7 +76,7 @@ export function disableLoop(data) {
     if (data.loop) {
         data.loop.prepends && data.loop.prepends.forEach((slide) => slide.remove());
         data.loop.appends  && data.loop.appends.forEach((slide) => slide.remove());
-        data.loop.slotchanges.stop();
+        data.loop.mutations.stop();
         data.loop.actives.stop();
         data.loop = undefined;
     }
