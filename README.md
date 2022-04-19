@@ -4,7 +4,7 @@ carousels. Features options for pagination, previous and next navigation buttons
 continuous looping and fullscreen mode. Children of a `<slide-show>` are layed out in a grid
 and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
-![screenshot](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
+![Example of an HTML carousel showing an image of a tractor as the current slide](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
 
 ## Quick start
 
