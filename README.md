@@ -1,7 +1,10 @@
 # `<slide-show>`
-A standalone `<slide-show>` custom element for building horizontal scroll-snap
-carousels. About 10kB minified and gzipped.
+An accessible `<slide-show>` custom element for building horizontal scroll-snapping
+carousels. Features options for pagination, previous and next navigation buttons, autoplay, 
+continuous looping and fullscreen mode. Children of a `<slide-show>` are layed out in a grid
+and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
+![Example of an HTML carousel showing an image of a tractor as the current slide](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
 
 ## Quick start
 
@@ -12,13 +15,22 @@ assets. Then import `build/element.js`:
 <script type="module" src="./path/to/slide-show/build/element.js"></script>
 ```
 
-This registers the `<slide-show>` custom element.
-
-You may also include `build/element.css`, which provides minimal fallback style for
-the element before it is registered, or for those times when JS fails completely:
+This registers the `<slide-show>` custom element. You should also include `build/element.css`, 
+which provides minimal fallback style for the element before it is registered, or for those 
+times when JS fails completely:
 
 ```html
 <link rel="stylesheet" src="./path/to/slide-show/build/element.css"></link>
+```
+
+You are now ready to write `<slide-show>` tags in your HTML:
+
+```html
+<slide-show controls="pagination">
+    <img src="../images/donkeys.jpg" draggable="false" />
+    <img src="../images/tractor.jpg" draggable="false" />
+    <img src="../images/mauverin.jpg" draggable="false" />
+</slide-show>
 ```
 
 
@@ -45,7 +57,7 @@ the element before it is registered, or for those times when JS fails completely
 
 Style for the `slide-show`:
 
-- `--slide-duration` - a CSS time value in `s` or `ms`
+- `--slide-duration` - a CSS time value in `s` or `ms`, used when `autoplay` is enabled
 - `--padding-left` - padding and scroll-padding inside the scroll area
 - `--padding-right` - padding and scroll-padding inside the scroll area
 - `::part(slides)` - the slides container, by default a grid layout
@@ -58,7 +70,7 @@ Style for the `slide-show`:
 
 Style for child slides:
 
-- `--slide-duration` - a CSS time value in `s` or `ms`
+- `--slide-duration` - a CSS time value in `s` or `ms`, used when `autoplay` is enabled
 
 ### Polyfill for `element.scrollTo()`
 
