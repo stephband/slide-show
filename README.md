@@ -15,10 +15,9 @@ assets. Then import `build/element.js`:
 <script type="module" src="./path/to/slide-show/build/element.js"></script>
 ```
 
-This registers the `<slide-show>` custom element.
-
-You may also include `build/element.css`, which provides minimal fallback style for
-the element before it is registered, or for those times when JS fails completely:
+This registers the `<slide-show>` custom element. You should also include `build/element.css`, 
+which provides minimal fallback style for the element before it is registered, or for those 
+times when JS fails completely:
 
 ```html
 <link rel="stylesheet" src="./path/to/slide-show/build/element.css"></link>
