@@ -20,28 +20,30 @@ element and upgrades instances already in the DOM.
 Children of a `<slide-show>` are displayed as slides in a horizontal grid.
 **/
 
-import equals      from '../fn/modules/equals.js';
-import noop        from '../fn/modules/noop.js';
-import nothing     from '../fn/modules/nothing.js';
-import Stream      from '../fn/modules/stream.js';
-import create      from '../dom/modules/create.js';
-import delegate    from '../dom/modules/delegate.js';
-import element     from '../dom/modules/element.js';
+import equals          from '../fn/modules/equals.js';
+import noop            from '../fn/modules/noop.js';
+import nothing         from '../fn/modules/nothing.js';
+import Stream          from '../fn/modules/stream.js';
+import create          from '../dom/modules/create.js';
+import delegate        from '../dom/modules/delegate.js';
+import element         from '../dom/modules/element.js';
+import createBoolean   from '../dom/modules/element/create-boolean.js';
+import createTokenList from '../dom/modules/element/create-token-list.js';
 import events, { isPrimaryButton } from '../dom/modules/events.js';
-import gestures    from '../dom/modules/gestures.js';
-import { px }      from '../dom/modules/parse-length.js';
-import rect        from '../dom/modules/rect.js';
-import Scrolls     from '../dom/modules/scrolls.js';
+import gestures        from '../dom/modules/gestures.js';
+import { px }          from '../dom/modules/parse-length.js';
+import rect            from '../dom/modules/rect.js';
+import Scrolls         from '../dom/modules/scrolls.js';
 
+import { $data }       from './modules/consts.js';
 import { scrollTo, jumpTo, updateActive } from './modules/active.js';
-import { processPointers } from './modules/swipe.js';
-import { enableAutoplay, disableAutoplay } from './modules/autoplay.js';
-import { enableLoop, disableLoop, isSlide } from './modules/loop.js';
-import { enableNavigation, disableNavigation } from './modules/navigation.js';
-import { enablePagination, disablePagination } from './modules/pagination.js';
-import { enableFullscreen, disableFullscreen } from './modules/fullscreen.js';
+import { processPointers } from './modules/swipes.js';
 
-const $data = Symbol('data');
+import * as autoplay   from './modules/autoplay.js';
+import * as loop       from './modules/loop.js';
+import * as navigation from './modules/navigation.js';
+import * as pagination from './modules/pagination.js';
+import * as fullscreen from './modules/fullscreen.js';
 
 
 function getWidth(scroller, slides, children) {
@@ -67,6 +69,11 @@ function updateWidth(scroller, slides, children) {
     scroller.style.setProperty('--scroll-width', width + 'px');
 }
 
+function isSlide(slide) {
+    // Filter out loop ghosts
+    return !slide.dataset.slideIndex;
+}
+
 
 /* Element */
 
@@ -82,22 +89,20 @@ const lifecycle = {
         // Shadow DOM
         const slides   = create('slot', { part: 'slides' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
-
-        // A place to put optional UI (fullscreen close buttons etc)
-        //const optional = create('slot', { name: 'ui', part: 'ui' });
+        const ui       = create('slot', { part: 'ui', name: 'ui' });
 
         // Add slots to shadow
-        shadow.append(scroller);
+        shadow.append(scroller, ui);
 
         const slotchanges  = events('slotchange', slides).broadcast();
-        const mutations    = Stream.of().broadcast({ memory: true });
+        const mutations    = Stream.broadcast({ memory: true });
         const clicks       = events('click', shadow).filter(isPrimaryButton).broadcast();
         const focuses      = events('focusin', this);
         const resizes      = events('resize', window);
         const fullscreens  = events('fullscreenchange', window);
         const scrolls      = Scrolls(scroller);
         const swipes       = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow).filter(() => data.children.length > 1);
-        const actives      = Stream.of().broadcast({ memory: true });
+        const actives      = Stream.broadcast({ memory: true });
 
         // Private data
         const data = this[$data] = {
@@ -180,10 +185,10 @@ const lifecycle = {
         data.loaded = true;
 
         if (this.loop) {
-            enableLoop(data);
+            loop.enable(this);
         }
         else {
-            disableLoop(data);
+            loop.disable(this);
         }
 
         // Update width hack now we have some style loaded
@@ -199,22 +204,24 @@ const lifecycle = {
 };
 
 const properties = {
+    /**
+    .active
+    Gets or sets the currently scroll-snapped child element.
+
+    ```js
+    const activeSlide = slideshow.active;
+    ```
+
+    May be set to one of the child elements, or to the id of one of the
+    child elements. Setting this property causes the slide to change.
+
+    ```js
+    slideshow.active = 'slide-1';
+    ```
+    **/
+
     active: {
-        /**
-        .active
-        Returns the currently scroll-snapped child element.
 
-        ```js
-        const activeSlide = slideshow.active;
-        ```
-
-        May be set to one of the child elements, or to the id of one of the
-        child elements. Setting this property causes the slide to change.
-
-        ```js
-        slideshow.active = 'slide-1';
-        ```
-        **/
 
         set: function(target) {
             const data = this[$data];
@@ -238,147 +245,51 @@ const properties = {
         }
     },
 
-    autoplay: {
-        /**
-        autoplay=""
-        Boolean attribute. When present the slide-show activates the next
-        slide after a pause. The pause duration may be set in CSS via the
-        `--slide-duration` variable.
-        **/
-        attribute: function(value) {
-            // Delegate to property
-            this.autoplay = (value !== null);
-        },
+    /**
+    autoplay=""
+    Boolean attribute. When present the slide-show activates the next
+    slide after a pause. The pause duration may be set in CSS via the
+    `--slide-duration` variable.
+    **/
 
-        /**
-        .autoplay
-        Boolean property. When `true` the slide-show activates the next
-        slide after a pause. The pause duration may be set in CSS via the
-        `--slide-duration` variable.
-        **/
-        set: function(state) {
-            const data = this[$data];
-            return !state === !data.autoplay ?
-                undefined :
-                state ?
-                    enableAutoplay(data) :
-                    disableAutoplay(data) ;
-        },
+    /**
+    .autoplay
+    Boolean property. When `true` the slide-show activates the next
+    slide after a pause. The pause duration may be set in CSS via the
+    `--slide-duration` variable.
+    **/
 
-        get: function() {
-            const data = this[$data];
-            return !!data.autoplay;
-        }
-    },
+    autoplay: createBoolean(autoplay),
 
-    controls: {
-        /**
-        controls=""
+    /**
+    controls=""
+    A TokenList attribute. Accepts the tokens `"navigation"`, `"pagination"`
+    and `"fullscreen"`.
+    **/
 
-        Treated as a boolean or a token list. If it is present but empty
-        all tokens are considered to be true. Otherwise, possible tokens are:
+    /**
+    .controls
+    A TokenList object supporting the tokens `"navigation"`, `"pagination"`
+    and `"fullscreen"`.
+    **/
 
-        <strong>navigation</strong> enables previous and next buttons. The
-        buttons may be styled with `::part(previous)` and `::part(next)`
-        selectors. To change their text content, import and modify
-        `config.trans`:
+    controls: createTokenList({
+        'navigation': navigation,
+        'pagination': pagination,
+        'fullscreen': fullscreen
+    }),
 
-        ```js
-        import { config } from './bolt/elements/slide-show/module.js';
-        config.trans['Previous'] = 'Précédent';
-        config.trans['Next']     = 'Suivant';
-        ```
+    /**
+    loop=""
+    Boolean attribute. Makes the slideshow behave as a continuous loop.
+    **/
 
-        <strong>pagination</strong> enables a row of pagination dots. The
-        dots may be styled with `::part(page)`.
-        **/
-        attribute: function(value) {
-            const data = this[$data];
-            let navigationState, paginationState, fullscreenState;
+    /**
+    .loop
+    Boolean property. Makes the slideshow behave as a continuous loop.
+    **/
 
-            // If value is a string of tokens
-            if (typeof value === 'string' && value !== '') {
-                const state = value.split(/\s+/);
-                navigationState = state.includes('navigation');
-                paginationState = state.includes('pagination');
-                fullscreenState = state.includes('fullscreen');
-            }
-            else {
-                const state = value !== null;
-                navigationState = state;
-                paginationState = state;
-                fullscreenState = state;
-            }
-
-            if (!!navigationState !== !!data.navigation) {
-                if (navigationState) {
-                    enableNavigation(data);
-                }
-                else {
-                    disableNavigation(data);
-                }
-            }
-
-            if (!!paginationState !== !!data.pagination) {
-                if (paginationState) {
-                    enablePagination(data);
-                }
-                else {
-                    disablePagination(data);
-                }
-            }
-
-            if (!!fullscreenState !== !!data.fullscreen) {
-                if (fullscreenState) {
-                    enableFullscreen(data);
-                }
-                else {
-                    disableFullscreen(data);
-                }
-            }
-        }
-    },
-
-    loop: {
-        /**
-        loop=""
-        Boolean attribute. Makes the slideshow behave as a continuous loop.
-        **/
-        attribute: function(value) {
-            // Delegate to property
-            this.loop = (value !== null);
-        },
-
-        /**
-        .loop
-        Boolean property. Makes the slideshow behave as a continuous loop.
-        **/
-        set: function(state) {
-            const data = this[$data];
-            return !state === !data.loop ?
-                undefined :
-                state ?
-                    enableLoop(data) :
-                    disableLoop(data) ;
-        },
-
-        get: function() {
-            const data = this[$data];
-            return !!data.loop;
-        }
-    },
-
-    previous: {
-        value: function prev() {
-            console.log('Todo: advance slide');
-        }
-    },
-
-    next: {
-        value: function next() {
-            console.log('Todo: back slide');
-        }
-    }
+    loop: createBoolean(loop)
 };
 
 export default element('slide-show', lifecycle, properties);

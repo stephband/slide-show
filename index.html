@@ -102,17 +102,8 @@ slide after a pause. The pause duration may be set in CSS via the
     </a>
 </h3>
 
-<p>Treated as a boolean or a token list. If it is present but empty
-all tokens are considered to be true. Otherwise, possible tokens are:</p>
-<p><strong>navigation</strong> enables previous and next buttons. The
-buttons may be styled with <code>::part(previous)</code> and <code>::part(next)</code>
-selectors. To change their text content, import and modify
-<code>config.trans</code>:</p>
-<pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> config <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../bolt/templates/bolt/elements/slide-show/module.js'</span><span class="token punctuation">;</span>
-config<span class="token punctuation">.</span>trans<span class="token punctuation">[</span><span class="token string">'Previous'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'Précédent'</span><span class="token punctuation">;</span>
-config<span class="token punctuation">.</span>trans<span class="token punctuation">[</span><span class="token string">'Next'</span><span class="token punctuation">]</span>     <span class="token operator">=</span> <span class="token string">'Suivant'</span><span class="token punctuation">;</span></code></pre>
-<p><strong>pagination</strong> enables a row of pagination dots. The
-dots may be styled with <code>::part(page)</code>.</p>
+<p>A TokenList attribute. Accepts the tokens <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code>
+and <code>&quot;fullscreen&quot;</code>.</p>
 
 </div>
 
@@ -144,7 +135,7 @@ dots may be styled with <code>::part(page)</code>.</p>
     </a>
 </h3>
 
-<p>Returns the currently scroll-snapped child element.</p>
+<p>Gets or sets the currently scroll-snapped child element.</p>
 <pre><code class="language-js"><span class="token keyword">const</span> activeSlide <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span></code></pre>
 <p>May be set to one of the child elements, or to the id of one of the
 child elements. Setting this property causes the slide to change.</p>
@@ -163,6 +154,19 @@ child elements. Setting this property causes the slide to change.</p>
 <p>Boolean property. When <code>true</code> the slide-show activates the next
 slide after a pause. The pause duration may be set in CSS via the
 <code>--slide-duration</code> variable.</p>
+
+</div>
+
+ 
+<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-controls">
+<h3 class="property-doctext-05 doctext-05">
+    <a href="#property|selector-controls">
+        <code class="property language-js">.controls</code>
+    </a>
+</h3>
+
+<p>A TokenList object supporting the tokens <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code>
+and <code>&quot;fullscreen&quot;</code>.</p>
 
 </div>
 

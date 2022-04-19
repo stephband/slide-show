@@ -10,6 +10,7 @@ import parseValue from '../../fn/modules/parse-value.js';
 import Stream     from '../../fn/modules/stream.js';
 import events     from '../../dom/modules/events.js';
 
+import { $data }  from './consts.js';
 
 const parseTime = parseValue({
     's':  id,
@@ -59,8 +60,9 @@ function cancel(data) {
     data.autoplay.timer = null;
 }
 
-export function enableAutoplay(data) {
-    const { actives, host } = data;
+export function enable(host) {
+    const data = host[$data];
+    const { actives } = data;
 
     // Add an object to store autoplay state
     const autoplay = data.autoplay = {};
@@ -96,8 +98,14 @@ export function enableAutoplay(data) {
         ));
 }
 
-export function disableAutoplay(data) {
+export function disable(host) {
+    const data = host[$data];
     cancel(data);
     data.autoplay.updates.stop();
     data.autoplay = undefined;
+}
+
+export function getState(host) {
+    const data = host[$data];
+    return !!data.autoplay;
 }

@@ -1,9 +1,9 @@
 
-import nothing from '../../fn/modules/nothing.js';
-import Stream  from '../../fn/modules/stream.js';
-import rect    from '../../dom/modules/rect.js';
+import rect from '../../dom/modules/rect.js';
 
+import { $data }  from './consts.js';
 import { jumpTo } from './active.js';
+
 
 const loopOverflow = 2400;
 
@@ -15,11 +15,6 @@ function toLoopGhost(slide, i) {
     ghost.setAttribute('aria-hidden', 'true');
     ghost.tabIndex = '-1';
     return ghost;
-}
-
-export function isSlide(slide) {
-    // Filter out loop ghosts
-    return !slide.dataset.slideIndex;
 }
 
 function render(data) {
@@ -51,7 +46,8 @@ function render(data) {
     jumpTo(scroller, active || children[0]);
 }
 
-export function enableLoop(data) {
+export function enable(host) {
+    const data = host[$data];
     const { mutations } = data;
 
     // Add an object to store loop state
@@ -67,11 +63,17 @@ export function enableLoop(data) {
         .each(() => render(data));
 }
 
-export function disableLoop(data) {
+export function disable(host) {
+    const data = host[$data];
     if (data.loop) {
         data.loop.prepends && data.loop.prepends.forEach((slide) => slide.remove());
         data.loop.appends  && data.loop.appends.forEach((slide) => slide.remove());
         data.loop.mutations.stop();
         data.loop = undefined;
     }
+}
+
+export function getState(host) {
+    const data = host[$data];
+    return !!data.loop;
 }

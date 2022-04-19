@@ -3,10 +3,11 @@ import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 import { fullscreenEnabled, getFullscreenElement, enterFullscreen, exitFullscreen } from '../../dom/modules/fullscreen.js';
 
+import { $data }          from './consts.js';
 import { enableControls } from './controls.js';
 
-export function enableFullscreen(data, state) {
-    const { host } = data;
+export function enable(host) {
+    const data = host[$data];
 
     if (!fullscreenEnabled) {
         if (window.DEBUG) {
@@ -54,8 +55,8 @@ export function enableFullscreen(data, state) {
     }));
 }
 
-export function disableFullscreen(data) {
-    const { host } = data;
+export function disable(host) {
+    const data = host[$data];
     const fullscreenCurrent = getFullscreenElement();
 
     if (fullscreenCurrent === host) {
@@ -65,4 +66,9 @@ export function disableFullscreen(data) {
     data.fullscreen.button.remove();
     data.fullscreen.clicks.stop();
     data.fullscreen = undefined;
+}
+
+export function getState(host) {
+    const data = host[$data];
+    return !!data.fullscreen;
 }

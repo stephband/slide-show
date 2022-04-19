@@ -27,14 +27,15 @@ the element before it is registered, or for those times when JS fails completely
 ### Attributes
 
 - `autoplay` - boolean attribute, slide-show plays through slides
-- `controls` - token list attribute, accepts the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
-- `loop` - boolean attribute, causes slides to appear on a continuous carousel
+- `controls` - token list supporting the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
+- `loop`     - boolean attribute, causes slides to appear on a continuous carousel
 
 ### Properties
 
-- `.active` - a reference to the current scroll-snap aligned (ie 'active') child
+- `.active`   - a reference to the current scroll-snap aligned (ie 'active') child
 - `.autoplay` - boolean, get/set the state of autoplay
-- `.loop` - boolean, get/set the state of loop
+- `.controls` - a TokenList object supporting the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
+- `.loop`     - boolean, get/set the state of loop
 
 ### Events
 

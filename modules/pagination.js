@@ -1,9 +1,8 @@
 
-import nothing  from '../../fn/modules/nothing.js';
-import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 
+import { $data }          from './consts.js';
 import { enableControls } from './controls.js';
 
 
@@ -49,7 +48,8 @@ function render(controls, pagination, shadow, children) {
     controls.append(pagination.buttons);
 }
 
-export function enablePagination(data, state) {
+export function enable(host) {
+    const data = host[$data];
     const { shadow, actives, clicks, mutations } = data;
 
     // Set up nav::part(controls) element
@@ -86,10 +86,16 @@ export function enablePagination(data, state) {
     }));
 }
 
-export function disablePagination(data) {
+export function disable(host) {
+    const data = host[$data];
     data.pagination.buttons.remove();
     data.pagination.mutations.stop();
     data.pagination.actives.stop();
     data.pagination.clicks.stop();
     data.pagination = undefined;
+}
+
+export function getState(host) {
+    const data = host[$data];
+    return !!data.pagination;
 }

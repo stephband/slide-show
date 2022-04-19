@@ -1,8 +1,8 @@
 
-import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 
+import { $data }  from './consts.js';
 import { enableControls } from './controls.js';
 
 function updateButtons(prev, next, elements, i) {
@@ -29,8 +29,9 @@ function update(data) {
     updateButtons(prev, next, elements, i)
 }
 
-export function enableNavigation(data, state) {
-    const { host, actives, clicks, mutations } = data;
+export function enable(host) {
+    const data = host[$data];
+    const { actives, clicks, mutations } = data;
 
     // Set up nav::part(controls) element
     enableControls(data);
@@ -63,11 +64,17 @@ export function enableNavigation(data, state) {
     }));
 }
 
-export function disableNavigation(data) {
+export function disable(host) {
+    const data = host[$data];
     data.navigation.prev.remove();
     data.navigation.next.remove();
     data.navigation.mutations.stop();
     data.navigation.actives.stop();
     data.navigation.clicks.stop();
     data.navigation = undefined;
+}
+
+export function getState(host) {
+    const data = host[$data];
+    return !!data.navigation;
 }
