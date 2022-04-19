@@ -2,6 +2,7 @@
 A standalone `<slide-show>` custom element for building horizontal scroll-snap
 carousels. About 10kB minified and gzipped.
 
+![screenshot](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
 
 ## Quick start
 
