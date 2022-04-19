@@ -57,7 +57,7 @@ You are now ready to write `<slide-show>` tags in your HTML:
 
 Style for the `slide-show`:
 
-- `--slide-duration` - a CSS time value in `s` or `ms`
+- `--slide-duration` - a CSS time value in `s` or `ms`, used when `autoplay` is enabled
 - `--padding-left` - padding and scroll-padding inside the scroll area
 - `--padding-right` - padding and scroll-padding inside the scroll area
 - `::part(slides)` - the slides container, by default a grid layout
@@ -70,7 +70,7 @@ Style for the `slide-show`:
 
 Style for child slides:
 
-- `--slide-duration` - a CSS time value in `s` or `ms`
+- `--slide-duration` - a CSS time value in `s` or `ms`, used when `autoplay` is enabled
 
 ### Polyfill for `element.scrollTo()`
 
