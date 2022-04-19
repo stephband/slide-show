@@ -87,10 +87,10 @@ repository into the same directory as three other repositories that contain
 dependencies:
 
 ```cli
-git clone git@gihub.com:stephband/fn
-git clone git@gihub.com:stephband/dom
-git clone git@gihub.com:stephband/literal
-git clone git@gihub.com:stephband/slide-show
+git clone git@github.com:stephband/fn
+git clone git@github.com:stephband/dom
+git clone git@github.com:stephband/literal
+git clone git@github.com:stephband/slide-show
 ```
 
 Now the `slide-show` repo is ready to build:
