@@ -1,6 +1,6 @@
 # `<slide-show>`
 An accessible `<slide-show>` custom element for building horizontal scroll-snapping
-carousels. Features optional pagination, previous and next navigation buttons, autoplay, 
+carousels. Features options for pagination, previous and next navigation buttons, autoplay, 
 continuous looping and fullscreen mode. About 12kB minified and gzipped.
 
 ![screenshot](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
