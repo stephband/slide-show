@@ -27,7 +27,7 @@ the element before it is registered, or for those times when JS fails completely
 ### Attributes
 
 - `autoplay` - boolean attribute, slide-show plays through slides
-- `controls` - token list supporting the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
+- `controls` - token list attribute supporting the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
 - `loop`     - boolean attribute, causes slides to appear on a continuous carousel
 
 ### Properties
