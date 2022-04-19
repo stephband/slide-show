@@ -1,7 +1,8 @@
 # `<slide-show>`
 An accessible `<slide-show>` custom element for building horizontal scroll-snapping
 carousels. Features options for pagination, previous and next navigation buttons, autoplay, 
-continuous looping and fullscreen mode. About 12kB minified and gzipped.
+continuous looping and fullscreen mode. Children of a `<slide-show>` are layed out in a grid
+and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
 ![screenshot](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
 
@@ -21,6 +22,16 @@ the element before it is registered, or for those times when JS fails completely
 
 ```html
 <link rel="stylesheet" src="./path/to/slide-show/build/element.css"></link>
+```
+
+You are now ready to write `<slide-show>` tags in your HTML:
+
+```html
+<slide-show controls="pagination">
+    <img src="../images/donkeys.jpg" draggable="false" />
+    <img src="../images/tractor.jpg" draggable="false" />
+    <img src="../images/mauverin.jpg" draggable="false" />
+</slide-show>
 ```
 
 
