@@ -1,32 +1,98 @@
 
-@import 'https://stephen.band/fonts/fira-mono.css';
-@import 'https://stephen.band/fonts/source-sans-pro.css';
+/*@import '../../bolt/fonts/fira-code.css';
+@import '../../bolt/fonts/fira-mono.css';
+@import '../../bolt/fonts/source-sans-pro.css';*/
 
-@import "https://stephen.band/bolt/elements/html.css";
-@import "https://stephen.band/bolt/elements/svg.css";
-@import "https://stephen.band/bolt/elements/root.css";
-@import "https://stephen.band/bolt/elements/body.css";
-@import "https://stephen.band/bolt/elements/type.css";
-@import "https://stephen.band/bolt/elements/a.css";
-@import "https://stephen.band/bolt/elements/code.css";
-@import "https://stephen.band/bolt/elements/table.css";
+@import "../../bolt/elements/html.css";
+@import "../../bolt/elements/svg.css";
+@import "../../bolt/elements/root.css";
+@import "../../bolt/elements/body.css";
+@import "../../bolt/elements/type.css";
+@import "../../bolt/elements/a.css";
+@import "../../bolt/elements/code.css";
+@import "../../bolt/elements/table.css";
 
-@import "https://stephen.band/bolt/classes/js.css";
-@import "https://stephen.band/bolt/classes/button.css";
-@import "https://stephen.band/bolt/classes/list.css";
-@import "https://stephen.band/bolt/classes/layer.css";
-@import "https://stephen.band/bolt/classes/badge.css";
-@import "https://stephen.band/bolt/classes/pill.css";
-@import "https://stephen.band/bolt/classes/thumb.css";
-@import "https://stephen.band/bolt/classes/block.css";
-@import "https://stephen.band/bolt/classes/color.css";
-@import "https://stephen.band/bolt/classes/text.css";
-@import "https://stephen.band/bolt/classes/atoms.css";
-@import "https://stephen.band/bolt/classes/device.css";
-@import "https://stephen.band/bolt/classes/dialog.css";
-@import "https://stephen.band/bolt/classes/toggle-block.css";
-@import "https://stephen.band/bolt/classes/bubble.css";
+@import "../../bolt/classes/js.css";
+@import "../../bolt/classes/button.css";
+@import "../../bolt/classes/list.css";
+@import "../../bolt/classes/layer.css";
+@import "../../bolt/classes/badge.css";
+@import "../../bolt/classes/pill.css";
+@import "../../bolt/classes/thumb.css";
+@import "../../bolt/classes/block.css";
+@import "../../bolt/classes/color.css";
+/*@import "../../bolt/classes/text.css";*/
+@import "../../bolt/classes/atoms.css";
+@import "../../bolt/classes/device.css";
+@import "../../bolt/classes/dialog.css";
+@import "../../bolt/classes/toggle-block.css";
+@import "../../bolt/classes/bubble.css";
 
-@import "https://stephen.band/bolt/documentation/prism-cruncher.css";
-@import "https://stephen.band/bolt/documentation/documentation.css";
-@import "https://stephen.band/bolt/documentation/atoms.css";
+@import "../../bolt/documentation/prism-cruncher.css";
+@import "../../bolt/documentation/documentation.css";
+@import "../../bolt/documentation/atoms.css";
+
+
+@font-face {
+    font-family: Assistant;
+    src: url('../docs/fonts/Assistant/assistant-light-webfont.woff2') format('woff2'),
+         url('../docs/fonts/Assistant/assistant-light-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Assistant;
+    src: url('../docs/fonts/Assistant/assistant-regular-webfont.woff2') format('woff2'),
+         url('../docs/fonts/Assistant/assistant-regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Assistant;
+    src: url('../docs/fonts/Assistant/assistant-semibold-webfont.woff2') format('woff2'),
+         url('../docs/fonts/Assistant/assistant-semibold-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: MartianMono;
+    src: url('../docs/fonts/Martian-Mono/MartianMonoVF.woff2') format('woff2');
+}
+
+
+.docs-text-01, h1,
+.docs-text-02, h2,
+.docs-text-03, h3,
+.docs-text-04, h4,
+.docs-text-05, h5,
+.docs-text-06, h6,
+.docs-text-08, body,
+.docs-text-09 {
+    font-family: Assistant;
+    font-style: none;
+    text-transform: none;
+    margin: 0;
+}
+
+.docs-text-07, code {
+    font-family: MartianMono, Menlo, Monaco, monospace !important;
+    font-variation-settings: 'wght' 480, 'wdth' 96;
+    font-size: 0.82em;
+}
+
+.docs-text-01, h1       { font-size: 6.33vw;    line-height: 2.625rem; font-weight: 300; }
+.docs-text-02, h2       { font-size: 1.5rem;    line-height: 1.625rem; font-weight: 300; }
+.docs-text-03, h3       { font-size: 1.25rem;   line-height: 1.5rem;   font-weight: 300; }
+.docs-text-04, h4       { font-size: 1rem;      line-height: 1.5rem;   font-weight: 300; }
+.docs-text-05, h5       { font-size: 1rem;      line-height: 1.375rem; font-weight: 300; }
+.docs-text-06, h6       { font-size: 1.125rem;  line-height: 1.5rem;   font-weight: 300; }
+.docs-text-07           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 480; }
+.docs-text-08, body     { font-size: 1rem;      line-height: 1.5rem;   font-weight: 400; }
+.docs-text-09           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 400; }
+
+.docs-text-01 > code {
+    font-variation-settings: 'wght' 680, 'wdth' 92;
+}
