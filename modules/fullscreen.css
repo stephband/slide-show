@@ -1,4 +1,16 @@
 
+
+/**
+::part(fullscreen-button)
+Style the fullscreen button, available when the attribute 'controls' contains
+the token `"fullscreen"`.
+**/
+
+/**
+::part(fullscreen-button-active)
+Style the fullscreen button while in fullscreen mode.
+**/
+
 [part*="fullscreen-button"] {
     vertical-align: baseline;
     overflow: hidden;

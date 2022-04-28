@@ -32,49 +32,85 @@
         max-width: 100%;
     }
 
-    @media (min-width: 30em) {
+    @media (min-width: 50em) {
         .banner-slide-show {
             column-gap: 1.5rem;
             --padding-left: 4.5rem;
             --padding-right: 4.5rem;
-            height: min-content;
+        }
+    }
+
+    @media (min-width: 70em) {
+        body.docs-grid {
+            /* Rough */
+            padding-top: 4vw;
+            padding-left: var(--x-gap);
+            padding-right: var(--x-gap);
+        }
+
+        .banner-slide-show {
+            --padding-left: calc(11.11111111% + 1.5rem / 9);
+            --padding-right: calc(11.11111111% + 1.5rem / 9);
         }
     }
     </style>
 </head>
 
 <body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid y-start-grid">
-    <!--nav class="x1 x-stretch y1 @2-x1 @2-1x">
-        <a class="thumb thumb-1:1" width="400" height="400" style="background-image: url('./images/logo.svg'); background-size: contain; width: 120%; padding-top: 120%; max-width: 6rem; margin-top: -16%; margin-left: -8%; margin-right: -12%;">Bolt</a>
-    </nav-->
-
-    <header class="x1 3x @1-x1 @1-4x @2-x2 @2-6x">
+    <header class="x1 3x @1-x1 @1-4x @2-x2">
         <h1 class="docs-text-01">&lt;slide-show&gt;</h1>
-        <p>The accessible, scrollable, fullscreenable, horizontal carousel custom element. No dependencies, about <code>12kB</code> minified and gzipped.</p>
+        <p>The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about <code>12kB</code> minified and gzipped.</p>
     </header>
 
-    <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @2-9x" loop autoplay controls="navigation pagination fullscreen">
-        <img src="./docs/images/donkeys.jpg" draggable="false" />
-        <img src="./docs/images/tractor.jpg" draggable="false" />
-        <img src="./docs/images/mauverin.jpg" draggable="false" />
-        <img src="./docs/images/rocks.jpg" draggable="false" />
-        <img src="./docs/images/summit.jpg" draggable="false" />
+    <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @1-x-stretch @2-9x" loop autoplay controls="navigation pagination fullscreen">
+        <img src="./docs/images/donkeys.jpg" draggable="false" alt="A rowdy group of curious donkeys"/>
+        <img src="./docs/images/tractor.jpg" draggable="false" alt="A lonely, rusted tractor abandonned on the edge of the arctic ocean"/>
+        <img src="./docs/images/mauverin.jpg" draggable="false" alt="The shadow of a the summit of the Mauverin cast over the alpine valley of Nant"/>
+        <img src="./docs/images/rocks.jpg" draggable="false" alt="Wet moss and lichen-covered rocks in a shallow pool"/>
+        <img src="./docs/images/summit.jpg" draggable="false" alt="Golden autumn meadows in front of a rocky summit dusted with snow"/>
     </slide-show>
 
-    <section class="x1 3x @1-x3 @1-4x @2-x4">
+    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
         <h2 class="docs-text-02">Get started</h2>
-        <p>Download the latest <a href="https://github.com/stephband/slide-show/releases">release</a>. Then include the JS and CSS files in your html.</p>
+        <p>Download the latest <a href="https://github.com/stephband/slide-show/releases">release</a>.</p>
+        <p>Then include the JS and CSS files in your HTML:</p>
+        <p>You can now use the <code>&lt;slide-show&gt;</code> elmement in your HTML. The <code>&lt;slide-show&gt;</code> above looks something like this:</p>
+        <p>A <code>&lt;slide-show&gt;</code> element treats its children as slides, layed out in a grid by default. Slide content may be any arbitrary HTML. <!--There are <a href="#examples">more examples</a> further down this page.--></p>
     </section>
 
-    ${ include('../bolt/templates/element.literal', comments("./element.js", "./shadow.css")) }
+    ${ include('./docs/templates/element.literal', comments(
+        "./element.js",
+        "./modules/active.js",
+        "./shadow.css",
+        "./css/host.css",
+        "./css/scroller.css",
+        "./css/slides.css",
+        "./modules/loop.css",
+        "./modules/navigation.css",
+        "./modules/pagination.css",
+        "./modules/fullscreen.css"
+    )) }
 
-    <footer class="x1 3x @1-x1 @1-4x @2-x2 @2-6x">
-        <p class="text-09">This page is set in <a href="https://www.swisstypefaces.com/fonts/euclid/">Euclid</a> and Martian Mono</p>
+    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
+        <h2 class="docs-text-02">Contribute</h2>
+        <p>Contribute to the repo: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/</a></p>
+        <p>Report a problem: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/issues</a></p>
+    </section>
+
+    <hr class="x1 3x @1-6x @2-x2"/>
+
+    <footer class="x1 3x @1-4x @2-x2 @2-7x">
+        <small class="block">
+            <p>Made by <a href="https://stephen.band">Stephen Band</a> at <a href="https://cruncher.ch"><img style="width: 20px; display: inline-block; vertical-align: -0.5em;" src="https://cruncher.ch/static/images/logo.svg" alt="The Cruncher logo"/> Cruncher</a>.</p>
+            <p class="text-09">This page is set in <a href="https://www.swisstypefaces.com/fonts/euclid/">Euclid</a> and <a href="https://github.com/evilmartians/mono">Martian Mono</a>.</p>
+            <p>Images <code>&copy;2022</code> Stephen Band.</p>
+            <p>Fonts and images used for this documentation are not included as part of the open source license covering the use of the <code>&lt;slide-show&gt;</code> element.</p>
+        </small>
     </footer>
 
     <script type="module">
-        import '../dom/polyfills/element.scrollto.js';
         import './build/element.js';
+        import './docs/build/docs.js';
     </script>
 
     <!--$ { include('../bolt/templates/scripts.html') }-->

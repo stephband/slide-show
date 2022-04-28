@@ -71,6 +71,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.docs-text-05 code:not(.pill) {
+    font-family: MartianMono, Menlo, Monaco, monospace !important;
+    font-variation-settings: 'wght' 300, 'wdth' 96;
+    font-size: 0.875em;
+}
+
 .docs-text-07, code {
     font-family: MartianMono, Menlo, Monaco, monospace !important;
     font-variation-settings: 'wght' 480, 'wdth' 96;
@@ -92,4 +98,14 @@
 }
 
 /* Specific to <slide-show> header */
-.docs-text-01           { font-size: 14.5vw; white-space: nowrap; }
+.docs-text-01 { font-size: 14.5vw; white-space: nowrap; }
+
+@media (min-width: 50em) {
+    .docs-text-01 { font-size: 10.2vw; }
+}
+
+@media (min-width: 70em) {
+    .docs-text-01 { font-size: 7vw; }
+}
+
+* + .docs-text-03 { margin-top: 3rem; }

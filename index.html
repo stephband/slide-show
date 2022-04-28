@@ -52,71 +52,56 @@
         max-width: 100%;
     }
 
-    @media (min-width: 30em) {
+    @media (min-width: 50em) {
         .banner-slide-show {
             column-gap: 1.5rem;
             --padding-left: 4.5rem;
             --padding-right: 4.5rem;
-            height: min-content;
+        }
+    }
+
+    @media (min-width: 70em) {
+        body.docs-grid {
+            /* Rough */
+            padding-top: 4vw;
+            padding-left: var(--x-gap);
+            padding-right: var(--x-gap);
+        }
+
+        .banner-slide-show {
+            --padding-left: calc(11.11111111% + 1.5rem / 9);
+            --padding-right: calc(11.11111111% + 1.5rem / 9);
         }
     }
     </style>
 </head>
 
 <body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid y-start-grid">
-    <!--nav class="x1 x-stretch y1 @2-x1 @2-1x">
-        <a class="thumb thumb-1:1" width="400" height="400" style="background-image: url('./images/logo.svg'); background-size: contain; width: 120%; padding-top: 120%; max-width: 6rem; margin-top: -16%; margin-left: -8%; margin-right: -12%;">Bolt</a>
-    </nav-->
-
-    <header class="x1 3x @1-x1 @1-4x @2-x2 @2-6x">
+    <header class="x1 3x @1-x1 @1-4x @2-x2">
         <h1 class="docs-text-01">&lt;slide-show&gt;</h1>
-        <p>The accessible, scrollable, fullscreenable, horizontal carousel custom element. No dependencies, about <code>12kB</code> minified and gzipped.</p>
+        <p>The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about <code>12kB</code> minified and gzipped.</p>
     </header>
 
-    <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @2-9x" loop autoplay controls="navigation pagination fullscreen">
-        <img src="./docs/images/donkeys.jpg" draggable="false" />
-        <img src="./docs/images/tractor.jpg" draggable="false" />
-        <img src="./docs/images/mauverin.jpg" draggable="false" />
-        <img src="./docs/images/rocks.jpg" draggable="false" />
-        <img src="./docs/images/summit.jpg" draggable="false" />
+    <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @1-x-stretch @2-9x" loop autoplay controls="navigation pagination fullscreen">
+        <img src="./docs/images/donkeys.jpg" draggable="false" alt="A rowdy group of curious donkeys"/>
+        <img src="./docs/images/tractor.jpg" draggable="false" alt="A lonely, rusted tractor abandonned on the edge of the arctic ocean"/>
+        <img src="./docs/images/mauverin.jpg" draggable="false" alt="The shadow of a the summit of the Mauverin cast over the alpine valley of Nant"/>
+        <img src="./docs/images/rocks.jpg" draggable="false" alt="Wet moss and lichen-covered rocks in a shallow pool"/>
+        <img src="./docs/images/summit.jpg" draggable="false" alt="Golden autumn meadows in front of a rocky summit dusted with snow"/>
     </slide-show>
 
-    <section class="x1 3x @1-x3 @1-4x @2-x4">
+    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
         <h2 class="docs-text-02">Get started</h2>
-        <p>Download the latest <a href="https://github.com/stephband/slide-show/releases">release</a>. Then include the JS and CSS files in your html.</p>
+        <p>Download the latest <a href="https://github.com/stephband/slide-show/releases">release</a>.</p>
+        <p>Then include the JS and CSS files in your HTML:</p>
+        <p>You can now use the <code>&lt;slide-show&gt;</code> elmement in your HTML. The <code>&lt;slide-show&gt;</code> above looks something like this:</p>
+        <p>A <code>&lt;slide-show&gt;</code> element treats its children as slides, layed out in a grid by default. Slide content may be any arbitrary HTML. <!--There are <a href="#examples">more examples</a> further down this page.--></p>
     </section>
 
     
-<header class="x1 3x @1-x3 @1-4x @2-x4">
-    
-    <h2 class="docs-text-02">&lt;slide-show&gt;</h2>
-    <p>Import <code>&lt;slide-show&gt;</code> custom element. This registers the custom
-element and upgrades instances already in the DOM.</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/element.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>
 
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/donkeys.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/tractor.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/mauverin.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
-<p>Children of a <code>&lt;slide-show&gt;</code> are displayed as slides in a horizontal grid.</p>
-
-    
-</header>
-
-<form class="x1 3x @1-x1 @1-2x @2-x1 @2-3x x-stretch y-start">
-    <script type="module" src="../bolt/templates/build/element.js"></script>
-
-<slide-show loop controls="navigation">
-   <img src="../bolt/templates/images/donkeys.jpg" draggable="false" />
-   <img src="../bolt/templates/images/tractor.jpg" draggable="false" />
-   <img src="../bolt/templates/images/mauverin.jpg" draggable="false" />
-</slide-show>
-    <!-- for testing form submission values -->
-    <input hidden class="button" type="submit" />
-</form>
-
-<div class="x1 3x @1-x3 @1-2x @2-x4 x-stretch y-start">
+<div class="x1 3x @1-3x @2-x2 x-stretch y-start">
     
     <h3 class="docs-text-03">Attributes</h3>
     
@@ -133,7 +118,7 @@ slide after a pause. The pause duration may be set in CSS via the
 
 </div>
 
- 
+
 <div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-controls">
 <h3 class="attribute-docs-text-05 docs-text-05">
     <a href="#attribute-controls">
@@ -146,7 +131,7 @@ and <code>&quot;fullscreen&quot;</code>.</p>
 
 </div>
 
- 
+
 <div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-loop">
 <h3 class="attribute-docs-text-05 docs-text-05">
     <a href="#attribute-loop">
@@ -158,7 +143,7 @@ and <code>&quot;fullscreen&quot;</code>.</p>
 
 </div>
 
- 
+
 
     
     
@@ -182,7 +167,7 @@ child elements. Setting this property causes the slide to change.</p>
 
 </div>
 
- 
+
 <div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-autoplay">
 <h3 class="property-docs-text-05 docs-text-05">
     <a href="#property|selector-autoplay">
@@ -196,7 +181,7 @@ slide after a pause. The pause duration may be set in CSS via the
 
 </div>
 
- 
+
 <div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-controls">
 <h3 class="property-docs-text-05 docs-text-05">
     <a href="#property|selector-controls">
@@ -209,7 +194,7 @@ and <code>&quot;fullscreen&quot;</code>.</p>
 
 </div>
 
- 
+
 <div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-loop">
 <h3 class="property-docs-text-05 docs-text-05">
     <a href="#property|selector-loop">
@@ -221,31 +206,183 @@ and <code>&quot;fullscreen&quot;</code>.</p>
 
 </div>
 
- 
+
+
     
+    <h3 class="docs-text-03">Events</h3>
     
-    
-    
+<div class="string-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="string-slide-active">
+<h3 class="string-docs-text-05 docs-text-05">
+    <a href="#string-slide-active">
+        <code class=" language-js">"slide-active"</code>
+    </a>
+</h3>
+
+<p>Emitted by a slide when it is brought into scroll-snap alignment.</p>
+
 </div>
 
-<div class="x1 3x @1-x5 @1-2x @2-x6 x-stretch y-start">
-    
-    
-    
 
+</div>
+
+<div class="x1 3x @1-x4 @1-3x @2-x5 x-stretch y-start">
     
+    <h3 class="docs-text-03">Parts</h3>
     
-    
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-prev-button">
+<h3 class="part-docs-text-05 docs-text-05">
+    <a href="#part-prev-button">
+        <code class=" language-css">::part(prev-button)</code>
+    </a>
+</h3>
+
+<p>Style the ‘previous slide’ button, available when the <code>controls</code> attribute
+contains the token <code>&quot;navigation&quot;</code>.</p>
+
 </div>
 
 
-    <footer class="x1 3x @1-x1 @1-4x @2-x2 @2-6x">
-        <p class="text-09">This page has been set in Euclid and Martian Mono</p>
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-next-button">
+<h3 class="part-docs-text-05 docs-text-05">
+    <a href="#part-next-button">
+        <code class=" language-css">::part(next-button)</code>
+    </a>
+</h3>
+
+<p>Style the ‘next slide’ button, available when the <code>controls</code> attribute
+contains the token <code>&quot;navigation&quot;</code>.</p>
+
+</div>
+
+
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-pagination">
+<h3 class="part-docs-text-05 docs-text-05">
+    <a href="#part-pagination">
+        <code class=" language-css">::part(pagination)</code>
+    </a>
+</h3>
+
+<p>Style the pagination wrapper.</p>
+
+</div>
+
+
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-page-button">
+<h3 class="part-docs-text-05 docs-text-05">
+    <a href="#part-page-button">
+        <code class=" language-css">::part(page-button)</code>
+    </a>
+</h3>
+
+<p>Style the pagination buttons.</p>
+
+</div>
+
+
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-page-button-active">
+<h3 class="part-docs-text-05 docs-text-05">
+    <a href="#part-page-button-active">
+        <code class=" language-css">::part(page-button-active)</code>
+    </a>
+</h3>
+
+<p>Style the pagination button pointing to the active slide.</p>
+
+</div>
+
+
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-fullscreen-button">
+<h3 class="part-docs-text-05 docs-text-05">
+    <a href="#part-fullscreen-button">
+        <code class=" language-css">::part(fullscreen-button)</code>
+    </a>
+</h3>
+
+<p>Style the fullscreen button, available when the attribute ‘controls’ contains
+the token <code>&quot;fullscreen&quot;</code>.</p>
+
+</div>
+
+
+<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-fullscreen-button-active">
+<h3 class="part-docs-text-05 docs-text-05">
+    <a href="#part-fullscreen-button-active">
+        <code class=" language-css">::part(fullscreen-button-active)</code>
+    </a>
+</h3>
+
+<p>Style the fullscreen button while in fullscreen mode.</p>
+
+</div>
+
+
+
+    
+    <h3 class="docs-text-03">Variables</h3>
+    
+<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-slide-duration">
+<h3 class="var-docs-text-05 docs-text-05">
+    <a href="#var-slide-duration">
+        <code class=" language-css">--slide-duration</code>
+    </a>
+</h3>
+
+<p>Set the duration that a slide is displayed for when the slideshow is in
+autoplay mode. May be a CSS time value in <code>s</code> or <code>ms</code>.</p>
+
+</div>
+
+
+<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-padding-left">
+<h3 class="var-docs-text-05 docs-text-05">
+    <a href="#var-padding-left">
+        <code class=" language-css">--padding-left</code>
+    </a>
+</h3>
+
+<p>Adjusts the space to the left of the leftmost slide. Internally it sets
+<code>padding</code> and <code>scroll-padding</code>.</p>
+
+</div>
+
+
+<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-padding-right">
+<h3 class="var-docs-text-05 docs-text-05">
+    <a href="#var-padding-right">
+        <code class=" language-css">--padding-right</code>
+    </a>
+</h3>
+
+<p>Adjusts the space to the right of the rightmost slide. Internally it sets
+<code>padding</code> and <code>scroll-padding</code> (and hacks around browsers’ lack of respect
+for <code>padding-right</code> on scrollable grids).</p>
+
+</div>
+
+
+</div>
+
+
+    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
+        <h2 class="docs-text-02">Contribute</h2>
+        <p>Contribute to the repo: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/</a></p>
+        <p>Report a problem: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/issues</a></p>
+    </section>
+
+    <hr class="x1 3x @1-6x @2-x2"/>
+
+    <footer class="x1 3x @1-4x @2-x2 @2-7x">
+        <small class="block">
+            <p>Made by <a href="https://stephen.band">Stephen Band</a> at <a href="https://cruncher.ch"><img style="width: 20px; display: inline-block; vertical-align: -0.5em;" src="https://cruncher.ch/static/images/logo.svg" alt="The Cruncher logo"/> Cruncher</a>.</p>
+            <p class="text-09">This page is set in <a href="https://www.swisstypefaces.com/fonts/euclid/">Euclid</a> and <a href="https://github.com/evilmartians/mono">Martian Mono</a>.</p>
+            <p>Images <code>&copy;2022</code> Stephen Band.</p>
+            <p>Fonts and images used for this documentation are not included as part of the open source license covering the use of the <code>&lt;slide-show&gt;</code> element.</p>
+        </small>
     </footer>
 
     <script type="module">
-        import '../dom/polyfills/element.scrollto.js';
         import './build/element.js';
+        import './docs/build/docs.js';
     </script>
 
     <!--$ { include('../bolt/templates/scripts.html') }-->

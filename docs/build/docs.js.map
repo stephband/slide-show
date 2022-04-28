@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "sources": ["../docs/docs.js"],
+  "sources": ["../docs.js"],
   "sourcesContent": ["\nimport 'https://stephen.band/bolt/attributes/data-toggleable.js';\nimport 'https://stephen.band/bolt/classes/device.js';\nimport 'https://stephen.band/bolt/classes/toggle-block.js';\n"],
   "mappings": ";;;;;AACA,gEACA,oDACA",
   "names": []

@@ -105,6 +105,11 @@ function isGhost(slide) {
     return !!slide.dataset.slideIndex;
 }
 
+/**
+'slide-active'
+Emitted by a slide when it is brought into scroll-snap alignment.
+**/
+
 export function updateActive(data) {
     const { scroller, children, elements } = data;
     const current = getActive(scroller, elements);

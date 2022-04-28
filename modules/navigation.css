@@ -1,12 +1,14 @@
 
 /**
-::part(previous)
-Style the 'previous slide' button.
+::part(prev-button)
+Style the 'previous slide' button, available when the `controls` attribute
+contains the token `"navigation"`.
 **/
 
 /**
-::part(next)
-Style the 'next slide' button.
+::part(next-button)
+Style the 'next slide' button, available when the `controls` attribute
+contains the token `"navigation"`.
 **/
 
 [part="prev-button"],
