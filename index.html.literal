@@ -53,6 +53,13 @@
             --padding-right: calc(11.11111111% + 1.5rem / 9);
         }
     }
+
+    @media (min-width: 90em) {
+        .banner-slide-show {
+            --padding-left: calc(11.11111111% + 1.5rem / 9);
+            --padding-right: calc(22.22222222% + 3rem / 9);
+        }
+    }
     </style>
 </head>
 
