@@ -12,23 +12,56 @@
     <link rel="stylesheet" href="./build/element.css">
 
     <style>
-    slide-show {
-        background: #cccccc;
-        margin: 0 auto;
+    .grid {
+        /* Temp */
+        --x-gap: 1.5rem;
+    }
+
+    .banner-slide-show {
+        column-gap: 0.75rem;
+        --padding-left: 1.5rem;
+        --padding-right: 1.5rem;
+        height: min-content;
+    }
+
+    .banner-slide-show > a,
+    .banner-slide-show > a > img,
+    .banner-slide-show > img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    @media (min-width: 30em) {
+        .banner-slide-show {
+            column-gap: 1.5rem;
+            --padding-left: 4.5rem;
+            --padding-right: 4.5rem;
+            height: min-content;
+        }
     }
     </style>
 </head>
 
 <body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid">
-    <nav class="x1 x-stretch y1 @2-x1 @2-1x">
+    <!--nav class="x1 x-stretch y1 @2-x1 @2-1x">
         <a class="thumb thumb-1:1" width="400" height="400" style="background-image: url('./images/logo.svg'); background-size: contain; width: 120%; padding-top: 120%; max-width: 6rem; margin-top: -16%; margin-left: -8%; margin-right: -12%;">Bolt</a>
-    </nav>
+    </nav-->
 
     <header class="x1 3x @1-x1 @1-4x @2-x2 @2-6x">
-        <h1 class="docs-text-01"><code>&lt;slide-show&gt;</code></h1>
+        <h1 class="docs-text-01">&lt;slide-show&gt;</h1>
+        <p>The accessible, scrollable, fullscreenable, horizontal carousel custom element.</p>
     </header>
 
-    ${ include('../bolt/templates/element.literal', comments("./element.js", "./shadow.css")) }
+    <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @2-9x" loop autoplay controls="navigation pagination fullscreen">
+        <img src="./docs/images/donkeys.jpg" draggable="false" />
+        <img src="./docs/images/tractor.jpg" draggable="false" />
+        <img src="./docs/images/mauverin.jpg" draggable="false" />
+        <img src="./docs/images/rocks.jpg" draggable="false" />
+        <img src="./docs/images/summit.jpg" draggable="false" />
+    </slide-show>
+
+    <!--$ { include('../bolt/templates/element.literal', comments("./element.js", "./shadow.css")) }-->
 
     <!--section class="x1 3x @1-x3 @1-4x @2-x4">
         <h2>Examples</h2>
@@ -74,13 +107,13 @@
         </slide-show>
     </section-->
 
+    <footer>
+        <p class="text-09">This page has been set in Euclid and Martian Mono</p>
+    </footer>
+
     <script type="module">
         import '../dom/polyfills/element.scrollto.js';
         import './build/element.js';
-
-        import S, { Producer as P } from '../fn/modules/stream/stream-unicast.js';
-        window.S = S;
-        window.P = P;
     </script>
 
     <!--$ { include('../bolt/templates/scripts.html') }-->

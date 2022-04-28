@@ -34,25 +34,15 @@
 
 
 @font-face {
-    font-family: Assistant;
-    src: url('../docs/fonts/Assistant/assistant-light-webfont.woff2') format('woff2'),
-         url('../docs/fonts/Assistant/assistant-light-webfont.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: Assistant;
-    src: url('../docs/fonts/Assistant/assistant-regular-webfont.woff2') format('woff2'),
-         url('../docs/fonts/Assistant/assistant-regular-webfont.woff') format('woff');
+    font-family: Euclid;
+    src: url('../docs/fonts/Euclid/EuclidCircularA-Regular-WebTrial.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: Assistant;
-    src: url('../docs/fonts/Assistant/assistant-semibold-webfont.woff2') format('woff2'),
-         url('../docs/fonts/Assistant/assistant-semibold-webfont.woff') format('woff');
+    font-family: Euclid;
+    src: url('../docs/fonts/Euclid/EuclidCircularA-Medium-WebXL.woff') format('woff');
     font-weight: 600;
     font-style: normal;
 }
@@ -71,10 +61,14 @@
 .docs-text-06, h6,
 .docs-text-08, body,
 .docs-text-09 {
-    font-family: Assistant;
+    font-family: Euclid;
     font-style: none;
     text-transform: none;
     margin: 0;
+
+    /* Make fonts appear the same on both hires and lores screens */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .docs-text-07, code {
@@ -83,12 +77,12 @@
     font-size: 0.82em;
 }
 
-.docs-text-01, h1       { font-size: 6.33vw;    line-height: 2.625rem; font-weight: 300; }
-.docs-text-02, h2       { font-size: 1.5rem;    line-height: 1.625rem; font-weight: 300; }
-.docs-text-03, h3       { font-size: 1.25rem;   line-height: 1.5rem;   font-weight: 300; }
-.docs-text-04, h4       { font-size: 1rem;      line-height: 1.5rem;   font-weight: 300; }
-.docs-text-05, h5       { font-size: 1rem;      line-height: 1.375rem; font-weight: 300; }
-.docs-text-06, h6       { font-size: 1.125rem;  line-height: 1.5rem;   font-weight: 300; }
+.docs-text-01, h1       { font-size: 13.6vw;    line-height: 1em; font-weight: 600; }
+.docs-text-02, h2       { font-size: 1.5rem;    line-height: 1.625rem; font-weight: 600; }
+.docs-text-03, h3       { font-size: 1.25rem;   line-height: 1.5rem;   font-weight: 600; }
+.docs-text-04, h4       { font-size: 1rem;      line-height: 1.5rem;   font-weight: 600; }
+.docs-text-05, h5       { font-size: 1rem;      line-height: 1.375rem; font-weight: 600; }
+.docs-text-06, h6       { font-size: 1.125rem;  line-height: 1.5rem;   font-weight: 600; }
 .docs-text-07           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 480; }
 .docs-text-08, body     { font-size: 1rem;      line-height: 1.5rem;   font-weight: 400; }
 .docs-text-09           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 400; }
@@ -96,3 +90,6 @@
 .docs-text-01 > code {
     font-variation-settings: 'wght' 680, 'wdth' 92;
 }
+
+/* Specific to <slide-show> header */
+.docs-text-01           { font-size: 14.5vw; white-space: nowrap; }
