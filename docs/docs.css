@@ -83,14 +83,14 @@
     font-size: 0.82em;
 }
 
-.docs-text-01, h1       { font-size: 13.6vw;    line-height: 1em; font-weight: 600; }
-.docs-text-02, h2       { font-size: 1.5rem;    line-height: 1.625rem; font-weight: 600; }
+.docs-text-01, h1       { font-size: 13.6vw;    line-height: 1em;      font-weight: 600; }
+.docs-text-02, h2       { font-size: 1.875rem;   line-height: 1.625em; font-weight: 600; }
 .docs-text-03, h3       { font-size: 1.25rem;   line-height: 1.5rem;   font-weight: 600; }
 .docs-text-04, h4       { font-size: 1rem;      line-height: 1.5rem;   font-weight: 600; }
-.docs-text-05, h5       { font-size: 1rem;      line-height: 1.375rem; font-weight: 600; }
+.docs-text-05, h5       { font-size: 1.125rem;  line-height: 1.375em;  font-weight: 600; }
 .docs-text-06, h6       { font-size: 1.125rem;  line-height: 1.5rem;   font-weight: 600; }
 .docs-text-07           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 480; }
-.docs-text-08, body     { font-size: 1rem;      line-height: 1.5rem;   font-weight: 400; }
+.docs-text-08, body     { font-size: 1.125rem;  line-height: 1.5em;    font-weight: 400; }
 .docs-text-09           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 400; }
 
 .docs-text-01 > code {
