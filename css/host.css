@@ -2,23 +2,53 @@
 :host {
     /**
     --slide-duration
-    Set the duration that a slide is displayed for when the slideshow is in
-    autoplay mode. May be a CSS time value in `s` or `ms`.
+    Sets the display duration of a slide when the slideshow has
+    `controls="autoplay"` enabled. May be a CSS time value in `s` or `ms`.
+
+    ```css
+    slide-show > img {
+        --slide-duration: 12s;
+    }
+    ```
+
+    If applied to the `slide-show` itself, sets the display duration of all
+    slides.
+
+    ```css
+    slide-show {
+        --slide-duration: 12s;
+    }
+    ```
     **/
     --slide-duration: 8s;
 
     /**
     --padding-left
-    Adjusts the space to the left of the leftmost slide. Internally it sets
-    `padding` and `scroll-padding`.
+    Adjusts the space to the left of the leftmost slide, and the alignment
+    position of slides set to `scroll-snap-align: start`. (Internally it sets
+    both `padding-left` and `scroll-padding-left` while enabling a workaround for
+    some browser inconsistencies.)
+
+    ```css
+    slide-show {
+        --padding-left: 3rem;
+    }
+    ```
     **/
     --padding-left: 0;
 
     /**
     --padding-right
-    Adjusts the space to the right of the rightmost slide. Internally it sets
-    `padding` and `scroll-padding` (and hacks around browsers' lack of respect
-    for `padding-right` on scrollable grids).
+    Adjusts the space to the right of the rightmost slide, and the alignment
+    position of slides set to `scroll-snap-align: end`. (Internally it sets
+    both `padding-right` and `scroll-padding-right` while enabling a workaround
+    for some browser inconsistencies.)
+
+    ```css
+    slide-show {
+        --padding-right: 3rem;
+    }
+    ```
     **/
     --padding-right: 0;
 

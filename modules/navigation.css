@@ -1,14 +1,28 @@
 
 /**
 ::part(prev-button)
-Style the 'previous slide' button, available when the `controls` attribute
-contains the token `"navigation"`.
+Style the 'previous slide' button, available when the slideshow has
+`controls="navigation"` enabled. By default button icons are background images.
+Replace the background image to change the icon.
+
+```css
+slide-show::part(next-button) {
+    background-image: url('./chevron-prev.svg');
+}
+```
 **/
 
 /**
 ::part(next-button)
-Style the 'next slide' button, available when the `controls` attribute
-contains the token `"navigation"`.
+Style the 'next slide' button, available when the slideshow has
+`controls="navigation"` enabled. By default button icons are background images.
+Replace the background image to change the icon.
+
+```css
+slide-show::part(next-button) {
+    background-image: url('./chevron-next.svg');
+}
+```
 **/
 
 [part="prev-button"],

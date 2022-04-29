@@ -1,4 +1,4 @@
 
-import 'https://stephen.band/bolt/attributes/data-toggleable.js';
-import 'https://stephen.band/bolt/classes/device.js';
-import 'https://stephen.band/bolt/classes/toggle-block.js';
+import '../../bolt/attributes/data-toggleable.js';
+import '../../bolt/classes/device.js';
+import '../../bolt/classes/toggle-block.js';

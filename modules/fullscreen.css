@@ -2,13 +2,27 @@
 
 /**
 ::part(fullscreen-button)
-Style the fullscreen button, available when the attribute 'controls' contains
-the token `"fullscreen"`.
+Style the fullscreen button, available when the slideshow has `controls="fullscreen"`
+enabled. By default button icons are background images. Replace the background
+image to change the icon.
+
+```css
+slide-show::part(fullscreen-button) {
+    background-image: url('./fullscreen.svg');
+}
+```
 **/
 
 /**
 ::part(fullscreen-button-active)
-Style the fullscreen button while in fullscreen mode.
+Style the fullscreen button while in fullscreen mode. By default button icons
+are background images. Replace the background image to change the icon.
+
+```css
+slide-show::part(fullscreen-button-active) {
+    background-image: url('./close.svg');
+}
+```
 **/
 
 [part*="fullscreen-button"] {

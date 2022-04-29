@@ -1,0 +1,5 @@
+
+${ data[0].type === 'text' ? `
+<h2 class="docs-text-02" id="${ slugify(data[0].name) }">${ data[0].name }</h2>
+${ data[0].body }
+` : `` }

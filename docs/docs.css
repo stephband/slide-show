@@ -73,31 +73,27 @@
 
 .docs-text-05 code:not(.pill) {
     font-family: MartianMono, Menlo, Monaco, monospace !important;
-    font-variation-settings: 'wght' 300, 'wdth' 96;
+    font-variation-settings: 'wght' 350, 'wdth' 96;
     font-size: 0.875em;
 }
 
-.docs-text-07, code {
+code {
     font-family: MartianMono, Menlo, Monaco, monospace !important;
-    font-variation-settings: 'wght' 480, 'wdth' 96;
-    font-size: 0.82em;
+    font-variation-settings: 'wght' 520, 'wdth' 96;
+    font-size: 0.8125em;
 }
 
-.docs-text-01, h1       { font-size: 13.6vw;    line-height: 1em;      font-weight: 600; }
-.docs-text-02, h2       { font-size: 1.875rem;   line-height: 1.625em; font-weight: 600; }
-.docs-text-03, h3       { font-size: 1.25rem;   line-height: 1.5rem;   font-weight: 600; }
-.docs-text-04, h4       { font-size: 1rem;      line-height: 1.5rem;   font-weight: 600; }
-.docs-text-05, h5       { font-size: 1.125rem;  line-height: 1.375em;  font-weight: 600; }
-.docs-text-06, h6       { font-size: 1.125rem;  line-height: 1.5rem;   font-weight: 600; }
-.docs-text-07           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 480; }
-.docs-text-08, body     { font-size: 1.125rem;  line-height: 1.5em;    font-weight: 400; }
-.docs-text-09           { font-size: 0.9375rem; line-height: 1.5rem;   font-weight: 400; }
-
-.docs-text-01 > code {
-    font-variation-settings: 'wght' 680, 'wdth' 92;
-}
+/* https://stephen.band/font-size/?breakpoints=320,1440&.text-02,%20h2=31.25,35.15625&.text-03,%20h3=25,28.125&.text-04,%20h4=20,22.5&.text-05,%20h5=16,18&.text-08,%20body=16,18&.text-09=12.8,14.4https://stephen.band/font-size/?breakpoints=320,1440&.text-02,%20h2=31.25,35.15625&.text-03,%20h3=25,28.125&.text-04,%20h4=20,22.5&.text-05,%20h5=16,18&.text-08,%20body=16,18&.text-09=12.8,14.4 */
+.docs-text-01, h1    { font-size: 14.5vw;                             line-height: 1em;     font-weight: 600; }
+.docs-text-02, h2    { font-size: calc(1.88337054rem + 0.34877232vw); line-height: 1.152em; font-weight: 600; }
+.docs-text-03, h3    { font-size: calc(1.50669643rem + 0.27901786vw); line-height: 1.44em;  font-weight: 600; }
+.docs-text-04, h4    { font-size: calc(1.20535714rem + 0.22321429vw); line-height: 1.2em;   font-weight: 600; }
+.docs-text-05, h5    { font-size: calc(0.96428571rem + 0.17857143vw); line-height: 1.5em;   font-weight: 600; }
+.docs-text-08, body  { font-size: calc(0.96428571rem + 0.17857143vw); line-height: 1.5em;   font-weight: 400; }
+.docs-text-09        { font-size: calc(0.77142857rem + 0.14285714vw); line-height: 1.25em;  font-weight: 400; }
 
 /* Specific to <slide-show> header */
+
 .docs-text-01 { font-size: 14.5vw; white-space: nowrap; }
 
 @media (min-width: 50em) {
@@ -108,5 +104,55 @@
     .docs-text-01 { font-size: 7vw; }
 }
 
-* + .docs-text-03 { margin-top: 3rem; }
-ul + p { margin-top: 1.5em; }
+.docs-text-05 > a {
+    min-height: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.docs-text-05 > a:hover,
+.docs-text-05 > a:focus-visible,
+.docs-text-05 > a.on {
+    color: #137bb1;
+}
+
+.docs-text-04 + p, .docs-text-04 + .docs-text-08 { margin-top: 1em; }
+
+* + .docs-text-04 { margin-top: 2.4em; }
+p + p, ul + p { margin-top: 1em; }
+pre + p, p + pre { margin-top: 1.5em; }
+small > p + p { margin-top: 0; }
+
+
+@media (min-width: 50em) {
+    .\@1-no-wrap {
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+
+.doc-toggle-block {
+    min-height: calc(1.5em + 1rem);
+}
+
+* > .doc-toggle-block {
+    margin-bottom: -0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+* + .doc-toggle-block {
+    margin-top: -0.5rem;
+    padding-top: 0.5rem;
+}
+
+.docs-text-04 + .doc-toggle-block {
+    margin-top: calc(1em - 0.5rem);
+}
+
+.doc-toggle-block > pre > code {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}

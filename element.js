@@ -2,22 +2,32 @@
 // Polyfill Element.scrollTo() for Safari
 import '../dom/polyfills/element.scrollto.js';
 
-/** <slide-show>
+/** Get started
 
-Import `<slide-show>` custom element. This registers the custom
-element and upgrades instances already in the DOM.
+Download the latest release.
+
+Then include the JS and CSS files in your HTML:
 
 ```html
+<link rel="stylesheet" href="./build/element.css" />
 <script type="module" src="./build/element.js"></script>
+```
 
-<slide-show loop controls="navigation">
+You can now use the `<slide-show>` in your HTML. The `<slide-show>` example
+above looks something like this:
+
+```html
+<slide-show autoplay loop controls="navigation pagination fullscreen">
    <img src="./images/donkeys.jpg" draggable="false" />
    <img src="./images/tractor.jpg" draggable="false" />
    <img src="./images/mauverin.jpg" draggable="false" />
 </slide-show>
 ```
 
-Children of a `<slide-show>` are displayed as slides in a horizontal grid.
+A `<slide-show>` element lays out its children as slides, by default in
+`grid` mode, although other horizontal modes (`flex`, `inline-block`) are
+supported. `<slide-show>`s are not only for images – they take any arbitrary
+HTML.
 **/
 
 import equals          from '../fn/modules/equals.js';
@@ -213,7 +223,7 @@ const properties = {
     ```
 
     May be set to one of the child elements, or to the id of one of the
-    child elements. Setting this property causes the slide to change.
+    child elements, which causes the `slide-show` to scroll.
 
     ```js
     slideshow.active = 'slide-1';
@@ -247,30 +257,42 @@ const properties = {
 
     /**
     autoplay=""
-    Boolean attribute. When present the slide-show activates the next
-    slide after a pause. The pause duration may be set in CSS via the
-    `--slide-duration` variable.
+    Boolean attribute. When present the `slide-show` activates the next
+    slide after a pause. The pause duration may be set with the CSS variable
+    `--slide-duration`. Autoplay is also paused when a mouse pointer is
+    inside the `slide-show`, or when a slide has focus.
     **/
 
     /**
     .autoplay
+
     Boolean property. When `true` the slide-show activates the next
-    slide after a pause. The pause duration may be set in CSS via the
-    `--slide-duration` variable.
+    slide after a pause. The pause duration may be set with the CSS variable
+    `--slide-duration`. Autoplay is also paused when a mouse pointer is
+    inside the `slide-show`, or when a slide has focus.
+
+    ```js
+    document.querySelector('slide-show').autoplay = true;
+    ```
     **/
 
     autoplay: createBoolean(autoplay),
 
     /**
     controls=""
-    A TokenList attribute. Accepts the tokens `"navigation"`, `"pagination"`
-    and `"fullscreen"`.
+    An attribute that accepts the tokens `"navigation"`, `"pagination"`
+    and `"fullscreen"`. The presence of one of these tokens enables the
+    corresponding controls.
     **/
 
     /**
     .controls
-    A TokenList object supporting the tokens `"navigation"`, `"pagination"`
-    and `"fullscreen"`.
+    A TokenList object (like `.classList`) that supports the tokens `"navigation"`,
+    `"pagination"` and `"fullscreen"`.
+
+    ```js
+    document.querySelector('slide-show').controls.add('pagination');
+    ```
     **/
 
     controls: createTokenList({
@@ -281,12 +303,22 @@ const properties = {
 
     /**
     loop=""
-    Boolean attribute. Makes the slideshow behave as a continuous loop.
+    Boolean attribute. When present, the `slide-show` behaves as a continuous
+    loop. Looping works by duplicating some of the children of the `slide-show`.
+    Duplicate content is given `aria-hidden="true"` and `tab-index="-1"`, and
+    has `id` attributes stripped off in an attempt to make it inert.
     **/
 
     /**
     .loop
-    Boolean property. Makes the slideshow behave as a continuous loop.
+    Boolean property. When `true`, the `slide-show` behaves as a continuous loop.
+    Looping works by duplicating some of the children of the `slide-show`.
+    Duplicate content is given `aria-hidden="true"` and `tab-index="-1"`, and
+    has `id` attributes stripped off in an attempt to make it inert.
+
+    ```js
+    document.querySelector('slide-show').loop = true;
+    ```
     **/
 
     loop: createBoolean(loop)

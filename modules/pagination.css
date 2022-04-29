@@ -12,7 +12,8 @@ Style the pagination wrapper.
 
 /**
 ::part(page-button)
-Style the pagination buttons.
+Style the pagination buttons, available when the slideshow has
+`controls="pagination"` enabled.
 **/
 
 [part*="page-button"] {
@@ -30,7 +31,8 @@ Style the pagination buttons.
 
 /**
 ::part(page-button-active)
-Style the pagination button pointing to the active slide.
+Style the pagination button pointing to the active slide, available when the
+slideshow has `controls="pagination"` enabled.
 **/
 
 [part*="page-button-active"] {
