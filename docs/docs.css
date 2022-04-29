@@ -83,7 +83,7 @@ code {
     font-size: 0.8125em;
 }
 
-/* https://stephen.band/font-size/?breakpoints=320,1440&.text-02,%20h2=31.25,35.15625&.text-03,%20h3=25,28.125&.text-04,%20h4=20,22.5&.text-05,%20h5=16,18&.text-08,%20body=16,18&.text-09=12.8,14.4https://stephen.band/font-size/?breakpoints=320,1440&.text-02,%20h2=31.25,35.15625&.text-03,%20h3=25,28.125&.text-04,%20h4=20,22.5&.text-05,%20h5=16,18&.text-08,%20body=16,18&.text-09=12.8,14.4 */
+/* https://stephen.band/font-size/?breakpoints=320,1440&.text-02,%20h2=31.25,35.15625&.text-03,%20h3=25,28.125&.text-04,%20h4=20,22.5&.text-05,%20h5=16,18&.text-08,%20body=16,18&.text-09=12.8,14.4 */
 .docs-text-01, h1    { font-size: 14.5vw;                             line-height: 1em;       font-weight: 600; }
 .docs-text-02, h2    { font-size: calc(1.88337054rem + 0.34877232vw); line-height: 1.152em;   font-weight: 600; }
 .docs-text-03, h3    { font-size: calc(1.50669643rem + 0.27901786vw); line-height: 1.44em;    font-weight: 600; }
