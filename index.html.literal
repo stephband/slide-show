@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    ${ include('../bolt/templates/head.literal', './package.json') }
+
+    <script title="debug">
+        window.DEBUG = true;
+    </script>
+
+    <link rel="stylesheet" href="./docs/docs.css">
+    <link rel="stylesheet" href="./build/slide-show.css">
+
+    <style>
+    .grid {
+        /* Temp */
+        --x-gap: 1.5rem;
+    }
+
+    .banner-slide-show {
+        column-gap: 0.75rem;
+        --padding-left: 1.5rem;
+        --padding-right: 1.5rem;
+        height: min-content;
+    }
+
+    .banner-slide-show > a,
+    .banner-slide-show > a > img,
+    .banner-slide-show > img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    @media (min-width: 50em) {
+        .banner-slide-show {
+            column-gap: 1.5rem;
+            --padding-left: 4.5rem;
+            --padding-right: 4.5rem;
+        }
+    }
+
+    @media (min-width: 70em) {
+        body.docs-grid {
+            /* Rough */
+            padding-top: 4vw;
+            padding-left: var(--x-gap);
+            padding-right: var(--x-gap);
+        }
+
+        .banner-slide-show {
+            --padding-left: calc(11.11111111% + 1.5rem / 9);
+            --padding-right: calc(11.11111111% + 1.5rem / 9);
+        }
+    }
+
+    @media (min-width: 90em) {
+        .banner-slide-show {
+            --padding-left: calc(11.11111111% + 1.5rem / 9);
+            --padding-right: calc(22.22222222% + 3rem / 9);
+        }
+    }
+
+    .tabs-slide-show {
+
+    }
+    </style>
+</head>
+
+<body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid y-start-grid">
+    <header class="x1 3x @1-x1 @1-4x @2-x2">
+        <h1 class="docs-text-01">&lt;slide-show&gt;</h1>
+        <p class="@1-no-wrap">The accessible, scrollable, styleable, horizontal carousel custom element. <br class="@1-shown"/>No dependencies, about <code>12kB</code> minified and gzipped.</p>
+    </header>
+
+    <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @1-x-stretch @2-9x" loop autoplay controls="navigation pagination fullscreen">
+        <img src="./docs/images/donkeys.jpg" draggable="false" alt="A rowdy group of curious donkeys"/>
+        <img src="./docs/images/tractor.jpg" draggable="false" alt="A lonely, rusted tractor abandonned on the edge of the arctic ocean"/>
+        <img src="./docs/images/mauverin.jpg" draggable="false" alt="The shadow of a the summit of the Mauverin cast over the alpine valley of Nant"/>
+        <img src="./docs/images/rocks.jpg" draggable="false" alt="Wet moss and lichen-covered rocks in a shallow pool"/>
+        <img src="./docs/images/summit.jpg" draggable="false" alt="Golden autumn meadows in front of a rocky summit dusted with snow"/>
+    </slide-show>
+
+    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
+        ${ include('./docs/templates/content.literal', comments("./element.js")) }
+    </section>
+
+    <h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>
+
+    ${ include('./docs/templates/api.literal', comments(
+        "./element.js",
+        "./modules/active.js",
+        "./element.css",
+        "./element-shadow.css",
+        "./css/host.css",
+        "./css/scroller.css",
+        "./css/slides.css",
+        "./modules/loop.css",
+        "./modules/navigation.css",
+        "./modules/pagination.css",
+        "./modules/fullscreen.css"
+    )) }
+
+    <div class="x1 3x @1-4x @2-x2 x-stretch y-start">
+        <h3 class="docs-text-04">Fallback</h3>
+
+        <p><code>&lt;slide-show&gt;</code> is built to scroll, and if JavaScript
+        fails and the features of the element do not initialise (the component
+        is not 'upgraded' in Web Component parlance), the user nonetheless gets
+        a scrollable element. Fallback style is provided by <code>./build/element.css</code>.</p>
+
+        <p>Upgraded style is provided by <code>./build/element-shadow.css</code>, which
+        must be in the same location as <code>./build/element.js</code> in order
+        to be loaded into the <code>slide-show</code>'s shadow DOM automatically.</p>
+
+        <h3 class="docs-text-04">Polyfills</h3>
+
+        <p>The package includes a basic polyfill of <code>element.scrollTo()</code>,
+        as Safari lacks support for the smooth scrolling option of this method.
+        The polyfill is not applied in browsers where smooth scrolling is already
+        supported.</p>
+    </div>
+
+    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
+        <h2 class="docs-text-02">Contribute</h2>
+
+        <ul>
+            <li>Contribute to the repo: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/</a></li>
+            <li>Report a problem: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/issues</a></li>
+        </ul>
+
+        <p>Comments about accessibility are particularly welcome. I try to respect the
+        <a href="https://www.w3.org/WAI/tutorials/carousels/">Web Accessibility guidelines for carousels</a>,
+        but the examples given there were clearly written without a scroll-snapping interface in mind, and
+        browsers respond to scrolling in their own subtly unique ways.</p>
+    </section>
+
+
+
+    <hr class="x1 3x @1-6x @2-x2 @2-7x"/>
+
+    <footer class="x1 3x @1-4x @2-x2">
+        <small class="block">
+            <p class="docs-text-09">Made by <a href="https://stephen.band">Stephen Band</a> at <a href="https://cruncher.ch"><img style="width: 20px; display: inline-block; vertical-align: -0.5em;" src="https://cruncher.ch/static/images/logo.svg" alt="The Cruncher logo"/> Cruncher</a>.</p>
+            <p class="docs-text-09">This page is set in <a href="https://www.swisstypefaces.com/fonts/euclid/">Euclid</a> and <a href="https://github.com/evilmartians/mono">Martian Mono</a>.</p>
+            <p class="docs-text-09">Images <code>&copy;2022</code> Stephen Band.</p>
+            <p class="docs-text-09">Fonts and images used for this documentation are not included as part of the open source license covering the use of the <code>&lt;slide-show&gt;</code> element.</p>
+        </small>
+    </footer>
+
+    <script type="module">
+        import './docs/docs.js';
+        import './build/slide-show.js';
+
+        // Log events
+        document.body.addEventListener('slide-active', (e) =>
+            console.log(e.type, e.target)
+        );
+    </script>
+</body>
