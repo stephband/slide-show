@@ -258,7 +258,15 @@ const properties = {
     /**
     autoplay=""
     Boolean attribute. When present the `slide-show` activates the next
-    slide after a pause. The pause duration may be set with the CSS variable
+    slide after a pause.
+
+    ```html
+    <slide-show autoplay>
+        ...
+    </slide-show>
+    ```
+
+    The pause duration may be set with the CSS variable
     `--slide-duration`. Autoplay is also paused when a mouse pointer is
     inside the `slide-show`, or when a slide has focus.
     **/
@@ -283,6 +291,12 @@ const properties = {
     An attribute that accepts the tokens `"navigation"`, `"pagination"`
     and `"fullscreen"`. The presence of one of these tokens enables the
     corresponding controls.
+
+    ```html
+    <slide-show controls="navigation fullscreen">
+        ...
+    </slide-show>
+    ```
     **/
 
     /**
@@ -304,7 +318,15 @@ const properties = {
     /**
     loop=""
     Boolean attribute. When present, the `slide-show` behaves as a continuous
-    loop. Looping works by duplicating some of the children of the `slide-show`.
+    loop.
+
+    ```html
+    <slide-show loop>
+        ...
+    </slide-show>
+    ```
+
+    Looping works by duplicating some of the children of the `slide-show`.
     Duplicate content is given `aria-hidden="true"` and `tab-index="-1"`, and
     has `id` attributes stripped off in an attempt to make it inert.
     **/
