@@ -83,12 +83,6 @@
 
     <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
         ${ include('./docs/templates/content.literal', comments("./element.js")) }
-
-        <!--h2 class="docs-text-02">Get started</h2>
-        <p>Download the latest <a href="https://github.com/stephband/slide-show/releases">release</a>.</p>
-        <p>Then include the JS and CSS files in your HTML:</p>
-        <p>You can now use the <code>&lt;slide-show&gt;</code> elmement in your HTML. The <code>&lt;slide-show&gt;</code> above looks something like this:</p>
-        <p>A <code>&lt;slide-show&gt;</code> element treats its children as slides, layed out in a grid by default. Slide content may be any arbitrary HTML. <!--There are <a href="#examples">more examples</a> further down this page</p-->
     </section>
 
     <h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>

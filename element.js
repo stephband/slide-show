@@ -24,10 +24,10 @@ above looks something like this:
 </slide-show>
 ```
 
-A `<slide-show>` element lays out its children as slides, by default in
-`grid` mode, although other horizontal modes (`flex`, `inline-block`) are
-supported. `<slide-show>`s are not only for images – they take any arbitrary
-HTML.
+A `<slide-show>` lays out its children horizontally, by default in `grid` layout.
+Content is horizontally scrollable via touch or trackpad, draggable with a mouse
+(making it a Good Idea to add `draggable="false"`to images and links), and also
+navigable via keyboard focus.
 **/
 
 import equals          from '../fn/modules/equals.js';
@@ -231,8 +231,6 @@ const properties = {
     **/
 
     active: {
-
-
         set: function(target) {
             const data = this[$data];
 
