@@ -8,7 +8,7 @@ and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
 ## Documentation
 
-Full documentation is at (stephen.band/slide-show/)[https://stephen.band/slide-show/].
+Full documentation is at [stephen.band/slide-show/](https://stephen.band/slide-show/).
 
 ## Quick start
 
