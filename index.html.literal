@@ -9,7 +9,7 @@
     </script>
 
     <link rel="stylesheet" href="./docs/docs.css">
-    <link rel="stylesheet" href="./build/element.css">
+    <link rel="stylesheet" href="./build/slide-show.css">
 
     <style>
     .grid {
@@ -90,7 +90,8 @@
     ${ include('./docs/templates/api.literal', comments(
         "./element.js",
         "./modules/active.js",
-        "./shadow.css",
+        "./element.css",
+        "./element-shadow.css",
         "./css/host.css",
         "./css/scroller.css",
         "./css/slides.css",
@@ -108,7 +109,7 @@
         is not 'upgraded' in Web Component parlance), the user nonetheless gets
         a scrollable element. Fallback style is provided by <code>./build/element.css</code>.</p>
 
-        <p>Upgraded style is provided by <code>./build/shadow.css</code>, which
+        <p>Upgraded style is provided by <code>./build/element-shadow.css</code>, which
         must be in the same location as <code>./build/element.js</code> in order
         to be loaded into the <code>slide-show</code>'s shadow DOM automatically.</p>
 
@@ -148,14 +149,12 @@
     </footer>
 
     <script type="module">
-        import './build/element.js';
         import './docs/docs.js';
-    </script>
+        import './build/slide-show.js';
 
-    <!--$ { include('../bolt/templates/scripts.html') }-->
-
-    <script type="module">
-    // Log events
-    document.body.addEventListener('slide-active', (e) => console.log(e.type, e.target));
+        // Log events
+        document.body.addEventListener('slide-active', (e) =>
+            console.log(e.type, e.target)
+        );
     </script>
 </body>

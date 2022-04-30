@@ -29,7 +29,7 @@
     </script>
 
     <link rel="stylesheet" href="./docs/docs.css">
-    <link rel="stylesheet" href="./build/element.css">
+    <link rel="stylesheet" href="./build/slide-show.css">
 
     <style>
     .grid {
@@ -105,10 +105,11 @@
         
 
 <h2 class="docs-text-02" id="get-started">Get started</h2>
-<p>Download the latest release.</p>
+<p>Download the latest release:</p>
+<p><a href="https://github.com/stephband/slide-show/releases">github.com/stephband/slide-show/releases</a></p>
 <p>Then include the JS and CSS files in your HTML:</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/element.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/element.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 <p>You can now use the <code>&lt;slide-show&gt;</code> in your HTML. The <code>&lt;slide-show&gt;</code> example
 above looks something like this:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span> <span class="token attr-name">loop</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation pagination fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -445,7 +446,7 @@ for some browser inconsistencies.)</p>
         is not 'upgraded' in Web Component parlance), the user nonetheless gets
         a scrollable element. Fallback style is provided by <code>./build/element.css</code>.</p>
 
-        <p>Upgraded style is provided by <code>./build/shadow.css</code>, which
+        <p>Upgraded style is provided by <code>./build/element-shadow.css</code>, which
         must be in the same location as <code>./build/element.js</code> in order
         to be loaded into the <code>slide-show</code>'s shadow DOM automatically.</p>
 
@@ -485,14 +486,12 @@ for some browser inconsistencies.)</p>
     </footer>
 
     <script type="module">
-        import './build/element.js';
         import './docs/docs.js';
-    </script>
+        import './build/slide-show.js';
 
-    <!--$ { include('../bolt/templates/scripts.html') }-->
-
-    <script type="module">
-    // Log events
-    document.body.addEventListener('slide-active', (e) => console.log(e.type, e.target));
+        // Log events
+        document.body.addEventListener('slide-active', (e) =>
+            console.log(e.type, e.target)
+        );
     </script>
 </body>

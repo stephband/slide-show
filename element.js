@@ -4,13 +4,15 @@ import '../dom/polyfills/element.scrollto.js';
 
 /** Get started
 
-Download the latest release.
+Download the latest release:
+
+[github.com/stephband/slide-show/releases](https://github.com/stephband/slide-show/releases)
 
 Then include the JS and CSS files in your HTML:
 
 ```html
-<link rel="stylesheet" href="./build/element.css" />
-<script type="module" src="./build/element.js"></script>
+<link rel="stylesheet" href="./build/slide-show.css" />
+<script type="module" src="./build/slide-show.js"></script>
 ```
 
 You can now use the `<slide-show>` in your HTML. The `<slide-show>` example
@@ -87,13 +89,11 @@ function isSlide(slide) {
 
 /* Element */
 
+console.log(import.meta.url);
+
 const lifecycle = {
-    // Get path to dir of this module
-    stylesheet:
-        // Support the old path system baked into the Nendaz project
-        window.customElementStylesheetPath && window.customElementStylesheetPath + 'slide-show.shadow.css' ||
-        window.elementSlideShowStylesheet ||
-        import.meta.url.replace(/\/[^\/]*([?#].*)?$/, '/') + 'shadow.css',
+    // Get path to dir of this .js module, replace with -shadow.css
+    stylesheet: import.meta.url.replace(/\.js/, '-shadow.css'),
 
     construct: function(shadow) {
         // Shadow DOM
