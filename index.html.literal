@@ -40,10 +40,10 @@
         "./css/host.css",
         "./css/scroller.css",
         "./css/slides.css",
-        "./modules/loop.css",
-        "./modules/navigation.css",
-        "./modules/pagination.css",
-        "./modules/fullscreen.css"
+        "./css/loop.css",
+        "./css/navigation.css",
+        "./css/pagination.css",
+        "./css/fullscreen.css"
     )) }
 
     <div class="x1 3x @1-4x @2-x2 x-stretch y-start">

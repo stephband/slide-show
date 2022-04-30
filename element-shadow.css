@@ -3,9 +3,9 @@
 @import 'css/host.css';
 @import 'css/scroller.css';
 @import 'css/slides.css';
-@import 'modules/controls.css';
-@import 'modules/fullscreen.css';
-@import 'modules/navigation.css';
-@import 'modules/pagination.css';
-@import 'modules/loop.css';
-@import 'modules/optional.css';
+@import 'css/controls.css';
+@import 'css/fullscreen.css';
+@import 'css/navigation.css';
+@import 'css/pagination.css';
+@import 'css/loop.css';
+@import 'css/optional.css';
