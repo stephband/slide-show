@@ -2,10 +2,14 @@
     "title": "<slide-show>",
     "version": "1.0.0",
     "description": "A scroll-snapping slideshow/carousel, implemented as the custom element <slide-show>.",
-    "homepage": "https://stephen.band/slide-show/",
     "author": {
-        "name": "Stephen Band"
+        "name": "Stephen Band",
+        "twitter": "stephband"
     },
+    "card": {
+        "image": "https://stephen.band/slide-show/docs/images/card.jpg"
+    },
+    "homepage": "https://stephen.band/slide-show/",
     "repository": {
         "type": "git",
         "url": "https://github.com/stephband/slide-show.git"
