@@ -7,6 +7,8 @@ controls
     display: flex;
     margin-top: 0.75rem;
     height: 1.875rem;
+    padding-left: var(--padding-left);
+    padding-right: var(--padding-right);
     align-content:center;
     align-items: center;
     justify-content: center;

@@ -63,18 +63,18 @@ export function enable(host) {
 
     // Render buttons when children change
     pagination.mutations = mutations.each(() =>
-        render(data.controls, pagination, shadow, data.children.filter((slide) => !slide.dataset.slideIndex))
+        render(data.controls, pagination, shadow, data.children)
     );
 
     // Create a new stream of actives starting with the current active
     pagination.actives = actives.each(() =>
-        update(pagination, data.children.filter((slide) => !slide.dataset.slideIndex), data.active)
+        update(pagination, data.children, data.active)
     );
 
     pagination.clicks = clicks.each(delegate({
         '[name="pagination"]': function(button, e) {
             const { host } = data;
-            const children = data.children.filter((slide) => !slide.dataset.slideIndex);
+            const children = data.children;
             const target = children[button.value];
 
             if (!target) { return; }

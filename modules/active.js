@@ -116,6 +116,7 @@ export function updateActive(data) {
     let active;
 
     // If current is a loop ghost jump to the actual slide it references
+    if (!current) { return; }
     if (isGhost(current)) {
         active = children[current.dataset.slideIndex];
         jumpTo(scroller, active);

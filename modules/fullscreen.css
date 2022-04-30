@@ -30,7 +30,7 @@ slide-show::part(fullscreen-button-active) {
     overflow: hidden;
     position: absolute;
     bottom: 0.125rem;
-    right: 0.0625rem;
+    right: calc(var(--padding-right) + 0.0625rem);
     z-index: 2;
 
     /* Nullify stuff */

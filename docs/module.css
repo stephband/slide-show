@@ -26,21 +26,21 @@
 
 @font-face {
     font-family: Euclid;
-    src: url('../docs/fonts/Euclid/EuclidCircularA-Regular-WebTrial.woff') format('woff');
+    src: url('https://stephen.band/slide-show/docs/fonts/Euclid/EuclidCircularA-Regular-WebTrial.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: Euclid;
-    src: url('../docs/fonts/Euclid/EuclidCircularA-Medium-WebXL.woff') format('woff');
+    src: url('https://stephen.band/slide-show/docs/fonts/Euclid/EuclidCircularA-Medium-WebXL.woff') format('woff');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face{
     font-family: MartianMono;
-    src: url('../docs/fonts/Martian-Mono/MartianMonoVF.woff2') format('woff2');
+    src: url('https://stephen.band/slide-show/docs/fonts/Martian-Mono/MartianMonoVF.woff2') format('woff2');
 }
 
 
@@ -52,7 +52,7 @@
 .docs-text-06, h6,
 .docs-text-08, body,
 .docs-text-09 {
-    font-family: Euclid;
+    font-family: Euclid, Helvetica, Arial, sans-serif;
     font-style: none;
     text-transform: none;
     margin: 0;
@@ -125,6 +125,7 @@ small > p + p { margin-top: 0; }
 
 
 .doc-toggle-block {
+    font-size: 0.9em;
     min-height: calc(1.5em + 1rem);
 }
 
@@ -147,3 +148,92 @@ small > p + p { margin-top: 0; }
     margin-right: 0;
     width: 100%;
 }
+
+
+
+.grid {
+    /* Temp */
+    --x-gap: 1.5rem;
+}
+
+.banner-slide-show {
+    column-gap: 0.75rem;
+    --padding-left: 1.5rem;
+    --padding-right: 1.5rem;
+    height: min-content;
+}
+
+.banner-slide-show > a,
+.banner-slide-show > a > img,
+.banner-slide-show > img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 50em) {
+    .banner-slide-show {
+        column-gap: 1.5rem;
+        --padding-left: 4.5rem;
+        --padding-right: 4.5rem;
+    }
+}
+
+@media (min-width: 70em) {
+    body.docs-grid {
+        /* Rough */
+        padding-top: 4vw;
+        padding-left: var(--x-gap);
+        padding-right: var(--x-gap);
+    }
+
+    .banner-slide-show {
+        --padding-left: calc(11.11111111% + 1.5rem / 9);
+        --padding-right: calc(11.11111111% + 1.5rem / 9);
+    }
+}
+
+@media (min-width: 90em) {
+    .banner-slide-show {
+        --padding-left: calc(11.11111111% + 1.5rem / 9);
+        --padding-right: calc(22.22222222% + 3rem / 9);
+    }
+}
+
+
+
+/* Github sponsor button */
+
+.githubsponsor-button {
+    --height: 1.75em;
+    width: 200px;
+    color: #24292f;
+    background-color: #f6f8fa;
+    box-shadow: 0 1px 0 rgba(27,31,36,0.04), inset 0 1px 0 rgba(255,255,255,0.25);;
+    transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+    transition-property: color,background-color,box-shadow,border-color;
+    position: relative;
+    display: inline-block;
+    padding: 0.3125rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    --line-height: 1em;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    border: 1px solid rgba(27,31,36,0.45);
+    border-radius: 0.375rem;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.githubsponsor-button > svg {
+    fill: #bf3989;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+}
+
+

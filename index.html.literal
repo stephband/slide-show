@@ -10,61 +10,6 @@
 
     <link rel="stylesheet" href="./docs/docs.css">
     <link rel="stylesheet" href="./build/slide-show.css">
-
-    <style>
-    .grid {
-        /* Temp */
-        --x-gap: 1.5rem;
-    }
-
-    .banner-slide-show {
-        column-gap: 0.75rem;
-        --padding-left: 1.5rem;
-        --padding-right: 1.5rem;
-        height: min-content;
-    }
-
-    .banner-slide-show > a,
-    .banner-slide-show > a > img,
-    .banner-slide-show > img {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    @media (min-width: 50em) {
-        .banner-slide-show {
-            column-gap: 1.5rem;
-            --padding-left: 4.5rem;
-            --padding-right: 4.5rem;
-        }
-    }
-
-    @media (min-width: 70em) {
-        body.docs-grid {
-            /* Rough */
-            padding-top: 4vw;
-            padding-left: var(--x-gap);
-            padding-right: var(--x-gap);
-        }
-
-        .banner-slide-show {
-            --padding-left: calc(11.11111111% + 1.5rem / 9);
-            --padding-right: calc(11.11111111% + 1.5rem / 9);
-        }
-    }
-
-    @media (min-width: 90em) {
-        .banner-slide-show {
-            --padding-left: calc(11.11111111% + 1.5rem / 9);
-            --padding-right: calc(22.22222222% + 3rem / 9);
-        }
-    }
-
-    .tabs-slide-show {
-
-    }
-    </style>
 </head>
 
 <body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid y-start-grid">
@@ -74,11 +19,11 @@
     </header>
 
     <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @1-x-stretch @2-9x" loop autoplay controls="navigation pagination fullscreen">
-        <img src="./docs/images/donkeys.jpg" draggable="false" alt="A rowdy group of curious donkeys"/>
-        <img src="./docs/images/tractor.jpg" draggable="false" alt="A lonely, rusted tractor abandonned on the edge of the arctic ocean"/>
-        <img src="./docs/images/mauverin.jpg" draggable="false" alt="The shadow of a the summit of the Mauverin cast over the alpine valley of Nant"/>
-        <img src="./docs/images/rocks.jpg" draggable="false" alt="Wet moss and lichen-covered rocks in a shallow pool"/>
-        <img src="./docs/images/summit.jpg" draggable="false" alt="Golden autumn meadows in front of a rocky summit dusted with snow"/>
+        <img src="https://stephen.band/slide-show/docs/images/donkeys.jpg" draggable="false" alt="A rowdy group of curious donkeys"/>
+        <img src="https://stephen.band/slide-show/docs/images/tractor.jpg" draggable="false" alt="A lonely, rusted tractor abandonned on the edge of the arctic ocean"/>
+        <img src="https://stephen.band/slide-show/docs/images/mauverin.jpg" draggable="false" alt="The shadow of a the summit of the Mauverin cast over the alpine valley of Nant"/>
+        <img src="https://stephen.band/slide-show/docs/images/rocks.jpg" draggable="false" alt="Wet moss and lichen-covered rocks in a shallow pool"/>
+        <img src="https://stephen.band/slide-show/docs/images/summit.jpg" draggable="false" alt="Golden autumn meadows in front of a rocky summit dusted with snow"/>
     </slide-show>
 
     <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
@@ -124,15 +69,13 @@
     <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
         <h2 class="docs-text-02">Contribute</h2>
 
-        <ul>
-            <li>Contribute to the repo: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/</a></li>
-            <li>Report a problem: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/issues</a></li>
-        </ul>
+        ${ include('./docs/templates/contribute.literal', './package.json') }
 
         <p>Comments about accessibility are particularly welcome. I try to respect the
         <a href="https://www.w3.org/WAI/tutorials/carousels/">Web Accessibility guidelines for carousels</a>,
-        but the examples given there were clearly written without a scroll-snapping interface in mind, and
-        browsers respond to scrolling in their own subtly unique ways.</p>
+        but the examples given there are clearly written without a scroll-snapping interface in mind.
+        Browsers respond to scrolling and keyboard navigation in their own subtly unique
+        ways, still, I would like to iron out any user frustrations.</p>
     </section>
 
 

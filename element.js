@@ -30,6 +30,8 @@ A `<slide-show>` lays out its children horizontally, by default in `grid` layout
 Content is horizontally scrollable via touch or trackpad, draggable with a mouse
 (making it a Good Idea to add `draggable="false"`to images and links), and also
 navigable via keyboard focus.
+
+A `<slide-show>` is not just for images. Content may be any HTML.
 **/
 
 import equals          from '../fn/modules/equals.js';
