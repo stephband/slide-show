@@ -58,9 +58,7 @@ export function enable(host) {
     }
 
     // Render buttons when children change
-    loop.mutations = mutations
-        .map((o) => o)
-        .each(() => render(data));
+    loop.mutations = mutations.each(() => render(data));
 }
 
 export function disable(host) {

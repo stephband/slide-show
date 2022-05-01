@@ -53,7 +53,7 @@ function scrollToTarget(scroller, target, behavior) {
     });
 }
 
-export function scrollTo(scroller, target, behavior) {
+export function scrollTo(scroller, target) {
     scrollToTarget(scroller, target, 'smooth');
 }
 

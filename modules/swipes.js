@@ -32,7 +32,6 @@ export const processPointers = overload((data, e) => e.type, {
             }
 
             data.scrollLeft0 = data.scroller.scrollLeft;
-            //data.scroller.classList.add('gesturing');
             data.scroller.style.setProperty('scroll-snap-type', 'none', 'important');
             data.scroller.style.setProperty('scroll-behavior', 'auto', 'important');
             data.gesturing = true;
@@ -62,7 +61,7 @@ export const processPointers = overload((data, e) => e.type, {
         // If those numbers are the same we are probably in FF, where removing
         // scroll-snap type doesn't seem to change much.
         if (scrollLeft1 === scrollLeft2) {
-            // But FF has sensible smooth scroll behaviour, reset it.
+            // But FF has sensible smooth scroll behaviour when we reset it.
             scroller.style.setProperty('scroll-behavior', '');
         }
         else {
