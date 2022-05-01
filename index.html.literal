@@ -52,10 +52,10 @@
         <p><code>&lt;slide-show&gt;</code> is built to scroll, and if JavaScript
         fails and the features of the element do not initialise (the component
         is not 'upgraded' in Web Component parlance), the user nonetheless gets
-        a scrollable element. Fallback style is provided by <code>./build/element.css</code>.</p>
+        a scrollable element. Fallback style is provided by <code>./build/slide-show.css</code>.</p>
 
-        <p>Upgraded style is provided by <code>./build/element-shadow.css</code>, which
-        must be in the same location as <code>./build/element.js</code> in order
+        <p>Upgraded style is provided by <code>./build/slide-show-shadow.css</code>, which
+        must be in the same location as <code>./build/slide-show.js</code> in order
         to be loaded into the <code>slide-show</code>'s shadow DOM automatically.</p>
 
         <h3 class="docs-text-04">Polyfills</h3>

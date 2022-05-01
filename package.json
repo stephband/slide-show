@@ -1,7 +1,7 @@
 {
     "title": "slide-show",
     "version": "1.0.0",
-    "description": "The accessible, scrollable, styleable, horizontal carousel custom element.",
+    "description": "The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped.",
     "author": {
         "name": "Stephen Band",
         "twitter": "@stephband"
