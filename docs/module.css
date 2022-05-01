@@ -200,6 +200,28 @@ small > p + p { margin-top: 0; }
     }
 }
 
+.banner-slide-show:-webkit-full-screen {
+    --padding-left: 0.75rem;
+    --padding-right: 0.75rem;
+}
+
+.banner-slide-show:fullscreen {
+    --padding-left: 0.75rem;
+    --padding-right: 0.75rem;
+}
+
+@media (min-width: 50em) {
+    .banner-slide-show:-webkit-full-screen {
+        --padding-left: 1.5rem;
+        --padding-right: 1.5rem;
+    }
+
+    .banner-slide-show:fullscreen {
+        --padding-left: 1.5rem;
+        --padding-right: 1.5rem;
+    }
+}
+
 
 
 /* Github sponsor button */
