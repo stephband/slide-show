@@ -91,8 +91,6 @@ function isSlide(slide) {
 
 /* Element */
 
-console.log(import.meta.url);
-
 const lifecycle = {
     // Get path to dir of this .js module, replace with -shadow.css
     stylesheet: import.meta.url.replace(/\.js/, '-shadow.css'),
