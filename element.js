@@ -327,20 +327,21 @@ const properties = {
     ```
 
     Looping works by duplicating some of the children of the `slide-show`.
-    Duplicate content is given `aria-hidden="true"` and `tab-index="-1"`, and
-    has `id` attributes stripped off in an attempt to make it inert.
+    Duplicate elements are given `aria-hidden="true"` and `tab-index="-1"`, and
+    have `id` attributes stripped off in an attempt to make them inert.
     **/
 
     /**
     .loop
     Boolean property. When `true`, the `slide-show` behaves as a continuous loop.
-    Looping works by duplicating some of the children of the `slide-show`.
-    Duplicate content is given `aria-hidden="true"` and `tab-index="-1"`, and
-    has `id` attributes stripped off in an attempt to make it inert.
 
     ```js
     document.querySelector('slide-show').loop = true;
     ```
+
+    Looping works by duplicating some of the children of the `slide-show`.
+    Duplicate elements are given `aria-hidden="true"` and `tab-index="-1"`, and
+    have `id` attributes stripped off in an attempt to make them inert.
     **/
 
     loop: createBoolean(loop)
