@@ -212,13 +212,13 @@ small > p + p { margin-top: 0; }
 
 @media (min-width: 50em) {
     .banner-slide-show:-webkit-full-screen {
-        --padding-left: 1.5rem;
-        --padding-right: 1.5rem;
+        --padding-left: 4.5rem;
+        --padding-right: 4.5rem;
     }
 
     .banner-slide-show:fullscreen {
-        --padding-left: 1.5rem;
-        --padding-right: 1.5rem;
+        --padding-left: 4.5rem;
+        --padding-right: 4.5rem;
     }
 }
 
