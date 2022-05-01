@@ -1,6 +1,6 @@
 # `<slide-show>`
 An accessible `<slide-show>` custom element for building horizontal scroll-snapping
-carousels. Features options for pagination, previous and next navigation buttons, autoplay, 
+carousels. Features options for pagination, previous and next navigation buttons, autoplay,
 continuous looping and fullscreen mode. Children of a `<slide-show>` are layed out in a grid
 and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
@@ -19,8 +19,8 @@ assets. Then import `build/slide-show.js`:
 <script type="module" src="./path/to/slide-show/build/slide-show.js"></script>
 ```
 
-This registers the `<slide-show>` custom element. You should also include `build/element.css`, 
-which provides minimal fallback style for the element before it is registered, or for those 
+This registers the `<slide-show>` custom element. You should also include `build/slide-show.css`,
+which provides minimal fallback style for the element before it is registered, or for those
 times when JS fails completely:
 
 ```html
@@ -87,25 +87,36 @@ polyfill is ignored in other browsers.
 
 To build the `<slide-show>` component from its dependent modules, you must have
 [_Deno_](https://deno.land/) installed. You then need to clone this git
-repository into the same directory as three other repositories that contain
+repository into the same directory as two other repositories that contain
 dependencies:
 
 ```cli
 git clone git@github.com:stephband/fn
 git clone git@github.com:stephband/dom
-git clone git@github.com:stephband/literal
 git clone git@github.com:stephband/slide-show
+cd slide-show
 ```
 
-Now the `slide-show` repo is ready to build:
+Now the `slide-show` modules can be built. The build process uses *esbuild*
+to import and compile JS and CSS modules to the `build/` folder:
 
 ```cli
-cd slide-show
 make modules
-make docs
 ```
 
-Builds production files to the `build/` folder, and documentation to `index.html`.
+## Build documentation
 
-The build process launches *esbuild* to import and compile JS and CSS modules,
-and *literal* to compile documentation.
+To build documentation, also clone the literal repo:
+
+```cli
+git clone git@github.com:stephband/literal
+cd slide-show
+```
+
+The documentation builder compiles `.literal` templates to `.html`, pulling out
+documentation comments from JS and CSS, and packages dependencies found in
+the `docs/` folder:
+
+```cli
+make docs
+```

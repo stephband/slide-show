@@ -259,9 +259,7 @@ const properties = {
     slide after a pause.
 
     ```html
-    <slide-show autoplay>
-        ...
-    </slide-show>
+    <slide-show autoplay>…</slide-show>
     ```
 
     The pause duration may be set with the CSS variable
@@ -278,7 +276,7 @@ const properties = {
     inside the `slide-show`, or when a slide has focus.
 
     ```js
-    document.querySelector('slide-show').autoplay = true;
+    slideshow.autoplay = true;
     ```
     **/
 
@@ -291,19 +289,17 @@ const properties = {
     corresponding controls.
 
     ```html
-    <slide-show controls="navigation fullscreen">
-        ...
-    </slide-show>
+    <slide-show controls="navigation fullscreen">…</slide-show>
     ```
     **/
 
     /**
     .controls
-    A TokenList object (like `.classList`) that supports the tokens `"navigation"`,
-    `"pagination"` and `"fullscreen"`.
+    A TokenList object (like `.classList`) that supports the tokens
+    `"navigation"`, `"pagination"` and `"fullscreen"`.
 
     ```js
-    document.querySelector('slide-show').controls.add('pagination');
+    slideshow.controls.add('pagination');
     ```
     **/
 
@@ -319,9 +315,7 @@ const properties = {
     loop.
 
     ```html
-    <slide-show loop>
-        ...
-    </slide-show>
+    <slide-show loop>…</slide-show>
     ```
 
     Looping works by duplicating some of the children of the `slide-show`.
@@ -334,7 +328,7 @@ const properties = {
     Boolean property. When `true`, the `slide-show` behaves as a continuous loop.
 
     ```js
-    document.querySelector('slide-show').loop = true;
+    slideshow.loop = true;
     ```
 
     Looping works by duplicating some of the children of the `slide-show`.

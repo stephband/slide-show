@@ -95,9 +95,7 @@ navigable via keyboard focus.</p>
 
 <p>Boolean attribute. When present the <code>slide-show</code> activates the next
 slide after a pause.</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span><span class="token punctuation">></span></span>
-    ...
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 <p>The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
@@ -115,9 +113,7 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
 <p>An attribute that accepts the tokens <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code>
 and <code>&quot;fullscreen&quot;</code>. The presence of one of these tokens enables the
 corresponding controls.</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    ...
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
 </div>
 
@@ -131,9 +127,7 @@ corresponding controls.</p>
 
 <p>Boolean attribute. When present, the <code>slide-show</code> behaves as a continuous
 loop.</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span><span class="token punctuation">></span></span>
-    ...
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 <p>Looping works by duplicating some of the children of the <code>slide-show</code>.
 Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
 have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
@@ -176,7 +170,7 @@ child elements, which causes the <code>slide-show</code> to scroll.</p>
 slide after a pause. The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
-<pre><code class="language-js">document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'slide-show'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>autoplay <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>autoplay <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
 
 </div>
 
@@ -188,9 +182,9 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
     </a>
 </h3>
 
-<p>A TokenList object (like <code>.classList</code>) that supports the tokens <code>&quot;navigation&quot;</code>,
-<code>&quot;pagination&quot;</code> and <code>&quot;fullscreen&quot;</code>.</p>
-<pre><code class="language-js">document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'slide-show'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'pagination'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>A TokenList object (like <code>.classList</code>) that supports the tokens
+<code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code> and <code>&quot;fullscreen&quot;</code>.</p>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'pagination'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 </div>
 
@@ -203,7 +197,7 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
 </h3>
 
 <p>Boolean property. When <code>true</code>, the <code>slide-show</code> behaves as a continuous loop.</p>
-<pre><code class="language-js">document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'slide-show'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
 <p>Looping works by duplicating some of the children of the <code>slide-show</code>.
 Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
 have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
