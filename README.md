@@ -6,13 +6,17 @@ and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
 ![Example of an HTML carousel showing an image of a tractor as the current slide](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
 
+## Documentation
+
+Full documentation is at [stephen.band/slide-show/](https://stephen.band/slide-show/).
+
 ## Quick start
 
 Clone this repository, or copy the files in `build/`, into your front-end
-assets. Then import `build/element.js`:
+assets. Then import `build/slide-show.js`:
 
 ```html
-<script type="module" src="./path/to/slide-show/build/element.js"></script>
+<script type="module" src="./path/to/slide-show/build/slide-show.js"></script>
 ```
 
 This registers the `<slide-show>` custom element. You should also include `build/element.css`, 
@@ -20,7 +24,7 @@ which provides minimal fallback style for the element before it is registered, o
 times when JS fails completely:
 
 ```html
-<link rel="stylesheet" src="./path/to/slide-show/build/element.css"></link>
+<link rel="stylesheet" src="./path/to/slide-show/build/slide-show.css"></link>
 ```
 
 You are now ready to write `<slide-show>` tags in your HTML:
