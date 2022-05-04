@@ -5,12 +5,19 @@
 <head>
     <meta charset="utf-8" />
 <meta name="author" content="Stephen Band" />
-<meta name="description" content="Documentation for <slide-show>. A scroll-snapping slideshow/carousel, implemented as the custom element <slide-show>." />
+<meta name="description" content="Documentation for slide-show. The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
 <meta name="viewport" content="width=device-width" />
 
 
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@stephband">
+<meta property="og:title" content="slide-show" />
+<meta property="og:description" content="The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
+<meta property="og:image" content="https://stephen.band/slide-show/docs/images/card.jpg" />
+<meta property="og:url" content="https://stephen.band/slide-show/" />
 
-<title><slide-show></title>
+
+<title>slide-show</title>
 
 
 
@@ -87,7 +94,9 @@ navigable via keyboard focus.</p>
 </h3>
 
 <p>Boolean attribute. When present the <code>slide-show</code> activates the next
-slide after a pause. The pause duration may be set with the CSS variable
+slide after a pause.</p>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<p>The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
 
@@ -104,6 +113,7 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
 <p>An attribute that accepts the tokens <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code>
 and <code>&quot;fullscreen&quot;</code>. The presence of one of these tokens enables the
 corresponding controls.</p>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
 </div>
 
@@ -116,9 +126,11 @@ corresponding controls.</p>
 </h3>
 
 <p>Boolean attribute. When present, the <code>slide-show</code> behaves as a continuous
-loop. Looping works by duplicating some of the children of the <code>slide-show</code>.
-Duplicate content is given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
-has <code>id</code> attributes stripped off in an attempt to make it inert.</p>
+loop.</p>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<p>Looping works by duplicating some of the children of the <code>slide-show</code>.
+Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
+have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
 
 </div>
 
@@ -158,7 +170,7 @@ child elements, which causes the <code>slide-show</code> to scroll.</p>
 slide after a pause. The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
-<pre><code class="language-js">document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'slide-show'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>autoplay <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>autoplay <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
 
 </div>
 
@@ -170,9 +182,9 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
     </a>
 </h3>
 
-<p>A TokenList object (like <code>.classList</code>) that supports the tokens <code>&quot;navigation&quot;</code>,
-<code>&quot;pagination&quot;</code> and <code>&quot;fullscreen&quot;</code>.</p>
-<pre><code class="language-js">document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'slide-show'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'pagination'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>A TokenList object (like <code>.classList</code>) that supports the tokens
+<code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code> and <code>&quot;fullscreen&quot;</code>.</p>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'pagination'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 </div>
 
@@ -184,11 +196,11 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
     </a>
 </h3>
 
-<p>Boolean property. When <code>true</code>, the <code>slide-show</code> behaves as a continuous loop.
-Looping works by duplicating some of the children of the <code>slide-show</code>.
-Duplicate content is given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
-has <code>id</code> attributes stripped off in an attempt to make it inert.</p>
-<pre><code class="language-js">document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'slide-show'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<p>Boolean property. When <code>true</code>, the <code>slide-show</code> behaves as a continuous loop.</p>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<p>Looping works by duplicating some of the children of the <code>slide-show</code>.
+Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
+have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
 
 </div>
 
@@ -390,10 +402,10 @@ for some browser inconsistencies.)</p>
         <p><code>&lt;slide-show&gt;</code> is built to scroll, and if JavaScript
         fails and the features of the element do not initialise (the component
         is not 'upgraded' in Web Component parlance), the user nonetheless gets
-        a scrollable element. Fallback style is provided by <code>./build/element.css</code>.</p>
+        a scrollable element. Fallback style is provided by <code>./build/slide-show.css</code>.</p>
 
-        <p>Upgraded style is provided by <code>./build/element-shadow.css</code>, which
-        must be in the same location as <code>./build/element.js</code> in order
+        <p>Upgraded style is provided by <code>./build/slide-show-shadow.css</code>, which
+        must be in the same location as <code>./build/slide-show.js</code> in order
         to be loaded into the <code>slide-show</code>'s shadow DOM automatically.</p>
 
         <h3 class="docs-text-04">Polyfills</h3>
@@ -408,14 +420,15 @@ for some browser inconsistencies.)</p>
         <h2 class="docs-text-02">Contribute</h2>
 
         
-<p>Fund development:
-        <a aria-label="Sponsor @stephband" href="https://github.com/sponsors/stephband" class="githubsponsor-button button">
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="fill octicon octicon-heart icon-sponsor mr-1 v-align-middle color-fg-sponsors anim-pulse-in">
-                <path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path>
-            </svg>
-            <span class="v-align-middle">Sponsor</span>
-        </a>
-    </p>
+<p>
+    Fund development:
+    <a aria-label="Sponsor @stephband" href="https://github.com/sponsors/stephband" class="githubsponsor-button button">
+        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="fill octicon octicon-heart icon-sponsor mr-1 v-align-middle color-fg-sponsors anim-pulse-in">
+            <path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path>
+        </svg>
+        <span class="v-align-middle">Sponsor</span>
+    </a>
+</p>
 <ul>
     <li>Contribute to the repo: <a href="https://github.com/stephband/slide-show">github.com/stephband/slide-show</a></li>
     <li>Report a problem: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/issues</a></li>
