@@ -49,10 +49,6 @@ function isSlide(slide) {
 /* Lifecycle */
 
 export default {
-    // Get path to dir of this .js module, replace with -shadow.css
-    stylesheet: '../slide-show-shadow.css',
-        //import.meta.url.replace(/\.js/, '-shadow.css'),
-
     construct: function(shadow) {
         // Shadow DOM
         const slides   = create('slot', { part: 'slides' });
