@@ -1,11 +1,8 @@
 
-import rect from '../../dom/modules/rect.js';
+import rect   from '../../dom/modules/rect.js';
 
 import { $data }  from './consts.js';
 import { jumpTo } from './active.js';
-
-
-const loopOverflow = 2400;
 
 
 function toLoopGhost(slide, i) {
@@ -28,6 +25,7 @@ function render(data) {
     }
 
     if (children.length < 2) {
+        console.log('LENGTH', children);
         // Dont wait for the slotchange event, which is fired after the one
         // that caused this render has completed. Synchronously update
         // data.elements or our state is out of sync for the activation of
@@ -36,16 +34,20 @@ function render(data) {
         return;
     }
 
-    // Expand children to the left and right by loopOverflow px
-    const boxes = children.map(rect);
-    const left  = boxes[0].left;
-    const right = boxes[boxes.length - 1].right;
+    // Expand children to the left and right by at least 1 slide plus the width
+    // of the host slide-show. Todo: by rights, this should change on resize.
+    const loopOverflow = host.clientWidth;
+    const boxes        = children.map(rect);
+    const left         = boxes[1].left;
+    const right        = boxes[boxes.length - 2].right;
 
-    let n = 0;
+    // Always append a minimum of 1 slide
+    let n = 1;
     while (boxes[++n] && boxes[n].left < left + loopOverflow);
     const appends = children.slice(0, n).map(toLoopGhost);
 
-    n = boxes.length - 1;
+    // Always prepend a minimum of 1 slide
+    n = boxes.length - 2;
     while (boxes[--n] && boxes[n].right > right - loopOverflow);
     const prepends = children.slice(++n).map((slide, i) => toLoopGhost(slide, n + i));
 
@@ -75,7 +77,9 @@ export function enable(host) {
     }
 
     // Render buttons when children change
-    loop.mutations = mutations.each(() => render(data));
+    loop.mutations = mutations.each(() => {
+        console.log('LOOP');
+        render(data)});
 }
 
 export function disable(host) {
