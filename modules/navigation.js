@@ -4,7 +4,6 @@ import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 
 import { $data }  from './consts.js';
-import { enableControls } from './controls.js';
 
 function update(prev, next, elements, i) {
     // Preemptively hide buttons now (before new active is detected at
@@ -27,9 +26,6 @@ function update(prev, next, elements, i) {
 export function enable(host) {
     const data = host[$data];
     const { actives, clicks, slotchanges } = data;
-
-    // Set up nav::part(controls) element
-    enableControls(data);
 
     // Add an object to store navigation state
     const navigation = data.navigation = {

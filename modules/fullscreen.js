@@ -4,7 +4,7 @@ import delegate from '../../dom/modules/delegate.js';
 import { fullscreenEnabled, getFullscreenElement, enterFullscreen, exitFullscreen } from '../../dom/modules/fullscreen.js';
 
 import { $data }          from './consts.js';
-import { enableControls } from './controls.js';
+
 
 export function enable(host) {
     const data = host[$data];
@@ -16,9 +16,6 @@ export function enable(host) {
 
         return;
     }
-
-    // Set up nav::part(controls) element
-    enableControls(data);
 
     // Add an object to store navigation state
     const fullscreen = data.fullscreen = {

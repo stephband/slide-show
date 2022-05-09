@@ -51,17 +51,17 @@ export default {
         // Shadow DOM
         const slides   = create('slot', { part: 'slides' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
-        const ui       = create('slot', { part: 'ui', name: 'ui' });
+        const controls = create('nav',  { part: 'controls' });
 
         // Add slots to shadow
-        shadow.append(scroller, ui);
+        shadow.append(scroller, controls);
 
         // Create streams from things that happen to slide-show
         const load = Stream.of();
 
         const slotchanges = events('slotchange', slides)
             .map((e) => data.elements = slides.assignedElements())
-            .broadcast();
+            .broadcast({ memory: true });
 
         const mutations = slotchanges
             .map((elements) => {
@@ -92,10 +92,11 @@ export default {
             style:    window.getComputedStyle(this),
             elements: nothing,
             children: nothing,
-            load,
             shadow,
             scroller,
             slides,
+            controls,
+            load,
             actives,
             slotchanges,
             mutations,
