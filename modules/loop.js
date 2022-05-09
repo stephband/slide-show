@@ -1,4 +1,5 @@
 
+import Stream from '../../fn/modules/stream.js';
 import rect   from '../../dom/modules/rect.js';
 
 import { $data }  from './consts.js';
@@ -25,7 +26,6 @@ function render(data) {
     }
 
     if (children.length < 2) {
-        console.log('LENGTH', children);
         // Dont wait for the slotchange event, which is fired after the one
         // that caused this render has completed. Synchronously update
         // data.elements or our state is out of sync for the activation of
@@ -67,19 +67,15 @@ function render(data) {
 
 export function enable(host) {
     const data = host[$data];
-    const { mutations } = data;
+    const { load, mutations } = data;
 
     // Add an object to store loop state
     const loop = data.loop = {};
 
-    if (!data.loaded) {
-        return;
-    }
-
-    // Render buttons when children change
-    loop.mutations = mutations.each(() => {
-        console.log('LOOP');
-        render(data)});
+    // Render ghosts when children change
+    loop.renders = Stream
+    .combine({ loaded: load, children: mutations })
+    .each((state) => render(data));
 }
 
 export function disable(host) {
@@ -87,7 +83,7 @@ export function disable(host) {
     if (data.loop) {
         data.loop.prepends && data.loop.prepends.forEach((slide) => slide.remove());
         data.loop.appends  && data.loop.appends.forEach((slide) => slide.remove());
-        data.loop.mutations.stop();
+        data.loop.renders.stop();
         data.loop = undefined;
     }
 }

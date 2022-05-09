@@ -80,7 +80,7 @@ export default {
     ```
     **/
 
-    autoplay: createBoolean(autoplay),
+    autoplay: createBoolean(autoplay, 'autoplay'),
 
     /**
     controls=""
@@ -136,5 +136,5 @@ export default {
     have `id` attributes stripped off in an attempt to make them inert.
     **/
 
-    loop: createBoolean(loop)
+    loop: createBoolean(loop, 'loop')
 };

@@ -14,8 +14,6 @@ import { $data } from './consts.js';
 import { scrollTo, jumpTo, updateActive } from './active.js';
 import { processPointers } from './swipes.js';
 
-import * as loop from './loop.js';
-
 
 function getWidth(scroller, slides, children) {
     let n = children.length;
@@ -58,6 +56,9 @@ export default {
         // Add slots to shadow
         shadow.append(scroller, ui);
 
+        // Create streams from things that happen to slide-show
+        const load = Stream.of();
+
         const slotchanges = events('slotchange', slides)
             .map((e) => data.elements = slides.assignedElements())
             .broadcast();
@@ -91,6 +92,7 @@ export default {
             style:    window.getComputedStyle(this),
             elements: nothing,
             children: nothing,
+            load,
             shadow,
             scroller,
             slides,
@@ -102,12 +104,13 @@ export default {
 
         // Create a stream of width updates
         Stream
-        .merge(slotchanges, resizes)
+        .merge(load, slotchanges, resizes)
         .each(() => updateWidth(data.scroller, data.slides, data.elements));
 
         // Prevent default on immediate clicks after a gesture, and don't let
         // them out: this is a gesture not a click
-        clicks.each(function(e) {
+        clicks
+        .each(function(e) {
             const time = window.performance.now();
             if (time - data.clickSuppressTime < 120) {
                 e.preventDefault();
@@ -116,14 +119,16 @@ export default {
         });
 
         // Enable single finger scroll on mouse devices. Bad idea in my opinion,
-        // but designers tend to want it.
-        swipes.each((pointers) => {
+        // but designers tend to like it to support mouse only devices.
+        swipes
+        .each((pointers) => {
             // Keep a reference to pointers, it's used inside processPointers
             data.pointers = pointers;
             pointers.reduce(processPointers, data);
         });
 
-        fullscreens.each((e) => {
+        fullscreens
+        .each((e) => {
             // If this slide-show was involved in the fullscreen change
             // reposition the active slide, it may have been shuftied.
             if (e.target === this || e.target.contains(this)) {
@@ -131,7 +136,9 @@ export default {
             }
         });
 
-        scrolls.each((stream) =>
+        // Update active when scroll comes to rest
+        scrolls
+        .each((stream) =>
             stream
             .each(noop)
             .done(() => updateActive(data))
@@ -140,7 +147,8 @@ export default {
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the
         // focused slide. Todo: FF not getting this.
-        focuses.map((e) => (
+        focuses
+        .map((e) => (
             // Is e.target a slide
             data.children.indexOf(e.target) !== -1 ? e.target :
             // Or inside a slide
@@ -151,23 +159,13 @@ export default {
 
     load: function (shadow) {
         const data = this[$data];
-        data.loaded = true;
-
-        if (this.loop) {
-            loop.enable(this);
-        }
-        else {
-            loop.disable(this);
-        }
-
-        // Update width hack now we have some style loaded
-        updateWidth(data.scroller, data.slides, data.elements);
+        data.load.push(this);
 
         // Update and bind to slotchanges on load so that initial `slide-active`
         // event is guaranteed to be sent after initialisation. (In Chrome and
         // FF initial `slotchange` event is always sent before load, but not so
         // in Safari where either order may happen.)
         updateActive(data);
-        data.slotchanges.each(() => updateActive(data));
+        data.slotchanges.each((elements) => updateActive(data));
     }
 };

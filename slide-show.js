@@ -41,3 +41,5 @@ import properties from './modules/properties.js';
 const stylesheet = import.meta.url.replace(/\/[^\/]*\.js/, '/slide-show-shadow.css');
 
 export default element('slide-show', lifecycle, properties, stylesheet);
+
+window.console && window.console.log('%c<slide-show>%c registered (documentation at %chttps://stephen.band/slide-show/%c)', 'color: #3a8ab0; font-weight: 600;', 'color: #888888; font-weight: 400;', 'color: inherit; font-weight: 400;', 'color: #888888; font-weight: 400;');
