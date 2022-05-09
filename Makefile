@@ -14,6 +14,10 @@ docs:
 
 modules:
 	rm -r build
-	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/slide-show.js ./element.js
-	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/slide-show.css ./element.css
-	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/slide-show-shadow.css ./element-shadow.css
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ \
+		./slide-show-figure.js \
+		./slide-show-ol.js \
+		./slide-show-ul.js \
+		./slide-show.js \
+		./slide-show.css \
+		./slide-show-shadow.css

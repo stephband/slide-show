@@ -59,48 +59,67 @@
 </head>
 
 <body>
+    <pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - one child</pre>
+
     <slide-show loop autoplay controls="navigation pagination fullscreen">
-        <a href="/" draggable="false"><img src="../images/donkeys.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="../images/tractor.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="../images/mauverin.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="../images/rocks.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="../images/summit.jpg" draggable="false" /></a>
+        <img src="../docs/images/bourg.jpg" draggable="false" />
     </slide-show>
+
+    <!--pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - 5 children</pre>
+
+    <slide-show loop autoplay controls="navigation pagination fullscreen">
+        <a href="/" draggable="false"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../docs/images/rocks.jpg" draggable="false" /></a>
+        <a href="/" draggable="false"><img src="../docs/images/summit.jpg" draggable="false" /></a>
+    </slide-show>
+
+    <pre>slide-show       { grid-auto-columns: 60%; }
+slide-show > img { scroll-snap-align: center; }</pre>
 
     <slide-show class="centre-slide-show">
-        <img src="../images/bourg.jpg" draggable="false" />
-        <img src="../images/tractor.jpg" draggable="false" />
-        <img src="../images/bourg.jpg" draggable="false" />
-        <img src="../images/tractor.jpg" draggable="false" />
-        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/tractor.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/tractor.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
     </slide-show>
+
+    <pre>slide-show       { grid-auto-columns: 60%; }
+slide-show > img { scroll-snap-align: start; }</pre>
 
     <slide-show class="left-slide-show">
-        <img src="../images/bourg.jpg" draggable="false" />
-        <img src="../images/tractor.jpg" draggable="false" />
-        <img src="../images/bourg.jpg" draggable="false" />
-        <img src="../images/tractor.jpg" draggable="false" />
-        <img src="../images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/tractor.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/tractor.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
     </slide-show>
+
+    <pre>slide-show       { grid-auto-columns: 60%; }
+slide-show > img { scroll-snap-align: end; }</pre>
 
     <slide-show class="right-slide-show">
-        <img class="right-slide" src="../images/bourg.jpg" draggable="false" />
-        <img class="right-slide" src="../images/tractor.jpg" draggable="false" />
-        <img class="right-slide" src="../images/bourg.jpg" draggable="false" />
-        <img class="right-slide" src="../images/tractor.jpg" draggable="false" />
-        <img class="right-slide" src="../images/bourg.jpg" draggable="false" />
+        <img class="right-slide" src="../docs/images/bourg.jpg" draggable="false" />
+        <img class="right-slide" src="../docs/images/tractor.jpg" draggable="false" />
+        <img class="right-slide" src="../docs/images/bourg.jpg" draggable="false" />
+        <img class="right-slide" src="../docs/images/tractor.jpg" draggable="false" />
+        <img class="right-slide" src="../docs/images/bourg.jpg" draggable="false" />
     </slide-show>
+
+    <pre>slide-show { grid-template-columns: 4rem 6rem 2rem 9rem 3rem; }</pre>
 
     <slide-show class="grid-slide-show">
-        <img src="../images/bourg.jpg" draggable="false" />
-        <img src="../images/tractor.jpg" draggable="false" />
-        <img src="../images/bourg.jpg" draggable="false" />
-        <img src="../images/tractor.jpg" draggable="false" />
-        <img src="../images/bourg.jpg" draggable="false" />
-    </slide-show>
+        <img src="../docs/images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/tractor.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
+        <img src="../docs/images/tractor.jpg" draggable="false" />
+        <img src="../docs/images/bourg.jpg" draggable="false" />
+    </slide-show-->
 
     <script type="module">
-        import '../element.js';
+        import '../slide-show.js';
     </script>
 
     <script>

@@ -1,4 +1,5 @@
 
+import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 
@@ -33,7 +34,7 @@ function render(controls, pagination, shadow, children) {
     }
 
     // Don't generate pagination when there are 0 or 1 slides
-    if (children.length < 2) { return; }
+    if (children.length < 2) { return children.length; }
 
     pagination.buttons = create('div', {
         part: 'pagination',
@@ -46,6 +47,7 @@ function render(controls, pagination, shadow, children) {
     });
 
     controls.append(pagination.buttons);
+    return children.length;
 }
 
 export function enable(host) {
@@ -62,14 +64,15 @@ export function enable(host) {
     };
 
     // Render buttons when children change
-    pagination.mutations = mutations.each(() =>
-        render(data.controls, pagination, shadow, data.children)
-    );
+    pagination.mutations = mutations
+    .each(() => render(data.controls, pagination, shadow, data.children));
 
-    // Create a new stream of actives starting with the current active
-    pagination.actives = actives.each(() =>
-        update(pagination, data.children, data.active)
-    );
+    // Create a new stream of updates that happen when a slide activates and
+    // when enough children become available for pagination
+    pagination.updates = Stream
+    .combine({ active: actives, children: mutations })
+    .filter((state) => state.children.length > 1)
+    .each((state) => update(pagination, data.children, data.active));
 
     pagination.clicks = clicks.each(delegate({
         '[name="pagination"]': function(button, e) {
@@ -90,7 +93,7 @@ export function disable(host) {
     const data = host[$data];
     data.pagination.buttons.remove();
     data.pagination.mutations.stop();
-    data.pagination.actives.stop();
+    data.pagination.updates.stop();
     data.pagination.clicks.stop();
     data.pagination = undefined;
 }

@@ -39,7 +39,6 @@ import noop            from '../fn/modules/noop.js';
 import nothing         from '../fn/modules/nothing.js';
 import Stream          from '../fn/modules/stream.js';
 import create          from '../dom/modules/create.js';
-import delegate        from '../dom/modules/delegate.js';
 import element         from '../dom/modules/element.js';
 import createBoolean   from '../dom/modules/element/create-boolean.js';
 import createTokenList from '../dom/modules/element/create-token-list.js';
@@ -131,7 +130,7 @@ const lifecycle = {
         };
 
         slotchanges.each(() => {
-            const elements = slides.assignedElements();
+            const elements = data.slides.assignedElements();
             data.elements = elements;
             updateWidth(data.scroller, data.slides, data.elements);
 

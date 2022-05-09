@@ -1,11 +1,12 @@
 
+import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 
 import { $data }  from './consts.js';
 import { enableControls } from './controls.js';
 
-function updateButtons(prev, next, elements, i) {
+function update(prev, next, elements, i) {
     // Preemptively hide buttons now (before new active is detected at
     // end of scroll)
     if (i === 0) {
@@ -23,15 +24,9 @@ function updateButtons(prev, next, elements, i) {
     }
 }
 
-function update(data) {
-    const { active, elements, navigation: { prev, next } } = data;
-    const i = elements.indexOf(active);
-    updateButtons(prev, next, elements, i)
-}
-
 export function enable(host) {
     const data = host[$data];
-    const { actives, clicks, mutations } = data;
+    const { actives, clicks, slotchanges } = data;
 
     // Set up nav::part(controls) element
     enableControls(data);
@@ -44,11 +39,15 @@ export function enable(host) {
 
     data.controls.prepend(navigation.prev, navigation.next);
 
-    // Add object for storing navigation state
-    navigation.mutations = mutations.each(() => update(data));
-
-    // Create a new stream of actives starting with the current active
-    navigation.actives = actives.each(() => update(data));
+    // Create a stream of updates starting with the current active
+    navigation.updates = Stream
+    .combine({ active: actives, elements: slotchanges })
+    .each((state) => update(
+        navigation.prev,
+        navigation.next,
+        state.elements,
+        state.elements.indexOf(state.active)
+    ));
 
     navigation.clicks = clicks.each(delegate({
         '[name="navigation"]': function(button, e) {
@@ -59,7 +58,7 @@ export function enable(host) {
             if (!target) { return; }
 
             host.active = target;
-            updateButtons(navigation.prev, navigation.next, data.elements, i);
+            update(navigation.prev, navigation.next, data.elements, i);
         }
     }));
 }
@@ -68,8 +67,7 @@ export function disable(host) {
     const data = host[$data];
     data.navigation.prev.remove();
     data.navigation.next.remove();
-    data.navigation.mutations.stop();
-    data.navigation.actives.stop();
+    data.navigation.updates.stop();
     data.navigation.clicks.stop();
     data.navigation = undefined;
 }
