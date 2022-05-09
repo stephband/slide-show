@@ -27,16 +27,17 @@
     </slide-show>
 
     <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
-        ${ include('./docs/templates/content.literal', comments("./element.js")) }
+        ${ include('./docs/templates/content.literal', comments("./slide-show.js")) }
     </section>
 
     <h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>
 
     ${ include('./docs/templates/api.literal', comments(
-        "./element.js",
+        "./modules/lifecycle.js",
+        "./modules/properties.js",
         "./modules/active.js",
-        "./element.css",
-        "./element-shadow.css",
+        "./slide-show.css",
+        "./slide-show-shadow.css",
         "./css/host.css",
         "./css/scroller.css",
         "./css/slides.css",

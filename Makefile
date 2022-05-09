@@ -14,10 +14,9 @@ docs:
 
 modules:
 	rm -r build
-	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ \
-		./slide-show-figure.js \
-		./slide-show-ol.js \
-		./slide-show-ul.js \
-		./slide-show.js \
-		./slide-show.css \
-		./slide-show-shadow.css
+	# Run separate builds to package them as standalones
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ ./slide-show-figure.js
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ ./slide-show-ol.js
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ ./slide-show-ul.js
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ ./slide-show.js
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ ./slide-show.css ./slide-show-shadow.css
