@@ -8,7 +8,7 @@ Download the latest release:
 
 [github.com/stephband/slide-show/releases](https://github.com/stephband/slide-show/releases)
 
-Then include the JS and CSS files in your HTML:
+Then include the JS and CSS files:
 
 ```html
 <link rel="stylesheet" href="./build/slide-show.css" />

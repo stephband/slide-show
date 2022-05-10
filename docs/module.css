@@ -173,7 +173,7 @@ small > p + p { margin-top: 0; }
 
 @media (min-width: 50em) {
     .banner-slide-show {
-        column-gap: 1.5rem;
+        column-gap: 1.25rem;
         --padding-left: 4.5rem;
         --padding-right: 4.5rem;
     }
@@ -182,12 +182,13 @@ small > p + p { margin-top: 0; }
 @media (min-width: 70em) {
     body.docs-grid {
         /* Rough */
-        padding-top: 4vw;
+        padding-top: 4.5em;
         padding-left: var(--x-gap);
         padding-right: var(--x-gap);
     }
 
     .banner-slide-show {
+        column-gap: 1.5rem;
         --padding-left: calc(11.11111111% + 1.5rem / 9);
         --padding-right: calc(11.11111111% + 1.5rem / 9);
     }
