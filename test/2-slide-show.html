@@ -18,7 +18,11 @@
             padding: 0;
         }
 
-        slide-show {
+        .main-slide-show,
+        .centre-slide-show,
+        .left-slide-show,
+        .right-slide-show,
+        .grid-slide-show {
             margin-top: 1rem;
             margin-left: auto;
             margin-right: auto;
@@ -55,7 +59,9 @@
         }
     </style>
 
+    <link rel="stylesheet" href="../docs/module.css">
     <link rel="stylesheet" href="../slide-show.css">
+    <link rel="prefetch" href="../slide-show-shadow.css">
 </head>
 
 <body>
@@ -67,7 +73,7 @@
 
     <pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - 5 children</pre>
 
-    <slide-show loop controls="navigation pagination">
+    <slide-show class="main-slide-show" loop controls="navigation pagination">
         <a href="/" draggable="false"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
         <a href="/" draggable="false"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
         <a href="/" draggable="false"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>
@@ -75,7 +81,18 @@
         <a href="/" draggable="false"><img src="../docs/images/summit.jpg" draggable="false" /></a>
     </slide-show>
 
-    <slide-show loop autoplay controls="navigation pagination fullscreen">
+    <pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - one child</pre>
+
+    <slide-show class="tab-slide-show">
+        <a class="tab-button button" href="#1" draggable="false">Explore</a>
+        <a class="tab-button button active" href="#2" draggable="false">Buy</a>
+        <a class="tab-button button" href="#3" draggable="false">Free trial</a>
+        <a class="tab-button button" href="#4" draggable="false">About</a>
+        <a class="tab-button button" href="#5" draggable="false">Student discount</a>
+        <a class="tab-button button" href="#6" draggable="false">Contact us</a>
+    </slide-show>
+
+    <slide-show class="main-slide-show" loop autoplay controls="navigation pagination fullscreen">
         <a href="/" draggable="false"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
         <a href="/" draggable="false"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
         <a href="/" draggable="false"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>

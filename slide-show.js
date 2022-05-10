@@ -31,7 +31,17 @@ Content is horizontally scrollable via touch or trackpad, draggable with a mouse
 (making it a Good Idea to add `draggable="false"`to images and links), and also
 navigable via keyboard focus.
 
-A `<slide-show>` is not just for images. Content may be any HTML.
+A `<slide-show>` is not just for images. Content may be any HTML. Here's a
+`<slide-show>` being employed as a tabbed navigation:
+
+<slide-show class="tab-slide-show">
+    <a class="tab-button button" href="#1" draggable="false">Explore</a>
+    <a class="tab-button button active" href="#2" draggable="false">Buy</a>
+    <a class="tab-button button" href="#3" draggable="false">Free trial</a>
+    <a class="tab-button button" href="#4" draggable="false">About</a>
+    <a class="tab-button button" href="#5" draggable="false">Student discount</a>
+    <a class="tab-button button" href="#6" draggable="false">Contact us</a>
+</slide-show>
 **/
 
 import element    from '../dom/modules/element.js';

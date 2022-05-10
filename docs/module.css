@@ -260,3 +260,57 @@ small > p + p { margin-top: 0; }
 }
 
 
+/* .tab-slide-show */
+
+.tab-slide-show {
+    width: 100%;
+    max-width: 28.125rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    grid-auto-columns: max-content;
+    column-gap: 2px;
+    background-image:
+        radial-gradient(circle at -3.5rem, rgba(0, 0, 0, 0.25) 0%, transparent 4.5rem),
+        radial-gradient(circle at calc(100% + 3.5rem), rgba(0, 0, 0, 0.25) 0%, transparent 4.5rem);
+}
+
+.tab-slide-show > * {
+    scroll-snap-align: start;
+}
+
+* + .tab-slide-show {
+    margin-top: 1.5em;
+}
+
+.tab-button {
+    --font-size: 0.9375rem;
+    --line-height: 1.25em;
+    --height: 2.5rem;
+    color: #666666;
+    border-bottom-color: #999999;
+    border-radius: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.tab-button:hover,
+.tab-button:focus-visible {
+    color: black;
+    border-bottom-color: currentcolor;
+}
+
+.tab-button.active {
+    color: black;
+    border-bottom-color: currentcolor;
+}
+
+.tab-button.active::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 3px solid currentcolor;
+}
