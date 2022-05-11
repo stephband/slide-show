@@ -27,8 +27,8 @@ function getWidth(scroller, slides, children) {
 
     const box   = rect(slides);
     const style = getComputedStyle(scroller);
-    const pl    = px(style.paddingLeft);
-    const pr    = px(style.paddingRight);
+    const pl    = px(style.paddingLeft || 0);
+    const pr    = px(style.paddingRight || 0);
 
     return pl + pr + r - box.x;
 }
