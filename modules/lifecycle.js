@@ -105,8 +105,8 @@ export default {
 
         // Create a stream of width updates
         Stream
-        .merge(load, slotchanges, resizes)
-        .each(() => updateWidth(data.scroller, data.slides, data.elements));
+        .merge(Stream.combine({ load, slotchanges }), resizes)
+        .each((state) => updateWidth(data.scroller, data.slides, data.elements));
 
         // Prevent default on immediate clicks after a gesture, and don't let
         // them out: this is a gesture not a click
