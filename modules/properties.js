@@ -31,21 +31,26 @@ export default {
     **/
 
     active: {
-        set: function(target) {
+        attribute: function(id) {
+            this.active = id;
+        },
+
+        set: function(id) {
             const data = this[$data];
 
             // Accept an id
-            const child = typeof target !== 'object' ?
+            const child = typeof id === 'object' ?
+                id :
                 this.querySelector('#' + (/^\d/.test((id + '')[0]) ?
                     '\\3' + (id + '')[0] + ' ' + (id + '').slice(1) :
-                    target)
-                ) : target ;
+                    id)
+                ) ;
 
             if (!child) {
                 throw new Error('Cannot set active – not a child of slide-show');
             }
 
-            scrollTo(data.scroller, child);
+            data.activates.push(child);
         },
 
         get: function() {

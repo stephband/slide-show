@@ -59,13 +59,23 @@ export default {
         // Create streams from things that happen to slide-show
         const load = Stream.of();
 
-        const slotchanges = events('slotchange', slides)
-            .map((e) => data.elements = slides.assignedElements())
+        // In Chrome and FF initial `slotchange` event is always sent before
+        // load, but not so in Safari where either order may happen, at a guess
+        // due to some caching strategy. Here we sanitise order by making
+        // slotchanges stream dependent on load. There's little point in doing
+        // much before load anyway, as active slide is dependent on loaded
+        // stylesheet.
+        const slotchanges = Stream
+            .combine({
+                host: load,
+                elements: events({ type: 'slotchange', select: '[part="slides"]' }, slides)
+                    .map((e) => data.elements = slides.assignedElements()),
+            })
             .broadcast({ memory: true });
 
         const mutations = slotchanges
-            .map((elements) => {
-                const children = elements.filter(isSlide);
+            .map((state) => {
+                const children = state.elements.filter(isSlide);
                 return equals(data.children, children) ?
                     undefined :
                     (data.children = children) ;
@@ -79,11 +89,12 @@ export default {
         const swipes = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow)
             .filter(() => data.children.length > 1);
 
-        const scrolls      = scrollStreams(scroller);
-        const focuses      = events('focusin', this);
-        const resizes      = events('resize', window);
-        const fullscreens  = events('fullscreenchange', window);
-        const actives      = Stream.broadcast({ memory: true });
+        const scrolls     = scrollStreams(scroller);
+        const focuses     = events('focusin', this);
+        const resizes     = events('resize', window);
+        const fullscreens = events('fullscreenchange', window);
+        const activates   = Stream.of();
+        const actives     = Stream.broadcast({ memory: true });
 
         // Private data
         const data = this[$data] = {
@@ -97,6 +108,7 @@ export default {
             slides,
             controls,
             load,
+            activates,
             actives,
             slotchanges,
             mutations,
@@ -105,15 +117,24 @@ export default {
 
         // Create a stream of width updates
         Stream
-        .merge(Stream.combine({ load, slotchanges }), resizes)
-        .each((state) => updateWidth(data.scroller, data.slides, data.elements));
+        .merge(slotchanges, resizes)
+        .each(() => updateWidth(data.scroller, data.slides, data.elements));
+
+        // let count = 0;
+        Stream
+        .combine({ changes: slotchanges, child: activates })
+        .each((state) => (data.loaded ?
+            scrollTo(data.scroller, state.child) :
+            jumpTo(data.scroller, state.child)
+        ));
+
+        slotchanges.each((state) => updateActive(data));
 
         // Prevent default on immediate clicks after a gesture, and don't let
         // them out: this is a gesture not a click
         clicks
-        .each(function(e) {
-            const time = window.performance.now();
-            if (time - data.clickSuppressTime < 120) {
+        .each((e) => {
+            if (e.timeStamp - data.clickSuppressTime < 120) {
                 e.preventDefault();
                 e.stopPropagation();
             }
@@ -139,8 +160,7 @@ export default {
 
         // Update active when scroll comes to rest
         scrolls
-        .each((stream) =>
-            stream
+        .each((stream) => stream
             .each(noop)
             .done(() => updateActive(data))
         );
@@ -161,12 +181,6 @@ export default {
     load: function (shadow) {
         const data = this[$data];
         data.load.push(this);
-
-        // Update and bind to slotchanges on load so that initial `slide-active`
-        // event is guaranteed to be sent after initialisation. (In Chrome and
-        // FF initial `slotchange` event is always sent before load, but not so
-        // in Safari where either order may happen.)
-        updateActive(data);
-        data.slotchanges.each((elements) => updateActive(data));
+        data.loaded = true;
     }
 };

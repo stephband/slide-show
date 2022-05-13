@@ -67,15 +67,13 @@ function render(data) {
 
 export function enable(host) {
     const data = host[$data];
-    const { load, mutations } = data;
+    const { mutations } = data;
 
     // Add an object to store loop state
     const loop = data.loop = {};
 
     // Render ghosts when children change
-    loop.renders = Stream
-    .combine({ loaded: load, children: mutations })
-    .each((state) => render(data));
+    loop.renders = mutations.each((children) => render(data));
 }
 
 export function disable(host) {

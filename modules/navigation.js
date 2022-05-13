@@ -37,12 +37,12 @@ export function enable(host) {
 
     // Create a stream of updates starting with the current active
     navigation.updates = Stream
-    .combine({ active: actives, elements: slotchanges })
+    .combine({ active: actives, changes: slotchanges })
     .each((state) => update(
         navigation.prev,
         navigation.next,
-        state.elements,
-        state.elements.indexOf(state.active)
+        state.changes.elements,
+        state.changes.elements.indexOf(state.active)
     ));
 
     navigation.clicks = clicks.each(delegate({
