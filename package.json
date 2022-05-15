@@ -1,10 +1,12 @@
 {
     "title": "slide-show",
+    "name": "slide-show",
     "version": "1.1.0",
     "description": "The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped.",
     "author": {
         "name": "Stephen Band",
-        "twitter": "@stephband"
+        "twitter": "@stephband",
+        "email": "stephband@cruncher.ch"
     },
     "card": {
         "image": "https://stephen.band/slide-show/docs/images/card.jpg"
@@ -20,5 +22,7 @@
     "funding": {
         "github": "https://github.com/sponsors/stephband"
     },
+    "type": "module",
+    "main": "./build/slide-show.js",
     "browser": "./build/slide-show.js"
 }
