@@ -16,8 +16,14 @@ import * as fullscreen from './fullscreen.js';
 export default {
     /**
     active="#id"
-    Sets the initially scroll-snapped slide. `#id` must be the id of a direct
-    child of the `<slide-show>`.
+    Sets the initial scroll-snapped slide, where `#id` must be the id of a
+    direct child of the `<slide-show>`.
+
+    ```html
+    <slide-show active="#tractor">
+        <img src="./images/tractor.jpg" draggable="false" id="tractor">
+    </slide-show>
+    ```
     **/
 
     /**
