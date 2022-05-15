@@ -15,8 +15,14 @@ import * as fullscreen from './fullscreen.js';
 
 export default {
     /**
+    active="#id"
+    Sets the initially scroll-snapped slide. `#id` must be the id of a direct
+    child of the `<slide-show>`.
+    **/
+
+    /**
     .active
-    Gets or sets the currently scroll-snapped child element.
+    Gets or sets the currently scroll-snapped slide.
 
     ```js
     const activeSlide = slideshow.active;
@@ -41,10 +47,11 @@ export default {
             // Accept an id
             const child = typeof id === 'object' ?
                 id :
-                this.querySelector('#' + (/^\d/.test((id + '')[0]) ?
-                    '\\3' + (id + '')[0] + ' ' + (id + '').slice(1) :
-                    id)
-                ) ;
+                /^\d/.test(id + '') ?
+                    this.querySelector('#\\3' + (id + '')[0] + ' ' + (id + '').slice(1)) :
+                /^\#/.test(id + '') ?
+                    this.querySelector(id) :
+                this.querySelector('#' + id) ;
 
             if (!child) {
                 throw new Error('Cannot set active – not a child of slide-show');

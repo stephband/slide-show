@@ -71,17 +71,25 @@
         <img src="../docs/images/bourg.jpg" draggable="false" />
     </slide-show>
 
-    <pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - 5 children</pre>
+    <pre>&lt;slide-show loop controls="navigation pagination fullscreen"&gt; - 5 children</pre>
 
-    <slide-show class="main-slide-show" loop controls="navigation pagination" active="mauverin">
+    <slide-show class="main-slide-show" controls="navigation pagination" active="#mauverin" loop>
+        <a href="/" draggable="false" id="donkeys"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="tractor"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="mauverin"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="rocks"><img src="../docs/images/rocks.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="summit"><img src="../docs/images/summit.jpg" draggable="false" /></a>
+    </slide-show>
+
+    <pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - one child</pre>
+
+    <slide-show class="main-slide-show" loop autoplay controls="navigation pagination fullscreen" active="#mauverin">
         <a href="/" draggable="false"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
         <a href="/" draggable="false"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
         <a href="/" draggable="false" id="mauverin"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>
         <a href="/" draggable="false"><img src="../docs/images/rocks.jpg" draggable="false" /></a>
         <a href="/" draggable="false"><img src="../docs/images/summit.jpg" draggable="false" /></a>
     </slide-show>
-
-    <pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - one child</pre>
 
     <slide-show class="tab-slide-show">
         <a class="tab-button button" href="#1" draggable="false">Explore</a>
@@ -90,14 +98,6 @@
         <a class="tab-button button" href="#4" draggable="false">About</a>
         <a class="tab-button button" href="#5" draggable="false">Student discount</a>
         <a class="tab-button button" href="#6" draggable="false">Contact us</a>
-    </slide-show>
-
-    <slide-show class="main-slide-show" loop autoplay controls="navigation pagination fullscreen">
-        <a href="/" draggable="false"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
-        <a href="/" draggable="false" id="mauverin"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="../docs/images/rocks.jpg" draggable="false" /></a>
-        <a href="/" draggable="false"><img src="../docs/images/summit.jpg" draggable="false" /></a>
     </slide-show>
 
     <pre>slide-show       { grid-auto-columns: 60%; }
@@ -145,12 +145,10 @@ slide-show > img { scroll-snap-align: end; }</pre>
 
     <script type="module">
         import '../slide-show.js';
-    </script>
 
-    <script>
-        /*document.body.addEventListener('slide-active', (e) => {
+        document.body.addEventListener('slide-active', (e) => {
             console.log('EVENT', e.type, e.target);
-        });*/
+        });
     </script>
 </body>
 </html>

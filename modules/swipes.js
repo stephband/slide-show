@@ -2,7 +2,7 @@
 import events   from '../../dom/modules/events.js';
 import overload from '../../fn/modules/overload.js';
 
-import { updateActive } from './active.js';
+import { getActive } from './active.js';
 
 export const processPointers = overload((data, e) => e.type, {
     pointerdown: function(data, e) {
@@ -68,7 +68,11 @@ export const processPointers = overload((data, e) => e.type, {
             // We may as well preemptively update the active slide now, since we
             // are sitting in the new position. This is not a crucial step, just
             // makes the UI react a bit more quickly.
-            updateActive(data);
+            // Dont, actually, if there are ghosts this causes some jumping
+            // around.
+            //updateActive(data);
+            const active = getActive(data);
+            data.aaa.push(active);
 
             // Otherwise we have to do things the hard way. Switch scroll-snap
             // off again and put scroll back to position 1, ...

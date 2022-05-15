@@ -1,6 +1,5 @@
 
 import equals        from '../../fn/modules/equals.js';
-import noop          from '../../fn/modules/noop.js';
 import nothing       from '../../fn/modules/nothing.js';
 import Stream        from '../../fn/modules/stream.js';
 import create        from '../../dom/modules/create.js';
@@ -8,11 +7,14 @@ import events, { isPrimaryButton } from '../../dom/modules/events.js';
 import gestures      from '../../dom/modules/gestures.js';
 import { px }        from '../../dom/modules/parse-length.js';
 import rect          from '../../dom/modules/rect.js';
-import scrollStreams from '../../dom/modules/scrolls.js';
 
-import { $data } from './consts.js';
+import { $data }     from './consts.js';
 import { scrollTo, jumpTo, updateActive } from './active.js';
 import { processPointers } from './swipes.js';
+import scrollends    from './scrollends.js';
+
+
+import { trigger } from '../../dom/modules/trigger.js';
 
 
 function getWidth(scroller, slides, children) {
@@ -46,6 +48,11 @@ function isSlide(slide) {
 
 /* Lifecycle */
 
+/**
+'slide-active'
+Emitted by a slide when it is brought into scroll-snap alignment.
+**/
+
 export default {
     construct: function(shadow) {
         // Shadow DOM
@@ -56,19 +63,17 @@ export default {
         // Add slots to shadow
         shadow.append(scroller, controls);
 
-        // Create streams from things that happen to slide-show
+        // Stream to push load to
         const load = Stream.of();
 
         // In Chrome and FF initial `slotchange` event is always sent before
-        // load, but not so in Safari where either order may happen, at a guess
-        // due to some caching strategy. Here we sanitise order by making
-        // slotchanges stream dependent on load. There's little point in doing
-        // much before load anyway, as active slide is dependent on loaded
-        // stylesheet.
+        // load, but not so in Safari where either order may happen (at a guess
+        // due to some caching strategy). Here we sanitise order by making
+        // slotchanges stream always fire after load.
         const slotchanges = Stream
             .combine({
                 host: load,
-                elements: events({ type: 'slotchange', select: '[part="slides"]' }, slides)
+                elements: events('slotchange', slides)
                     .map((e) => data.elements = slides.assignedElements()),
             })
             .broadcast({ memory: true });
@@ -82,19 +87,28 @@ export default {
             })
             .broadcast({ memory: true });
 
+        // Buffer stream for pushing children to scroll to and activate
+        const activates = Stream.of(null);
+
+        // Buffer stream for pushing children to activate
+        const aaa = Stream.of();
+
+        // Broadcast stream for listen to changes to active
+        const actives = aaa
+            .filter((child) => (data.active !== child && trigger('slide-active', child)))
+            .map((child) => data.active = child)
+            .broadcast({ memory: true });
+
+        const focuses     = events('focusin', this);
+        const resizes     = events('resize', window);
+        const fullscreens = events('fullscreenchange', window);
+
         const clicks = events('click', shadow)
             .filter(isPrimaryButton)
             .broadcast();
 
         const swipes = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow)
             .filter(() => data.children.length > 1);
-
-        const scrolls     = scrollStreams(scroller);
-        const focuses     = events('focusin', this);
-        const resizes     = events('resize', window);
-        const fullscreens = events('fullscreenchange', window);
-        const activates   = Stream.of();
-        const actives     = Stream.broadcast({ memory: true });
 
         // Private data
         const data = this[$data] = {
@@ -109,6 +123,7 @@ export default {
             controls,
             load,
             activates,
+            aaa,
             actives,
             slotchanges,
             mutations,
@@ -118,17 +133,39 @@ export default {
         // Create a stream of width updates
         Stream
         .merge(slotchanges, resizes)
-        .each(() => updateWidth(data.scroller, data.slides, data.elements));
+        .each((e) => updateWidth(scroller, slides, data.elements));
 
-        // let count = 0;
+        // Wait for fist slotchange/load, then on mutation maintain active
+        // position, or on activation scroll to new child, then pipe the child
+        // to be activated
         Stream
-        .combine({ changes: slotchanges, child: activates })
-        .each((state) => (data.loaded ?
-            scrollTo(data.scroller, state.child) :
-            jumpTo(data.scroller, state.child)
-        ));
+        .combine({ children: mutations, child: activates })
+        .map((state) => {
+            // Is previous child not yet defined, or the new one the same as it?
+            if (!data.active || data.active === state.child) {
+                // This is a mutation, so jump to the active child if it is
+                // still there, or the first child if not
+                return jumpTo(scroller, state.children.includes(state.child) ?
+                    state.child :
+                    state.children[0]
+                );
+            }
 
-        slotchanges.each((state) => updateActive(data));
+            // This is an activation, scroll to the new active child without
+            // a check for being in children, we may be activating a ghost
+            scrollTo(scroller, state.child);
+
+            // If it is a ghost, activate the original not the ghost
+            return state.child.dataset.slideIndex ?
+                state.children[state.child.dataset.slideIndex] :
+                state.child ;
+        })
+        .pipe(aaa);
+
+        // Update active when scroll comes to rest, but not mid-gesture
+        scrollends(scroller)
+        .filter(() => !data.gesturing)
+        .each((stream) => updateActive(data));
 
         // Prevent default on immediate clicks after a gesture, and don't let
         // them out: this is a gesture not a click
@@ -157,13 +194,6 @@ export default {
                 jumpTo(scroller, data.active);
             }
         });
-
-        // Update active when scroll comes to rest
-        scrolls
-        .each((stream) => stream
-            .each(noop)
-            .done(() => updateActive(data))
-        );
 
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the

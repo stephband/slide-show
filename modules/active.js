@@ -6,7 +6,6 @@ scroll-snap alignment.
 
 import { px }      from '../../dom/modules/parse-length.js';
 import rect        from '../../dom/modules/rect.js';
-import { trigger } from '../../dom/modules/trigger.js';
 
 
 function getPaddedBox(scroller) {
@@ -55,21 +54,23 @@ function scrollToTarget(scroller, target, behavior) {
 
 export function scrollTo(scroller, target) {
     scrollToTarget(scroller, target, 'smooth');
+    return target;
 }
 
 export function jumpTo(scroller, target) {
     scroller.style.setProperty('scroll-behavior', 'auto', 'important');
     scrollToTarget(scroller, target, 'auto');
     scroller.style.setProperty('scroll-behavior', '');
+    return target;
 }
 
-function getActive(scroller, children) {
+function getAligned(scroller, elements) {
     const { leftPadding, rightPadding, centrePadding } = getPaddedBox(scroller);
 
-    let n = children.length;
+    let n = elements.length;
     let slide;
 
-    while ((slide = children[--n])) {
+    while ((slide = elements[--n])) {
         const slideRect = rect(slide);
         if (!slideRect) { continue; }
 
@@ -105,14 +106,17 @@ function isGhost(slide) {
     return !!slide.dataset.slideIndex;
 }
 
-/**
-'slide-active'
-Emitted by a slide when it is brought into scroll-snap alignment.
-**/
+export function getActive(data) {
+    const { scroller, elements, children } = data;
+    const aligned = getAligned(scroller, elements);
+    return isGhost(aligned) ?
+        children[aligned.dataset.slideIndex] :
+        aligned ;
+}
 
 export function updateActive(data) {
     const { scroller, children, elements } = data;
-    const current = getActive(scroller, elements);
+    const current = getAligned(scroller, elements);
     let active;
 
     // If current is a loop ghost jump to the actual slide it references
@@ -125,9 +129,5 @@ export function updateActive(data) {
         active = current;
     }
 
-    if (active === data.active) { return; }
-    data.active = active;
-    if (active === undefined) { return; }
-    data.actives.push(active);
-    trigger('slide-active', active);
+    data.aaa.push(active);
 }
