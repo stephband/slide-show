@@ -1,6 +1,6 @@
 {
     "title": "slide-show",
-    "name": "slide-show",
+    "name": "@stephband/slide-show",
     "version": "1.1.0",
     "description": "The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped.",
     "author": {
@@ -24,5 +24,16 @@
     },
     "type": "module",
     "main": "./build/slide-show.js",
-    "browser": "./build/slide-show.js"
+    "browser": "./build/slide-show.js",
+    "files": [
+        "build/*",
+        "docs/docs.css",
+        "docs/docs.js",
+        "index.html",
+        "README.md",
+        "LICENSE"
+    ],
+    "dependencies": {
+        "@stephband/slide-show": "^1.1.0"
+    }
 }

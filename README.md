@@ -8,40 +8,60 @@ and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
 ## Documentation
 
-Full documentation is at [stephen.band/slide-show/](https://stephen.band/slide-show/).
+Documentation is at [stephen.band/slide-show/](https://stephen.band/slide-show/).
+
+## Install
+
+### Via download
+
+Download the latest release:
+
+<a href="https://github.com/stephband/slide-show/releases">github.com/stephband/slide-show/releases</a>
+
+Then import the CSS and JS files:
+
+```html
+<link rel="stylesheet" href="./build/slide-show.css" />
+<script type="module" src="./build/slide-show.js"></script>
+```
+
+### Via npm
+
+Install into `node_modules/`:
+
+```js
+npm install @stephband/slide-show
+```
+
+The package comes with CSS files, one for the outer DOM and one for the shadow
+DOM. The outer DOM CSS can be imported from `build/slide-show.css`:
+
+```html
+<link rel="stylesheet" href="./node_modules/@stephband/slide-show/build/slide-show.css" />
+```
+
+The shadow DOM CSS file must be placed in the same location as 'build/slide-show.js',
+which will work fine until you build your own package to a different location. I
+really don't know how you are supposed to handle this sort of thing via npm and I
+hope someone can <a href="https://github.com/stephband/slide-show/issues">advise</a>.
 
 ## Quick start
-
-Clone this repository, or copy the files in `build/`, into your front-end
-assets. Then import `build/slide-show.js`:
-
-```html
-<script type="module" src="./path/to/slide-show/build/slide-show.js"></script>
-```
-
-This registers the `<slide-show>` custom element. You should also include `build/slide-show.css`,
-which provides minimal fallback style for the element before it is registered, or for those
-times when JS fails completely:
-
-```html
-<link rel="stylesheet" src="./path/to/slide-show/build/slide-show.css"></link>
-```
 
 You are now ready to write `<slide-show>` tags in your HTML:
 
 ```html
-<slide-show controls="pagination">
+<slide-show loop controls="pagination">
     <img src="../images/donkeys.jpg" draggable="false" />
     <img src="../images/tractor.jpg" draggable="false" />
     <img src="../images/mauverin.jpg" draggable="false" />
 </slide-show>
 ```
 
-
 ## API
 
 ### Attributes
 
+- `active`   - id string of initial slide to 'activate'
 - `autoplay` - boolean attribute, slide-show plays through slides
 - `controls` - token list attribute supporting the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
 - `loop`     - boolean attribute, causes slides to appear on a continuous carousel
@@ -64,7 +84,6 @@ Style for the `slide-show`:
 - `--slide-duration` - a CSS time value in `s` or `ms`, used when `autoplay` is enabled
 - `--padding-left` - padding and scroll-padding inside the scroll area
 - `--padding-right` - padding and scroll-padding inside the scroll area
-- `::part(slides)` - the slides container, by default a grid layout
 - `::part(prev-button)` - the 'previous' navigation button
 - `::part(next-button)` - the 'next' navigation button
 - `::part(page-button)` - a pagination button
@@ -75,6 +94,8 @@ Style for the `slide-show`:
 Style for child slides:
 
 - `--slide-duration` - a CSS time value in `s` or `ms`, used when `autoplay` is enabled
+
+See [stephen.band/slide-show/](https://stephen.band/slide-show/) for more detail.
 
 ### Polyfill for `element.scrollTo()`
 
