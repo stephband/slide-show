@@ -97,16 +97,9 @@ export default {
             .map((child) => data.active = child)
             .broadcast({ memory: true });
 
-        const focuses     = events('focusin', this);
-        const resizes     = events('resize', window);
-        const fullscreens = events('fullscreenchange', window);
-
         const clicks = events('click', shadow)
             .filter(isPrimaryButton)
             .broadcast();
-
-        const swipes = gestures({ threshold: '0.25rem', device: 'mouse' }, shadow)
-            .filter(() => data.children.length > 1);
 
         // Private data
         const data = this[$data] = {
@@ -128,14 +121,14 @@ export default {
             clicks
         };
 
-        // Create a stream of width updates
+        // Create a stream of width updates on slotchanges and resizes
         Stream
-        .merge(slotchanges, resizes)
+        .merge(slotchanges, events('resize', window))
         .each((e) => updateWidth(scroller, slides, data.elements));
 
         // Wait for fist slotchange/load, then on mutation maintain active
         // position, or on activation scroll to new child, then pipe the child
-        // to be activated
+        // to be activated.
         Stream
         .combine({ children: mutations, child: activates })
         .map((state) => {
@@ -176,15 +169,17 @@ export default {
         });
 
         // Enable single finger scroll on mouse devices. Bad idea in my opinion,
-        // but designers tend to like it to support mouse only devices.
-        swipes
+        // but it does add support for mouse-only devices.
+        gestures({ threshold: '0.25rem', device: 'mouse' }, shadow)
+        .filter(() => data.children.length > 1)
         .each((pointers) => {
             // Keep a reference to pointers, it's used inside processPointers
             data.pointers = pointers;
             pointers.reduce(processPointers, data);
         });
 
-        fullscreens
+        // Update positions on entry or exit from fullscreen
+        events('fullscreenchange', window)
         .each((e) => {
             // If this slide-show was involved in the fullscreen change
             // reposition the active slide, it may have been shuftied.
@@ -196,7 +191,7 @@ export default {
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the
         // focused slide. Todo: FF not getting this.
-        focuses
+        events('focusin', this)
         .map((e) => (
             // Is e.target a slide
             data.children.indexOf(e.target) !== -1 ? e.target :
