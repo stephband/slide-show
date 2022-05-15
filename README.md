@@ -1,3 +1,6 @@
+
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/stephband/slide-show)
+
 # `<slide-show>`
 An accessible `<slide-show>` custom element for building horizontal scroll-snapping
 carousels. Features options for pagination, previous and next navigation buttons, autoplay,
@@ -6,9 +9,9 @@ and may contain any arbitrary HTML. About 12kB minified and gzipped.
 
 ![Example of an HTML carousel showing an image of a tractor as the current slide](https://user-images.githubusercontent.com/69022/163908499-3eab9f2e-c8f5-4249-ad60-7f18ad235492.jpg)
 
-## Documentation
+## Demos and Documentation
 
-Documentation is at [stephen.band/slide-show/](https://stephen.band/slide-show/).
+Demos and docs at [stephen.band/slide-show/](https://stephen.band/slide-show/).
 
 ## Install
 
@@ -43,7 +46,7 @@ DOM. The outer DOM CSS can be imported from `build/slide-show.css`:
 The shadow DOM CSS file must be placed in the same location as 'build/slide-show.js',
 which will work fine until you build your own package to a different location. I
 really don't know how you are supposed to handle this sort of thing via npm and I
-hope someone can <a href="https://github.com/stephband/slide-show/issues">advise</a>.
+hope someone will <a href="https://github.com/stephband/slide-show/issues">advise</a>.
 
 ## Quick start
 
