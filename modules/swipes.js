@@ -72,7 +72,7 @@ export const processPointers = overload((data, e) => e.type, {
             // around.
             //updateActive(data);
             const active = getActive(data);
-            data.aaa.push(active);
+            data.activations.push(active);
 
             // Otherwise we have to do things the hard way. Switch scroll-snap
             // off again and put scroll back to position 1, ...

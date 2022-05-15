@@ -63,7 +63,7 @@ export default {
                 throw new Error('Cannot set active – not a child of slide-show');
             }
 
-            data.activates.push(child);
+            data.views.push(child);
         },
 
         get: function() {

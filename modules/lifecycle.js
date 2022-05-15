@@ -85,13 +85,13 @@ export default {
             .broadcast({ memory: true });
 
         // Buffer stream for pushing children to scroll into view then activate
-        const activates = Stream.of(null);
+        const views = Stream.of(null);
 
         // Buffer stream for pushing children to activate
-        const aaa = Stream.of();
+        const activations = Stream.of();
 
         // Broadcast stream for listening to changes to active
-        const actives = aaa
+        const actives = activations
             .filter((child) => (data.active !== child && trigger('slide-active', child)))
             .map((child) => data.active = child)
             .broadcast({ memory: true, hot: true });
@@ -109,8 +109,8 @@ export default {
             slides,
             controls,
             load,
-            activates,
-            aaa,
+            views,
+            activations,
             actives,
             slotchanges,
             mutations,
@@ -126,7 +126,7 @@ export default {
         // position, or on activation scroll to new child, then pipe the child
         // to be activated.
         Stream
-        .combine({ children: mutations, child: activates })
+        .combine({ children: mutations, child: views })
         .map((state) => {
             // Is previous child not yet defined, or the new one the same as it?
             if (!data.active || data.active === state.child) {
@@ -147,7 +147,7 @@ export default {
                 state.children[state.child.dataset.slideIndex] :
                 state.child ;
         })
-        .pipe(aaa);
+        .pipe(activations);
 
         // Update active when scroll comes to rest, but not mid-gesture.
         scrollends(scroller)
