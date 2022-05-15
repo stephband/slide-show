@@ -1,6 +1,5 @@
 
 import equals        from '../../fn/modules/equals.js';
-import nothing       from '../../fn/modules/nothing.js';
 import Stream        from '../../fn/modules/stream.js';
 import create        from '../../dom/modules/create.js';
 import events, { isPrimaryButton } from '../../dom/modules/events.js';
@@ -85,7 +84,7 @@ export default {
             })
             .broadcast({ memory: true });
 
-        // Buffer stream for pushing children to scroll to and activate
+        // Buffer stream for pushing children to scroll into view then activate
         const activates = Stream.of(null);
 
         // Buffer stream for pushing children to activate
@@ -95,7 +94,7 @@ export default {
         const actives = aaa
             .filter((child) => (data.active !== child && trigger('slide-active', child)))
             .map((child) => data.active = child)
-            .broadcast({ memory: true });
+            .broadcast({ memory: true, hot: true });
 
         const clicks = events('click', shadow)
             .filter(isPrimaryButton)
@@ -104,11 +103,8 @@ export default {
         // Private data
         const data = this[$data] = {
             clickSuppressTime: -Infinity,
-            host:     this,
-            style:    window.getComputedStyle(this),
-            elements: nothing,
-            children: nothing,
-            shadow,
+            host:  this,
+            style: window.getComputedStyle(this),
             scroller,
             slides,
             controls,
@@ -153,23 +149,13 @@ export default {
         })
         .pipe(aaa);
 
-        // Update active when scroll comes to rest, but not mid-gesture
+        // Update active when scroll comes to rest, but not mid-gesture.
         scrollends(scroller)
         .filter(() => !data.gesturing)
-        .each((stream) => updateActive(data));
+        .each((e) => updateActive(data));
 
-        // Prevent default on immediate clicks after a gesture, and don't let
-        // them out: this is a gesture not a click
-        clicks
-        .each((e) => {
-            if (e.timeStamp - data.clickSuppressTime < 120) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        });
-
-        // Enable single finger scroll on mouse devices. Bad idea in my opinion,
-        // but it does add support for mouse-only devices.
+        // Enable single finger scroll on mouse devices. Dodgy idea in my
+        // opinion, but it does add support for mouse-only devices.
         gestures({ threshold: '0.25rem', device: 'mouse' }, shadow)
         .filter(() => data.children.length > 1)
         .each((pointers) => {
@@ -178,7 +164,17 @@ export default {
             pointers.reduce(processPointers, data);
         });
 
-        // Update positions on entry or exit from fullscreen
+        // Prevent default on immediate clicks after a gesture, and don't let
+        // them out: this is a gesture not a click.
+        clicks
+        .each((e) => {
+            if (e.timeStamp - data.clickSuppressTime < 120) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+
+        // Update positions on entry or exit from fullscreen.
         events('fullscreenchange', window)
         .each((e) => {
             // If this slide-show was involved in the fullscreen change
@@ -204,6 +200,5 @@ export default {
     load: function (shadow) {
         const data = this[$data];
         data.load.push(this);
-        data.loaded = true;
     }
 };
