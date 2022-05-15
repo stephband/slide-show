@@ -4,14 +4,15 @@ controls
 */
 
 [part="controls"] {
-    display: flex;
-    margin-top: 0.75rem;
-    height: 1.875rem;
+    display: grid;
+    grid-template-columns: [left] 1fr [center] auto [right] 1fr;
+    height: auto;
     padding-left: var(--padding-left);
     padding-right: var(--padding-right);
-    align-content:center;
+    align-content: center;
     align-items: center;
-    justify-content: center;
+    justify-items: center;
+    justify-content: stretch;
 }
 
 [part="controls"]:empty {

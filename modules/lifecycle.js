@@ -91,7 +91,7 @@ export default {
         // Buffer stream for pushing children to activate
         const aaa = Stream.of();
 
-        // Broadcast stream for listen to changes to active
+        // Broadcast stream for listening to changes to active
         const actives = aaa
             .filter((child) => (data.active !== child && trigger('slide-active', child)))
             .map((child) => data.active = child)

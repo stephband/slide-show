@@ -7,6 +7,12 @@ Style the pagination wrapper.
 [part="pagination"] {
     display: flex;
     justify-content: center;
+
+    /* Centre pagination in flex box */
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    margin: 0.875em 0;
 }
 
 
@@ -18,14 +24,18 @@ Style the pagination buttons, available when the slideshow has
 
 [part*="page-button"] {
     display: inline-block;
-    padding: 0 0 0 1.25rem;
-    height: 1.25rem;
+    padding: 0 0 0 1.25em;
+    height: 1.25em;
     cursor: pointer;
 
     border-width: 0;
     background-color: transparent;
+    /* Using background-size: contain produces visible rounding errors
+       between buttons, at least in Chrome. */
+    background-size: 100% auto;
+    background-position: 50% 50%;
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <circle cx="10" cy="10" r="6" stroke="none" fill="gray" vector-effect="non-scaling-stroke"></circle>\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="gray"></circle>\
     </svg>');
 }
 
@@ -37,18 +47,18 @@ slideshow has `controls="pagination"` enabled.
 
 [part*="page-button-active"] {
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <circle cx="10" cy="10" r="6" stroke="none" fill="black" vector-effect="non-scaling-stroke"></circle>\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="black"></circle>\
     </svg>');
 }
 
 :host(:fullscreen) [part*="page-button-active"] {
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <circle cx="10" cy="10" r="6" stroke="none" fill="white" vector-effect="non-scaling-stroke"></circle>\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="white"></circle>\
     </svg>');
 }
 
 :host(:-webkit-full-screen) [part*="page-button-active"] {
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <circle cx="10" cy="10" r="6" stroke="none" fill="white" vector-effect="non-scaling-stroke"></circle>\
+        <circle cx="10" cy="10" r="6" stroke="none" fill="white"></circle>\
     </svg>');
 }
