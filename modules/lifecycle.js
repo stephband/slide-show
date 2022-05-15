@@ -7,14 +7,12 @@ import events, { isPrimaryButton } from '../../dom/modules/events.js';
 import gestures      from '../../dom/modules/gestures.js';
 import { px }        from '../../dom/modules/parse-length.js';
 import rect          from '../../dom/modules/rect.js';
+import { trigger }   from '../../dom/modules/trigger.js';
 
 import { $data }     from './consts.js';
 import { scrollTo, jumpTo, updateActive } from './active.js';
 import { processPointers } from './swipes.js';
 import scrollends    from './scrollends.js';
-
-
-import { trigger } from '../../dom/modules/trigger.js';
 
 
 function getWidth(scroller, slides, children) {
