@@ -95,6 +95,19 @@ navigable via keyboard focus.</p>
     
     <h3 class="docs-text-04">Attributes</h3>
     
+<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-active">
+<h3 class="attribute-docs-text-05 docs-text-05">
+    <a href="#attribute-active">
+        <code class="token language-html">active <span class="default">="<em>#id</em>"</span></code>
+    </a>
+</h3>
+
+<p>Sets the initially scroll-snapped slide. <code>#id</code> must be the id of a direct
+child of the <code>&lt;slide-show&gt;</code>.</p>
+
+</div>
+
+
 <div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-autoplay">
 <h3 class="attribute-docs-text-05 docs-text-05">
     <a href="#attribute-autoplay">
@@ -159,7 +172,7 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
     </a>
 </h3>
 
-<p>Gets or sets the currently scroll-snapped child element.</p>
+<p>Gets or sets the currently scroll-snapped slide.</p>
 <pre><code class="language-js"><span class="token keyword">const</span> activeSlide <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span></code></pre>
 <p>May be set to one of the child elements, or to the id of one of the
 child elements, which causes the <code>slide-show</code> to scroll.</p>
