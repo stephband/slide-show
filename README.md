@@ -44,9 +44,9 @@ DOM. The outer DOM CSS can be imported from `build/slide-show.css`:
 ```
 
 The shadow DOM CSS file must be placed in the same location as 'build/slide-show.js',
-which will work fine until you build your own package to a different location. I
+which will work fine as-is until you build your own package to a different location. (I
 really don't know how you are supposed to handle this sort of thing via npm and I
-hope someone will <a href="https://github.com/stephband/slide-show/issues">advise</a>.
+hope someone will <a href="https://github.com/stephband/slide-show/issues">advise</a>.)
 
 ## Quick start
 
