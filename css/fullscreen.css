@@ -79,8 +79,9 @@ slide-show::part(fullscreen-button-active) {
     grid-column: auto;
     grid-row: auto;
     position: absolute;
-    top: 0.1875em;
-    right: 0.1875em;
+    top: 0.75em;
+    right: 0.75em;
+    margin: 0;
     bottom: auto;
 }
 
@@ -88,7 +89,8 @@ slide-show::part(fullscreen-button-active) {
     grid-column: auto;
     grid-row: auto;
     position: absolute;
-    top: 0.1875em;
-    right: 0.1875em;
+    top: 0.75em;
+    right: 0.75em;
+    margin: 0;
     bottom: auto;
 }
