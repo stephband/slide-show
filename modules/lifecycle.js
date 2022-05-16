@@ -54,7 +54,7 @@ export default {
     construct: function(shadow) {
         // Shadow DOM
         const header   = create('slot', { name: 'header' });
-        const slides   = create('slot', { part: 'controls' });
+        const slides   = create('slot', { part: 'slides' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
         const controls = create('nav',  { part: 'controls', children: [
             create('slot', { name: 'controls' })
