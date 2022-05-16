@@ -65,26 +65,24 @@ export const processPointers = overload((data, e) => e.type, {
         const scrollLeft2 = scroller.scrollLeft;
 
         // If those numbers are the same we are probably in FF, where removing
-        // scroll-snap type doesn't seem to change much.
+        // scroll-snap does not cause an immediate jump to a snap alignment.
         if (scrollLeft1 === scrollLeft2) {
-            // But FF has sensible smooth scroll behaviour when we reset it.
+            // We can trust the browser to smooth scroll when we reset it.
             scroller.style.setProperty('scroll-behavior', '');
         }
         else {
-            // We may as well preemptively update the active slide now, since we
-            // are sitting in the new position. This is not a crucial step, just
-            // makes the UI react a bit more quickly.
-            // Dont, actually, if there are ghosts this causes some jumping
-            // around.
+            // Otherwise we have to do things the hard way. We may as well
+            // preemptively update the active slide now, since we are sitting
+            // in the new position. This is not a crucial step, just makes the
+            // UI react a bit more quickly.
             const active = getActive(data);
             data.activations.push(active);
 
-            // Otherwise we have to do things the hard way. Switch scroll-snap
-            // off again and put scroll back to position 1, ...
+            // Switch scroll-snap off again and put scroll back to position 1...
             scroller.style.setProperty('scroll-snap-type', 'none', 'important');
             scroller.scrollLeft = scrollLeft1;
 
-            // then manually smooth scroll over to position 2, ...
+            // then manually smooth scroll over to position 2...
             scroller.style.setProperty('scroll-behavior', '');
             scroller.scrollTo({
                 top:  scroller.scrollTop,
@@ -92,9 +90,8 @@ export const processPointers = overload((data, e) => e.type, {
                 behavior: 'smooth'
             });
 
-            // and finally, switch scroll snapping back on when that scroll is
-            // over. Wait for two frames without a scroll event to pass before
-            // resetting scroll-snap.
+            // and finally, switch scroll snapping back on when that scroll
+            // comes to rest (scrollInterval passes without an event).
             events({ type: 'scroll', passive: true }, scroller)
             .reduce((frame, e, i, stream) => {
                 clearTimeout(frame);

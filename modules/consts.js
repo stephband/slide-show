@@ -10,7 +10,7 @@ export const config = {
 /*
 scrollInterval
 Keep a heuristic of the shortest 'safe' time between scroll events, used by
-scrolls and swipes streams to determine when a scroll may have come to rest.
+scroll and swipe streams to determine when a scroll may have come to rest.
 */
 
 let scrollInterval = config.maxScrollInterval;

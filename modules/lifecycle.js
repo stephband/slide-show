@@ -16,7 +16,6 @@ import { scrollTo, jumpTo, updateActive } from './active.js';
 import { processPointers } from './swipes.js';
 import scrollends    from './scrollends.js';
 
-
 function getWidth(scroller, slides, children) {
     let n = children.length;
     let r = -Infinity;
@@ -194,23 +193,35 @@ export default {
         // FF not so much. Let's give them a helping hand at displaying the
         // focused slide. Todo: FF not getting this.
         events('focusin', this)
+        .log('Focus')
         .map((e) => (
             // Is e.target a slide
             data.children.indexOf(e.target) !== -1 ? e.target :
             // Or inside a slide
             data.children.find((child) => child.contains(e.target))
         ))
-        .each((target) => scrollTo(data.scroller, target));
+        .log('Child')
+        .pipe(views);
 
         // While the slide-show is focused allow left and right arrows to
         // navigate.
         events('keydown', this)
-        .filter(() => document.activeElement === this)
+        .filter(() => document.activeElement === this || this.contains(document.activeElement))
         .map(overload(get('keyCode'), {
             // Left arrow
-            37: (e) => data.elements[data.elements.indexOf(data.active) - 1],
+            37: (e) => {
+                // If we don't preventDefault FF jumps two slides - it scrolls
+                // once for the handler and once for its default scroll paging
+                e.preventDefault();
+                return data.elements[data.elements.indexOf(data.active) - 1];
+            },
             // Right arrow
-            39: (e) => data.elements[data.elements.indexOf(data.active) + 1],
+            39: (e) => {
+                // If we don't preventDefault FF jumps two slides - it scrolls
+                // once for the handler and once for its default scroll paging
+                e.preventDefault();
+                return data.elements[data.elements.indexOf(data.active) + 1];
+            },
             // Other keys
             default: noop
         }))
