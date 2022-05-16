@@ -12,7 +12,8 @@ Style the pagination wrapper.
     grid-column: 2;
     grid-row: 1;
     justify-self: center;
-    margin: 0.875em 0;
+    margin: 0;
+    padding: 0.875em 0;
 }
 
 
