@@ -13,7 +13,7 @@ docs:
 	make literal
 
 modules:
-	rm -r build
+	rm -rf build
 	# Run separate builds to package them as standalones
 	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ ./slide-show-figure.js
 	deno run --allow-read --allow-env --allow-net --allow-write --allow-run ../fn/deno/make-modules.js build/ ./slide-show-ol.js
