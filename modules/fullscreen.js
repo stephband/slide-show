@@ -30,7 +30,7 @@ export function enable(host) {
 
     data.controls.append(fullscreen.button);
 
-    fullscreen.changes = events('fullscreenchange webkitfullscreenchange', host)
+    fullscreen.changes = events('fullscreenchange', host)
     .filter((e) => getFullscreenElement() === host)
     .each((e) => {
         // Setup fullscreen
@@ -48,7 +48,7 @@ export function enable(host) {
         }
 
         // Setup fullscreen exit
-        const fullscreenend = events('fullscreenchange webkitfullscreenchange', host)
+        const fullscreenend = events('fullscreenchange', host)
         .each((e) => {
             fullscreen.button.part.remove('fullscreen-button-active');
             fullscreen.button.innerHTML = 'Open in fullscreen';
