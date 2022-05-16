@@ -53,12 +53,15 @@ Emitted by a slide when it is brought into scroll-snap alignment.
 export default {
     construct: function(shadow) {
         // Shadow DOM
-        const slides   = create('slot', { part: 'slides' });
+        const header   = create('slot', { name: 'header' });
+        const slides   = create('slot', { part: 'controls' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
-        const controls = create('nav',  { part: 'controls' });
+        const controls = create('nav',  { part: 'controls', children: [
+            create('slot', { name: 'controls' })
+        ] });
 
         // Add slots to shadow
-        shadow.append(scroller, controls);
+        shadow.append(header, scroller, controls);
 
         // Stream to push load to
         const load = Stream.of();
