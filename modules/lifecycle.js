@@ -1,5 +1,8 @@
 
 import equals        from '../../fn/modules/equals.js';
+import get           from '../../fn/modules/get.js';
+import noop          from '../../fn/modules/noop.js';
+import overload      from '../../fn/modules/overload.js';
 import Stream        from '../../fn/modules/stream.js';
 import create        from '../../dom/modules/create.js';
 import events, { isPrimaryButton } from '../../dom/modules/events.js';
@@ -198,6 +201,20 @@ export default {
             data.children.find((child) => child.contains(e.target))
         ))
         .each((target) => scrollTo(data.scroller, target));
+
+        // While the slide-show is focused allow left and right arrows to
+        // navigate.
+        events('keydown', this)
+        .filter(() => document.activeElement === this)
+        .map(overload(get('keyCode'), {
+            // Left arrow
+            37: (e) => data.elements[data.elements.indexOf(data.active) - 1],
+            // Right arrow
+            39: (e) => data.elements[data.elements.indexOf(data.active) + 1],
+            // Other keys
+            default: noop
+        }))
+        .pipe(views);
     },
 
     load: function (shadow) {

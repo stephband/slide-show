@@ -131,3 +131,20 @@ export function updateActive(data) {
 
     data.activations.push(active);
 }
+
+
+function activateIndex(host, elements, i) {
+    const target = elements[i];
+    if (!target) { return; }
+    host.active = target;
+}
+
+export function activateNext(host, elements, active) {
+    const i = elements.indexOf(active) + 1;
+    activateIndex(host, elements, i);
+}
+
+export function activatePrevious(host, elements, active) {
+    const i = elements.indexOf(active) - 1;
+    activateIndex(host, elements, i);
+}
