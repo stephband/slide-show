@@ -192,14 +192,12 @@ export default {
         // FF not so much. Let's give them a helping hand at displaying the
         // focused slide. Todo: FF not getting this.
         events('focusin', this)
-        .log('Focus')
         .map((e) => (
             // Is e.target a slide
             data.children.indexOf(e.target) !== -1 ? e.target :
             // Or inside a slide
             data.children.find((child) => child.contains(e.target))
         ))
-        .log('Child')
         .pipe(views);
 
         // While the slide-show is focused allow left and right arrows to
