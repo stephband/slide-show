@@ -4,6 +4,7 @@
 
 import Stream   from '../../fn/modules/stream.js';
 import Producer from '../../fn/modules/stream/producer.js';
+import { getScrollInterval, updateScrollInterval } from './consts.js';
 
 const assign = Object.assign;
 
@@ -14,40 +15,12 @@ const captureOptions = {
     passive: true
 };
 
-const config = {
-    minScrollEventInterval: 0.0375,
-    maxScrollEventInterval: 0.18
-};
-
-var trackingInterval = config.maxScrollEventInterval;
-
-function adjustTrackingInterval(times) {
-    // Dynamically adjust maxScrollEventInterval to tighten it up,
-    // imposing a baseline of 60ms (0.0375s * 1.6)
-
-    let n = times.length;
-    let interval = 0;
-
-    while (--n) {
-        const t = times[n] - times[n - 1];
-        interval = t > interval ? t : interval;
-    }
-
-    interval = interval < config.minScrollEventInterval ?
-        config.minScrollEventInterval :
-        interval ;
-
-    trackingInterval = (1.4 * interval) > config.maxScrollEventInterval ?
-        config.maxScrollEventInterval :
-        (1.4 * interval) ;
-}
-
 function fire(producer, e) {
     producer.timer = undefined;
     producer.stream.push(e);
 
     const times = producer.times;
-    if (times.length > 1) { adjustTrackingInterval(times); }
+    if (times.length > 1) { updateScrollInterval(times); }
     times.length = 0;
 }
 
@@ -70,7 +43,7 @@ assign(ScrollendsProducer.prototype, Producer.prototype, {
             clearTimeout(this.timer);
         }
 
-        this.timer = setTimeout(fire, trackingInterval * 1000, this, e);
+        this.timer = setTimeout(fire, getScrollInterval() * 1000, this, e);
     },
 
     stop: function() {

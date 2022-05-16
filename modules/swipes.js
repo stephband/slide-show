@@ -2,7 +2,13 @@
 import events   from '../../dom/modules/events.js';
 import overload from '../../fn/modules/overload.js';
 
-import { getActive } from './active.js';
+import { getActive }         from './active.js';
+import { getScrollInterval } from './consts.js';
+
+function resetScroll(scroller, scrolls) {
+    scroller.style.setProperty('scroll-snap-type', '');
+    scrolls.stop();
+}
 
 export const processPointers = overload((data, e) => e.type, {
     pointerdown: function(data, e) {
@@ -70,7 +76,6 @@ export const processPointers = overload((data, e) => e.type, {
             // makes the UI react a bit more quickly.
             // Dont, actually, if there are ghosts this causes some jumping
             // around.
-            //updateActive(data);
             const active = getActive(data);
             data.activations.push(active);
 
@@ -90,15 +95,10 @@ export const processPointers = overload((data, e) => e.type, {
             // and finally, switch scroll snapping back on when that scroll is
             // over. Wait for two frames without a scroll event to pass before
             // resetting scroll-snap.
-            let frame;
-            const scrolls = events({ type: 'scroll', passive: true }, scroller).each(() => {
-                cancelAnimationFrame(frame);
-                frame = requestAnimationFrame(() =>
-                    frame = requestAnimationFrame(() => {
-                        scroller.style.setProperty('scroll-snap-type', '');
-                        scrolls.stop();
-                    })
-                );
+            events({ type: 'scroll', passive: true }, scroller)
+            .reduce((frame, e, i, stream) => {
+                clearTimeout(frame);
+                return setTimeout(resetScroll, getScrollInterval() * 1000, scroller, stream);
             });
 
             // Ooof. What a polava.
