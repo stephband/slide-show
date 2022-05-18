@@ -157,12 +157,12 @@ slide-show > img { scroll-snap-align: end; }</pre>
 
         // -----
 
-        test(0, 'create slide-show, no children', (done) => {
+        test(0, 'create <slide-show> with no children', (done) => {
             const show = document.createElement('slide-show');
             done(show);
         });
 
-        test(0, 'append slide-show', (done, show) => {
+        test(0, 'append <slide-show> to body', (done, show) => {
             const listener = (e) => {
                 throw new Error('SHOULD NOT HAPPEN');
             };
@@ -198,7 +198,7 @@ slide-show > img { scroll-snap-align: end; }</pre>
             show.append(showImg0);
         });
 
-        test(0.2, 'remove slide-show', (done, show) => {
+        test(0.2, 'remove <slide-show>', (done, show) => {
             show.remove();
             done(show);
         });
@@ -206,7 +206,7 @@ slide-show > img { scroll-snap-align: end; }</pre>
 
         // -----
 
-        test(0, 'create slide-show, 5 children', (done) => {
+        test(0, 'create <slide-show> with 5 children', (done) => {
             const assign = Object.assign;
 
             const show     = document.createElement('slide-show');
@@ -227,7 +227,7 @@ slide-show > img { scroll-snap-align: end; }</pre>
             done(show);
         });
 
-        test(0, 'append slide-show', (done, show) => {
+        test(0, 'append <slide-show> to body', (done, show) => {
             show.children[0].addEventListener('slide-active', (e) => {
                 done(show);
             });
@@ -235,7 +235,7 @@ slide-show > img { scroll-snap-align: end; }</pre>
             document.body.append(show);
         });
 
-        test(0.5, 'remove slide-show child', (done, show) => {
+        test(0.5, 'remove <slide-show> child', (done, show) => {
             show.children[1].addEventListener('slide-active', (e) => {
                 done(show);
             });
@@ -257,12 +257,13 @@ slide-show > img { scroll-snap-align: end; }</pre>
             show.active = show.children[1];
             done(show);
         });
-
-        test(0.2, 'remove slide-show', (done, show) => {
+/*
+        test(0.2, 'remove <slide-show>', (done, show) => {
             // Here we are removing it mid-scroll
             show.remove();
             done(show);
         });
+*/
     </script>
 </body>
 </html>
