@@ -59,10 +59,6 @@ export default {
                     this.querySelector(id) :
                 this.querySelector('#' + id) ;
 
-            if (!child) {
-                throw new Error('Cannot set active – not a child of slide-show');
-            }
-
             data.views.push(child);
         },
 

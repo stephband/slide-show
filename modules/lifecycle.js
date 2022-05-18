@@ -2,6 +2,7 @@
 import equals        from '../../fn/modules/equals.js';
 import get           from '../../fn/modules/get.js';
 import noop          from '../../fn/modules/noop.js';
+import nothing       from '../../fn/modules/nothing.js';
 import overload      from '../../fn/modules/overload.js';
 import Stream        from '../../fn/modules/stream.js';
 import create        from '../../dom/modules/create.js';
@@ -65,7 +66,7 @@ export default {
         shadow.append(scroller, controls);
 
         // Stream to push load to
-        const load = Stream.of();
+        const load = Stream.of().broadcast({ memory: true });
 
         // In Chrome and FF initial `slotchange` event is always sent before
         // load, but not so in Safari where either order may happen (at a guess
@@ -86,16 +87,20 @@ export default {
                     undefined :
                     (data.children = children) ;
             })
-            .broadcast({ memory: true });
+            .broadcast({ memory: true, hot: true });
 
         // Buffer stream for pushing children to scroll into view then activate
-        const views = Stream.of(null);
+        const views = Stream.of();
 
         // Buffer stream for pushing children to activate
         const activations = Stream.of();
 
         // Broadcast stream for listening to changes to active
         const actives = activations
+            .map((child) => (child.dataset.slideIndex ?
+                data.children[child.dataset.slideIndex] :
+                child
+            ))
             .filter((child) => (data.active !== child && trigger('slide-active', child)))
             .map((child) => data.active = child)
             .broadcast({ memory: true, hot: true });
@@ -109,6 +114,8 @@ export default {
             clickSuppressTime: -Infinity,
             host:  this,
             style: window.getComputedStyle(this),
+            elements: nothing,
+            children: nothing,
             scroller,
             slides,
             controls,
@@ -126,31 +133,29 @@ export default {
         .merge(slotchanges, events('resize', window))
         .each((e) => updateWidth(scroller, slides, data.elements));
 
-        // Wait for fist slotchange/load, then on mutation maintain active
-        // position, or on activation scroll to new child, then pipe the child
-        // to be activated.
+        // Wait for fist slotchange/load, then maintain active position
+        slotchanges
+        .map((state) => (state.elements.includes(data.active) ?
+            data.active :
+            data.children[0]
+        ))
+        .map((child) => jumpTo(scroller, child))
+        .pipe(activations);
+
+        // On change of .active view, check it is a child element that is not
+        // already active and scroll to it
         Stream
-        .combine({ children: mutations, child: views })
-        .map((state) => {
-            // Is previous child not yet defined, or the new one the same as it?
-            if (!data.active || data.active === state.child) {
-                // This is a mutation, so jump to the active child if it is
-                // still there, or the first child if not
-                return jumpTo(scroller, state.children.includes(state.child) ?
-                    state.child :
-                    state.children[0]
-                );
-            }
-
-            // This is an activation, scroll to the new active child without
-            // a check for being in children, we may be activating a ghost
-            scrollTo(scroller, state.child);
-
-            // If it is a ghost, activate the original not the ghost
-            return state.child.dataset.slideIndex ?
-                state.children[state.child.dataset.slideIndex] :
-                state.child ;
-        })
+        .combine({ host: load, child: views })
+        .map((state) => (data.elements.includes(state.child) && data.active !== state.child ?
+            state.child :
+            undefined
+        ))
+        .map((child) => (data.active ?
+            // This is a activation, scroll to the new active child
+            scrollTo(scroller, child) :
+            // If active is not yet defined jump to the newly active child
+            jumpTo(scroller, child)
+        ))
         .pipe(activations);
 
         // Update active when scroll comes to rest, but not mid-gesture.

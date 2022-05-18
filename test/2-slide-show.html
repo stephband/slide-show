@@ -65,7 +65,7 @@
 </head>
 
 <body>
-    <pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - one child</pre>
+    <!--pre>&lt;slide-show loop autoplay controls="navigation pagination fullscreen"&gt; - one child</pre>
 
     <slide-show loop autoplay controls="navigation pagination fullscreen">
         <img src="../docs/images/bourg.jpg" draggable="false" />
@@ -141,13 +141,127 @@ slide-show > img { scroll-snap-align: end; }</pre>
         <img src="../docs/images/bourg.jpg" draggable="false" />
         <img src="../docs/images/tractor.jpg" draggable="false" />
         <img src="../docs/images/bourg.jpg" draggable="false" />
-    </slide-show>
+    </slide-show-->
 
     <script type="module">
         import '../slide-show.js';
 
+        /*
         document.body.addEventListener('slide-active', (e) => {
             console.log('EVENT', e.type, e.target);
+        });
+        */
+
+        import test from '../modules/test.js';
+
+
+        // -----
+
+        test(0, 'create slide-show, no children', (done) => {
+            const show = document.createElement('slide-show');
+            done(show);
+        });
+
+        test(0, 'append slide-show', (done, show) => {
+            const listener = (e) => {
+                throw new Error('SHOULD NOT HAPPEN');
+            };
+
+            show.addEventListener('slide-active', listener);
+            document.body.append(show);
+
+            // Wait in case slide-active is sent
+            setTimeout(() => {
+                show.removeEventListener('slide-active', listener);
+                done(show);
+            }, 200, show);
+        });
+
+        test(0.2, 'activate null', (done, show) => {
+            show.active = null;
+            done(show);
+        });
+
+        test(0.2, 'activate non-child element', (done, show) => {
+            show.active = document.body;
+            done(show);
+        });
+
+        test(0.2, 'append child', (done, show) => {
+            show.addEventListener('slide-active', (e) => {
+                done(show);
+            });
+
+            const assign = Object.assign;
+            const showImg0 = document.createElement('img');
+            assign(showImg0, { draggable: false, src: "../docs/images/donkeys.jpg" });
+            show.append(showImg0);
+        });
+
+        test(0.2, 'remove slide-show', (done, show) => {
+            show.remove();
+            done(show);
+        });
+
+
+        // -----
+
+        test(0, 'create slide-show, 5 children', (done) => {
+            const assign = Object.assign;
+
+            const show     = document.createElement('slide-show');
+            const showImg0 = document.createElement('img');
+            const showImg1 = document.createElement('img');
+            const showImg2 = document.createElement('img');
+            const showImg3 = document.createElement('img');
+            const showImg4 = document.createElement('img');
+
+            assign(showImg0, { draggable: false, src: "../docs/images/donkeys.jpg" });
+            assign(showImg1, { draggable: false, src: "../docs/images/tractor.jpg" });
+            assign(showImg2, { draggable: false, src: "../docs/images/mauverin.jpg" });
+            assign(showImg3, { draggable: false, src: "../docs/images/rocks.jpg" });
+            assign(showImg4, { draggable: false, src: "../docs/images/summit.jpg" });
+
+            show.append(showImg0, showImg1, showImg2, showImg3, showImg4);
+
+            done(show);
+        });
+
+        test(0, 'append slide-show', (done, show) => {
+            show.children[0].addEventListener('slide-active', (e) => {
+                done(show);
+            });
+
+            document.body.append(show);
+        });
+
+        test(0.5, 'remove slide-show child', (done, show) => {
+            show.children[1].addEventListener('slide-active', (e) => {
+                done(show);
+            });
+
+            show.children[0].remove();
+        });
+
+        test(0, 'activate null', (done, show) => {
+            show.active = null;
+            done(show);
+        });
+
+        test(0.2, 'activate first child', (done, show) => {
+            show.active = show.children[0];
+            done(show);
+        });
+
+        test(0.2, 'activate second child', (done, show) => {
+            show.active = show.children[1];
+            done(show);
+        });
+
+        test(0.2, 'remove slide-show', (done, show) => {
+            // Here we are removing it mid-scroll
+            show.remove();
+            done(show);
         });
     </script>
 </body>
