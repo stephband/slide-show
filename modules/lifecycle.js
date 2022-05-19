@@ -104,6 +104,7 @@ export default {
             ))
             .filter((child) => (data.active !== child && trigger('slide-active', child)))
             .map((child) => data.active = child)
+            .log('ACTIVE')
             .broadcast({ memory: true, hot: true });
 
         const clicks = events('click', shadow)
@@ -173,6 +174,7 @@ export default {
         // Update active when scroll comes to rest, but not mid-gesture.
         scrollends(scroller)
         .filter((e) => (data.connected && !data.gesturing))
+        // Of course, this causes a scroll, which causes a scrollend...
         .each((e) => updateActive(data));
 
         // Enable single finger scroll on mouse devices. Dodgy idea in my

@@ -72,6 +72,7 @@ function getAligned(scroller, elements) {
 
     while ((slide = elements[--n])) {
         const slideRect = rect(slide);
+
         if (!slideRect) { continue; }
 
         // Todo: do we need webkit property here?
@@ -94,6 +95,7 @@ function getAligned(scroller, elements) {
 
         // If position has crossed the detection going left, we're in the money
         if (x <= detection) {
+            console.log(x, detection, slide);
             break;
         }
     }
@@ -118,7 +120,7 @@ export function updateActive(data) {
     const { scroller, children, elements } = data;
     const current = getAligned(scroller, elements);
     let active;
-
+console.log('CURRENT', current);
     // If current is a loop ghost jump to the actual slide it references
     if (!current) { return; }
     if (isGhost(current)) {
