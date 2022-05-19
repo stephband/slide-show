@@ -287,20 +287,22 @@ slide-show > img { scroll-snap-align: end; }</pre>
         });
 
         test(0.2, 'append <slide-show> to document.body again', (done, show) => {
-            console.log(show.active);
             document.body.append(show);
 
             // In FF we don't need to wait any frames, its visible immediately
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
+            requestAnimationFrame(() =>
+                requestAnimationFrame(() =>
                     // In Safari its visible now
                     // In Chrome it's visible but style has not been applied
-                    requestAnimationFrame(() => {
-                        // In Chrome it's all right now
-                        window.confirm('Is picture of rocks visible?') && done(show);
-                    })
-                })
-            });
+                    requestAnimationFrame(() =>
+                        // In Chrome it's all right now. Probably. Sometimes it
+                        // needs one more.
+                        requestAnimationFrame(() => {
+                            window.confirm('Is picture of rocks visible?') && done(show);
+                        })
+                    )
+                )
+            );
         });
 
     </script>
