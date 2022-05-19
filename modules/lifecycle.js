@@ -56,7 +56,7 @@ Emitted by a slide when it is brought into scroll-snap alignment.
 export default {
     construct: function(shadow) {
         // Shadow DOM
-        const slides   = create('slot', { part: 'slides', style: 'display: grid;' });
+        const slides   = create('slot', { part: 'slides' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
         const controls = create('nav',  { part: 'controls', children: [
             create('slot', { name: 'controls' })
@@ -104,7 +104,6 @@ export default {
             ))
             .filter((child) => (data.active !== child && trigger('slide-active', child)))
             .map((child) => data.active = child)
-            .log('ACTIVE')
             .broadcast({ memory: true, hot: true });
 
         const clicks = events('click', shadow)
