@@ -39,6 +39,16 @@ function scrollToTarget(scroller, target, behavior) {
     const targetBox   = rect(target);
     const snap        = getSnapX(target);
 
+console.log(target, targetBox, target.previousElementSibling && rect(target.previousElementSibling), {
+        top:  scroller.scrollTop,
+        left: scroller.scrollLeft + (
+            snap === 'left' ? targetBox.left - scrollerBox.leftPadding :
+            snap === 'right' ? targetBox.right - scrollerBox.rightPadding :
+            targetBox.left + (targetBox.width / 2) - scrollerBox.centrePadding
+        ),
+        behavior: behavior
+    });
+
     // Move scroll position to target slide, taking into account
     // scroll-snap-align of the slide
     scroller.scrollTo({

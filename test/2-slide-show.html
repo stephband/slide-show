@@ -257,13 +257,52 @@ slide-show > img { scroll-snap-align: end; }</pre>
             show.active = show.children[1];
             done(show);
         });
-/*
+
         test(0.2, 'remove <slide-show>', (done, show) => {
             // Here we are removing it mid-scroll
             show.remove();
             done(show);
         });
-*/
+
+        test(0.2, 'remove <slide-show> child while disconnected', (done, show) => {
+            //show.children[1].addEventListener('slide-active', (e) => {
+            //    throw new Error('Should not emit events while disconnected');
+            //});
+
+            show.children[0].remove();
+            setTimeout(() => {
+                done(show);
+            }, 200);
+        });
+
+        test(0.2, 'activate <slide-show> child while disconnected', (done, show) => {
+            //show.children[1].addEventListener('slide-active', (e) => {
+            //    throw new Error('Should not emit events while disconnected');
+            //});
+
+            show.active = show.children[1];
+            setTimeout(() => {
+                done(show);
+            }, 200);
+        });
+
+        test(0.2, 'append <slide-show> to document.body again', (done, show) => {
+            console.log(show.active);
+            document.body.append(show);
+
+            // In FF we don't need to wait any frames, its visible immediately
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    // In Safari its visible now
+                    // In Chrome it's visible but style has not been applied
+                    requestAnimationFrame(() => {
+                        // In Chrome it's all right now
+                        window.confirm('Is picture of rocks visible?') && done(show);
+                    })
+                })
+            });
+        });
+
     </script>
 </body>
 </html>

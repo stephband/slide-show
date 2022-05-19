@@ -56,7 +56,7 @@ Emitted by a slide when it is brought into scroll-snap alignment.
 export default {
     construct: function(shadow) {
         // Shadow DOM
-        const slides   = create('slot', { part: 'slides' });
+        const slides   = create('slot', { part: 'slides', style: 'display: grid;' });
         const scroller = create('div',  { class: 'scroller', children: [slides] });
         const controls = create('nav',  { part: 'controls', children: [
             create('slot', { name: 'controls' })
@@ -66,7 +66,8 @@ export default {
         shadow.append(scroller, controls);
 
         // Stream to push load to
-        const load = Stream.of().broadcast({ memory: true });
+        const connects = Stream.broadcast();
+        const load     = Stream.broadcast();
 
         // In Chrome and FF initial `slotchange` event is always sent before
         // load, but not so in Safari where either order may happen (at a guess
@@ -112,6 +113,7 @@ export default {
         // Private data
         const data = this[$data] = {
             clickSuppressTime: -Infinity,
+            connected: false,
             host:  this,
             style: window.getComputedStyle(this),
             elements: nothing,
@@ -119,6 +121,7 @@ export default {
             scroller,
             slides,
             controls,
+            connects,
             load,
             views,
             activations,
@@ -133,13 +136,19 @@ export default {
         .merge(slotchanges, events('resize', window))
         .each((e) => updateWidth(scroller, slides, data.elements));
 
-        // Wait for fist slotchange/load, then maintain active position
-        slotchanges
-        .map((state) => (state.elements.includes(data.active) ?
+        // Wait for fist slotchange/load, then maintain active position. In
+        // Chrome this fails on connect, as it appears the style is not applied
+        // immediately, so jumpTo() can't measure positions properly.
+        Stream
+        .combine({ slotchanges, connects })
+        .map((state) => (data.elements.includes(data.active) ?
             data.active :
             data.children[0]
         ))
-        .map((child) => jumpTo(scroller, child))
+        .map((child) => (data.connected ?
+            jumpTo(scroller, child) :
+            child
+        ))
         .pipe(activations);
 
         // On change of .active view, check it is a child element that is not
@@ -150,17 +159,20 @@ export default {
             state.child :
             undefined
         ))
-        .map((child) => (data.active ?
-            // This is a activation, scroll to the new active child
-            scrollTo(scroller, child) :
-            // If active is not yet defined jump to the newly active child
-            jumpTo(scroller, child)
+        .map((child) => (data.connected ?
+            data.active ?
+                // This is a activation, scroll to the new active child
+                scrollTo(scroller, child) :
+                // If active is not yet defined jump to the newly active child
+                jumpTo(scroller, child) :
+            // If not connected pass the child through
+            child
         ))
         .pipe(activations);
 
         // Update active when scroll comes to rest, but not mid-gesture.
         scrollends(scroller)
-        .filter(() => !data.gesturing)
+        .filter((e) => (data.connected && !data.gesturing))
         .each((e) => updateActive(data));
 
         // Enable single finger scroll on mouse devices. Dodgy idea in my
@@ -228,10 +240,27 @@ export default {
             default: noop
         }))
         .pipe(views);
+
+        // Neuter streams intended as push-only, just as a sanity check
+        if (window.DEBUG) {
+            load.pipe = null;
+        }
     },
 
     load: function (shadow) {
         const data = this[$data];
         data.load.push(this);
+    },
+
+    connect: function(shadow) {
+        const data = this[$data];
+        data.connected = true;
+        data.connects.push(true);
+    },
+
+    disconnect: function(shadow) {
+        const data = this[$data];
+        data.connected = false;
+        //data.connects.push(false);
     }
 };
