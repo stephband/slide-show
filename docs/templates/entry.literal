@@ -25,7 +25,7 @@ ${ data.body }
             data.type === 'var'         ? '--' :
             ''
         }${ data.name }${
-            data.type === 'attribute' && data.defaultValue ? ` <span class="default">="<em>${ data.defaultValue }</em>"</span>` :
+            data.type === 'attribute' && data.defaultValue ? data.name === 'slot' ? `="${ data.defaultValue }"` : ` <span class="default">="<em>${ data.defaultValue }</em>"</span>` :
             data.type === 'property'  && data.defaultValue ? ` <span class="default">=<em>${ data.defaultValue }</em></span>` :
             data.type === 'constructor' ? '(<span class="param">' + data.params.join('</span>, <span class="param">') + '</span>)' :
             data.type === 'function'    ? '(<span class="param">' + data.params.join('</span>, <span class="param">') + '</span>)' :

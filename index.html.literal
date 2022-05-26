@@ -36,6 +36,8 @@
         "./modules/lifecycle.js",
         "./modules/properties.js",
         "./modules/active.js",
+        "./modules/navigation.js",
+        "./modules/fullscreen.js",
         "./slide-show.css",
         "./slide-show-shadow.css",
         "./css/host.css",
@@ -43,7 +45,6 @@
         "./css/slides.css",
         "./css/loop.css",
         "./css/navigation.css",
-        "./css/navigation.js",
         "./css/pagination.css",
         "./css/fullscreen.css"
     )) }

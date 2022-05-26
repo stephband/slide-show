@@ -1,23 +1,31 @@
 
 /**
 slot="prev-button"
-Hello.
+Available when the slideshow has `controls="navigation"` enabled, this slot
+allows the inclusion of html content into the previous navigation button. For
+example, this slot is useful for replacing the default icon with an inline SVG.
 
 ```html
-slide-show::part(next-button) {
-    background-image: url('./chevron-next.svg');
-}
+<slide-show controls="navigation">
+    <svg slot="prev-button">
+        <use href="#back-icon" />
+    </svg>
+</slide-show>
 ```
 **/
 
 /**
 slot="next-button"
-Hello.
+Available when the slideshow has `controls="navigation"` enabled, this slot
+allows the inclusion of html content into the next navigation button. For
+example, this slot is useful for replacing the default icon with an inline SVG.
 
 ```html
-slide-show::part(next-button) {
-    background-image: url('./chevron-next.svg');
-}
+<slide-show controls="navigation">
+    <svg slot="next-button">
+        <use href="#forward-icon" />
+    </svg>
+</slide-show>
 ```
 **/
 
@@ -52,14 +60,21 @@ export function enable(host) {
 
     // Add an object to store navigation state
     const navigation = data.navigation = {
-        prev: create('button', { part: 'prev-button', type: "button", name: "navigation", value: "-1", children: [
-            create('slot', { name: 'prev-button' }),
-            'Previous'
-        ] }),
-        next: create('button', { part: 'next-button', type: "button", name: "navigation", value: "1", children: [
-            create('slot', { name: 'next-button' }),
-            'Next'
-        ] })
+        prev: create('button', {
+            part: 'prev-button',
+            type: "button",
+            name: "navigation",
+            value: "-1",
+            children: [create('slot', { name: 'prev-button' }), 'Previous']
+        }),
+
+        next: create('button', {
+            part: 'next-button',
+            type: "button",
+            name: "navigation",
+            value: "1", c
+            hildren: [create('slot', { name: 'next-button' }), 'Next']
+        })
     };
 
     data.controls.prepend(navigation.prev, navigation.next);
