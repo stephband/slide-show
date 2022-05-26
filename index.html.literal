@@ -43,6 +43,7 @@
         "./css/slides.css",
         "./css/loop.css",
         "./css/navigation.css",
+        "./css/navigation.js",
         "./css/pagination.css",
         "./css/fullscreen.css"
     )) }

@@ -1,4 +1,26 @@
 
+/**
+slot="prev-button"
+Hello.
+
+```html
+slide-show::part(next-button) {
+    background-image: url('./chevron-next.svg');
+}
+```
+**/
+
+/**
+slot="next-button"
+Hello.
+
+```html
+slide-show::part(next-button) {
+    background-image: url('./chevron-next.svg');
+}
+```
+**/
+
 import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
