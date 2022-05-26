@@ -3,7 +3,8 @@ import Stream   from '../../fn/modules/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 
-import { $data }  from './consts.js';
+import { activatePrevious, activateNext, activateIndex } from './active.js';
+import { $data }         from './consts.js';
 
 function update(prev, next, elements, i) {
     // Preemptively hide buttons now (before new active is detected at
@@ -52,15 +53,19 @@ export function enable(host) {
     ));
 
     navigation.clicks = clicks.each(delegate({
-        '[name="navigation"]': function(button, e) {
-            const value  = parseFloat(button.value);
-            const i      = data.elements.indexOf(data.active) + value;
-            const target = data.elements[i];
+        // Slotted content does not delegate through it's parent element, but it
+        // does delegate through shadow, weirdly
+        '[slot="prev-button"]': (node, e) => {
+            activatePrevious(host, data.elements, data.active);
+        },
 
-            if (!target) { return; }
+        '[slot="next-button"]': (node, e) => {
+            activateNext(host, data.elements, data.active);
+        },
 
-            host.active = target;
-            update(navigation.prev, navigation.next, data.elements, i);
+        '[name="navigation"]': (button, e) => {
+            const i = data.elements.indexOf(data.active) + parseFloat(button.value);
+            activateIndex(host, data.elements, i);
         }
     }));
 }

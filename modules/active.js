@@ -134,7 +134,7 @@ export function updateActive(data) {
 }
 
 
-function activateIndex(host, elements, i) {
+export function activateIndex(host, elements, i) {
     const target = elements[i];
     if (!target) { return; }
     host.active = target;
