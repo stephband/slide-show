@@ -37,6 +37,11 @@ slide-show:not(:defined) {
     overflow-y: hidden;
 }
 
+slide-show:not(:defined) > [slot="prev-button"],
+slide-show:not(:defined) > [slot="next-button"] {
+    display: none;
+}
+
 .loading slide-show {
     /* During loading make scrolling instant */
     -webkit-scroll-behavior: auto;

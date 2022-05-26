@@ -12,7 +12,7 @@ export function enable(host) {
 
     if (!fullscreenEnabled) {
         if (window.DEBUG) {
-            console.warn('Fullscreen mode not available in this browser');
+            console.warn('<slide-show> fullscreen mode not available in this browser, fullscreen controls not rendered');
         }
 
         return;

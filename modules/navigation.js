@@ -29,8 +29,14 @@ export function enable(host) {
 
     // Add an object to store navigation state
     const navigation = data.navigation = {
-        prev: create('button', { part: 'prev-button', type: "button", name: "navigation", value: "-1", html: 'Previous' }),
-        next: create('button', { part: 'next-button', type: "button", name: "navigation", value: "1", html: 'Next' })
+        prev: create('button', { part: 'prev-button', type: "button", name: "navigation", value: "-1", children: [
+            create('slot', { name: 'prev-button' }),
+            'Previous'
+        ] }),
+        next: create('button', { part: 'next-button', type: "button", name: "navigation", value: "1", children: [
+            create('slot', { name: 'next-button' }),
+            'Next'
+        ] })
     };
 
     data.controls.prepend(navigation.prev, navigation.next);
