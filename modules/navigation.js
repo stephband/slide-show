@@ -72,8 +72,8 @@ export function enable(host) {
             part: 'next-button',
             type: "button",
             name: "navigation",
-            value: "1", c
-            hildren: [create('slot', { name: 'next-button' }), 'Next']
+            value: "1", 
+            children: [create('slot', { name: 'next-button' }), 'Next']
         })
     };
 
