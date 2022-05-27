@@ -3,14 +3,16 @@
 slot="fullscreen-button"
 
 Available when the slideshow has `controls="fullscreen"` enabled, this slot
-allows the inclusion of html content into the fullscreen button. For example,
-this slot can be used to replace the default icon with an inline SVG:
+allows the inclusion of html content into the fullscreen button. By default the
+slot contains an inline SVG of an icon, and some text (in English). Defining
+HTML for the slot replaces that default content:
 
 ```html
 <slide-show controls="fullscreen">
-    <svg slot="fullscreen-button">
+    <svg slot="fullscreen-button" aria-hidden="true">
         <use href="#fullscreen-icon" />
     </svg>
+    <span slot="fullscreen-button">Plein écran</span>
 </slide-show>
 ```
 **/

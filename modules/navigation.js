@@ -3,14 +3,16 @@
 slot="prev-button"
 
 Available when the slideshow has `controls="navigation"` enabled, this slot
-allows the inclusion of html content into the previous navigation button. For
-example, this slot can be used to replace the default icon with an inline SVG:
+allows the inclusion of html content into the 'previous' navigation button. By
+default the slot contains an inline SVG of an icon, and some text (in English).
+Defining HTML for the slot replaces that default content:
 
 ```html
 <slide-show controls="navigation">
-    <svg slot="prev-button">
+    <svg slot="prev-button" aria-hidden="true">
         <use href="#back-icon" />
     </svg>
+    <span slot="prev-button">Dernière</span>
 </slide-show>
 ```
 **/
@@ -18,14 +20,16 @@ example, this slot can be used to replace the default icon with an inline SVG:
 /**
 slot="next-button"
 Available when the slideshow has `controls="navigation"` enabled, this slot
-allows the inclusion of html content into the next navigation button. For
-example, this slot can be used to replace the default icon with an inline SVG:
+allows the inclusion of html content into the 'next' navigation button. By
+default the slot contains an inline SVG of an icon, and some text (in English).
+Defining HTML for the slot replaces that default content:
 
 ```html
 <slide-show controls="navigation">
-    <svg slot="next-button">
+    <svg slot="next-button" aria-hidden="true">
         <use href="#forward-icon" />
     </svg>
+    <span slot="prev-button">Prochaine</span>
 </slide-show>
 ```
 **/

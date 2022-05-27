@@ -238,12 +238,14 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 </h3>
 
 <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
-allows the inclusion of html content into the previous navigation button. For
-example, this slot can be used to replace the default icon with an inline SVG:</p>
+allows the inclusion of html content into the ‘previous’ navigation button. By
+default the slot contains an inline SVG of an icon, and some text (in English).
+Defining HTML for the slot replaces that default content:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#back-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Dernière<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
 </div>
@@ -257,12 +259,14 @@ example, this slot can be used to replace the default icon with an inline SVG:</
 </h3>
 
 <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
-allows the inclusion of html content into the next navigation button. For
-example, this slot can be used to replace the default icon with an inline SVG:</p>
+allows the inclusion of html content into the ‘next’ navigation button. By
+default the slot contains an inline SVG of an icon, and some text (in English).
+Defining HTML for the slot replaces that default content:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next-button<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#forward-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Prochaine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
 </div>
@@ -276,12 +280,14 @@ example, this slot can be used to replace the default icon with an inline SVG:</
 </h3>
 
 <p>Available when the slideshow has <code>controls=&quot;fullscreen&quot;</code> enabled, this slot
-allows the inclusion of html content into the fullscreen button. For example,
-this slot can be used to replace the default icon with an inline SVG:</p>
+allows the inclusion of html content into the fullscreen button. By default the
+slot contains an inline SVG of an icon, and some text (in English). Defining
+HTML for the slot replaces that default content:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen-button<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#fullscreen-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Plein écran<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
 </div>

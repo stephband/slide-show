@@ -1,7 +1,7 @@
 {
     "title": "slide-show",
     "name": "@stephband/slide-show",
-    "version": "1.1.6",
+    "version": "1.2.0",
     "description": "The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped.",
     "keywords": ["carousel", "slider", "slide", "slideshow", "gallery", "scroll", "web", "component", "custom", "element"],
     "author": {
