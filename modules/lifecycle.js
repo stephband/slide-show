@@ -210,14 +210,15 @@ export default {
 
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the
-        // focused slide. Todo: FF not getting this.
+        // focused slide. Start by tracking the latest input device...
         Stream
         .merge(events('pointerdown', this), events('keydown', this))
-        .reduce((data, e) => {
-            data.device = e.type === 'keydown' ? 'keyboard' : e.pointerType ;
-            return data;
-        }, data);
+        .each((e) => (data.device = e.type === 'keydown' ?
+            'keyboard' :
+            e.pointerType
+        ));
 
+        // Then listen to focus events. Todo: FF not getting this.
         events('focusin', this)
         .filter((e) => (console.log(data.device), data.device === 'keyboard'))
         .map((e) => (
