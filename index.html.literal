@@ -14,7 +14,7 @@
 
 <body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid y-start-grid">
     <header class="x1 3x @1-x1 @1-4x @2-x2">
-        <h1 class="docs-text-01">&lt;slide-show&gt;</h1>
+        <h1 class="docs-text-01"><span class="tag-brace">&lt;</span>slide-show<span class="tag-brace">&gt;</span>${ include('./docs/templates/version.literal', './package.json') }</h1>
         <p class="@1-no-wrap">The accessible, scrollable, styleable, horizontal carousel custom element. <br class="@1-shown"/>No dependencies, about <code>12kB</code> minified and gzipped.</p>
     </header>
 

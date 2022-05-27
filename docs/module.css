@@ -95,6 +95,10 @@ code {
     .docs-text-01 { font-size: 7vw; }
 }
 
+.docs-text-01 > .tag-brace {
+    vertical-align: -0.04em;
+}
+
 .docs-text-05 > a {
     min-height: 0;
     padding: 0;

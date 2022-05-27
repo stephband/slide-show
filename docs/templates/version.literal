@@ -1,0 +1,1 @@
+<span style="font-size: 0.1666667em; font-family: 'MartianMono'; font-variation-settings: 'wght' 400, 'wdth' 96; letter-spacing: -0.125em;">${ data.version }</span>
