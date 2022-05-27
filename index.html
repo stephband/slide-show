@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Literal template "/Users/stephband/Sites/unipop/unipop/static/slide-show/index.html.literal" -->
+<!-- Literal template "/Users/stephband/Sites/slide-show/index.html.literal" -->
 
 <html lang="en">
 <head>
@@ -239,7 +239,7 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
 allows the inclusion of html content into the previous navigation button. For
-example, this slot is useful for replacing the default icon with an inline SVG.</p>
+example, this slot can be used to replace the default icon with an inline SVG:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#back-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
@@ -258,7 +258,7 @@ example, this slot is useful for replacing the default icon with an inline SVG.<
 
 <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
 allows the inclusion of html content into the next navigation button. For
-example, this slot is useful for replacing the default icon with an inline SVG.</p>
+example, this slot can be used to replace the default icon with an inline SVG:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#forward-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
@@ -276,8 +276,8 @@ example, this slot is useful for replacing the default icon with an inline SVG.<
 </h3>
 
 <p>Available when the slideshow has <code>controls=&quot;fullscreen&quot;</code> enabled, this slot
-allows the inclusion of html content into the fullscreen button. For an example,
-this slot is useful for replacing the default icon with an inline SVG.</p>
+allows the inclusion of html content into the fullscreen button. For example,
+this slot can be used to replace the default icon with an inline SVG:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#fullscreen-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
@@ -377,22 +377,6 @@ enabled. By default button icons are background images. Replace the background
 image to change the icon.</p>
 <pre><code class="language-css"><span class="token selector">slide-show::part(fullscreen-button)</span> <span class="token punctuation">{</span>
     <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'./docs/templates/css/fullscreen.svg'</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-
-</div>
-
-
-<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-fullscreen-button-active">
-<h3 class="part-docs-text-05 docs-text-05">
-    <a href="#part-fullscreen-button-active">
-        <code class=" language-css">::part(fullscreen-button-active)</code>
-    </a>
-</h3>
-
-<p>Style the fullscreen button while in fullscreen mode. By default button icons
-are background images. Replace the background image to change the icon.</p>
-<pre><code class="language-css"><span class="token selector">slide-show::part(fullscreen-button-active)</span> <span class="token punctuation">{</span>
-    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'./docs/templates/css/close.svg'</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 
 </div>

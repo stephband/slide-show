@@ -93,20 +93,6 @@
     overflow: visible;
 }
 
-:host(:-webkit-full-screen) {
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-    background-color: #121212;
-}
-
-:host(:fullscreen) {
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-    background-color: #121212;
-}
-
 .invisible {
     /* Keep content accessible but not visible. */
     position: absolute;

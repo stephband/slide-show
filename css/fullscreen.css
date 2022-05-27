@@ -1,4 +1,76 @@
 
+:host(:-webkit-full-screen) {
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: white;
+    background-color: #121212;
+}
+
+:host(:fullscreen) {
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: white;
+    background-color: #121212;
+}
+
+/*
+[part="fullscreen-button"]
+Changes position in fullscreen mode.
+*/
+
+:host(:-webkit-full-screen) [part="fullscreen-button"] {
+    grid-column: auto;
+    grid-row: auto;
+    position: absolute;
+    top: 0.75em;
+    right: 0.75em;
+    margin: 0;
+    bottom: auto;
+}
+
+:host(:fullscreen) [part="fullscreen-button"] {
+    grid-column: auto;
+    grid-row: auto;
+    position: absolute;
+    top: 0.75em;
+    right: 0.75em;
+    margin: 0;
+    bottom: auto;
+}
+
+/*
+.fullscreen-hidden
+Hide an element when inside an element in fullscreen mode.
+*/
+
+:host(:-webkit-full-screen) .fullscreen-hidden {
+    display: none !important;
+}
+
+:host(:fullscreen) .fullscreen-hidden {
+    display: none !important;
+}
+
+
+/*
+.fullscreen-shown
+Hide an element when not in fullscreen mode.
+*/
+
+:host(:not(:-webkit-full-screen)) .fullscreen-shown {
+    display: none !important;
+}
+
+:host(:not(:fullscreen)) .fullscreen-shown {
+    display: none !important;
+}
+
 
 /**
 ::part(fullscreen-button)
@@ -9,18 +81,6 @@ image to change the icon.
 ```css
 slide-show::part(fullscreen-button) {
     background-image: url('./fullscreen.svg');
-}
-```
-**/
-
-/**
-::part(fullscreen-button-active)
-Style the fullscreen button while in fullscreen mode. By default button icons
-are background images. Replace the background image to change the icon.
-
-```css
-slide-show::part(fullscreen-button-active) {
-    background-image: url('./close.svg');
 }
 ```
 **/
@@ -39,24 +99,17 @@ slide-show::part(fullscreen-button-active) {
 
     /* Nullify stuff */
     padding: 0;
-    width: 0;
+    width: 1.875em;
+    height: 1.875em;
     min-width: 0;
     line-height: inherit;
     text-decoration: none;
-
-    /* Hide text by pushing it rightward, leaving background image to 'replace'
-       it. */
-    padding-left: 1.875em;
-    height: 1.875em;
     cursor: pointer;
 
     background-size: contain;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-color: transparent;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <path d="M9,9 L17,17 M9,15 L9,9 L15,9 M9,31 L17,23 M9,25 L9,31 L15,31 M31,31 L23,23 M25,31 L31,31 L31,25 M31,9 L23,17 M25,9 L31,9 L31,15" stroke="black" stroke-width="2" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"></path>\
-    </svg>');
 
     border-width: 0;
     border-radius: 0.3125em;
@@ -67,30 +120,4 @@ slide-show::part(fullscreen-button-active) {
 [part*="fullscreen-button"]:hover {
     transition: background-color 0.1s linear;
     background-color: rgba(255, 255, 255, 0.3);
-}
-
-[part*="fullscreen-button-active"] {
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <path d="M9,9 L31,31 M9,31 L31,9" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"></path>\
-    </svg>');
-}
-
-:host(:fullscreen) [part*="fullscreen-button"] {
-    grid-column: auto;
-    grid-row: auto;
-    position: absolute;
-    top: 0.75em;
-    right: 0.75em;
-    margin: 0;
-    bottom: auto;
-}
-
-:host(:-webkit-full-screen) [part*="fullscreen-button"] {
-    grid-column: auto;
-    grid-row: auto;
-    position: absolute;
-    top: 0.75em;
-    right: 0.75em;
-    margin: 0;
-    bottom: auto;
 }

@@ -1,9 +1,10 @@
 
 /**
 slot="prev-button"
+
 Available when the slideshow has `controls="navigation"` enabled, this slot
 allows the inclusion of html content into the previous navigation button. For
-example, this slot is useful for replacing the default icon with an inline SVG.
+example, this slot can be used to replace the default icon with an inline SVG:
 
 ```html
 <slide-show controls="navigation">
@@ -18,7 +19,7 @@ example, this slot is useful for replacing the default icon with an inline SVG.
 slot="next-button"
 Available when the slideshow has `controls="navigation"` enabled, this slot
 allows the inclusion of html content into the next navigation button. For
-example, this slot is useful for replacing the default icon with an inline SVG.
+example, this slot can be used to replace the default icon with an inline SVG:
 
 ```html
 <slide-show controls="navigation">
@@ -65,15 +66,31 @@ export function enable(host) {
             type: "button",
             name: "navigation",
             value: "-1",
-            children: [create('slot', { name: 'prev-button' }), 'Previous']
+            children: [create('slot', {
+                name: 'prev-button',
+                html: `
+                    <svg viewBox="0 0 30 40" aria-hidden="true">
+                        <path d="M19,9 L9,20 L19,31"></path>
+                    </svg>
+                    Previous
+                `
+            })]
         }),
 
         next: create('button', {
             part: 'next-button',
             type: "button",
             name: "navigation",
-            value: "1", 
-            children: [create('slot', { name: 'next-button' }), 'Next']
+            value: "1",
+            children: [create('slot', {
+                name: 'next-button',
+                html: `
+                    <svg viewBox="0 0 30 40" aria-hidden="true">
+                        <path d="M11,9 L21,20 L11,31"></path>
+                    </svg>
+                    Next
+                `
+            })]
         })
     };
 

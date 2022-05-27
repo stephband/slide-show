@@ -35,14 +35,13 @@ slide-show::part(next-button) {
 
     /* Nullify stuff */
     padding: 0;
-    width: 0;
+    width: 1.875rem;
     min-width: 0;
     line-height: inherit;
     text-decoration: none;
 
     /* Hide text by pushing it rightward, leaving background image to
        'replace' it */
-    padding-left: 1.875rem;
     height: 2.5rem;
     margin-top: -1.25rem;
 
@@ -60,16 +59,10 @@ slide-show::part(next-button) {
 
 [part="prev-button"] {
     left: 0.1875rem;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 40" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <path d="M19,9 L9,20 L19,31" stroke="black" stroke-width="2" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"></path>\
-    </svg>');
 }
 
 [part="next-button"] {
     right: 0.1875rem;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 40" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">\
-        <path d="M11,9 L21,20 L11,31" stroke="black" stroke-width="2" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"></path>\
-    </svg>');
 }
 
 [part="prev-button"]:hover,

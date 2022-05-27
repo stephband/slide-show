@@ -138,7 +138,7 @@ export default {
         .merge(slotchanges, events('resize', window))
         .each((e) => updateWidth(scroller, slides, data.elements));
 
-        // Wait for fist slotchange/load, then maintain active position. In
+        // Wait for first slotchange/load, then maintain active position. In
         // Chrome this fails on connect, as it appears the style is not applied
         // immediately, so jumpTo() can't measure positions properly.
         Stream
@@ -220,7 +220,7 @@ export default {
 
         // Then listen to focus events. Todo: FF not getting this.
         events('focusin', this)
-        .filter((e) => (console.log(data.device), data.device === 'keyboard'))
+        .filter((e) => (data.device === 'keyboard'))
         .map((e) => (
             // Is e.target a slide
             data.children.indexOf(e.target) !== -1 ? e.target :

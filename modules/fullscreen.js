@@ -1,9 +1,10 @@
 
 /**
 slot="fullscreen-button"
+
 Available when the slideshow has `controls="fullscreen"` enabled, this slot
-allows the inclusion of html content into the fullscreen button. For an example,
-this slot is useful for replacing the default icon with an inline SVG.
+allows the inclusion of html content into the fullscreen button. For example,
+this slot can be used to replace the default icon with an inline SVG:
 
 ```html
 <slide-show controls="fullscreen">
@@ -34,28 +35,32 @@ export function enable(host) {
     }
 
     // Add an object to store navigation state
-    const text = create('text', 'Open in fullscreen');
     const fullscreen = data.fullscreen = {
-        text,
         button: create('button', {
             part: 'fullscreen-button',
             type: "button",
             name: "fullscreen",
-            children: [
-                create('slot', { name: 'fullscreen-button' }),
-                text
-            ]
+            children: [create('slot', {
+                name: 'fullscreen-button',
+                html: `
+                    <svg viewBox="0 0 40 40" aria-hidden="true">
+                        <path class="fullscreen-hidden" d="M9,9 L17,17 M9,15 L9,9 L15,9 M9,31 L17,23 M9,25 L9,31 L15,31 M31,31 L23,23 M25,31 L31,31 L31,25 M31,9 L23,17 M25,9 L31,9 L31,15"></path>
+                        <path class="fullscreen-shown"  d="M9,9 L31,31 M9,31 L31,9"></path>
+                    </svg>
+                    <span class="fullscreen-hidden">Open in fullscreen</span>
+                    <span class="fullscreen-shown">Close fullscreen</span>
+                `
+            })]
         }),
     };
 
+    //data.fullscreen.button.append(text);
     data.controls.append(fullscreen.button);
 
     fullscreen.changes = events('fullscreenchange', host)
     .filter((e) => getFullscreenElement() === host)
     .each((e) => {
         // Setup fullscreen
-        fullscreen.button.part.add('fullscreen-button-active');
-        fullscreen.text.textContent = 'Close fullscreen';
 
         // In Chrome and FF, the fullscreen element receives focus without an
         // explicit tabIndex, in Safari we must encourage it by adding one.
@@ -70,8 +75,6 @@ export function enable(host) {
         // Setup fullscreen exit
         const fullscreenend = events('fullscreenchange', host)
         .each((e) => {
-            fullscreen.button.part.remove('fullscreen-button-active');
-            fullscreen.text.textContent = 'Open in fullscreen';
             host.tabIndex = fullscreen.tabIndex;
             fullscreen.tabIndex = undefined;
             fullscreenend.stop();

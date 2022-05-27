@@ -1,0 +1,10 @@
+
+/* Style for SVG icons */
+
+svg {
+    stroke:         currentcolor;
+    stroke-width:   2;
+    stroke-linecap: round;
+    fill:           none;
+    vector-effect:  non-scaling-stroke;
+}
