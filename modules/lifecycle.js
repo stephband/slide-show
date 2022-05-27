@@ -118,6 +118,7 @@ export default {
             style:     window.getComputedStyle(this),
             elements:  nothing,
             children:  nothing,
+            device:    undefined,
             shadow,
             scroller,
             slides,
@@ -210,7 +211,15 @@ export default {
         // Chrome behaves nicely when shifting focus between slides, Safari and
         // FF not so much. Let's give them a helping hand at displaying the
         // focused slide. Todo: FF not getting this.
+        Stream
+        .merge(events('pointerdown', this), events('keydown', this))
+        .reduce((data, e) => {
+            data.device = e.type === 'keydown' ? 'keyboard' : e.pointerType ;
+            return data;
+        }, data);
+
         events('focusin', this)
+        .filter((e) => (console.log(data.device), data.device === 'keyboard'))
         .map((e) => (
             // Is e.target a slide
             data.children.indexOf(e.target) !== -1 ? e.target :
