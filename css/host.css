@@ -56,7 +56,8 @@
 
     /* Must override anything applied to :fullscreen, however must not be
        !important as that can't be overridden externally, I don't think. */
-    display: block;
+    display: flex;
+    flex-direction: column;
 
     /* .scroller takes over viewport duties */
     padding-left:  0 !important;
@@ -91,6 +92,20 @@
     -ms-overflow-style: none !important; /* IE 11 */
     scrollbar-width: none !important; /* Firefox 64 */
     overflow: visible;
+}
+
+:host > .scroller,
+:host > [part="controls"] {
+    align-self: stretch;
+}
+
+:host > .scroller {
+    height: 100%;
+    justify-self: stretch;
+}
+
+:host > [part="controls"] {
+    justify-self: auto;
 }
 
 .invisible {
