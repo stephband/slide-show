@@ -140,7 +140,7 @@ export default {
         Stream
         .merge(slotchanges, events('resize', window))
         .filter((e) => (this.offsetWidth > 0 && this.offsetHeight > 0))
-        .each((e) => (console.log('updateWidth'), updateWidth(scroller, slides, data.elements)));
+        .each((e) => (console.log('updateWidth', this), updateWidth(scroller, slides, data.elements)));
 
         // Wait for first slotchange/load, then maintain active position. In
         // Chrome this fails on connect, as it appears the style is not applied
