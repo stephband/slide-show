@@ -76,8 +76,8 @@
     grid-template-columns: none;
     column-gap:            0;
 
-    grid-auto-rows:        min-content;
-    grid-template-rows:    1fr;
+    grid-auto-rows:        auto;
+    /*grid-template-rows:    1fr;*/
     row-gap:               0;
 
     scroll-snap-type: none !important;
