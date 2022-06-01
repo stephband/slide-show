@@ -204,11 +204,12 @@ export default {
 
         // Update positions on entry or exit from fullscreen.
         events('fullscreenchange', window)
+        .filter((e) => data.active)
         .each((e) => {
             // If this slide-show was involved in the fullscreen change
             // reposition the active slide, it may have been shuftied.
             if (e.target === this || e.target.contains(this)) {
-                requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(() => (console.log('FULLSCREEN', slides.offsetWidth, slides.offsetHeight, slides.offsetParent, data.active), jumpTo(scroller, data.active)))));
+                requestAnimationFrame(() => (console.log('FULLSCREEN', slides.offsetWidth, slides.offsetHeight, slides.offsetParent, data.active), jumpTo(scroller, data.active)));
             }
         });
 
