@@ -85,7 +85,7 @@ slide-show::part(fullscreen-button) {
 ```
 **/
 
-[part*="fullscreen-button"] {
+[part="fullscreen-button"] {
     vertical-align: baseline;
     overflow: hidden;
     z-index: 2;
@@ -115,9 +115,15 @@ slide-show::part(fullscreen-button) {
     border-radius: 0.3125em;
     color: inherit;
     transition: background-color 0.2s linear;
+
+    /* Inherited by inner SVG, but make overideable here */
+    stroke-width:   2;
+    stroke-linecap: round;
+    fill:           none;
+    vector-effect:  non-scaling-stroke;
 }
 
-[part*="fullscreen-button"]:hover {
+[part="fullscreen-button"]:hover {
     transition: background-color 0.1s linear;
     background-color: rgba(255, 255, 255, 0.3);
 }

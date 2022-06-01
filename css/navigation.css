@@ -55,6 +55,12 @@ slide-show::part(next-button) {
     transition: background-color 0.2s linear;
 
     cursor: pointer;
+
+    /* Inherited by inner SVG, but make overideable here */
+    stroke-width:   2;
+    stroke-linecap: round;
+    fill:           none;
+    vector-effect:  non-scaling-stroke;
 }
 
 [part="prev-button"] {

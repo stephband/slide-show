@@ -3,8 +3,8 @@
 
 svg {
     stroke:         currentcolor;
-    stroke-width:   2;
-    stroke-linecap: round;
-    fill:           none;
-    vector-effect:  non-scaling-stroke;
+    stroke-width:   inherit;
+    stroke-linecap: inherit;
+    fill:           inherit;
+    vector-effect:  inherit;
 }
