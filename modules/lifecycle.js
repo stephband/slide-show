@@ -133,9 +133,13 @@ export default {
             clicks
         };
 
-        // Create a stream of width updates on slotchanges and resizes
+        // Create a stream of width updates on slotchanges and resizes. We
+        // cannot know the slide-show becomes visible – it may have display: none
+        // on upgrade – so we must protect against update in cases where it is not,
+        // and hope to goodness it is updated somehow when it is made visible.
         Stream
         .merge(slotchanges, events('resize', window))
+        .filter((e) => (this.offsetWidth > 0 && this.offsetHeight > 0))
         .each((e) => updateWidth(scroller, slides, data.elements));
 
         // Wait for first slotchange/load, then maintain active position. In
