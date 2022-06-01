@@ -86,7 +86,7 @@ export function enable(host) {
     fullscreen.clicks = data.clicks.each(delegate({
         // Slotted content does not delegate through it's parent element, but it
         // does delegate through shadow, weirdly
-        '[slot="fullscreen"], [name="fullscreen"]': (target, e) => {
+        '[slot="fullscreen-button"], [name="fullscreen"]': (target, e) => {
             const fullscreenCurrent = getFullscreenElement();
 
             // Make button act as toggle: close the fullscreen
