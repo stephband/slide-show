@@ -308,11 +308,14 @@ HTML for the slot replaces that default content:</p>
 </h3>
 
 <p>Style the ‘previous slide’ button, available when the slideshow has
-<code>controls=&quot;navigation&quot;</code> enabled. By default button icons are background images.
-Replace the background image to change the icon.</p>
+<code>controls=&quot;navigation&quot;</code> enabled. Default button icons are inner SVGs that
+render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
+and <code>fill</code> properties from the button.</p>
 <pre><code class="language-css"><span class="token selector">slide-show::part(next-button)</span> <span class="token punctuation">{</span>
-    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'./docs/templates/css/chevron-prev.svg'</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+    <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<p>To fully replace the default icon, see <code>slot=&quot;prev-button&quot;</code>.</p>
 
 </div>
 
@@ -325,11 +328,14 @@ Replace the background image to change the icon.</p>
 </h3>
 
 <p>Style the ‘next slide’ button, available when the slideshow has
-<code>controls=&quot;navigation&quot;</code> enabled. By default button icons are background images.
-Replace the background image to change the icon.</p>
+<code>controls=&quot;navigation&quot;</code> enabled. Default button icons are inner SVGs that
+render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
+and <code>fill</code> properties from the button.</p>
 <pre><code class="language-css"><span class="token selector">slide-show::part(next-button)</span> <span class="token punctuation">{</span>
-    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'./docs/templates/css/chevron-next.svg'</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+    <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<p>To fully replace the default icon, see <code>slot=&quot;next-button&quot;</code>.</p>
 
 </div>
 
@@ -379,12 +385,15 @@ slideshow has <code>controls=&quot;pagination&quot;</code> enabled.</p>
     </a>
 </h3>
 
-<p>Style the fullscreen button, available when the slideshow has <code>controls=&quot;fullscreen&quot;</code>
-enabled. By default button icons are background images. Replace the background
-image to change the icon.</p>
+<p>Style the fullscreen button, available when the slideshow has
+<code>controls=&quot;fullscreen&quot;</code> enabled. Default button icons are inner SVGs that
+render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
+and <code>fill</code> properties from the button.</p>
 <pre><code class="language-css"><span class="token selector">slide-show::part(fullscreen-button)</span> <span class="token punctuation">{</span>
-    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'./docs/templates/css/fullscreen.svg'</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+    <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<p>To fully replace the default icon, see <code>slot=&quot;fullscreen-button&quot;</code>.</p>
 
 </div>
 
