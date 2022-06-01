@@ -103,13 +103,13 @@ export function enable(host) {
     // Create a stream of updates starting with the current active
     navigation.updates = Stream
     .combine({ active: actives, changes: slotchanges, scroll: scrolls })
-    .each((state) => (console.log('STATE', state), update(
+    .each((state) => update(
         scroller,
         navigation.prev,
         navigation.next,
         state.changes.elements,
         state.changes.elements.indexOf(state.active)
-    )));
+    ));
 
     navigation.clicks = clicks.each(delegate({
         // Slotted content does not delegate through it's parent element, but it
