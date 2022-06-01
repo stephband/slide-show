@@ -110,6 +110,12 @@ export default {
             .filter(isPrimaryButton)
             .broadcast();
 
+        // Track when scroll comes to rest...
+        const scrolls = scrollends(scroller)
+            // ...but not after disconnect or mid finger gesture...
+            .filter((e) => (data.connected && !data.gesturing))
+            .broadcast();
+
         // Private data
         const data = this[$data] = {
             clickSuppressTime: -Infinity,
@@ -130,13 +136,14 @@ export default {
             actives,
             slotchanges,
             mutations,
-            clicks
+            clicks,
+            scrolls
         };
 
         // Create a stream of width updates on slotchanges and resizes. We
-        // cannot know the slide-show becomes visible – it may have display: none
-        // on upgrade – so we must protect against update in cases where it is not,
-        // and hope to goodness it is updated somehow when it is made visible.
+        // cannot know if the slide-show is visible – it may have display: none –
+        // so we must protect against update in cases where it is not, and cross
+        // our fingers it is updated somehow when it is made visible.
         Stream
         .merge(slotchanges, events('resize', window))
         .filter((e) => (slides.offsetWidth && slides.offsetHeight))
@@ -167,7 +174,7 @@ export default {
         ))
         .map((child) => (data.connected ?
             data.active ?
-                // This is a activation, scroll to the new active child
+                // This is an activation, scroll to the new active child
                 scrollTo(scroller, child) :
                 // If active is not yet defined jump to the newly active child
                 jumpTo(scroller, child) :
@@ -176,10 +183,8 @@ export default {
         ))
         .pipe(activations);
 
-        // Update active when scroll comes to rest, but not mid-gesture.
-        scrollends(scroller)
-        .filter((e) => (data.connected && !data.gesturing))
-        // Of course, this causes a scroll, which causes a scrollend...
+        scrolls(scroller)
+        // ...of course, this causes a scroll, which causes a scrollend.
         .each((e) => updateActive(data));
 
         // Enable single finger scroll on mouse devices. Dodgy idea in my

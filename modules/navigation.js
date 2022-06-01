@@ -61,7 +61,7 @@ function update(scroller, prev, next, elements, i) {
 
 export function enable(host) {
     const data = host[$data];
-    const { actives, clicks, slotchanges, scroller } = data;
+    const { actives, clicks, slotchanges, scroller, scrolls } = data;
 
     // Add an object to store navigation state
     const navigation = data.navigation = {
@@ -102,7 +102,7 @@ export function enable(host) {
 
     // Create a stream of updates starting with the current active
     navigation.updates = Stream
-    .combine({ active: actives, changes: slotchanges })
+    .combine({ active: actives, changes: slotchanges, scroll: scrolls })
     .each((state) => (console.log('STATE', state), update(
         scroller,
         navigation.prev,
