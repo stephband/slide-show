@@ -183,9 +183,8 @@ export default {
         ))
         .pipe(activations);
 
-        scrolls(scroller)
-        // ...of course, this causes a scroll, which causes a scrollend.
-        .each((e) => updateActive(data));
+        // Keep active up-to-date following a scroll
+        scrolls.each((e) => updateActive(data));
 
         // Enable single finger scroll on mouse devices. Dodgy idea in my
         // opinion, but it does add support for mouse-only devices.
