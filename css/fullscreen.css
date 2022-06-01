@@ -74,15 +74,19 @@ Hide an element when not in fullscreen mode.
 
 /**
 ::part(fullscreen-button)
-Style the fullscreen button, available when the slideshow has `controls="fullscreen"`
-enabled. By default button icons are background images. Replace the background
-image to change the icon.
+Style the fullscreen button, available when the slideshow has
+`controls="fullscreen"` enabled. Default button icons are inner SVGs that
+render `stroke` as `currentcolor` and inherit `stroke-width`, `stroke-linecap`
+and `fill` properties from the button.
 
 ```css
 slide-show::part(fullscreen-button) {
-    background-image: url('./fullscreen.svg');
+    color: blue;
+    stroke-width: 3px;
 }
 ```
+
+To fully replace the default icon, see `slot="fullscreen-button"`.
 **/
 
 [part="fullscreen-button"] {
@@ -116,7 +120,7 @@ slide-show::part(fullscreen-button) {
     color: inherit;
     transition: background-color 0.2s linear;
 
-    /* Inherited by inner SVG, but make overideable here */
+    /* Inherited by inner SVG, overideable here */
     stroke-width:   2;
     stroke-linecap: round;
     fill:           none;

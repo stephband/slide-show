@@ -2,27 +2,35 @@
 /**
 ::part(prev-button)
 Style the 'previous slide' button, available when the slideshow has
-`controls="navigation"` enabled. By default button icons are background images.
-Replace the background image to change the icon.
+`controls="navigation"` enabled. Default button icons are inner SVGs that
+render `stroke` as `currentcolor` and inherit `stroke-width`, `stroke-linecap`
+and `fill` properties from the button.
 
 ```css
 slide-show::part(next-button) {
-    background-image: url('./chevron-prev.svg');
+    color: blue;
+    stroke-width: 3px;
 }
 ```
+
+To fully replace the default icon, see `slot="prev-button"`.
 **/
 
 /**
 ::part(next-button)
 Style the 'next slide' button, available when the slideshow has
-`controls="navigation"` enabled. By default button icons are background images.
-Replace the background image to change the icon.
+`controls="navigation"` enabled. Default button icons are inner SVGs that
+render `stroke` as `currentcolor` and inherit `stroke-width`, `stroke-linecap`
+and `fill` properties from the button.
 
 ```css
 slide-show::part(next-button) {
-    background-image: url('./chevron-next.svg');
+    color: blue;
+    stroke-width: 3px;
 }
 ```
+
+To fully replace the default icon, see `slot="next-button"`.
 **/
 
 [part="prev-button"],
@@ -56,7 +64,7 @@ slide-show::part(next-button) {
 
     cursor: pointer;
 
-    /* Inherited by inner SVG, but make overideable here */
+    /* Inherited by inner SVG, overideable here */
     stroke-width:   2;
     stroke-linecap: round;
     fill:           none;
