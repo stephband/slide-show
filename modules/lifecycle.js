@@ -139,8 +139,8 @@ export default {
         // and hope to goodness it is updated somehow when it is made visible.
         Stream
         .merge(slotchanges, events('resize', window))
-        .filter((e) => (this.offsetWidth > 0 && this.offsetHeight > 0))
-        .each((e) => (console.log('updateWidth', this.offsetWidth, this.offsetHeight, this.offsetParent, this), updateWidth(scroller, slides, data.elements)));
+        .filter((e) => (slides.offsetWidth > 0 && slides.offsetHeight > 0))
+        .each((e) => (console.log('updateWidth', slides.offsetWidth, slides.offsetHeight, slides.offsetParent, this), updateWidth(scroller, slides, data.elements)));
 
         // Wait for first slotchange/load, then maintain active position. In
         // Chrome this fails on connect, as it appears the style is not applied
