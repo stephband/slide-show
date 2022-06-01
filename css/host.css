@@ -55,8 +55,8 @@
     position: relative;
 
     /* Must override anything applied to :fullscreen, however must not be
-       !important as that can't be overridden externally. I don't think. */
-    display: block !important;
+       !important as that can't be overridden externally, I don't think. */
+    display: block;
 
     /* .scroller takes over viewport duties */
     padding-left:  0 !important;

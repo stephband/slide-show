@@ -4,7 +4,6 @@
 slide-show {
     /* Rules that can be overridden with classes, which themselves override
        :host styles. */
-    display: grid;
     position: relative;
     box-sizing: border-box;
     padding: 0;
@@ -31,15 +30,16 @@ slide-show {
 }
 
 slide-show:not(:defined) {
+    display: grid;
+
     /* Rules that you want to override on slide-show when the element is not
        upgraded  */
     overflow: scroll;
     overflow-y: hidden;
 }
 
-slide-show:not(:defined) > [slot="prev-button"],
-slide-show:not(:defined) > [slot="next-button"] {
-    display: none;
+slide-show:not(:defined) > [slot] {
+    display: none !important;
 }
 
 .loading slide-show {
