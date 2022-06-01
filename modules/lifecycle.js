@@ -140,7 +140,7 @@ export default {
         Stream
         .merge(slotchanges, events('resize', window))
         .filter((e) => (this.offsetWidth > 0 && this.offsetHeight > 0))
-        .each((e) => updateWidth(scroller, slides, data.elements));
+        .each((e) => (console.log('updateWidth'), updateWidth(scroller, slides, data.elements)));
 
         // Wait for first slotchange/load, then maintain active position. In
         // Chrome this fails on connect, as it appears the style is not applied
@@ -151,7 +151,7 @@ export default {
             data.active :
             data.children[0]
         ))
-        .map((child) => (data.connected ?
+        .map((child) => (console.log('A'), data.connected ?
             jumpTo(scroller, child) :
             child
         ))
@@ -165,7 +165,7 @@ export default {
             state.child :
             undefined
         ))
-        .map((child) => (data.connected ?
+        .map((child) => (console.log('B'), data.connected ?
             data.active ?
                 // This is a activation, scroll to the new active child
                 scrollTo(scroller, child) :
@@ -208,6 +208,7 @@ export default {
             // If this slide-show was involved in the fullscreen change
             // reposition the active slide, it may have been shuftied.
             if (e.target === this || e.target.contains(this)) {
+                console.log('FULLSCREEN');
                 jumpTo(scroller, data.active);
             }
         });
