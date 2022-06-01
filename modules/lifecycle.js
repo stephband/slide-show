@@ -209,7 +209,7 @@ export default {
             // reposition the active slide, it may have been shuftied.
             if (e.target === this || e.target.contains(this)) {
                 console.log('FULLSCREEN');
-                requestAnimationFrame(() => jumpTo(scroller, data.active));
+                requestAnimationFrame(() => requestAnimationFrame(() => jumpTo(scroller, data.active)));
             }
         });
 
