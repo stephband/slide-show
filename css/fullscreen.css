@@ -120,7 +120,6 @@ slide-show::part(fullscreen-button) {
     stroke-width:   2;
     stroke-linecap: round;
     fill:           none;
-    vector-effect:  non-scaling-stroke;
 }
 
 [part="fullscreen-button"]:hover {

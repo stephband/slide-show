@@ -6,5 +6,5 @@ svg {
     stroke-width:   inherit;
     stroke-linecap: inherit;
     fill:           inherit;
-    vector-effect:  inherit;
+    vector-effect:  non-scaling-stroke;
 }

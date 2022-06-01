@@ -60,7 +60,6 @@ slide-show::part(next-button) {
     stroke-width:   2;
     stroke-linecap: round;
     fill:           none;
-    vector-effect:  non-scaling-stroke;
 }
 
 [part="prev-button"] {
