@@ -6,7 +6,6 @@
 .scroller {
     display: block;
     position: relative;
-    height: 100%;
 
     padding-left:         var(--padding-left, 0);
     padding-right:        var(--padding-right, 0);
@@ -66,18 +65,7 @@
     /* Make sure it's behind everything else */
     z-index: -1;
 }
-/*
-:host([loop]) > .scroller {
-    /* Padding does not make sense when loop is on. */
-/*    padding-left:  0;
-    padding-right: 0;
-}
 
-:host([loop]) > .scroller::before {
-    /* So neither does the width hack. */
-/*    content: none;
-}
-*/
 .scroller::-webkit-scrollbar {
     /* Not convinced this is necessary */
     -webkit-appearance: none;
@@ -101,12 +89,4 @@
 .scroller > [part="slides"] {
     position: relative;
     z-index: 1;
-}
-
-:host(:-webkit-full-screen) .scroller {
-    height: calc(100% - 2.75rem);
-}
-
-:host(:fullscreen) .scroller {
-    height: calc(100% - 2.75rem);
 }
