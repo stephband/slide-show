@@ -208,7 +208,7 @@ export default {
             // If this slide-show was involved in the fullscreen change
             // reposition the active slide, it may have been shuftied.
             if (e.target === this || e.target.contains(this)) {
-                requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(() => (console.log('FULLSCREEN'), jumpTo(scroller, data.active)))));
+                requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(() => (console.log('FULLSCREEN', slides.offsetWidth, slides.offsetHeight, slides.offsetParent, data.active), jumpTo(scroller, data.active)))));
             }
         });
 
