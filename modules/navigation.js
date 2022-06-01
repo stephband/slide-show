@@ -41,17 +41,17 @@ import delegate from '../../dom/modules/delegate.js';
 import { activatePrevious, activateNext, activateIndex } from './active.js';
 import { $data }         from './consts.js';
 
-function update(prev, next, elements, i) {
+function update(scroller, prev, next, elements, i) {
     // Preemptively hide buttons now (before new active is detected at
     // end of scroll)
-    if (i === 0) {
+    if (i === 0 || scroller.scrollLeft === 0) {
         prev.hidden = true;
     }
     else {
         prev.hidden = false;
     }
 
-    if (i === elements.length - 1) {
+    if (i === elements.length - 1 || scroller.scrollLeft >= scroller.scrollWidth - scroller.clientWidth) {
         next.hidden = true;
     }
     else {
@@ -61,7 +61,7 @@ function update(prev, next, elements, i) {
 
 export function enable(host) {
     const data = host[$data];
-    const { actives, clicks, slotchanges } = data;
+    const { actives, clicks, slotchanges, scroller } = data;
 
     // Add an object to store navigation state
     const navigation = data.navigation = {
@@ -103,12 +103,13 @@ export function enable(host) {
     // Create a stream of updates starting with the current active
     navigation.updates = Stream
     .combine({ active: actives, changes: slotchanges })
-    .each((state) => update(
+    .each((state) => (console.log('STATE', state), update(
+        scroller,
         navigation.prev,
         navigation.next,
         state.changes.elements,
         state.changes.elements.indexOf(state.active)
-    ));
+    )));
 
     navigation.clicks = clicks.each(delegate({
         // Slotted content does not delegate through it's parent element, but it
