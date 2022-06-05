@@ -17,22 +17,21 @@ HTML for the slot replaces that default content:
 ```
 **/
 
-import create   from '../../dom/modules/create.js';
-import delegate from '../../dom/modules/delegate.js';
-import events   from '../../dom/modules/events.js';
+import create    from '../../dom/modules/create.js';
+import delegate  from '../../dom/modules/delegate.js';
+import events    from '../../dom/modules/events.js';
 import { fullscreenEnabled, getFullscreenElement, enterFullscreen, exitFullscreen } from '../../dom/modules/fullscreen.js';
 
-import { $data }          from './consts.js';
+import { $data } from './consts.js';
 
+if (window.DEBUG && !fullscreenEnabled) {
+    console.warn('<slide-show> fullscreen API not supported, fullscreen controls will not be rendered');
+}
 
 export function enable(host) {
     const data = host[$data];
 
     if (!fullscreenEnabled) {
-        if (window.DEBUG) {
-            console.warn('<slide-show> fullscreen mode not available in this browser, fullscreen controls not rendered');
-        }
-
         return;
     }
 
