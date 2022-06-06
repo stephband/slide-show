@@ -48,7 +48,7 @@ import element    from '../dom/modules/element.js';
 import lifecycle  from './modules/lifecycle.js';
 import properties from './modules/properties.js';
 
-const stylesheet = window.slideshowStylesheetPath || import.meta.url.replace(/\/[^\/]*\.js/, '/slide-show-shadow.css');
+const stylesheet = window.slideshowShadowStylesheet || import.meta.url.replace(/\/[^\/]*\.js/, '/slide-show-shadow.css');
 
 export default element('slide-show', lifecycle, properties, stylesheet);
 

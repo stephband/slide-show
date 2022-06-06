@@ -3,7 +3,6 @@ import createBoolean   from '../../dom/modules/element/create-boolean.js';
 import createTokenList from '../../dom/modules/element/create-token-list.js';
 
 import { $data }       from './consts.js';
-import { scrollTo }    from './active.js';
 import * as autoplay   from './autoplay.js';
 import * as loop       from './loop.js';
 import * as navigation from './navigation.js';
