@@ -94,6 +94,10 @@
     overflow: visible;
 }
 
+:host([hidden]) {
+    display: none;
+}
+
 :host > .scroller,
 :host > [part="controls"] {
     align-self: stretch;
