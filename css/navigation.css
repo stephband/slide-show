@@ -83,3 +83,9 @@ To fully replace the default icon, see `slot="next-button"`.
     transition: background-color 0.1s linear;
     background-color: rgba(255, 255, 255, 0.3);
 }
+
+[part="prev-button"] > svg,
+[part="next-button"] > svg {
+    width: 100%;
+    height: 100%;
+}

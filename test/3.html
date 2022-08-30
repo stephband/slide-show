@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="stephband" />
+    <meta name="description" content="<slide-show> test" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>&lt;slide-show&gt;</title>
+
+    <script title="debug">
+        window.DEBUG = true;
+        window.slideshowShadowStylesheet = '../shadow.css';
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-slide-show,
+        .centre-slide-show,
+        .left-slide-show,
+        .right-slide-show,
+        .grid-slide-show {
+            margin-top: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+            column-gap: 1rem;
+            --padding-left: 3rem;
+            --padding-right: 3rem;
+        }
+
+        slide-show > a,
+        slide-show > a > img,
+        slide-show > img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+        }
+    </style>
+
+    <link rel="stylesheet" href="../docs/module.css">
+    <link rel="stylesheet" href="../module.css">
+    <link rel="prefetch" href="../slide-show-shadow.css">
+</head>
+
+<body>
+    <slide-show class="main-slide-show" controls="navigation pagination" id="ss" style="visibility: hidden;">
+        <a href="/" draggable="false" id="donkeys"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="tractor"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="mauverin"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="rocks"><img src="../docs/images/rocks.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="summit"><img src="../docs/images/summit.jpg" draggable="false" /></a>
+    </slide-show>
+
+    <slide-show class="main-slide-show" controls="navigation pagination">
+        <a href="/" draggable="false" id="donkeys"><img src="../docs/images/donkeys.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="tractor"><img src="../docs/images/tractor.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="mauverin"><img src="../docs/images/mauverin.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="rocks"><img src="../docs/images/rocks.jpg" draggable="false" /></a>
+        <a href="/" draggable="false" id="summit"><img src="../docs/images/summit.jpg" draggable="false" /></a>
+    </slide-show>
+
+    <script type="module">
+        import '../module.js';
+
+        setTimeout(function() {
+             document.getElementById('ss').style.visibility = 'visible';
+        }, 500);
+    </script>
+</body>
+</html>
