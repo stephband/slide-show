@@ -87,8 +87,8 @@ To fully replace the default icon, see `slot="next-button"`.
 
 /* Default content inside the slot */
 
-[slot="prev-button"] > svg,
-[slot="next-button"] > svg {
+slot[name="prev-button"] > svg,
+slot[name="next-button"] > svg {
     width: 100%;
     height: 100%;
 }
