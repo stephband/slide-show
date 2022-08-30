@@ -186,11 +186,8 @@ export default {
         // Keep active up-to-date following a scroll
         scrolls.each((e) => updateActive(data));
 
-        // Enable single finger scroll on mouse devices. Interestingly, we
-        // cannot select the scroller, because events from content do not pass
-        // through it. We can select the slides slot, but events from gaps
-        // between the content don't go through it. So we listen to the whole
-        // shadow... which means gestures work on buttons and whatnot. Not ideal.
+        // Enable single finger scroll on mouse devices. Dodgy idea in my
+        // opinion, but it does add support for mouse-only devices.
         gestures({ threshold: '0.25rem', device: 'mouse' }, shadow)
         .filter(() => data.children.length > 1)
         .each((pointers) => {
