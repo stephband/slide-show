@@ -1,5 +1,4 @@
 
-import Stream from '../../fn/modules/stream.js';
 import rect   from '../../dom/modules/rect.js';
 
 import { $data }  from './consts.js';
