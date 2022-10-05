@@ -2,7 +2,9 @@
 /* Basic element reset */
 
 :host,
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 
     /* Set the dimensions of backgrounds to the limits of the
