@@ -54,6 +54,9 @@ Emitted by a slide when it is brought into scroll-snap alignment.
 **/
 
 export default {
+    // Uhoh Kavea needs access to scroll events ... what we gonna do here?
+    mode: 'open',
+
     construct: function(shadow) {
         // Shadow DOM
         const slides   = create('slot', { part: 'slides' });
