@@ -18,6 +18,7 @@ import { scrollTo, jumpTo, updateActive } from './active.js';
 import { processPointers } from './swipes.js';
 import scrollends    from './scrollends.js';
 
+
 function getWidth(scroller, slides, children) {
     let n = children.length;
     let r = -Infinity;
