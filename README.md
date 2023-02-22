@@ -76,6 +76,11 @@ You are now ready to write `<slide-show>` tags in your HTML:
 - `.controls` - a TokenList object supporting the tokens `"pagination"`, `"navigation"`, `"fullscreen"`
 - `.loop`     - boolean, get/set the state of loop
 
+### Methods
+
+- `.activateNext()`     - activates next slide
+- `.activatePrevious()` - activates previous slide
+
 ### Events
 
 - `'slide-active'` - emitted by a child slide when scrolled into scroll-snap alignment
