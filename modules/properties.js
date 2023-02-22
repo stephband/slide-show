@@ -67,6 +67,32 @@ export default {
     },
 
     /**
+    .activateNext()
+    Activates the next slide.
+    **/
+
+    activateNext: {
+        value: function() {
+            const { elements, views, active } = this[$data];
+            views.push(elements[elements.indexOf(active) + 1]);
+            return this;
+        }
+    },
+
+    /**
+    .activatePrevious()
+    Activates the previous slide.
+    **/
+
+    activatePrevious: {
+        value: function() {
+            const { elements, views, active } = this[$data];
+            views.push(elements[elements.indexOf(active) - 1]);
+            return this;
+        }
+    },
+
+    /**
     autoplay=""
     Boolean attribute. When present the `slide-show` activates the next
     slide after a pause.
