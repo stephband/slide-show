@@ -1,5 +1,8 @@
 
 <div class="x1 3x @1-3x @2-x2 x-stretch y-start">
+    ${ data.map((doc) => doc.type + ' ' + doc.name).join(' | ') }<br/><br/><br/>
+
+
     ${ this.attributes = data.filter((doc) => doc.type === 'attribute' && doc.name !== 'slot'), '' }
     ${ this.attributes.length ? '<h3 class="docs-text-04">Attributes</h3>' : '' }
     ${ Promise.all(this.attributes.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
@@ -8,9 +11,13 @@
     ${ this.properties.length ? '<h3 class="docs-text-04">Properties</h3>' : '' }
     ${ Promise.all(this.properties.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
 
-    ${ this.vars = data.filter((doc) => doc.type === 'attribute' && doc.name === 'slot'), '' }
-    ${ this.vars.length ? '<h3 class="docs-text-04">Slots</h3>' : '' }
-    ${ Promise.all(this.vars.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
+    ${ this.properties = data.filter((doc) => doc.type === 'method'), '' }
+    ${ this.properties.length ? '<h3 class="docs-text-04">Methods</h3>' : '' }
+    ${ Promise.all(this.properties.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
+
+    ${ this.events = data.filter((doc) => doc.type === 'string'), '' }
+    ${ this.events.length ? '<h3 class="docs-text-04">Events</h3>' : '' }
+    ${ Promise.all(this.events.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
 </div>
 
 <div class="x1 3x @1-x4 @1-3x @2-x5 x-stretch y-start">
@@ -22,7 +29,7 @@
     ${ this.vars.length ? '<h3 class="docs-text-04">Variables</h3>' : '' }
     ${ Promise.all(this.vars.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
 
-    ${ this.events = data.filter((doc) => doc.type === 'string'), '' }
-    ${ this.events.length ? '<h3 class="docs-text-04">Events</h3>' : '' }
-    ${ Promise.all(this.events.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
+    ${ this.vars = data.filter((doc) => doc.type === 'attribute' && doc.name === 'slot'), '' }
+    ${ this.vars.length ? '<h3 class="docs-text-04">Slots</h3>' : '' }
+    ${ Promise.all(this.vars.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
 </div>

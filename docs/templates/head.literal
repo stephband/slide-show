@@ -1,0 +1,28 @@
+<meta charset="utf-8" />
+<meta name="author" content="${ data.author && data.author.name }" />
+<meta name="description" content="Documentation for ${ data.title }. ${ data.description }" />
+<meta name="viewport" content="width=device-width" />
+
+${ data.author && data.author.twitter && (
+(!window.twitterCardValidateWarning && console.log('Remember to validate twitter cards at https://cards-dev.twitter.com/validator'), window.twitterCardValidateWarning = true), `
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="${ data.author.twitter }">
+<meta property="og:title" content="${ data.title }" />
+<meta property="og:description" content="${ data.description }" />
+<meta property="og:image" content="${ data.card && data.card.image }" />
+<meta property="og:url" content="${ data.homepage }" />
+`) }
+
+<title>${ data.title }</title>
+
+${ data.favicons && data.favicons.map((favicon) => `
+<link rel="icon"${ favicon.type ? ` type="${ favicon.type }"` : '' } href="${ favicon.url }"${ favicon.sizes ? ` sizes="${ favicon.sizes }"` : '' }>`) }
+
+<script title="load">
+    document.documentElement.className += ' js loading';
+    // window.addEventListener('DOMContentLoaded', () => document.documentElement.classList.remove('content-loading'));
+    // Wait for other load handlers to run first - Bolt does a few things on
+    // load (eg. targetable scrolls) and we want them to run before the loading
+    // class is removed
+    window.addEventListener('load', () => window.requestAnimationFrame(() => document.documentElement.classList.remove('loading')));
+</script>

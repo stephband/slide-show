@@ -15,13 +15,10 @@
 @import "../../bolt/classes/block.css";
 @import "../../bolt/classes/color.css";
 
-@import "../../bolt/classes/atoms.css";
 @import "../../bolt/classes/device.css";
 @import "../../bolt/classes/toggle-block.css";
 
-@import "../../bolt/documentation/prism-cruncher.css";
-@import "../../bolt/documentation/documentation.css";
-@import "../../bolt/documentation/atoms.css";
+@import "../../bolt/docs/module.css";
 
 
 @font-face {

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    ${ include('../bolt/templates/head.literal', './package.json') }
+    ${ include('./docs/templates/head.literal', './package.json') }
 
     <script title="debug">
         window.DEBUG = true;
@@ -92,7 +92,7 @@
         <p>Comments about accessibility are particularly welcome. I try to respect the
         <a href="https://www.w3.org/WAI/tutorials/carousels/">Web Accessibility guidelines for carousels</a>,
         but the examples given there are clearly written without a scroll-snapping interface in mind,
-        and browsers respond to scrolling and keyboard navigation in their own subtly unique
+        and browsers respond to scrolling and keyboard navigation in their own unique
         ways.</p>
     </section>
 

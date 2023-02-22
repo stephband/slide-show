@@ -29,7 +29,7 @@ Content is horizontally scrollable via touch or trackpad, draggable with a mouse
 navigable via keyboard focus.
 
 A `<slide-show>` is not just for images. Content may be any HTML. Here's a
-`<slide-show>` being employed as a tabbed navigation:
+`<slide-show>` being employed as tabbed navigation:
 
 <slide-show class="tab-slide-show">
     <a class="tab-button button" href="#1" draggable="false">Explore</a>
