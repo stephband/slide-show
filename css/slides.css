@@ -12,7 +12,7 @@
     grid-auto-columns:  inherit;
     column-gap:         inherit;
     /* Justification is important for alignment to the start of the scroller. */
-    justify-content:    start !important;
+    justify-content:    start;
     justify-items:      inherit;
 
     grid-template-rows: inherit;

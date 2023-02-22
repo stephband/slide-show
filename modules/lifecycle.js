@@ -1,21 +1,23 @@
 
-import equals        from '../../fn/modules/equals.js';
-import get           from '../../fn/modules/get.js';
-import noop          from '../../fn/modules/noop.js';
-import nothing       from '../../fn/modules/nothing.js';
-import overload      from '../../fn/modules/overload.js';
-import Stream        from '../../fn/modules/stream.js';
-import create        from '../../dom/modules/create.js';
-import events, { isPrimaryButton } from '../../dom/modules/events.js';
-import gestures      from '../../dom/modules/gestures.js';
-import { px }        from '../../dom/modules/parse-length.js';
-import rect          from '../../dom/modules/rect.js';
-import { trigger }   from '../../dom/modules/trigger.js';
+import equals          from '../../fn/modules/equals.js';
+import get             from '../../fn/modules/get.js';
+import noop            from '../../fn/modules/noop.js';
+import nothing         from '../../fn/modules/nothing.js';
+import overload        from '../../fn/modules/overload.js';
+import Stream          from '../../fn/modules/stream.js';
+import create          from '../../dom/modules/create.js';
+import events          from '../../dom/modules/events.js';
+import gestures        from '../../dom/modules/gestures.js';
+import isPrimaryButton from '../../dom/modules/is-primary-button.js';
+import { px }          from '../../dom/modules/parse-length.js';
+import rect            from '../../dom/modules/rect.js';
+import { trigger }     from '../../dom/modules/trigger.js';
 
 import { $data }     from './consts.js';
 import { scrollTo, jumpTo, updateActive } from './active.js';
 import { processPointers } from './swipes.js';
 import scrollends    from './scrollends.js';
+
 
 function getWidth(scroller, slides, children) {
     let n = children.length;
@@ -54,6 +56,9 @@ Emitted by a slide when it is brought into scroll-snap alignment.
 **/
 
 export default {
+    // Uhoh Kavea needs access to scroll events ... what we gonna do here?
+    mode: 'open',
+
     construct: function(shadow) {
         // Shadow DOM
         const slides   = create('slot', { part: 'slides' });

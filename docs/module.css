@@ -232,7 +232,7 @@ small > p + p { margin-top: 0; }
 /* Github sponsor button */
 
 .githubsponsor-button {
-    --height: 1.75em;
+    --size: 1.75em;
     width: 200px;
     color: #24292f;
     background-color: #f6f8fa;
@@ -291,7 +291,7 @@ small > p + p { margin-top: 0; }
 .tab-button {
     --font-size: 0.9375rem;
     --line-height: 1.25em;
-    --height: 2.5rem;
+    --size: 2.5rem;
     color: #666666;
     border-bottom-color: #999999;
     border-radius: 0;

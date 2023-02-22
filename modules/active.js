@@ -4,9 +4,17 @@ Detect and scroll to active slides. The active is the slide currently in
 scroll-snap alignment.
 */
 
-import { px }      from '../../dom/modules/parse-length.js';
-import rect        from '../../dom/modules/rect.js';
+import { px } from '../../dom/modules/parse-length.js';
+import rect   from '../../dom/modules/rect.js';
+import isFF   from '../../dom/modules/is-firefox.js';
 
+// FireFox resets scrollLeft to 0 on DOMContentLoaded. Naughty FireFox. We
+// can not feature detect this until it has happened, unfortunately, so we
+// are forced to use a browser hack `isFF`.
+let DOMContentLoaded = false;
+if (isFF) {
+    document.addEventListener('DOMContentLoaded', (e) => DOMContentLoaded = true);
+}
 
 function getPaddedBox(scroller) {
     const box          = rect(scroller);
@@ -41,7 +49,7 @@ function scrollToTarget(scroller, target, behavior) {
 
     // Move scroll position to target slide, taking into account
     // scroll-snap-align of the slide
-    scroller.scrollTo({
+    const position = {
         top:  scroller.scrollTop,
         left: scroller.scrollLeft + (
             snap === 'left' ? targetBox.left - scrollerBox.leftPadding :
@@ -49,7 +57,14 @@ function scrollToTarget(scroller, target, behavior) {
             targetBox.left + (targetBox.width / 2) - scrollerBox.centrePadding
         ),
         behavior: behavior
-    });
+    };
+
+    scroller.scrollTo(position);
+
+    // In Firefox, wait for DOMContentLoaded and set position again.
+    if (isFF && !DOMContentLoaded) {
+        document.addEventListener('DOMContentLoaded', () => scroller.scrollTo(position));
+    }
 }
 
 export function scrollTo(scroller, target) {
