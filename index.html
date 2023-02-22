@@ -5,14 +5,14 @@
 <head>
     <meta charset="utf-8" />
 <meta name="author" content="Stephen Band" />
-<meta name="description" content="Documentation for slide-show. The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
+<meta name="description" content="Documentation for slide-show. The accessible, scroll-snapping, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
 <meta name="viewport" content="width=device-width" />
 
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@stephband">
 <meta property="og:title" content="slide-show" />
-<meta property="og:description" content="The accessible, scrollable, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
+<meta property="og:description" content="The accessible, scroll-snapping, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
 <meta property="og:image" content="https://stephen.band/slide-show/docs/images/card.jpg" />
 <meta property="og:url" content="https://stephen.band/slide-show/" />
 
@@ -93,9 +93,6 @@ navigable via keyboard focus.</p>
 
     
 <div class="x1 3x @1-3x @2-x2 x-stretch y-start">
-    string slide-active | attribute active | property active | attribute autoplay | property autoplay | attribute controls | property controls | attribute loop | property loop | attribute slot | attribute slot | attribute slot | var slide-duration | var padding-left | var padding-right | selector  scroller | part prev-button | part next-button | part pagination | part page-button | part page-button-active | part fullscreen-button<br/><br/><br/>
-
-
     
     <h3 class="docs-text-04">Attributes</h3>
     
@@ -232,8 +229,32 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 
     
+    <h3 class="docs-text-04">Methods</h3>
     
-    
+<div class="method-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="method-activatenext">
+<h3 class="method-docs-text-05 docs-text-05">
+    <a href="#method-activatenext">
+        <code class=" language-js">.activateNext(<span class="param"></span>)</code>
+    </a>
+</h3>
+
+<p>Activates the next slide.</p>
+
+</div>
+
+
+<div class="method-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="method-activateprevious">
+<h3 class="method-docs-text-05 docs-text-05">
+    <a href="#method-activateprevious">
+        <code class=" language-js">.activatePrevious(<span class="param"></span>)</code>
+    </a>
+</h3>
+
+<p>Activates the previous slide.</p>
+
+</div>
+
+
 
     
     <h3 class="docs-text-04">Events</h3>

@@ -1,8 +1,5 @@
 
 <div class="x1 3x @1-3x @2-x2 x-stretch y-start">
-    ${ data.map((doc) => doc.type + ' ' + doc.name).join(' | ') }<br/><br/><br/>
-
-
     ${ this.attributes = data.filter((doc) => doc.type === 'attribute' && doc.name !== 'slot'), '' }
     ${ this.attributes.length ? '<h3 class="docs-text-04">Attributes</h3>' : '' }
     ${ Promise.all(this.attributes.map((doc) => include("./entry.literal", doc))).then((array) => array.join('')) }
