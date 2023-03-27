@@ -3,9 +3,11 @@
 
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <title>slide-show</title>
+
+<meta charset="utf-8" />
 <meta name="author" content="Stephen Band" />
-<meta name="description" content="Documentation for slide-show. The accessible, scroll-snapping, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
+<meta name="description" content="The accessible, scroll-snapping, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
 <meta name="viewport" content="width=device-width" />
 
 
@@ -16,8 +18,6 @@
 <meta property="og:image" content="https://stephen.band/slide-show/docs/images/card.jpg" />
 <meta property="og:url" content="https://stephen.band/slide-show/" />
 
-
-<title>slide-show</title>
 
 
 
@@ -31,22 +31,32 @@
 </script>
 
 
-    <script title="debug">
-        window.DEBUG = true;
+<script title="debug">
+    window.DEBUG = true;
+    window.detailsToggleStylesheet = 'https://stephen.band/literal/documentation/build/details-toggle/shadow.css';
+</script>
+
+<link rel="stylesheet" href="https://stephen.band/literal/documentation/build/module.css">
+<link rel="preload" as="style" href="https://stephen.band/literal/documentation/build/details-toggle/shadow.css">
+
+
+    <script title="slide-show">
+        window.slideshowStylesheet = './build/slide-show-shadow.css';
     </script>
 
-    <link rel="stylesheet" href="./docs/docs.css">
+    <link rel="stylesheet" href="./docs/module.css">
     <link rel="stylesheet" href="./build/slide-show.css">
+    <link rel="prefetch" as="style" href="./build/slide-show-shadow.css">
 </head>
 
-<body class="docs-grid grid 3x-grid @1-6x-grid @2-9x-grid y-start-grid">
-    <header class="x1 3x @1-x1 @1-4x @2-x2">
-        <h1 class="docs-text-01"><span class="tag-brace">&lt;</span>slide-show<span class="tag-brace">&gt;</span><span style="font-size: 0.1666667em; font-family: 'MartianMono'; font-variation-settings: 'wght' 400, 'wdth' 96; letter-spacing: -0.125em;">1.2.3</span>
+<body class="4x-grid @1-6x-grid @2-7x-grid @3-9x-grid grid">
+    <header class="x1 3x @1-4x @2-x2 x-stretch y-start">
+        <h1 class="text-title"><span class="tag-brace">&lt;</span>slide-show<span class="tag-brace">&gt;</span><span class="text-10">1.2.3</span>
 </h1>
-        <p class="@1-no-wrap">The accessible, scrollable, styleable, horizontal carousel custom element. <br class="@1-shown"/>No dependencies, about <code>12kB</code> minified and gzipped.</p>
+        <p class="@1-no-wrap">A scroll-snapping, loopable, autoplaying, fullscreen-ready horizontal carousel custom element. <br class="@1-shown"/>No dependencies, about <code>12kB</code> minified and gzipped.</p>
     </header>
 
-    <slide-show class="banner-slide-show x1 x-flood 3x @1-6x @1-x-stretch @2-9x" loop autoplay controls="navigation pagination fullscreen">
+    <slide-show class="banner-slide-show x1 4x x-flood @1-6x @1-x-stretch @2-7x @3-9x" loop autoplay controls="navigation pagination fullscreen">
         <img src="https://stephen.band/slide-show/docs/images/donkeys.jpg" draggable="false" alt="A rowdy group of curious donkeys"/>
         <img src="https://stephen.band/slide-show/docs/images/tractor.jpg" draggable="false" alt="A lonely, rusted tractor abandonned on the edge of the arctic ocean"/>
         <img src="https://stephen.band/slide-show/docs/images/mauverin.jpg" draggable="false" alt="The shadow of a the summit of the Mauverin cast over the alpine valley of Nant"/>
@@ -54,12 +64,12 @@
         <img src="https://stephen.band/slide-show/docs/images/summit.jpg" draggable="false" alt="Golden autumn meadows in front of a rocky summit dusted with snow"/>
     </slide-show>
 
-    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
+    <section class="x1 4x @3-x2 x-stretch y-start documentation-block block">
         
 
 <h2 class="docs-text-02" id="get-started">Get started</h2>
 <p>Download the latest release:</p>
-<p><a href="https://github.com/stephband/slide-show/releases">github.com/stephband/slide-show/releases</a></p>
+<p><a href="https://github.com/stephband/slide-show/releases"><code>github.com/stephband/slide-show/releases</code></a></p>
 <p>Then include the JS and CSS files:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
@@ -91,200 +101,187 @@ navigable via keyboard focus.</p>
 
     <h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>
 
+    <div class="x1 4x @1-3x @3-x2 x-stretch y-start">
     
-<div class="x1 3x @1-3x @2-x2 x-stretch y-start">
+    <h3>Attributes</h3>
     
-    <h3 class="docs-text-04">Attributes</h3>
-    
-<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-active">
-<h3 class="attribute-docs-text-05 docs-text-05">
-    <a href="#attribute-active">
-        <code class="token language-html">active <span class="default">="<em>#id</em>"</span></code>
-    </a>
-</h3>
 
-<p>Sets the initial scroll-snapped slide, where <code>#id</code> must be the id of a
+<details-toggle class="attribute-details-toggle" id="attribute-active">
+    <h4 class="attribute-text text-05" slot="summary">
+        <code class="token language-html">active <span class="default-text">="<em>#id</em>"</span></code>
+    </h4>
+
+    <p>Sets the initial scroll-snapped slide, where <code>#id</code> must be the id of a
 direct child of the <code>&lt;slide-show&gt;</code>.</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">active</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#tractor<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/tractor.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tractor<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-autoplay">
-<h3 class="attribute-docs-text-05 docs-text-05">
-    <a href="#attribute-autoplay">
+
+<details-toggle class="attribute-details-toggle" id="attribute-autoplay">
+    <h4 class="attribute-text text-05" slot="summary">
         <code class="token language-html">autoplay</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Boolean attribute. When present the <code>slide-show</code> activates the next
+    <p>Boolean attribute. When present the <code>slide-show</code> activates the next
 slide after a pause.</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 <p>The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
 
-</div>
+</details-toggle>
 
 
-<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-controls">
-<h3 class="attribute-docs-text-05 docs-text-05">
-    <a href="#attribute-controls">
+
+<details-toggle class="attribute-details-toggle" id="attribute-controls">
+    <h4 class="attribute-text text-05" slot="summary">
         <code class="token language-html">controls</code>
-    </a>
-</h3>
+    </h4>
 
-<p>An attribute that accepts the tokens <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code>
+    <p>An attribute that accepts the tokens <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code>
 and <code>&quot;fullscreen&quot;</code>. The presence of one of these tokens enables the
 corresponding controls.</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-loop">
-<h3 class="attribute-docs-text-05 docs-text-05">
-    <a href="#attribute-loop">
+
+<details-toggle class="attribute-details-toggle" id="attribute-loop">
+    <h4 class="attribute-text text-05" slot="summary">
         <code class="token language-html">loop</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Boolean attribute. When present, the <code>slide-show</code> behaves as a continuous
+    <p>Boolean attribute. When present, the <code>slide-show</code> behaves as a continuous
 loop.</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 <p>Looping works by duplicating some of the children of the <code>slide-show</code>.
 Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
 have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
 
-</div>
+</details-toggle>
 
 
 
     
-    <h3 class="docs-text-04">Properties</h3>
+    <h3>Properties</h3>
     
-<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-active">
-<h3 class="property-docs-text-05 docs-text-05">
-    <a href="#property|selector-active">
+
+<details-toggle class="property-details-toggle" id="property|selector-active">
+    <h4 class="property-text text-05" slot="summary">
         <code class="property language-js">.active</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Gets or sets the currently scroll-snapped slide.</p>
+    <p>Gets or sets the currently scroll-snapped slide.</p>
 <pre><code class="language-js"><span class="token keyword">const</span> activeSlide <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span></code></pre>
 <p>May be set to one of the child elements, or to the id of one of the
 child elements, which causes the <code>slide-show</code> to scroll.</p>
 <pre><code class="language-js">slideshow<span class="token punctuation">.</span>active <span class="token operator">=</span> <span class="token string">'slide-1'</span><span class="token punctuation">;</span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-autoplay">
-<h3 class="property-docs-text-05 docs-text-05">
-    <a href="#property|selector-autoplay">
+
+<details-toggle class="property-details-toggle" id="property|selector-autoplay">
+    <h4 class="property-text text-05" slot="summary">
         <code class="property language-js">.autoplay</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Boolean property. When <code>true</code> the slide-show activates the next
+    <p>Boolean property. When <code>true</code> the slide-show activates the next
 slide after a pause. The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
 <pre><code class="language-js">slideshow<span class="token punctuation">.</span>autoplay <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-controls">
-<h3 class="property-docs-text-05 docs-text-05">
-    <a href="#property|selector-controls">
+
+<details-toggle class="property-details-toggle" id="property|selector-controls">
+    <h4 class="property-text text-05" slot="summary">
         <code class="property language-js">.controls</code>
-    </a>
-</h3>
+    </h4>
 
-<p>A TokenList object (like <code>.classList</code>) that supports the tokens
+    <p>A TokenList object (like <code>.classList</code>) that supports the tokens
 <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code> and <code>&quot;fullscreen&quot;</code>.</p>
 <pre><code class="language-js">slideshow<span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'pagination'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="property-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="property|selector-loop">
-<h3 class="property-docs-text-05 docs-text-05">
-    <a href="#property|selector-loop">
+
+<details-toggle class="property-details-toggle" id="property|selector-loop">
+    <h4 class="property-text text-05" slot="summary">
         <code class="property language-js">.loop</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Boolean property. When <code>true</code>, the <code>slide-show</code> behaves as a continuous loop.</p>
+    <p>Boolean property. When <code>true</code>, the <code>slide-show</code> behaves as a continuous loop.</p>
 <pre><code class="language-js">slideshow<span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
 <p>Looping works by duplicating some of the children of the <code>slide-show</code>.
 Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
 have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
 
-</div>
+</details-toggle>
 
 
 
     
-    <h3 class="docs-text-04">Methods</h3>
+    <h3>Methods</h3>
     
-<div class="method-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="method-activatenext">
-<h3 class="method-docs-text-05 docs-text-05">
-    <a href="#method-activatenext">
+
+<details-toggle class="method-details-toggle" id="method-activatenext">
+    <h4 class="method-text text-05" slot="summary">
         <code class=" language-js">.activateNext(<span class="param"></span>)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Activates the next slide.</p>
+    <p>Activates the next slide.</p>
 
-</div>
+</details-toggle>
 
 
-<div class="method-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="method-activateprevious">
-<h3 class="method-docs-text-05 docs-text-05">
-    <a href="#method-activateprevious">
+
+<details-toggle class="method-details-toggle" id="method-activateprevious">
+    <h4 class="method-text text-05" slot="summary">
         <code class=" language-js">.activatePrevious(<span class="param"></span>)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Activates the previous slide.</p>
+    <p>Activates the previous slide.</p>
 
-</div>
+</details-toggle>
 
 
 
     
-    <h3 class="docs-text-04">Events</h3>
+    <h3>Events</h3>
     
-<div class="string-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="string-slide-active">
-<h3 class="string-docs-text-05 docs-text-05">
-    <a href="#string-slide-active">
+
+<details-toggle class="string-details-toggle" id="string-slide-active">
+    <h4 class="string-text text-05" slot="summary">
         <code class=" language-js">"slide-active"</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Emitted by a slide when it is brought into scroll-snap alignment.</p>
+    <p>Emitted by a slide when it is brought into scroll-snap alignment.</p>
+
+</details-toggle>
+
 
 </div>
 
-
-</div>
-
-<div class="x1 3x @1-x4 @1-3x @2-x5 x-stretch y-start">
+<div class="x1 4x @1-x4 @1-3x @3-x5 x-stretch y-start">
     
-    <h3 class="docs-text-04">Parts</h3>
+    <h3>Parts</h3>
     
-<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-prev-button">
-<h3 class="part-docs-text-05 docs-text-05">
-    <a href="#part-prev-button">
+
+<details-toggle class="part-details-toggle" id="part-prev-button">
+    <h4 class="part-text text-05" slot="summary">
         <code class=" language-css">::part(prev-button)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Style the ‘previous slide’ button, available when the slideshow has
+    <p>Style the ‘previous slide’ button, available when the slideshow has
 <code>controls=&quot;navigation&quot;</code> enabled. Default button icons are inner SVGs that
 render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
 and <code>fill</code> properties from the button.</p>
@@ -294,17 +291,16 @@ and <code>fill</code> properties from the button.</p>
 <span class="token punctuation">}</span></code></pre>
 <p>To fully replace the default icon, see <code>slot=&quot;prev-button&quot;</code>.</p>
 
-</div>
+</details-toggle>
 
 
-<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-next-button">
-<h3 class="part-docs-text-05 docs-text-05">
-    <a href="#part-next-button">
+
+<details-toggle class="part-details-toggle" id="part-next-button">
+    <h4 class="part-text text-05" slot="summary">
         <code class=" language-css">::part(next-button)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Style the ‘next slide’ button, available when the slideshow has
+    <p>Style the ‘next slide’ button, available when the slideshow has
 <code>controls=&quot;navigation&quot;</code> enabled. Default button icons are inner SVGs that
 render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
 and <code>fill</code> properties from the button.</p>
@@ -314,55 +310,51 @@ and <code>fill</code> properties from the button.</p>
 <span class="token punctuation">}</span></code></pre>
 <p>To fully replace the default icon, see <code>slot=&quot;next-button&quot;</code>.</p>
 
-</div>
+</details-toggle>
 
 
-<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-pagination">
-<h3 class="part-docs-text-05 docs-text-05">
-    <a href="#part-pagination">
+
+<details-toggle class="part-details-toggle" id="part-pagination">
+    <h4 class="part-text text-05" slot="summary">
         <code class=" language-css">::part(pagination)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Style the pagination wrapper.</p>
+    <p>Style the pagination wrapper.</p>
 
-</div>
+</details-toggle>
 
 
-<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-page-button">
-<h3 class="part-docs-text-05 docs-text-05">
-    <a href="#part-page-button">
+
+<details-toggle class="part-details-toggle" id="part-page-button">
+    <h4 class="part-text text-05" slot="summary">
         <code class=" language-css">::part(page-button)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Style the pagination buttons, available when the slideshow has
+    <p>Style the pagination buttons, available when the slideshow has
 <code>controls=&quot;pagination&quot;</code> enabled.</p>
 
-</div>
+</details-toggle>
 
 
-<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-page-button-active">
-<h3 class="part-docs-text-05 docs-text-05">
-    <a href="#part-page-button-active">
+
+<details-toggle class="part-details-toggle" id="part-page-button-active">
+    <h4 class="part-text text-05" slot="summary">
         <code class=" language-css">::part(page-button-active)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Style the pagination button pointing to the active slide, available when the
+    <p>Style the pagination button pointing to the active slide, available when the
 slideshow has <code>controls=&quot;pagination&quot;</code> enabled.</p>
 
-</div>
+</details-toggle>
 
 
-<div class="part-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="part-fullscreen-button">
-<h3 class="part-docs-text-05 docs-text-05">
-    <a href="#part-fullscreen-button">
+
+<details-toggle class="part-details-toggle" id="part-fullscreen-button">
+    <h4 class="part-text text-05" slot="summary">
         <code class=" language-css">::part(fullscreen-button)</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Style the fullscreen button, available when the slideshow has
+    <p>Style the fullscreen button, available when the slideshow has
 <code>controls=&quot;fullscreen&quot;</code> enabled. Default button icons are inner SVGs that
 render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
 and <code>fill</code> properties from the button.</p>
@@ -372,21 +364,20 @@ and <code>fill</code> properties from the button.</p>
 <span class="token punctuation">}</span></code></pre>
 <p>To fully replace the default icon, see <code>slot=&quot;fullscreen-button&quot;</code>.</p>
 
-</div>
+</details-toggle>
 
 
 
     
-    <h3 class="docs-text-04">Variables</h3>
+    <h3>Variables</h3>
     
-<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-slide-duration">
-<h3 class="var-docs-text-05 docs-text-05">
-    <a href="#var-slide-duration">
+
+<details-toggle class="var-details-toggle" id="var-slide-duration">
+    <h4 class="var-text text-05" slot="summary">
         <code class=" language-css">--slide-duration</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Sets the display duration of a slide when the slideshow has
+    <p>Sets the display duration of a slide when the slideshow has
 <code>controls=&quot;autoplay&quot;</code> enabled. May be a CSS time value in <code>s</code> or <code>ms</code>.</p>
 <pre><code class="language-css"><span class="token selector">slide-show > img</span> <span class="token punctuation">{</span>
     <span class="token property">--slide-duration</span><span class="token punctuation">:</span> 12s<span class="token punctuation">;</span>
@@ -397,17 +388,16 @@ slides.</p>
     <span class="token property">--slide-duration</span><span class="token punctuation">:</span> 12s<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-padding-left">
-<h3 class="var-docs-text-05 docs-text-05">
-    <a href="#var-padding-left">
+
+<details-toggle class="var-details-toggle" id="var-padding-left">
+    <h4 class="var-text text-05" slot="summary">
         <code class=" language-css">--padding-left</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Adjusts the space to the left of the leftmost slide, and the alignment
+    <p>Adjusts the space to the left of the leftmost slide, and the alignment
 position of slides set to <code>scroll-snap-align: start</code>. (Internally it sets
 both <code>padding-left</code> and <code>scroll-padding-left</code> while enabling a workaround for
 some browser inconsistencies.)</p>
@@ -415,17 +405,16 @@ some browser inconsistencies.)</p>
     <span class="token property">--padding-left</span><span class="token punctuation">:</span> 3rem<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="var-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="var-padding-right">
-<h3 class="var-docs-text-05 docs-text-05">
-    <a href="#var-padding-right">
+
+<details-toggle class="var-details-toggle" id="var-padding-right">
+    <h4 class="var-text text-05" slot="summary">
         <code class=" language-css">--padding-right</code>
-    </a>
-</h3>
+    </h4>
 
-<p>Adjusts the space to the right of the rightmost slide, and the alignment
+    <p>Adjusts the space to the right of the rightmost slide, and the alignment
 position of slides set to <code>scroll-snap-align: end</code>. (Internally it sets
 both <code>padding-right</code> and <code>scroll-padding-right</code> while enabling a workaround
 for some browser inconsistencies.)</p>
@@ -433,21 +422,20 @@ for some browser inconsistencies.)</p>
     <span class="token property">--padding-right</span><span class="token punctuation">:</span> 3rem<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 
-</div>
+</details-toggle>
 
 
 
     
-    <h3 class="docs-text-04">Slots</h3>
+    <h3>Slots</h3>
     
-<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-slot">
-<h3 class="attribute-docs-text-05 docs-text-05">
-    <a href="#attribute-slot">
-        <code class="token language-html">slot="prev-button"</code>
-    </a>
-</h3>
 
-<p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
+<details-toggle class="slot-details-toggle" id="slot-prev-button">
+    <h4 class="slot-text text-05" slot="summary">
+        <code class=" language-html">slot="prev-button"</code>
+    </h4>
+
+    <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
 allows the inclusion of html content into the ‘previous’ navigation button. By
 default the slot contains an inline SVG of an icon, and some text (in English).
 Defining HTML for the slot replaces that default content:</p>
@@ -458,17 +446,16 @@ Defining HTML for the slot replaces that default content:</p>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Dernière<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-slot-1">
-<h3 class="attribute-docs-text-05 docs-text-05">
-    <a href="#attribute-slot-1">
-        <code class="token language-html">slot="next-button"</code>
-    </a>
-</h3>
 
-<p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
+<details-toggle class="slot-details-toggle" id="slot-next-button">
+    <h4 class="slot-text text-05" slot="summary">
+        <code class=" language-html">slot="next-button"</code>
+    </h4>
+
+    <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
 allows the inclusion of html content into the ‘next’ navigation button. By
 default the slot contains an inline SVG of an icon, and some text (in English).
 Defining HTML for the slot replaces that default content:</p>
@@ -479,17 +466,16 @@ Defining HTML for the slot replaces that default content:</p>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Prochaine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
-</div>
+</details-toggle>
 
 
-<div class="attribute-doc-toggle-block doc-toggle-block toggle-block block" data-toggleable id="attribute-slot-2">
-<h3 class="attribute-docs-text-05 docs-text-05">
-    <a href="#attribute-slot-2">
-        <code class="token language-html">slot="fullscreen-button"</code>
-    </a>
-</h3>
 
-<p>Available when the slideshow has <code>controls=&quot;fullscreen&quot;</code> enabled, this slot
+<details-toggle class="slot-details-toggle" id="slot-fullscreen-button">
+    <h4 class="slot-text text-05" slot="summary">
+        <code class=" language-html">slot="fullscreen-button"</code>
+    </h4>
+
+    <p>Available when the slideshow has <code>controls=&quot;fullscreen&quot;</code> enabled, this slot
 allows the inclusion of html content into the fullscreen button. By default the
 slot contains an inline SVG of an icon, and some text (in English). Defining
 HTML for the slot replaces that default content:</p>
@@ -500,13 +486,13 @@ HTML for the slot replaces that default content:</p>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Plein écran<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
 
-</div>
+</details-toggle>
 
 
 </div>
 
 
-    <div class="x1 3x @1-4x @2-x2 x-stretch y-start">
+    <div class="x1 4x @3-x2 x-stretch y-start documentation-block block">
         <h3 class="docs-text-04">Fallback</h3>
 
         <p><code>&lt;slide-show&gt;</code> is built to scroll, and if JavaScript
@@ -553,50 +539,66 @@ HTML for the slot replaces that default content:</p>
         supported.</p>
     </div>
 
-    <section class="x1 3x @1-4x @2-x2 x-stretch y-start">
-        <h2 class="docs-text-02">Contribute</h2>
+    
+<section class="x1 4x @3-x2 x-stretch y-start">
+    <h2 class="docs-text-02">Contribute</h2>
+    <p>
+        Support development:
+        <a aria-label="Sponsor @stephband" href="https://github.com/sponsors/stephband" class="githubsponsor-button button">
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="fill octicon octicon-heart icon-sponsor mr-1 v-align-middle color-fg-sponsors anim-pulse-in">
+                <path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path>
+            </svg>
+            <span class="v-align-middle">Sponsor</span>
+        </a>
+    </p>
+    <ul>
+        <li>Contribute to the repo: <a href="https://github.com/stephband/slide-show"><code>github.com/stephband/slide-show</code></a></li>
+        <li>Report a problem: <a href="https://github.com/stephband/slide-show/issues"><code>github.com/stephband/slide-show/issues</code></a></li>
+    </ul>
+</section>
 
-        
-<p>
-    Fund development:
-    <a aria-label="Sponsor @stephband" href="https://github.com/sponsors/stephband" class="githubsponsor-button button">
-        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="fill octicon octicon-heart icon-sponsor mr-1 v-align-middle color-fg-sponsors anim-pulse-in">
-            <path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path>
-        </svg>
-        <span class="v-align-middle">Sponsor</span>
-    </a>
-</p>
-<ul>
-    <li>Contribute to the repo: <a href="https://github.com/stephband/slide-show">github.com/stephband/slide-show</a></li>
-    <li>Report a problem: <a href="https://github.com/stephband/slide-show/issues">github.com/stephband/slide-show/issues</a></li>
-</ul>
+    
+<hr class="x1 4x @3-x2 x-stretch" />
 
+<div class="x1 4x @3-x2 x-stretch y-start">
+    <p class="text-10">
+    Built by <a href="">Stephen Band</a> for
+    <a href="https://cruncher.ch"><img style="width: 1.366666667em; display: inline-block; vertical-align: bottom; margin-top: -0.1em; margin-bottom: -0.1em;" src="https://cruncher.ch/static/images/logo.svg" alt="Cruncher logo"/> Cruncher</a>.
+    </p>
 
-        <p>Comments about accessibility are particularly welcome. I try to respect the
-        <a href="https://www.w3.org/WAI/tutorials/carousels/">Web Accessibility guidelines for carousels</a>,
-        but the examples given there are clearly written without a scroll-snapping interface in mind,
-        and browsers respond to scrolling and keyboard navigation in their own unique
-        ways.</p>
-    </section>
+    <p class="text-10">
+    Documentation set in <a href="https://www.swisstypefaces.com/fonts/euclid/">Euclid</a>
+    and <a href="https://github.com/evilmartians/mono">Martian Mono</a>. Fonts
+    used for documentation not included as part of the license covering the
+    use of <code>slide-show</code>.
+    </p>
+</div>
 
-    <hr class="x1 3x @1-6x @2-x2 @2-7x"/>
+    
+<footer class="x1 4x @1-6x @2-7x @3-9x 4x-grid @1-6x-grid @2-7x-grid @3-9x-grid grid grid footer">
+    <div class="x1 4x @3-x2 x-stretch y-start">
+        <h3>Elements</h3>
+        <a class="block" href="https://stephen.band/slide-show/"><code class="lang-html">&lt;slide-show&gt;</code></a>
+        <a class="block" href="https://stephen.band/details-toggle/"><code class="lang-html">&lt;details-toggle&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/rotary-input/"><code class="lang-html">&lt;rotary-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/range-input/"><code class="lang-html">&lt;range-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/y-input/"><code class="lang-html">&lt;y-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/xy-input/"><code class="lang-html">&lt;xy-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/number-control/"><code class="lang-html">&lt;number-control&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/select-control/"><code class="lang-html">&lt;select-control&gt;</code></a>
+        <a class="block" href="https://stephen.band/literal/"><code class="lang-html">&lt;literal-element&gt;</code></a>
+    </div>
+</footer>
 
-    <footer class="x1 3x @1-4x @2-x2">
-        <small class="block">
-            <p class="docs-text-09">Made by <a href="https://stephen.band">Stephen Band</a> at <a href="https://cruncher.ch"><img style="width: 20px; display: inline-block; vertical-align: -0.5em;" src="https://cruncher.ch/static/images/logo.svg" alt="The Cruncher logo"/> Cruncher</a>.</p>
-            <p class="docs-text-09">This page is set in <a href="https://www.swisstypefaces.com/fonts/euclid/">Euclid</a> and <a href="https://github.com/evilmartians/mono">Martian Mono</a>.</p>
-            <p class="docs-text-09">Images <code>&copy;2022</code> Stephen Band.</p>
-            <p class="docs-text-09">Fonts and images used for this documentation are not included as part of the open source license covering the use of the <code>&lt;slide-show&gt;</code> element.</p>
-        </small>
-    </footer>
+    <script type="module" src="https://stephen.band/literal/documentation/build/module.js"></script>
+
 
     <script type="module">
-        import './docs/docs.js';
+        // Register <slide-show>
         import './build/slide-show.js';
 
         // Log events
-        /*document.body.addEventListener('slide-active', (e) =>
-            console.log(e.type, e.target)
-        );*/
+        import events from 'https://stephen.band/dom/modules/events.js';
+        events('slide-active', document).each((e) => console.log(e.type, e.target));
     </script>
 </body>

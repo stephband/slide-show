@@ -1,4 +1,4 @@
-archive/*
+mmarchive/*
 node_modules/*
 assets/*
 .nova

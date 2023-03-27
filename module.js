@@ -3,7 +3,7 @@
 
 Download the latest release:
 
-[github.com/stephband/slide-show/releases](https://github.com/stephband/slide-show/releases)
+[`github.com/stephband/slide-show/releases`](https://github.com/stephband/slide-show/releases)
 
 Then include the JS and CSS files:
 

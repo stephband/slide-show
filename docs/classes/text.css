@@ -1,0 +1,21 @@
+
+/* Specific to <slide-show> header */
+
+.text-title {
+    font-size: 14.5vw;
+    line-height: 1em;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.text-title > .tag-brace {
+    vertical-align: -0.04em;
+}
+
+@media (min-width: 50em) {
+    .text-title { font-size: 10.2vw; }
+}
+
+@media (min-width: 70em) {
+    .text-title { font-size: 7vw; }
+}
