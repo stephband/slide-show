@@ -67,7 +67,7 @@
        such as in fullscreen mode. */
     align-content:   center !important;
     align-items:     stretch;
-    justify-content: center !important;
+    justify-content: center;
     justify-items:   stretch;
 
     /* Reset style applied to un-upgraded slide-show  */
