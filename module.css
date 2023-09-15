@@ -2,6 +2,7 @@
 /* Style the un-upgraded slide-show */
 
 slide-show {
+    display: grid;
     /* Rules that can be overridden with classes, which themselves override
        :host styles. */
     position: relative;
@@ -30,8 +31,6 @@ slide-show {
 }
 
 slide-show:not(:defined) {
-    display: grid;
-
     /* Rules that you want to override on slide-show when the element is not
        upgraded  */
     overflow: scroll;
