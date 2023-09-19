@@ -72,14 +72,16 @@
 <p><a href="https://github.com/stephband/slide-show/releases"><code>github.com/stephband/slide-show/releases</code></a></p>
 <p>Then include the JS and CSS files:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
 <p>You can now use the <code>&lt;slide-show&gt;</code> in your HTML. The <code>&lt;slide-show&gt;</code> example
 above looks something like this:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span> <span class="token attr-name">loop</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation pagination fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/donkeys.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/tractor.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/mauverin.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 <p>A <code>&lt;slide-show&gt;</code> lays out its children horizontally, by default in <code>grid</code> layout.
 Content is horizontally scrollable via touch or trackpad, draggable with a mouse
 (making it a Good Idea to add <code>draggable=&quot;false&quot;</code>to images and links), and also
@@ -101,7 +103,7 @@ navigable via keyboard focus.</p>
 
     <h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>
 
-    <div class="x1 4x @1-3x @3-x2 x-stretch y-start">
+    <div class="x1 4x @1-3x @2-x2 x-stretch y-start">
     
     <h3>Attributes</h3>
     
@@ -115,7 +117,8 @@ navigable via keyboard focus.</p>
 direct child of the <code>&lt;slide-show&gt;</code>.</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">active</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#tractor<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/tractor.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tractor<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 
 </details-toggle>
 
@@ -128,7 +131,8 @@ direct child of the <code>&lt;slide-show&gt;</code>.</p>
 
     <p>Boolean attribute. When present the <code>slide-show</code> activates the next
 slide after a pause.</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">autoplay</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 <p>The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
@@ -145,7 +149,8 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
     <p>An attribute that accepts the tokens <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code>
 and <code>&quot;fullscreen&quot;</code>. The presence of one of these tokens enables the
 corresponding controls.</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation fullscreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 
 </details-toggle>
 
@@ -158,7 +163,8 @@ corresponding controls.</p>
 
     <p>Boolean attribute. When present, the <code>slide-show</code> behaves as a continuous
 loop.</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">loop</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 <p>Looping works by duplicating some of the children of the <code>slide-show</code>.
 Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
 have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
@@ -177,10 +183,12 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
     </h4>
 
     <p>Gets or sets the currently scroll-snapped slide.</p>
-<pre><code class="language-js"><span class="token keyword">const</span> activeSlide <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js"><span class="token keyword">const</span> activeSlide <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span>
+</code></pre>
 <p>May be set to one of the child elements, or to the id of one of the
 child elements, which causes the <code>slide-show</code> to scroll.</p>
-<pre><code class="language-js">slideshow<span class="token punctuation">.</span>active <span class="token operator">=</span> <span class="token string">'slide-1'</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>active <span class="token operator">=</span> <span class="token string">'slide-1'</span><span class="token punctuation">;</span>
+</code></pre>
 
 </details-toggle>
 
@@ -195,7 +203,8 @@ child elements, which causes the <code>slide-show</code> to scroll.</p>
 slide after a pause. The pause duration may be set with the CSS variable
 <code>--slide-duration</code>. Autoplay is also paused when a mouse pointer is
 inside the <code>slide-show</code>, or when a slide has focus.</p>
-<pre><code class="language-js">slideshow<span class="token punctuation">.</span>autoplay <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>autoplay <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+</code></pre>
 
 </details-toggle>
 
@@ -208,7 +217,8 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
 
     <p>A TokenList object (like <code>.classList</code>) that supports the tokens
 <code>&quot;navigation&quot;</code>, <code>&quot;pagination&quot;</code> and <code>&quot;fullscreen&quot;</code>.</p>
-<pre><code class="language-js">slideshow<span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'pagination'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'pagination'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 
 </details-toggle>
 
@@ -220,7 +230,8 @@ inside the <code>slide-show</code>, or when a slide has focus.</p>
     </h4>
 
     <p>Boolean property. When <code>true</code>, the <code>slide-show</code> behaves as a continuous loop.</p>
-<pre><code class="language-js">slideshow<span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">slideshow<span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+</code></pre>
 <p>Looping works by duplicating some of the children of the <code>slide-show</code>.
 Duplicate elements are given <code>aria-hidden=&quot;true&quot;</code> and <code>tab-index=&quot;-1&quot;</code>, and
 have <code>id</code> attributes stripped off in an attempt to make them inert.</p>
@@ -271,7 +282,7 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 </div>
 
-<div class="x1 4x @1-x4 @1-3x @3-x5 x-stretch y-start">
+<div class="x1 4x @1-x4 @1-3x @2-x5 x-stretch y-start">
     
     <h3>Parts</h3>
     
@@ -288,7 +299,8 @@ and <code>fill</code> properties from the button.</p>
 <pre><code class="language-css"><span class="token selector">slide-show::part(next-button)</span> <span class="token punctuation">{</span>
     <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
     <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>To fully replace the default icon, see <code>slot=&quot;prev-button&quot;</code>.</p>
 
 </details-toggle>
@@ -307,7 +319,8 @@ and <code>fill</code> properties from the button.</p>
 <pre><code class="language-css"><span class="token selector">slide-show::part(next-button)</span> <span class="token punctuation">{</span>
     <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
     <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>To fully replace the default icon, see <code>slot=&quot;next-button&quot;</code>.</p>
 
 </details-toggle>
@@ -361,7 +374,8 @@ and <code>fill</code> properties from the button.</p>
 <pre><code class="language-css"><span class="token selector">slide-show::part(fullscreen-button)</span> <span class="token punctuation">{</span>
     <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
     <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>To fully replace the default icon, see <code>slot=&quot;fullscreen-button&quot;</code>.</p>
 
 </details-toggle>
@@ -381,12 +395,14 @@ and <code>fill</code> properties from the button.</p>
 <code>controls=&quot;autoplay&quot;</code> enabled. May be a CSS time value in <code>s</code> or <code>ms</code>.</p>
 <pre><code class="language-css"><span class="token selector">slide-show > img</span> <span class="token punctuation">{</span>
     <span class="token property">--slide-duration</span><span class="token punctuation">:</span> 12s<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>If applied to the <code>slide-show</code> itself, sets the display duration of all
 slides.</p>
 <pre><code class="language-css"><span class="token selector">slide-show</span> <span class="token punctuation">{</span>
     <span class="token property">--slide-duration</span><span class="token punctuation">:</span> 12s<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 
 </details-toggle>
 
@@ -403,7 +419,8 @@ both <code>padding-left</code> and <code>scroll-padding-left</code> while enabli
 some browser inconsistencies.)</p>
 <pre><code class="language-css"><span class="token selector">slide-show</span> <span class="token punctuation">{</span>
     <span class="token property">--padding-left</span><span class="token punctuation">:</span> 3rem<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 
 </details-toggle>
 
@@ -420,7 +437,8 @@ both <code>padding-right</code> and <code>scroll-padding-right</code> while enab
 for some browser inconsistencies.)</p>
 <pre><code class="language-css"><span class="token selector">slide-show</span> <span class="token punctuation">{</span>
     <span class="token property">--padding-right</span><span class="token punctuation">:</span> 3rem<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 
 </details-toggle>
 
@@ -444,7 +462,8 @@ Defining HTML for the slot replaces that default content:</p>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#back-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Dernière<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 
 </details-toggle>
 
@@ -463,8 +482,9 @@ Defining HTML for the slot replaces that default content:</p>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next-button<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#forward-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Prochaine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Prochaine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 
 </details-toggle>
 
@@ -484,7 +504,8 @@ HTML for the slot replaces that default content:</p>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#fullscreen-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fullscreen-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Plein écran<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
+</code></pre>
 
 </details-toggle>
 
@@ -514,14 +535,16 @@ HTML for the slot replaces that default content:</p>
 <p>Import <code>./build/slide-show-ol.js</code> to register the customised built-in:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">is</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>slide-show-ol<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span>
+</code></pre>
 
 
         
 <p>Import <code>./build/slide-show-ul.js</code> to register the customised built-in:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">is</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>slide-show-ul<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+</code></pre>
 
 
 
@@ -540,7 +563,7 @@ HTML for the slot replaces that default content:</p>
     </div>
 
     
-<section class="x1 4x @3-x2 x-stretch y-start">
+<section class="x1 4x @2-x2 x-stretch y-start">
     <h2>Contribute</h2>
     <p>
         Support development:
@@ -558,9 +581,9 @@ HTML for the slot replaces that default content:</p>
 </section>
 
     
-<hr class="x1 4x @3-x2 x-stretch" />
+<hr class="x1 4x @2-x2 x-stretch" />
 
-<div class="x1 4x @3-x2 x-stretch y-start">
+<div class="x1 4x @2-x2 x-stretch y-start">
     <p class="text-10">
     Built by <a href="">Stephen Band</a> for
     <a href="https://cruncher.ch"><img style="width: 1.366666667em; display: inline-block; vertical-align: bottom; margin-top: -0.1em; margin-bottom: -0.1em;" src="https://cruncher.ch/static/images/logo.svg" alt="Cruncher logo"/> Cruncher</a>.
@@ -576,22 +599,24 @@ HTML for the slot replaces that default content:</p>
 
     
 <footer class="x1 4x @1-6x @2-7x @3-9x 4x-grid @1-6x-grid @2-7x-grid @3-9x-grid grid grid footer">
-    <div class="x1 4x @1-2x @3-x2 x-stretch y-start">
+    <div class="x1 4x @1-2x @2-x2 x-stretch y-start">
         <h3>Elements</h3>
-        <a class="block" href="https://stephen.band/slide-show/"><code class="lang-html">&lt;slide-show&gt;</code></a>
-        <a class="block" href="https://stephen.band/details-toggle/"><code class="lang-html">&lt;details-toggle&gt;</code></a>
-        <a class="block" href="https://stephen.band/form-elements/rotary-input/"><code class="lang-html">&lt;rotary-input&gt;</code></a>
-        <a class="block" href="https://stephen.band/form-elements/range-input/"><code class="lang-html">&lt;range-input&gt;</code></a>
-        <a class="block" href="https://stephen.band/form-elements/y-input/"><code class="lang-html">&lt;y-input&gt;</code></a>
-        <a class="block" href="https://stephen.band/form-elements/xy-input/"><code class="lang-html">&lt;xy-input&gt;</code></a>
-        <a class="block" href="https://stephen.band/form-elements/number-control/"><code class="lang-html">&lt;number-control&gt;</code></a>
-        <a class="block" href="https://stephen.band/form-elements/select-control/"><code class="lang-html">&lt;select-control&gt;</code></a>
-        <a class="block" href="https://stephen.band/literal/"><code class="lang-html">&lt;literal-element&gt;</code></a>
+        <a class="block" href="https://stephen.band/slide-show/"><code>&lt;slide-show&gt;</code></a>
+        <a class="block" href="https://stephen.band/details-toggle/"><code>&lt;details-toggle&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/rotary-input/"><code>&lt;rotary-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/range-input/"><code>&lt;range-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/y-input/"><code>&lt;y-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/xy-input/"><code>&lt;xy-input&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/number-control/"><code>&lt;number-control&gt;</code></a>
+        <a class="block" href="https://stephen.band/form-elements/select-control/"><code>&lt;select-control&gt;</code></a>
+        <a class="block" href="https://stephen.band/literal/literal-element/"><code>&lt;literal-element&gt;</code></a>
+        <a class="block" href="https://stephen.band/literal/literal-html/"><code>&lt;literal-html&gt;</code></a>
     </div>
 
-    <div class="x1 4x @1-2x @1-x3 @3-x4 x-stretch y-start">
+    <div class="x1 4x @1-2x @1-x3 @2-x4 x-stretch y-start">
         <h3>Tools</h3>
         <a class="block" href="https://stephen.band/font-size/">Font-size calculator</a>
+        <a class="block" href="https://stephen.band/harmony-circle/">Harmonic circle</a>
     </div>
 </footer>
 
