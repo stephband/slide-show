@@ -73,10 +73,15 @@
     /* Reset style applied to un-upgraded slide-show  */
     grid-auto-flow: row !important;
 
+    /* Make the .scroller element inhabit full width. On .scroller,
+       grid-template-columns is none-ified so that columns on
+       slot[part="slides"] are sized via grid-auto-columns (or by
+       grid-template-columns specifically set on :part(slides)). */
+    grid-template-columns: 100%;
+    /* Make slides full width by default. This is inherited by
+       .scroller > slot[part="slides"]. */
     grid-auto-columns:     100%;
-    grid-template-columns: none;
     column-gap:            0;
-
     grid-auto-rows:        auto;
     /*grid-template-rows:    1fr;*/
     row-gap:               0;
