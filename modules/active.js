@@ -19,8 +19,19 @@ if (isFF) {
 function getPaddedBox(scroller) {
     const box          = rect(scroller);
     const computed     = window.getComputedStyle(scroller, null);
-    const paddingLeft  = px(computed.getPropertyValue('padding-left'));
-    const paddingRight = px(computed.getPropertyValue('padding-right'));
+
+    // TODO: These values may contain `calc()`, which won't parse. How do we get
+    // used or actual values out of CSS?
+    let paddingLeft, paddingRight;
+    try {
+        paddingLeft  = px(computed.getPropertyValue('padding-left'));
+        paddingRight = px(computed.getPropertyValue('padding-right'));
+    }
+    catch(e) {
+        console.warn(e.message);
+        paddingLeft  = 0;
+        paddingRight = 0;
+    }
 
     box.leftPadding   = box.left + paddingLeft;
     box.rightPadding  = box.left + box.width - paddingRight;

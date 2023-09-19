@@ -2,8 +2,7 @@
 // Much of this code has been purloined from targetable.js – do we need the
 // hashchange tracking here? I have commented it
 
-import Stream   from '../../fn/modules/stream.js';
-import Producer from '../../fn/modules/stream/producer.js';
+import Stream, { stop } from '../../fn/modules/stream.js';
 import { getScrollInterval, updateScrollInterval } from './consts.js';
 
 const assign = Object.assign;
@@ -29,7 +28,7 @@ function ScrollendsProducer(element) {
     this.times   = [];
 }
 
-assign(ScrollendsProducer.prototype, Producer.prototype, {
+assign(ScrollendsProducer.prototype, {
     pipe: function(stream) {
         this.stream = stream;
         this.element.addEventListener('scroll', this, captureOptions);
@@ -48,7 +47,7 @@ assign(ScrollendsProducer.prototype, Producer.prototype, {
 
     stop: function() {
         this.element.removeEventListener('scroll', this);
-        Producer.prototype.stop.apply(this, arguments);
+        stop(this.stream);
     }
 });
 
