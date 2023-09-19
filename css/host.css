@@ -117,6 +117,21 @@
     justify-self: auto;
 }
 
+:host(:focus) {
+    outline-width: 0;
+}
+
+:host(:focus-visible) {
+    outline-width: 1px;
+}
+
+@supports not selector(:focus-visible) {
+    :host(:focus) {
+        outline-width: 1px;
+    }
+}
+
+
 .invisible {
     /* Keep content accessible but not visible. */
     position: absolute;
