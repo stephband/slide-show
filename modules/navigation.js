@@ -29,7 +29,7 @@ Defining HTML for the slot replaces that default content:
     <svg slot="next-button" aria-hidden="true">
         <use href="#forward-icon" />
     </svg>
-    <span slot="prev-button">Prochaine</span>
+    <span slot="next-button">Prochaine</span>
 </slide-show>
 ```
 **/
