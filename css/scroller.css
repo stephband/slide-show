@@ -27,6 +27,10 @@
     will-change: -webkit-scroll-behavior;
     will-change: scroll-behavior;
 
+<<<<<<< HEAD
+=======
+    grid-template-columns: none;
+>>>>>>> main
     grid-auto-columns:     inherit;
     column-gap:            inherit;
     justify-content:       inherit;
