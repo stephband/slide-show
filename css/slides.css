@@ -8,7 +8,7 @@
 
     grid-auto-flow: column;
 
-    grid-template-columns: inherit;
+    grid-template-columns: none;
     grid-auto-columns:  inherit;
     column-gap:         inherit;
     /* Justification is important for alignment to the start of the scroller. */
