@@ -50,4 +50,4 @@ import properties from './modules/properties.js';
 
 const stylesheet = window.slideshowStylesheet || import.meta.url.replace(/\/[^\/]*\.js/, '/slide-show-shadow.css');
 
-export default element('slide-show', lifecycle, properties, stylesheet, 'documentation – stephen.band/slide-show/');
+export default element('slide-show', lifecycle, properties, stylesheet, 'stephen.band/slide-show/');
