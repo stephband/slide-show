@@ -24,9 +24,10 @@
 }
 
 .tab-button {
-    --font-size: 0.9375rem;
-    --line-height: 1.25em;
     --size: 2.5rem;
+
+    font-size: 0.9375rem;
+    line-height: 1.25em;
     color: #666666;
     border-bottom-color: #999999;
     border-radius: 0;
