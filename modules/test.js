@@ -1,5 +1,5 @@
 
-import equals from '../../fn/modules/equals.js';
+import equals from 'fn/equals.js';
 
 let promise = Promise.resolve(0);
 let n = 0;

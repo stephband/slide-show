@@ -1,10 +1,10 @@
 
-import equals          from '../../fn/modules/equals.js';
-import get             from '../../fn/modules/get.js';
-import noop            from '../../fn/modules/noop.js';
-import nothing         from '../../fn/modules/nothing.js';
-import overload        from '../../fn/modules/overload.js';
-import Stream          from '../../fn/modules/stream.js';
+import equals          from 'fn/equals.js';
+import get             from 'fn/get.js';
+import noop            from 'fn/noop.js';
+import nothing         from 'fn/nothing.js';
+import overload        from 'fn/overload.js';
+import Stream          from 'fn/stream.js';
 import create          from '../../dom/modules/create.js';
 import events          from '../../dom/modules/events.js';
 import gestures        from '../../dom/modules/gestures.js';

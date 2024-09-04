@@ -1,5 +1,5 @@
 
-import Stream   from '../../fn/modules/stream.js';
+import Stream   from 'fn/stream.js';
 import create   from '../../dom/modules/create.js';
 import delegate from '../../dom/modules/delegate.js';
 

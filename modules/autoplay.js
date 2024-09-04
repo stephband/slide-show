@@ -3,11 +3,11 @@
 Autoplay
 */
 
-import id         from '../../fn/modules/id.js';
-import get        from '../../fn/modules/get.js';
-import overload   from '../../fn/modules/overload.js';
-import parseValue from '../../fn/modules/parse-value.js';
-import Stream     from '../../fn/modules/stream.js';
+import id         from 'fn/id.js';
+import get        from 'fn/get.js';
+import overload   from 'fn/overload.js';
+import parseValue from 'fn/parse-value.js';
+import Stream     from 'fn/stream.js';
 import events     from '../../dom/modules/events.js';
 
 import { $data }  from './consts.js';
