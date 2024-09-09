@@ -19,7 +19,7 @@ import { processPointers } from './swipes.js';
 import scrollends    from './scrollends.js';
 
 
-function getWidth(scroller, slides, children) {
+function getWidth(slides, slot, children) {
     let n = children.length;
     let r = -Infinity;
 
@@ -29,17 +29,17 @@ function getWidth(scroller, slides, children) {
         r = right > r ? right : r;
     }
 
-    const box   = rect(slides);
-    const style = getComputedStyle(scroller);
+    const box   = rect(slot);
+    const style = getComputedStyle(slides);
     const pl    = px(style.paddingLeft || 0);
     const pr    = px(style.paddingRight || 0);
 
     return pl + pr + r - box.x;
 }
 
-function updateWidth(scroller, slides, children) {
-    const width = getWidth(scroller, slides, children);
-    scroller.style.setProperty('--scroll-width', width + 'px');
+function updateWidth(slides, slot, children) {
+    const width = getWidth(slides, slot, children);
+    slides.style.setProperty('--scroll-width', width + 'px');
 }
 
 function isSlide(slide) {
@@ -61,14 +61,14 @@ export default {
 
     construct: function(shadow) {
         // Shadow DOM
-        const slides   = create('slot', { part: 'slides' });
-        const scroller = create('div',  { class: 'scroller', children: [slides] });
+        const slot     = create('slot');
+        const slides   = create('div',  { part: 'slides', children: [slot] });
         const controls = create('nav',  { part: 'controls', children: [
             create('slot', { name: 'controls' })
         ] });
 
         // Add slots to shadow
-        shadow.append(scroller, controls);
+        shadow.append(slides, controls);
 
         // Stream to push load to
         const connects = Stream.broadcast();
@@ -81,8 +81,8 @@ export default {
         const slotchanges = Stream
             .combine({
                 host: load,
-                elements: events('slotchange', slides)
-                    .map((e) => data.elements = slides.assignedElements()),
+                elements: events('slotchange', slot)
+                    .map((e) => data.elements = slot.assignedElements()),
             })
             .broadcast({ memory: true });
 
@@ -116,7 +116,7 @@ export default {
             .broadcast();
 
         // Track when scroll comes to rest...
-        const scrolls = scrollends(scroller)
+        const scrolls = scrollends(slides)
             // ...but not after disconnect or mid finger gesture...
             .filter((e) => (data.connected && !data.gesturing))
             .broadcast();
@@ -131,8 +131,8 @@ export default {
             children:  nothing,
             device:    undefined,
             shadow,
-            scroller,
             slides,
+            slot,
             controls,
             connects,
             load,
@@ -151,8 +151,8 @@ export default {
         // our fingers it is updated somehow when it is made visible.
         Stream
         .merge(slotchanges, events('resize', window))
-        .filter((e) => (slides.offsetWidth && slides.offsetHeight))
-        .each((e) => updateWidth(scroller, slides, data.elements));
+        .filter((e) => (slot.offsetWidth && slot.offsetHeight))
+        .each((e) => updateWidth(slides, slot, data.elements));
 
         // Wait for first slotchange/load, then maintain active position. In
         // Chrome this fails on connect, as it appears the style is not applied
@@ -164,7 +164,7 @@ export default {
             data.children[0]
         ))
         .map((child) => (data.connected ?
-            jumpTo(scroller, child) :
+            jumpTo(slides, child) :
             child
         ))
         .pipe(activations);
@@ -180,9 +180,9 @@ export default {
         .map((child) => (data.connected ?
             data.active ?
                 // This is an activation, scroll to the new active child
-                scrollTo(scroller, child) :
+                scrollTo(slides, child) :
                 // If active is not yet defined jump to the newly active child
-                jumpTo(scroller, child) :
+                jumpTo(slides, child) :
             // If not connected pass the child through
             child
         ))
@@ -213,16 +213,16 @@ export default {
 
         // Update positions on entry or exit from fullscreen.
         events('fullscreenchange', window)
-        .filter((e) => data.active && slides.offsetWidth && slides.offsetHeight)
+        .filter((e) => data.active && slot.offsetWidth && slot.offsetHeight)
         .each((e) => {
             // If this slide-show was involved in the fullscreen change
             // reposition the active slide, it may have been shuftied.
             if (e.target === this || e.target.contains(this)) {
-                jumpTo(scroller, data.active);
+                jumpTo(slides, data.active);
             }
         });
 
-        // Chrome behaves nicely when shifting focus between slides, Safari and
+        // Chrome behaves nicely when shifting focus between slot, Safari and
         // FF not so much. Let's give them a helping hand at displaying the
         // focused slide. Start by tracking the latest input device...
         Stream
@@ -250,14 +250,14 @@ export default {
         .map(overload(get('keyCode'), {
             // Left arrow
             37: (e) => {
-                // If we don't preventDefault FF jumps two slides - it scrolls
+                // If we don't preventDefault FF jumps two slot - it scrolls
                 // once for the handler and once for its default scroll paging
                 e.preventDefault();
                 return data.elements[data.elements.indexOf(data.active) - 1];
             },
             // Right arrow
             39: (e) => {
-                // If we don't preventDefault FF jumps two slides - it scrolls
+                // If we don't preventDefault FF jumps two slot - it scrolls
                 // once for the handler and once for its default scroll paging
                 e.preventDefault();
                 return data.elements[data.elements.indexOf(data.active) + 1];

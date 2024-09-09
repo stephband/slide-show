@@ -14,7 +14,6 @@
 
     <link rel="stylesheet" href="../css/normalise.css">
     <link rel="stylesheet" href="../css/host.css">
-    <link rel="stylesheet" href="../css/scroller.css">
     <link rel="stylesheet" href="../css/slides.css">
     <link rel="stylesheet" href="../element.css">
     <!--link rel="stylesheet" href="../../documentation/prism-cruncher.css" />
@@ -32,7 +31,7 @@
         --padding-right: 2rem;
     }
 
-    .scroller {
+    [part="slides"] {
         width: 80%;
         background-color: red;
     }
@@ -47,8 +46,8 @@
 
 <body>
     <div class="block">
-        <div class="scroller">
-            <slot part="slides">
+        <div part="slides">
+            <slot>
                 <img src="images/bourg.jpg" />
                 <img src="images/tractor.jpg" />
                 <img src="images/bourg.jpg" />

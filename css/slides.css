@@ -1,27 +1,118 @@
 
+/**
+[part="slides"]
+**/
+
 [part="slides"] {
+    display: block;
+    position: relative;
+
+    padding-left:         var(--padding-left, 0);
+    padding-right:        var(--padding-right, 0);
+    scroll-padding-left:  var(--padding-left, 0);
+    scroll-padding-right: var(--padding-right, 0);
+
+    overflow:   auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: none;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none; /* Firefox 64 */
+
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+
+    -webkit-scroll-behavior: inherit;
+            scroll-behavior: inherit;
+
+    will-change: -webkit-scroll-behavior;
+    will-change: scroll-behavior;
+
+    /* Inherit all grid definitions other than grid-template, as grid-template
+       is used by the parent :host to position controls, and justify-content,
+       which affects scrolling. These properties do not apply to this element
+       but are inherited in turn by the child `.slides` grid. */
+    grid-auto-flow:        column;
+    grid-template-columns: none;
+    grid-auto-columns:     inherit;
+    column-gap:            inherit;
+    justify-content:       start;
+    justify-items:         inherit;
+    grid-template-rows:    none;
+    grid-auto-rows:        inherit;
+    row-gap:               inherit;
+    align-content:         inherit;
+    align-items:           inherit;
+}
+
+[part="slides"]::before {
+    /* The scroll element does not scroll to the extent of their right padding,
+       as its child, the slides element, is max 100% wide – allowing the slides
+       grid or its children to set their width according to the host width.
+       Tricky stuff, but this is a general problem with scrolling elements, and
+       not just in this custom element.
+
+       However, the presence of a ridiculously wide absolutely positioned block
+       does allow scroll-snap to align the last item to the centre by default,
+       making padding right work, sorta. It breaks for other alignments of
+       scroll-snap, so width is nonetheless updated in JS. */
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    /* Accommodate 50 full width slides as a default. */
+    width: var(--scroll-width, 5000%);
+
+    /* Requires at least some height to take effect. */
+    height: 1px;
+
+    /* Put it behind everything else */
+    z-index: -1;
+}
+
+[part="slides"]::-webkit-scrollbar {
+    /* Not convinced this is necessary */
+    -webkit-appearance: none;
+
+    /* Hide scrollbar by default */
+    display:       var(--webkit-scrollbar-display, none);
+    width:         var(--webkit-scrollbar-width);
+    height:        var(--webkit-scrollbar-width);
+    background:    var(--webkit-scrollbar-background);
+    border:        var(--webkit-scrollbar-border);
+    border-radius: var(--webkit-scrollbar-border-radius);
+}
+
+[part="slides"]::-webkit-scrollbar-thumb:vertical,
+[part="slides"]::-webkit-scrollbar-thumb:horizontal {
+    background:    var(--webkit-scrollbar-thumb-background);
+    border:        var(--webkit-scrollbar-thumb-border);
+    border-radius: var(--webkit-scrollbar-thumb-border-radius);
+}
+
+[part="slides"] > slot {
+    position: relative;
     display: grid;
     height: 100%;
 
     margin-left: auto;
     margin-right: auto;
 
-    grid-auto-flow: column;
-
-    grid-template-columns: none;
-    grid-auto-columns:  inherit;
-    column-gap:         inherit;
-    /* Justification is important for alignment to the start of the scroller. */
-    justify-content:    start;
-    justify-items:      inherit;
-
-    grid-template-rows: inherit;
-    grid-auto-rows:     inherit;
-    row-gap:            inherit;
-    align-content:      inherit;
-    align-items:        inherit;
+    /* Inherit all grid definitions other than justify-content, which affects
+       how horizontal scrolling behaves. */
+    grid-auto-flow:        inherit;
+    grid-template-columns: inherit;
+    grid-auto-columns:     inherit;
+    column-gap:            inherit;
+    justify-content:       start;
+    justify-items:         inherit;
+    grid-template-rows:    inherit;
+    grid-auto-rows:        inherit;
+    row-gap:               inherit;
+    align-content:         inherit;
+    align-items:           inherit;
 }
 
-[part="slides"]::slotted(*) {
+[part="slides"] > slot::slotted(*) {
     scroll-snap-align: center;
 }

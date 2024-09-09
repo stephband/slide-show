@@ -16,9 +16,9 @@ if (isFF) {
     document.addEventListener('DOMContentLoaded', (e) => DOMContentLoaded = true);
 }
 
-function getPaddedBox(scroller) {
-    const box          = rect(scroller);
-    const computed     = window.getComputedStyle(scroller, null);
+function getPaddedBox(slides) {
+    const box          = rect(slides);
+    const computed     = window.getComputedStyle(slides, null);
 
     // TODO: These values may contain `calc()`, which won't parse. How do we get
     // used or actual values out of CSS?
@@ -53,45 +53,45 @@ function getSnapX(element) {
         'centre' ;
 }
 
-function scrollToTarget(scroller, target, behavior) {
-    const scrollerBox = getPaddedBox(scroller);
+function scrollToTarget(slides, target, behavior) {
+    const slidesBox = getPaddedBox(slides);
     const targetBox   = rect(target);
     const snap        = getSnapX(target);
 
     // Move scroll position to target slide, taking into account
     // scroll-snap-align of the slide
     const position = {
-        top:  scroller.scrollTop,
-        left: scroller.scrollLeft + (
-            snap === 'left' ? targetBox.left - scrollerBox.leftPadding :
-            snap === 'right' ? targetBox.right - scrollerBox.rightPadding :
-            targetBox.left + (targetBox.width / 2) - scrollerBox.centrePadding
+        top:  slides.scrollTop,
+        left: slides.scrollLeft + (
+            snap === 'left' ? targetBox.left - slidesBox.leftPadding :
+            snap === 'right' ? targetBox.right - slidesBox.rightPadding :
+            targetBox.left + (targetBox.width / 2) - slidesBox.centrePadding
         ),
         behavior: behavior
     };
 
-    scroller.scrollTo(position);
+    slides.scrollTo(position);
 
     // In Firefox, wait for DOMContentLoaded and set position again.
     if (isFF && !DOMContentLoaded) {
-        document.addEventListener('DOMContentLoaded', () => scroller.scrollTo(position));
+        document.addEventListener('DOMContentLoaded', () => slides.scrollTo(position));
     }
 }
 
-export function scrollTo(scroller, target) {
-    scrollToTarget(scroller, target, 'smooth');
+export function scrollTo(slides, target) {
+    scrollToTarget(slides, target, 'smooth');
     return target;
 }
 
-export function jumpTo(scroller, target) {
-    scroller.style.setProperty('scroll-behavior', 'auto', 'important');
-    scrollToTarget(scroller, target, 'auto');
-    scroller.style.setProperty('scroll-behavior', '');
+export function jumpTo(slides, target) {
+    slides.style.setProperty('scroll-behavior', 'auto', 'important');
+    scrollToTarget(slides, target, 'auto');
+    slides.style.setProperty('scroll-behavior', '');
     return target;
 }
 
-function getAligned(scroller, elements) {
-    const { leftPadding, rightPadding, centrePadding } = getPaddedBox(scroller);
+function getAligned(slides, elements) {
+    const { leftPadding, rightPadding, centrePadding } = getPaddedBox(slides);
 
     let n = elements.length;
     let slide;
@@ -134,23 +134,23 @@ function isGhost(slide) {
 }
 
 export function getActive(data) {
-    const { scroller, elements, children } = data;
-    const aligned = getAligned(scroller, elements);
+    const { slides, elements, children } = data;
+    const aligned = getAligned(slides, elements);
     return isGhost(aligned) ?
         children[aligned.dataset.slideIndex] :
         aligned ;
 }
 
 export function updateActive(data) {
-    const { scroller, children, elements } = data;
-    const current = getAligned(scroller, elements);
+    const { slides, children, elements } = data;
+    const current = getAligned(slides, elements);
     let active;
 
     // If current is a loop ghost jump to the actual slide it references
     if (!current) { return; }
     if (isGhost(current)) {
         active = children[current.dataset.slideIndex];
-        jumpTo(scroller, active);
+        jumpTo(slides, active);
     }
     else {
         active = current;

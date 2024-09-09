@@ -5,8 +5,8 @@ import overload from 'fn/overload.js';
 import { getActive }         from './active.js';
 import { getScrollInterval } from './consts.js';
 
-function resetScroll(scroller, scrolls) {
-    scroller.style.setProperty('scroll-snap-type', '');
+function resetScroll(slides, scrolls) {
+    slides.style.setProperty('scroll-snap-type', '');
     scrolls.stop();
 }
 
@@ -37,38 +37,38 @@ export const processPointers = overload((data, e) => e.type, {
                 return;
             }
 
-            data.scrollLeft0 = data.scroller.scrollLeft;
-            data.scroller.style.setProperty('scroll-snap-type', 'none', 'important');
-            data.scroller.style.setProperty('scroll-behavior', 'auto', 'important');
+            data.scrollLeft0 = data.slides.scrollLeft;
+            data.slides.style.setProperty('scroll-snap-type', 'none', 'important');
+            data.slides.style.setProperty('scroll-behavior', 'auto', 'important');
             data.gesturing = true;
         }
 
         const dx = e.clientX - data.x0;
-        data.scroller.scrollLeft = data.scrollLeft0 - dx;
+        data.slides.scrollLeft = data.scrollLeft0 - dx;
 
         return data;
     },
 
     // Catches pointerup and pointercancel
     default: function(data, e) {
-        const scroller = data.scroller;
+        const slides = data.slides;
 
         // Track the end of click to allow click suppression
         data.clickSuppressTime = e.timeStamp;
 
         // Here we must go through a whole rigmarole in an attempt to avoid
         // scroll jumps at the end of a swipe. Find out where it is, ...
-        const scrollLeft1 = scroller.scrollLeft;
-        scroller.style.setProperty('scroll-snap-type', '');
+        const scrollLeft1 = slides.scrollLeft;
+        slides.style.setProperty('scroll-snap-type', '');
 
         // and where it would snap to.
-        const scrollLeft2 = scroller.scrollLeft;
+        const scrollLeft2 = slides.scrollLeft;
 
         // If those numbers are the same we are probably in FF, where removing
         // scroll-snap does not cause an immediate jump to a snap alignment.
         if (scrollLeft1 === scrollLeft2) {
             // We can trust the browser to smooth scroll when we reset it.
-            scroller.style.setProperty('scroll-behavior', '');
+            slides.style.setProperty('scroll-behavior', '');
         }
         else {
             // Otherwise we have to do things the hard way. We may as well
@@ -79,23 +79,23 @@ export const processPointers = overload((data, e) => e.type, {
             data.activations.push(active);
 
             // Switch scroll-snap off again and put scroll back to position 1...
-            scroller.style.setProperty('scroll-snap-type', 'none', 'important');
-            scroller.scrollLeft = scrollLeft1;
+            slides.style.setProperty('scroll-snap-type', 'none', 'important');
+            slides.scrollLeft = scrollLeft1;
 
             // then manually smooth scroll over to position 2...
-            scroller.style.setProperty('scroll-behavior', '');
-            scroller.scrollTo({
-                top:  scroller.scrollTop,
+            slides.style.setProperty('scroll-behavior', '');
+            slides.scrollTo({
+                top:  slides.scrollTop,
                 left: scrollLeft2,
                 behavior: 'smooth'
             });
 
             // and finally, switch scroll snapping back on when that scroll
             // comes to rest (scrollInterval passes without an event).
-            events({ type: 'scroll', passive: true }, scroller)
+            events({ type: 'scroll', passive: true }, slides)
             .reduce((frame, e, i, stream) => {
                 clearTimeout(frame);
-                return setTimeout(resetScroll, getScrollInterval() * 1000, scroller, stream);
+                return setTimeout(resetScroll, getScrollInterval() * 1000, slides, stream);
             });
 
             // Ooof. What a polava.

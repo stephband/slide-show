@@ -41,17 +41,17 @@ import delegate from '../../dom/modules/delegate.js';
 import { activatePrevious, activateNext, activateIndex } from './active.js';
 import { $data }         from './consts.js';
 
-function update(scroller, prev, next, elements, i) {
+function update(slides, prev, next, elements, i) {
     // Preemptively hide buttons now (before new active is detected at
     // end of scroll)
-    if (i === 0 || scroller.scrollLeft === 0) {
+    if (i === 0 || slides.scrollLeft === 0) {
         prev.hidden = true;
     }
     else {
         prev.hidden = false;
     }
 
-    if (i === elements.length - 1 || scroller.scrollLeft >= scroller.scrollWidth - scroller.clientWidth) {
+    if (i === elements.length - 1 || slides.scrollLeft >= slides.scrollWidth - slides.clientWidth) {
         next.hidden = true;
     }
     else {
@@ -61,7 +61,7 @@ function update(scroller, prev, next, elements, i) {
 
 export function enable(host) {
     const data = host[$data];
-    const { actives, clicks, slotchanges, scroller, scrolls } = data;
+    const { actives, clicks, slotchanges, slides, scrolls } = data;
 
     // Add an object to store navigation state
     const navigation = data.navigation = {
@@ -104,7 +104,7 @@ export function enable(host) {
     navigation.updates = Stream
     .combine({ active: actives, changes: slotchanges, scroll: scrolls })
     .each((state) => update(
-        scroller,
+        slides,
         navigation.prev,
         navigation.next,
         state.changes.elements,

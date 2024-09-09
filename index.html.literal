@@ -42,7 +42,6 @@
         "./module.css",
         "./shadow.css",
         "./css/host.css",
-        "./css/scroller.css",
         "./css/slides.css",
         "./css/loop.css",
         "./css/navigation.css",

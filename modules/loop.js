@@ -15,7 +15,7 @@ function toLoopGhost(slide, i) {
 }
 
 function render(data) {
-    const { active, children, host, scroller } = data;
+    const { active, children, host, slides } = data;
 
     if (data.loop.prepends) {
         data.loop.prepends.forEach((slide) => slide.remove());
@@ -29,7 +29,7 @@ function render(data) {
         // that caused this render has completed. Synchronously update
         // data.elements or our state is out of sync for the activation of
         // other components.
-        data.elements = data.slides.assignedElements();
+        data.elements = data.slot.assignedElements();
         return;
     }
 
@@ -59,9 +59,9 @@ function render(data) {
     // that caused this render has completed. Synchronously update
     // data.elements or our state is out of sync for the activation of
     // other components.
-    data.elements = data.slides.assignedElements();
+    data.elements = data.slot.assignedElements();
 
-    jumpTo(scroller, active || children[0]);
+    jumpTo(slides, active || children[0]);
 }
 
 export function enable(host) {

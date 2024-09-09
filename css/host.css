@@ -59,7 +59,7 @@
     display: flex;
     flex-direction: column;
 
-    /* .scroller takes over viewport duties */
+    /* [part="slides"] takes over viewport duties */
     padding-left:  0 !important;
     padding-right: 0 !important;
 
@@ -73,15 +73,14 @@
     /* Reset style applied to un-upgraded slide-show  */
     grid-auto-flow: row !important;
 
-    /* Make the .scroller element inhabit full width. On .scroller,
+    /* Make the [part="slides"] element inhabit full width. On [part="slides"],
        grid-template-columns is none-ified so that columns on
        slot[part="slides"] are sized via grid-auto-columns (or by
        grid-template-columns specifically set on :part(slides)). One possible
        way around this, to make grid-template-columns inherit nicely, would be
        to convert :host to display:flex. Maybe. */
     grid-template-columns: 100%;
-    /* Make slides full width by default. This is inherited by
-       .scroller > slot[part="slides"]. */
+    /* Make slides full width by default. This is inherited by [part="slides"] > slot. */
     grid-auto-columns:     100%;
     column-gap:            0;
     grid-auto-rows:        auto;
@@ -91,7 +90,7 @@
     scroll-snap-type: none !important;
     scroll-snap-stop: none !important;
 
-    /* Inherited by .scroller, overridable from outer DOM */
+    /* Inherited by [part="slides"], overridable from outer DOM */
     -webkit-scroll-behavior: smooth;
             scroll-behavior: smooth;
 
@@ -105,12 +104,12 @@
     display: none;
 }
 
-:host > .scroller,
+:host > [part="slides"],
 :host > [part="controls"] {
     align-self: stretch;
 }
 
-:host > .scroller {
+:host > [part="slides"] {
     height: 100%;
     justify-self: stretch;
 }
