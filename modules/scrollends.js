@@ -2,7 +2,7 @@
 // Much of this code has been purloined from targetable.js – do we need the
 // hashchange tracking here? I have commented it
 
-import Stream, { stop } from 'fn/stream.js';
+import Stream, { stop } from 'fn/stream/stream.js';
 import { getScrollInterval, updateScrollInterval } from './consts.js';
 
 const assign = Object.assign;
