@@ -35,8 +35,8 @@ Defining HTML for the slot replaces that default content:
 **/
 
 import Stream   from 'fn/stream.js';
-import create   from '../../dom/modules/create.js';
-import delegate from '../../dom/modules/delegate.js';
+import create   from 'dom/create.js';
+import delegate from 'dom/delegate.js';
 
 import { activatePrevious, activateNext, activateIndex } from './active.js';
 import { $data }         from './consts.js';

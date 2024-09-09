@@ -114,5 +114,6 @@
 }
 
 [part="slides"] > slot::slotted(*) {
+    /* Overrideable on individual slides without any fancy selector */
     scroll-snap-align: center;
 }

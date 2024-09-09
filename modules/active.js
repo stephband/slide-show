@@ -4,9 +4,9 @@ Detect and scroll to active slides. The active is the slide currently in
 scroll-snap alignment.
 */
 
-import { px } from '../../dom/modules/parse-length.js';
-import rect   from '../../dom/modules/rect.js';
-import isFF   from '../../dom/modules/is-firefox.js';
+import { px } from 'dom/parse-length.js';
+import rect   from 'dom/rect.js';
+import isFF   from 'dom/is-firefox.js';
 
 // FireFox resets scrollLeft to 0 on DOMContentLoaded. Naughty FireFox. We
 // can not feature detect this until it has happened, unfortunately, so we

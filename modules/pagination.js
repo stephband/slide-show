@@ -1,7 +1,7 @@
 
 import Stream   from 'fn/stream.js';
-import create   from '../../dom/modules/create.js';
-import delegate from '../../dom/modules/delegate.js';
+import create   from 'dom/create.js';
+import delegate from 'dom/delegate.js';
 
 import { $data }          from './consts.js';
 

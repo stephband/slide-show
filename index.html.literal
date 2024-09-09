@@ -11,6 +11,23 @@
     <link rel="stylesheet" href="./docs/module.css">
     <link rel="stylesheet" href="./build/slide-show.css">
     <link rel="prefetch" as="style" href="./build/slide-show-shadow.css">
+
+    <script type="importmap">{
+        "imports": {
+            "bolt/": "https://cdn.jsdelivr.net/gh/stephband/bolt-2@main/",
+            "dom/":  "https://cdn.jsdelivr.net/gh/stephband/dom@master/modules/",
+            "fn/":   "https://cdn.jsdelivr.net/gh/stephband/fn@master/modules/"
+        }
+    }</script>
+
+    <script type="module">
+        // Register <slide-show>
+        import './build/slide-show.js';
+
+        // Log events
+        import events from 'dom/modules/events.js';
+        events('slide-active', document).each((e) => console.log(e.type, e.target));
+    </script>
 </head>
 
 <body class="4x-grid @1-6x-grid @2-7x-grid @3-9x-grid grid">
@@ -67,9 +84,6 @@
         includes JS files for registering customised built-in versions of the
         slide-show.</p>
 
-        ${ include('./docs/templates/body.literal', comments("./module-ol.js")) }
-        ${ include('./docs/templates/body.literal', comments("./module-ul.js")) }
-
         <p>Note that these don't register the same way in
         all browsers – Safari does not support customised built-ins, so support
         is roughly polyfilled. Mileage may vary; please file an
@@ -88,13 +102,4 @@
     ${ include('../literal/documentation/templates/credit.literal', './package.json') }
     ${ include('../literal/documentation/templates/footer.literal', './package.json') }
     ${ include('../literal/documentation/templates/scripts.literal', './package.json') }
-
-    <script type="module">
-        // Register <slide-show>
-        import './build/slide-show.js';
-
-        // Log events
-        import events from 'https://stephen.band/dom/modules/events.js';
-        events('slide-active', document).each((e) => console.log(e.type, e.target));
-    </script>
 </body>

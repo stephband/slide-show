@@ -1,5 +1,5 @@
 
-import rect   from '../../dom/modules/rect.js';
+import rect   from 'dom/rect.js';
 
 import { $data }  from './consts.js';
 import { jumpTo } from './active.js';

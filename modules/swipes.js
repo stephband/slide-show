@@ -1,5 +1,5 @@
 
-import events   from '../../dom/modules/events.js';
+import events   from 'dom/events.js';
 import overload from 'fn/overload.js';
 
 import { getActive }         from './active.js';

@@ -8,7 +8,7 @@ import get        from 'fn/get.js';
 import overload   from 'fn/overload.js';
 import parseValue from 'fn/parse-value.js';
 import Stream     from 'fn/stream.js';
-import events     from '../../dom/modules/events.js';
+import events     from 'dom/events.js';
 
 import { $data }  from './consts.js';
 

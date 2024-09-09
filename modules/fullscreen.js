@@ -17,10 +17,10 @@ HTML for the slot replaces that default content:
 ```
 **/
 
-import create    from '../../dom/modules/create.js';
-import delegate  from '../../dom/modules/delegate.js';
-import events    from '../../dom/modules/events.js';
-import { fullscreenEnabled, getFullscreenElement, enterFullscreen, exitFullscreen } from '../../dom/modules/fullscreen.js';
+import create    from 'dom/create.js';
+import delegate  from 'dom/delegate.js';
+import events    from 'dom/events.js';
+import { fullscreenEnabled, getFullscreenElement, enterFullscreen, exitFullscreen } from 'dom/fullscreen.js';
 
 import { $data } from './consts.js';
 

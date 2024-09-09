@@ -42,12 +42,14 @@ A `<slide-show>` is not just for images. Content may be any HTML. Here's a
 **/
 
 // Polyfill Element.scrollTo() for Safari
-import '../dom/polyfills/element.scrollto.js';
+// Not needed since Safari 14:
+// https://caniuse.com/?search=scrollto
+//import 'dom/polyfills/element.scrollto.js';
 
-import element    from '../dom/modules/element.js';
+import element    from 'dom/element.js';
 import lifecycle  from './modules/lifecycle.js';
 import properties from './modules/properties.js';
 
-const stylesheet = window.slideshowStylesheet || import.meta.url.replace(/\/[^\/]*\.js/, '/slide-show-shadow.css');
+const stylesheet = window.slideshowStylesheet || import.meta.url.replace(/\/[^\/]*\.js/, '/shadow.css');
 
 export default element('slide-show', lifecycle, properties, stylesheet, 'stephen.band/slide-show/');
