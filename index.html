@@ -287,41 +287,41 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
     <h3>Parts</h3>
 
 
-<details-toggle class="part-details-toggle" id="part-prev-button">
+<details-toggle class="part-details-toggle" id="part-previous">
     <h4 class="part-text text-05" slot="summary">
-        <code class=" language-css">::part(prev-button)</code>
+        <code class=" language-css">::part(previous)</code>
     </h4>
 
     <p>Style the ‘previous slide’ button, available when the slideshow has
 <code>controls=&quot;navigation&quot;</code> enabled. Default button icons are inner SVGs that
 render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
 and <code>fill</code> properties from the button.</p>
-<pre><code class="language-css"><span class="token selector">slide-show::part(next-button)</span> <span class="token punctuation">{</span>
+<pre><code class="language-css"><span class="token selector">slide-show::part(next)</span> <span class="token punctuation">{</span>
     <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
     <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>To fully replace the default icon, see <code>slot=&quot;prev-button&quot;</code>.</p>
+<p>To fully replace the default icon, see <code>slot=&quot;previous&quot;</code>.</p>
 
 </details-toggle>
 
 
 
-<details-toggle class="part-details-toggle" id="part-next-button">
+<details-toggle class="part-details-toggle" id="part-next">
     <h4 class="part-text text-05" slot="summary">
-        <code class=" language-css">::part(next-button)</code>
+        <code class=" language-css">::part(next)</code>
     </h4>
 
     <p>Style the ‘next slide’ button, available when the slideshow has
 <code>controls=&quot;navigation&quot;</code> enabled. Default button icons are inner SVGs that
 render <code>stroke</code> as <code>currentcolor</code> and inherit <code>stroke-width</code>, <code>stroke-linecap</code>
 and <code>fill</code> properties from the button.</p>
-<pre><code class="language-css"><span class="token selector">slide-show::part(next-button)</span> <span class="token punctuation">{</span>
+<pre><code class="language-css"><span class="token selector">slide-show::part(next)</span> <span class="token punctuation">{</span>
     <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
     <span class="token property">stroke-width</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>To fully replace the default icon, see <code>slot=&quot;next-button&quot;</code>.</p>
+<p>To fully replace the default icon, see <code>slot=&quot;next&quot;</code>.</p>
 
 </details-toggle>
 
@@ -448,9 +448,9 @@ for some browser inconsistencies.)</p>
     <h3>Slots</h3>
 
 
-<details-toggle class="slot-details-toggle" id="slot-prev-button">
+<details-toggle class="slot-details-toggle" id="slot-previous">
     <h4 class="slot-text text-05" slot="summary">
-        <code class=" language-html">slot="prev-button"</code>
+        <code class=" language-html">slot="previous"</code>
     </h4>
 
     <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
@@ -458,10 +458,10 @@ allows the inclusion of html content into the ‘previous’ navigation button. 
 default the slot contains an inline SVG of an icon, and some text (in English).
 Defining HTML for the slot replaces that default content:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>previous<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#back-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prev-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Dernière<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>previous<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Dernière<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
 </code></pre>
 
@@ -469,9 +469,9 @@ Defining HTML for the slot replaces that default content:</p>
 
 
 
-<details-toggle class="slot-details-toggle" id="slot-next-button">
+<details-toggle class="slot-details-toggle" id="slot-next">
     <h4 class="slot-text text-05" slot="summary">
-        <code class=" language-html">slot="next-button"</code>
+        <code class=" language-html">slot="next"</code>
     </h4>
 
     <p>Available when the slideshow has <code>controls=&quot;navigation&quot;</code> enabled, this slot
@@ -479,10 +479,10 @@ allows the inclusion of html content into the ‘next’ navigation button. By
 default the slot contains an inline SVG of an icon, and some text (in English).
 Defining HTML for the slot replaces that default content:</p>
 <pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slide-show</span> <span class="token attr-name">controls</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next-button<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#forward-icon<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next-button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Prochaine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>next<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Prochaine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slide-show</span><span class="token punctuation">></span></span>
 </code></pre>
 

@@ -1,40 +1,40 @@
 
 /**
-::part(prev-button)
+::part(previous)
 Style the 'previous slide' button, available when the slideshow has
 `controls="navigation"` enabled. Default button icons are inner SVGs that
 render `stroke` as `currentcolor` and inherit `stroke-width`, `stroke-linecap`
 and `fill` properties from the button.
 
 ```css
-slide-show::part(next-button) {
+slide-show::part(next) {
     color: blue;
     stroke-width: 3px;
 }
 ```
 
-To fully replace the default icon, see `slot="prev-button"`.
+To fully replace the default icon, see `slot="previous"`.
 **/
 
 /**
-::part(next-button)
+::part(next)
 Style the 'next slide' button, available when the slideshow has
 `controls="navigation"` enabled. Default button icons are inner SVGs that
 render `stroke` as `currentcolor` and inherit `stroke-width`, `stroke-linecap`
 and `fill` properties from the button.
 
 ```css
-slide-show::part(next-button) {
+slide-show::part(next) {
     color: blue;
     stroke-width: 3px;
 }
 ```
 
-To fully replace the default icon, see `slot="next-button"`.
+To fully replace the default icon, see `slot="next"`.
 **/
 
-[part="prev-button"],
-[part="next-button"] {
+[part="previous"],
+[part="next"] {
     vertical-align: baseline;
     overflow: hidden;
     position: absolute;
@@ -70,16 +70,16 @@ To fully replace the default icon, see `slot="next-button"`.
     fill:           none;
 }
 
-[part="prev-button"] {
+[part="previous"] {
     left: 0.1875rem;
 }
 
-[part="next-button"] {
+[part="next"] {
     right: 0.1875rem;
 }
 
-[part="prev-button"]:hover,
-[part="next-button"]:hover {
+[part="previous"]:hover,
+[part="next"]:hover {
     transition: background-color 0.1s linear;
     background-color: rgba(255, 255, 255, 0.3);
 }
@@ -87,10 +87,10 @@ To fully replace the default icon, see `slot="next-button"`.
 
 /* Default content inside the slot */
 
-slot[name="prev-button"] > svg,
-slot[name="next-button"] > svg,
-slot[name="prev-button"]::slotted(svg),
-slot[name="next-button"]::slotted(svg) {
+slot[name="previous"] > svg,
+slot[name="next"] > svg,
+slot[name="previous"]::slotted(svg),
+slot[name="next"]::slotted(svg) {
     width: 100%;
     height: 100%;
 }
