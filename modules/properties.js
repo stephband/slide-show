@@ -34,7 +34,7 @@ export default {
     ```
 
     May be set to one of the child elements, or to the id of one of the
-    child elements, which causes the `slide-show` to scroll.
+    child elements, causing the `slide-show` to scroll.
 
     ```js
     slideshow.active = 'slide-1';
@@ -49,13 +49,13 @@ export default {
         set: function(id) {
             const data = this[$data];
 
-            // Accept an id
-            const child = typeof id === 'object' ?
-                id :
-                /^\d/.test(id + '') ?
-                    this.querySelector('#\\3' + (id + '')[0] + ' ' + (id + '').slice(1)) :
-                /^\#/.test(id + '') ?
-                    this.querySelector(id) :
+                // Accept an element
+            const child = typeof id === 'object' ? id :
+                // Accept an index (??)
+                /^\d/.test(id + '') ? this.querySelector('#\\3' + (id + '')[0] + ' ' + (id + '').slice(1)) :
+                // Accept an #id
+                /^\#/.test(id + '') ? this.querySelector(id) :
+                // Accept an id
                 this.querySelector('#' + id) ;
 
             data.views.push(child);

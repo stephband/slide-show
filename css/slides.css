@@ -95,6 +95,10 @@
     display: grid;
     height: 100%;
 
+    /* Encourage the slides strip to grow no bigger than its content and stay
+       centered if it ends up smaller */
+    width: fit-content;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 

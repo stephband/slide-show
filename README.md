@@ -92,8 +92,8 @@ Style for the `slide-show`:
 - `--slide-duration` - a CSS time value in `s` or `ms`, used when `autoplay` is enabled
 - `--padding-left` - padding and scroll-padding inside the scroll area
 - `--padding-right` - padding and scroll-padding inside the scroll area
-- `::part(prev-button)` - the 'previous' navigation button
-- `::part(next-button)` - the 'next' navigation button
+- `::part(previous)` - the 'previous' navigation button
+- `::part(next)` - the 'next' navigation button
 - `::part(page-button)` - a pagination button
 - `::part(page-button-active)` - the currently active pagination button
 - `::part(fullscreen-button)` - the fullscreen toggle button

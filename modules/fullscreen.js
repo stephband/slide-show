@@ -25,7 +25,7 @@ import { fullscreenEnabled, getFullscreenElement, enterFullscreen, exitFullscree
 import { $data } from './consts.js';
 
 if (window.DEBUG && !fullscreenEnabled) {
-    console.warn('<slide-show> fullscreen API not supported, fullscreen controls will not be rendered');
+    console.warn('<slide-show> Browser does not support fullscreen API, fullscreen controls will not shown');
 }
 
 export function enable(host) {
