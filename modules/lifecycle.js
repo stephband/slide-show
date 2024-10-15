@@ -71,8 +71,8 @@ export default {
         shadow.append(slides, controls);
 
         // Stream to push load to
-        const connects = Stream.broadcast();
-        const load     = Stream.broadcast();
+        const connects = Stream.of();
+        const load     = Stream.of();
 
         // In Chrome and FF initial `slotchange` event is always sent before
         // load, but not so in Safari where either order may happen (at a guess

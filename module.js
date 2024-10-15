@@ -46,7 +46,7 @@ A `<slide-show>` is not just for images. Content may be any HTML. Here's a
 // https://caniuse.com/?search=scrollto
 //import 'dom/polyfills/element.scrollto.js';
 
-import element    from 'dom/element.js';
+import element    from 'dom/element-1.js';
 import lifecycle  from './modules/lifecycle.js';
 import properties from './modules/properties.js';
 

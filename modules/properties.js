@@ -1,6 +1,6 @@
 
-import createBoolean   from 'dom/element/create-boolean.js';
-import createTokenList from 'dom/element/create-token-list.js';
+import createBoolean   from 'dom/element-1/create-boolean.js';
+import createTokenList from 'dom/element-1/create-token-list.js';
 
 import { $data }       from './consts.js';
 import * as autoplay   from './autoplay.js';
