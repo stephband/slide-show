@@ -46,10 +46,10 @@ A `<slide-show>` is not just for images. Content may be any HTML. Here's a
 // https://caniuse.com/?search=scrollto
 //import 'dom/polyfills/element.scrollto.js';
 
-import element    from 'dom/element-1.js';
+import element    from 'dom/element.js';
 import lifecycle  from './modules/lifecycle.js';
 import properties from './modules/properties.js';
 
-const stylesheet = window.slideshowStylesheet || import.meta.url.replace(/\/[^\/]*\.js/, '/shadow.css');
+lifecycle.shadow = `<link rel="stylesheet" href="${ window.slideshowStylesheet || import.meta.url.replace(/module\.js$/, 'shadow.css') }"/>`;
 
-export default element('slide-show', lifecycle, properties, stylesheet, 'stephen.band/slide-show/');
+export default element('slide-show', lifecycle, properties, 'stephen.band/slide-show/');
