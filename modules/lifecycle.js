@@ -83,8 +83,8 @@ export default {
                 host: load,
                 elements: events('slotchange', slot)
                     .map((e) => data.elements = slot.assignedElements()),
-            })
-            .broadcast({ memory: true });
+            });
+            //.broadcast({ memory: true });
 
         const mutations = slotchanges
             .map((state) => {
@@ -92,9 +92,10 @@ export default {
                 return equals(data.children, children) ?
                     undefined :
                     (data.children = children) ;
-            })
-            .broadcast({ memory: true, hot: true });
-
+            });
+            //.broadcast({ memory: true, hot: true });
+// Keep it hot
+mutations.pipe({ push: noop });
         // Buffer stream for pushing children to scroll into view then activate
         const views = Stream.of();
 
@@ -108,18 +109,19 @@ export default {
                 child
             ))
             .filter((child) => (data.active !== child && trigger('slide-active', child)))
-            .map((child) => data.active = child)
-            .broadcast({ memory: true, hot: true });
-
+            .map((child) => data.active = child);
+            //.broadcast({ memory: true, hot: true });
+// Keep it hot
+actives.pipe({ push: noop });
         const clicks = events('click', shadow)
-            .filter(isPrimaryButton)
-            .broadcast();
+            .filter(isPrimaryButton);
+            //.broadcast();
 
         // Track when scroll comes to rest...
         const scrolls = scrollends(slides)
             // ...but not after disconnect or mid finger gesture...
-            .filter((e) => (data.connected && !data.gesturing))
-            .broadcast();
+            .filter((e) => (data.connected && !data.gesturing));
+            //.broadcast();
 
         // Private data
         const data = this[$data] = {

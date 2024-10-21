@@ -14,24 +14,23 @@ const captureOptions = {
     passive: true
 };
 
-function fire(producer, e) {
-    producer.timer = undefined;
-    producer.stream.push(e);
-
-    const times = producer.times;
+function fire(stream, e) {
+    stream.timer = undefined;
+    Stream.push(stream, e);
+    const times = stream.times;
     if (times.length > 1) { updateScrollInterval(times); }
     times.length = 0;
 }
 
-function ScrollendsProducer(element) {
+function Scrollends(element) {
     this.element = element;
     this.times   = [];
 }
 
-assign(ScrollendsProducer.prototype, {
-    pipe: function(stream) {
-        this.stream = stream;
+assign(Scrollends.prototype, Stream.prototype, {
+    start: function(stream) {
         this.element.addEventListener('scroll', this, captureOptions);
+        return this;
     },
 
     handleEvent: function(e) {
@@ -47,10 +46,10 @@ assign(ScrollendsProducer.prototype, {
 
     stop: function() {
         this.element.removeEventListener('scroll', this);
-        Stream.stop(this.stream);
+        return Stream.stop(this);
     }
 });
 
 export default function scrollends(element) {
-    return new Stream(new ScrollendsProducer(element));
+    return new Scrollends(element);
 }
