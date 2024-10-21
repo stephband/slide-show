@@ -107,7 +107,7 @@ See [stephen.band/slide-show/](https://stephen.band/slide-show/) for more detail
 
 ### Polyfill for `element.scrollTo()`
 
-The script `element.js` includes a polyfill for `element.scrollTo()`, as
+The script `element-1.js` includes a polyfill for `element.scrollTo()`, as
 Safari's native version lacks support for smooth scrolling behaviour. The
 polyfill is ignored in other browsers.
 
