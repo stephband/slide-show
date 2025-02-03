@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<!-- Literal template "/Users/stephband/Sites/slide-show/index.html.literal" -->
-
 <html lang="en">
 <head>
-    <title>slide-show</title>
+    
+<title>slide-show</title>
 
 <meta charset="utf-8" />
 <meta name="author" content="Stephen Band" />
-<meta name="description" content="The accessible, scroll-snapping, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
+<meta name="description" content="The accessible, styleable, scroll-snapping horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
 <meta name="viewport" content="width=device-width" />
 
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@stephband">
 <meta property="og:title" content="slide-show" />
-<meta property="og:description" content="The accessible, scroll-snapping, styleable, horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
+<meta property="og:description" content="The accessible, styleable, scroll-snapping horizontal carousel custom element. No dependencies, about 12kB minified and gzipped." />
 <meta property="og:image" content="https://stephen.band/slide-show/docs/images/card.jpg" />
 <meta property="og:url" content="https://stephen.band/slide-show/" />
 
 
 
+
+<script type="importmap"></script>
 
 <script title="load">
     document.documentElement.className += ' js loading';
@@ -28,6 +29,10 @@
     // load (eg. targetable scrolls) and we want them to run before the loading
     // class is removed
     window.addEventListener('load', () => window.requestAnimationFrame(() => document.documentElement.classList.remove('loading')));
+</script>
+
+<script type="module">
+    import '../literal/literal-html/module.js';
 </script>
 
 
@@ -47,6 +52,23 @@
     <link rel="stylesheet" href="./docs/module.css">
     <link rel="stylesheet" href="./build/slide-show.css">
     <link rel="prefetch" as="style" href="./build/slide-show-shadow.css">
+
+    <script type="importmap">{
+        "imports": {
+            "bolt/": "https://cdn.jsdelivr.net/gh/stephband/bolt-2@main/",
+            "dom/":  "https://cdn.jsdelivr.net/gh/stephband/dom@master/modules/",
+            "fn/":   "https://cdn.jsdelivr.net/gh/stephband/fn@master/modules/"
+        }
+    }</script>
+
+    <script type="module">
+        // Register <slide-show>
+        import './build/slide-show.js';
+
+        // Log events
+        import events from 'dom/modules/events.js';
+        events('slide-active', document).each((e) => console.log(e.type, e.target));
+    </script>
 </head>
 
 <body class="4x-grid @1-6x-grid @2-7x-grid @3-9x-grid grid">
@@ -65,7 +87,7 @@
     </slide-show>
 
     <section class="x1 4x @3-x2 x-stretch y-start documentation-block block">
-
+        
 
 <h2 class="text-02" id="get-started">Get started</h2>
 <p>Download the latest release:</p>
@@ -104,9 +126,9 @@ navigable via keyboard focus.</p>
     <h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>
 
     <div class="x1 4x @1-3x @2-x2 x-stretch y-start">
-
+    
     <h3>Attributes</h3>
-
+    
 
 <details-toggle class="attribute-details-toggle" id="attribute-active">
     <h4 class="attribute-text text-05" slot="summary">
@@ -173,9 +195,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 
 
-
+    
     <h3>Properties</h3>
-
+    
 
 <details-toggle class="property-details-toggle" id="property|selector-active">
     <h4 class="property-text text-05" slot="summary">
@@ -186,7 +208,7 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 <pre><code class="language-js"><span class="token keyword">const</span> activeSlide <span class="token operator">=</span> slideshow<span class="token punctuation">.</span>active<span class="token punctuation">;</span>
 </code></pre>
 <p>May be set to one of the child elements, or to the id of one of the
-child elements, which causes the <code>slide-show</code> to scroll.</p>
+child elements, causing the <code>slide-show</code> to scroll.</p>
 <pre><code class="language-js">slideshow<span class="token punctuation">.</span>active <span class="token operator">=</span> <span class="token string">'slide-1'</span><span class="token punctuation">;</span>
 </code></pre>
 
@@ -240,9 +262,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 
 
-
+    
     <h3>Methods</h3>
-
+    
 
 <details-toggle class="method-details-toggle" id="method-activatenext">
     <h4 class="method-text text-05" slot="summary">
@@ -266,9 +288,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 
 
-
+    
     <h3>Events</h3>
-
+    
 
 <details-toggle class="string-details-toggle" id="string-slide-active">
     <h4 class="string-text text-05" slot="summary">
@@ -283,9 +305,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 </div>
 
 <div class="x1 4x @1-x4 @1-3x @2-x5 x-stretch y-start">
-
+    
     <h3>Parts</h3>
-
+    
 
 <details-toggle class="part-details-toggle" id="part-previous">
     <h4 class="part-text text-05" slot="summary">
@@ -382,9 +404,9 @@ and <code>fill</code> properties from the button.</p>
 
 
 
-
+    
     <h3>Variables</h3>
-
+    
 
 <details-toggle class="var-details-toggle" id="var-slide-duration">
     <h4 class="var-text text-05" slot="summary">
@@ -444,9 +466,9 @@ for some browser inconsistencies.)</p>
 
 
 
-
+    
     <h3>Slots</h3>
-
+    
 
 <details-toggle class="slot-details-toggle" id="slot-previous">
     <h4 class="slot-text text-05" slot="summary">
@@ -531,23 +553,6 @@ HTML for the slot replaces that default content:</p>
         includes JS files for registering customised built-in versions of the
         slide-show.</p>
 
-
-<p>Import <code>./build/slide-show-ol.js</code> to register the customised built-in:</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">is</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>slide-show-ol<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span>
-</code></pre>
-
-
-
-<p>Import <code>./build/slide-show-ul.js</code> to register the customised built-in:</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">is</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>slide-show-ul<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>…<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
-</code></pre>
-
-
-
         <p>Note that these don't register the same way in
         all browsers – Safari does not support customised built-ins, so support
         is roughly polyfilled. Mileage may vary; please file an
@@ -562,7 +567,7 @@ HTML for the slot replaces that default content:</p>
         supported.</p>
     </div>
 
-
+    
 <section class="x1 4x @2-x2 x-stretch y-start">
     <h2>Contribute</h2>
     <p>
@@ -580,13 +585,13 @@ HTML for the slot replaces that default content:</p>
     </ul>
 </section>
 
-
-<hr class="x1 4x @2-x2 x-stretch" />
+    
+<hr class="x1 4x @2-x2 x-stretch" style="margin-top: 4.2em;" />
 
 <div class="x1 4x @2-x2 x-stretch y-start">
     <p class="text-10">
     Built by <a href="">Stephen Band</a> for
-    <a href="https://cruncher.ch"><img style="width: 1.366666667em; display: inline-block; vertical-align: bottom; margin-top: -0.1em; margin-bottom: -0.1em;" src="https://cruncher.ch/static/images/logo.svg" alt="Cruncher logo"/> Cruncher</a>.
+    <a href="https://cruncher.ch">Cruncher</a>.
     </p>
 
     <p class="text-10">
@@ -597,10 +602,12 @@ HTML for the slot replaces that default content:</p>
     </p>
 </div>
 
-
+    
 <footer class="x1 4x @1-6x @2-7x @3-9x 4x-grid @1-6x-grid @2-7x-grid @3-9x-grid grid grid footer">
     <div class="x1 4x @1-2x @2-x2 x-stretch y-start">
         <h3>Elements</h3>
+        <a class="block" href="https://stephen.band/literal/literal-html/"><code>&lt;literal-html&gt;</code></a>
+        <a class="block" href="https://stephen.band/literal/literal-element/"><code>&lt;literal-element&gt;</code></a>
         <a class="block" href="https://stephen.band/slide-show/"><code>&lt;slide-show&gt;</code></a>
         <a class="block" href="https://stephen.band/details-toggle/"><code>&lt;details-toggle&gt;</code></a>
         <a class="block" href="https://stephen.band/form-elements/rotary-input/"><code>&lt;rotary-input&gt;</code></a>
@@ -609,8 +616,6 @@ HTML for the slot replaces that default content:</p>
         <a class="block" href="https://stephen.band/form-elements/xy-input/"><code>&lt;xy-input&gt;</code></a>
         <a class="block" href="https://stephen.band/form-elements/number-control/"><code>&lt;number-control&gt;</code></a>
         <a class="block" href="https://stephen.band/form-elements/select-control/"><code>&lt;select-control&gt;</code></a>
-        <a class="block" href="https://stephen.band/literal/literal-element/"><code>&lt;literal-element&gt;</code></a>
-        <a class="block" href="https://stephen.band/literal/literal-html/"><code>&lt;literal-html&gt;</code></a>
     </div>
 
     <div class="x1 4x @1-2x @1-x3 @2-x4 x-stretch y-start">
@@ -622,13 +627,4 @@ HTML for the slot replaces that default content:</p>
 
     <script type="module" src="https://stephen.band/literal/documentation/build/module.js"></script>
 
-
-    <script type="module">
-        // Register <slide-show>
-        import './build/slide-show.js';
-
-        // Log events
-        import events from 'https://stephen.band/dom/modules/events.js';
-        events('slide-active', document).each((e) => console.log(e.type, e.target));
-    </script>
 </body>
