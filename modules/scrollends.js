@@ -22,18 +22,19 @@ function fire(stream, e) {
     times.length = 0;
 }
 
-function Scrollends(element) {
-    this.element = element;
-    this.times   = [];
-}
+class Scrollends extends Stream {
+    constructor(element) {
+        super();
+        this.element = element;
+        this.times   = [];
+    }
 
-assign(Scrollends.prototype, Stream.prototype, {
-    start: function(stream) {
+    start() {
         this.element.addEventListener('scroll', this, captureOptions);
         return this;
-    },
+    }
 
-    handleEvent: function(e) {
+    handleEvent(e) {
         const time = e.timeStamp / 1000;
         this.times.push(time);
 
@@ -42,13 +43,13 @@ assign(Scrollends.prototype, Stream.prototype, {
         }
 
         this.timer = setTimeout(fire, getScrollInterval() * 1000, this, e);
-    },
+    }
 
-    stop: function() {
+    stop() {
         this.element.removeEventListener('scroll', this);
         return Stream.stop(this);
     }
-});
+}
 
 export default function scrollends(element) {
     return new Scrollends(element);
