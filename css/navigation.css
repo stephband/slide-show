@@ -60,7 +60,7 @@ To fully replace the default icon, see `slot="next"`.
     border-width: 0;
     border-radius: 0.3125rem;
     color: inherit;
-    transition: background-color 0.2s linear;
+    transition: background-color 0.15s linear;
 
     cursor: pointer;
 
@@ -82,6 +82,13 @@ To fully replace the default icon, see `slot="next"`.
 [part="next"]:hover {
     transition: background-color 0.1s linear;
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+[part="previous"]:disabled,
+[part="next"]:disabled {
+    /* Hide unusable buttons by default. Can be overidden with
+       slide-show::part(previous):disabled { visibility: visible; } */
+    visibility: hidden;
 }
 
 

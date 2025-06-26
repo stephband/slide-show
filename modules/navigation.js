@@ -45,17 +45,21 @@ function update(slides, prev, next, elements, i) {
     // Preemptively hide buttons now (before new active is detected at
     // end of scroll)
     if (i === 0 || slides.scrollLeft === 0) {
-        prev.style.visibility = 'hidden';
+        prev.disabled = true;
+        //prev.style.visibility = 'hidden';
     }
     else {
-        prev.style.visibility = '';
+        prev.disabled = false;
+        //prev.style.visibility = '';
     }
 
     if (i === elements.length - 1 || slides.scrollLeft >= slides.scrollWidth - slides.clientWidth) {
-        next.style.visibility = 'hidden';
+        next.disabled = true;
+        //next.style.visibility = 'hidden';
     }
     else {
-        next.style.visibility = '';
+        next.disabled = false;
+        //next.style.visibility = '';
     }
 }
 
