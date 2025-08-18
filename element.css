@@ -2,7 +2,7 @@
 /* Style the un-upgraded slide-show */
 
 slide-show {
-    display: grid;
+    display: flex;
     /* Rules that can be overridden with classes, which themselves override
        :host styles. */
     position: relative;
@@ -41,23 +41,7 @@ slide-show:not(:defined) > [slot] {
     display: none !important;
 }
 
-.loading slide-show {
-    /* During loading make scrolling instant */
-    -webkit-scroll-behavior: auto;
-            scroll-behavior: auto;
-}
-
-
-/*
-slide-show:defined {
-}
-*/
-
 slide-show::-webkit-scrollbar {
-    display: none;
-}
-
-slide-show:not(:defined) > [slot] {
     display: none;
 }
 
@@ -77,9 +61,8 @@ slide-show:fullscreen {
     align-content: center;
 }
 
-/*
-Simulate in iOS
-slide-show.fullscreen {
-    align-content: center;
+.loading slide-show {
+    /* During loading make scrolling instant */
+    -webkit-scroll-behavior: auto;
+            scroll-behavior: auto;
 }
-*/
