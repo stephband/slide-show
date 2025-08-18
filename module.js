@@ -50,6 +50,6 @@ import element    from 'dom/element.js';
 import lifecycle  from './modules/lifecycle.js';
 import properties from './modules/properties.js';
 
-lifecycle.shadow = `<link rel="stylesheet" href="${ window.slideshowStylesheet || import.meta.url.replace(/module\.js$/, 'shadow.css') }"/>`;
+lifecycle.shadow = `<link rel="stylesheet" href="${ window.slideshowStylesheet || new URL('shadow.css', import.meta.url) }"/>`;
 
 export default element('slide-show', lifecycle, properties, 'stephen.band/slide-show/');
