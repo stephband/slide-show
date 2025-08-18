@@ -25,7 +25,7 @@
     },
     "license" : "GPL-3.0",
     "type": "module",
-    "browser": "./build/slide-show.js",
+    "browser": "./build/element.js",
     "files": [
         "build/*",
         "docs/docs.css",

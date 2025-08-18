@@ -8,8 +8,8 @@ Download the latest release:
 Then include the JS and CSS files:
 
 ```html
-<link rel="stylesheet" href="./build/slide-show.css" />
-<script type="module" src="./build/slide-show.js"></script>
+<link rel="stylesheet" href="./build/element.css" />
+<script type="module" src="./build/element.js"></script>
 ```
 
 You can now use the `<slide-show>` in your HTML. The `<slide-show>` example

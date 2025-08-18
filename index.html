@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+
 <title>slide-show</title>
 
 <meta charset="utf-8" />
@@ -46,12 +46,12 @@
 
 
     <script title="slide-show">
-        window.slideshowStylesheet = './build/slide-show-shadow.css';
+        window.slideshowStylesheet = './build/shadow.css';
     </script>
 
     <link rel="stylesheet" href="./docs/module.css">
-    <link rel="stylesheet" href="./build/slide-show.css">
-    <link rel="prefetch" as="style" href="./build/slide-show-shadow.css">
+    <link rel="stylesheet" href="./build/element.css">
+    <link rel="prefetch" as="style" href="./build/shadow.css">
 
     <script type="importmap">{
         "imports": {
@@ -63,7 +63,7 @@
 
     <script type="module">
         // Register <slide-show>
-        import './build/slide-show.js';
+        import './build/element.js';
 
         // Log events
         import events from 'dom/modules/events.js';
@@ -87,14 +87,14 @@
     </slide-show>
 
     <section class="x1 4x @3-x2 x-stretch y-start documentation-block block">
-        
+
 
 <h2 class="text-02" id="get-started">Get started</h2>
 <p>Download the latest release:</p>
 <p><a href="https://github.com/stephband/slide-show/releases"><code>github.com/stephband/slide-show/releases</code></a></p>
 <p>Then include the JS and CSS files:</p>
-<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/slide-show.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<pre><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/element.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./build/element.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre>
 <p>You can now use the <code>&lt;slide-show&gt;</code> in your HTML. The <code>&lt;slide-show&gt;</code> example
 above looks something like this:</p>
@@ -126,9 +126,9 @@ navigable via keyboard focus.</p>
     <h2 class="x1 3x @1-4x @2-x2 x-stretch y-start">API</h2>
 
     <div class="x1 4x @1-3x @2-x2 x-stretch y-start">
-    
+
     <h3>Attributes</h3>
-    
+
 
 <details-toggle class="attribute-details-toggle" id="attribute-active">
     <h4 class="attribute-text text-05" slot="summary">
@@ -195,9 +195,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 
 
-    
+
     <h3>Properties</h3>
-    
+
 
 <details-toggle class="property-details-toggle" id="property|selector-active">
     <h4 class="property-text text-05" slot="summary">
@@ -262,9 +262,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 
 
-    
+
     <h3>Methods</h3>
-    
+
 
 <details-toggle class="method-details-toggle" id="method-activatenext">
     <h4 class="method-text text-05" slot="summary">
@@ -288,9 +288,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 
 
 
-    
+
     <h3>Events</h3>
-    
+
 
 <details-toggle class="string-details-toggle" id="string-slide-active">
     <h4 class="string-text text-05" slot="summary">
@@ -305,9 +305,9 @@ have <code>id</code> attributes stripped off in an attempt to make them inert.</
 </div>
 
 <div class="x1 4x @1-x4 @1-3x @2-x5 x-stretch y-start">
-    
+
     <h3>Parts</h3>
-    
+
 
 <details-toggle class="part-details-toggle" id="part-previous">
     <h4 class="part-text text-05" slot="summary">
@@ -404,9 +404,9 @@ and <code>fill</code> properties from the button.</p>
 
 
 
-    
+
     <h3>Variables</h3>
-    
+
 
 <details-toggle class="var-details-toggle" id="var-slide-duration">
     <h4 class="var-text text-05" slot="summary">
@@ -466,9 +466,9 @@ for some browser inconsistencies.)</p>
 
 
 
-    
+
     <h3>Slots</h3>
-    
+
 
 <details-toggle class="slot-details-toggle" id="slot-previous">
     <h4 class="slot-text text-05" slot="summary">
@@ -541,10 +541,10 @@ HTML for the slot replaces that default content:</p>
         <p><code>&lt;slide-show&gt;</code> is built to scroll, and if JavaScript
         fails and the features of the element do not initialise (the component
         is not 'upgraded' in Web Component parlance), the user nonetheless gets
-        a scrollable element. Fallback style is provided by <code>./build/slide-show.css</code>.</p>
+        a scrollable element. Fallback style is provided by <code>./build/element.css</code>.</p>
 
-        <p>Upgraded style is provided by <code>./build/slide-show-shadow.css</code>, which
-        must be in the same location as <code>./build/slide-show.js</code> in order
+        <p>Upgraded style is provided by <code>./build/shadow.css</code>, which
+        must be in the same location as <code>./build/element.js</code> in order
         to be loaded into the <code>slide-show</code>'s shadow DOM.</p>
 
         <h3 class="docs-text-04">Semantics</h3>
@@ -567,7 +567,7 @@ HTML for the slot replaces that default content:</p>
         supported.</p>
     </div>
 
-    
+
 <section class="x1 4x @2-x2 x-stretch y-start">
     <h2>Contribute</h2>
     <p>
@@ -585,7 +585,7 @@ HTML for the slot replaces that default content:</p>
     </ul>
 </section>
 
-    
+
 <hr class="x1 4x @2-x2 x-stretch" style="margin-top: 4.2em;" />
 
 <div class="x1 4x @2-x2 x-stretch y-start">
@@ -602,7 +602,7 @@ HTML for the slot replaces that default content:</p>
     </p>
 </div>
 
-    
+
 <footer class="x1 4x @1-6x @2-7x @3-9x 4x-grid @1-6x-grid @2-7x-grid @3-9x-grid grid grid footer">
     <div class="x1 4x @1-2x @2-x2 x-stretch y-start">
         <h3>Elements</h3>

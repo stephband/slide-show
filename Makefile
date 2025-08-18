@@ -15,7 +15,7 @@ docs:
 modules:
 	@rm -f deno.lock
 	rm -rf build
-	deno run --allow-read --allow-env --allow-net --allow-write --allow-run https://cdn.jsdelivr.net/gh/stephband/fn@master/deno/make-modules.js build/element.js ./module.js
-	deno run --allow-read --allow-env --allow-net --allow-write --allow-run https://cdn.jsdelivr.net/gh/stephband/fn@master/deno/make-css.js build/element.css ./module.css
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run https://cdn.jsdelivr.net/gh/stephband/fn@master/deno/make-modules.js build/element.js ./element.js
+	deno run --allow-read --allow-env --allow-net --allow-write --allow-run https://cdn.jsdelivr.net/gh/stephband/fn@master/deno/make-css.js build/element.css ./element.css
 	deno run --allow-read --allow-env --allow-net --allow-write --allow-run https://cdn.jsdelivr.net/gh/stephband/fn@master/deno/make-css.js build/shadow.css ./shadow.css
 	@rm deno.lock

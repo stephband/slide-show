@@ -24,8 +24,8 @@ Download the latest release:
 Then import the CSS and JS files:
 
 ```html
-<link rel="stylesheet" href="./build/slide-show.css" />
-<script type="module" src="./build/slide-show.js"></script>
+<link rel="stylesheet" href="./build/element.css" />
+<script type="module" src="./build/element.js"></script>
 ```
 
 ### Via npm
@@ -37,13 +37,13 @@ npm install @stephband/slide-show
 ```
 
 The package comes with CSS files, one for the outer DOM and one for the shadow
-DOM. The outer DOM CSS can be imported from `build/slide-show.css`:
+DOM. The outer DOM CSS can be imported from `build/element.css`:
 
 ```html
-<link rel="stylesheet" href="./node_modules/@stephband/slide-show/build/slide-show.css" />
+<link rel="stylesheet" href="./node_modules/@stephband/slide-show/build/element.css" />
 ```
 
-The shadow DOM CSS file must be placed in the same location as 'build/slide-show.js',
+The shadow DOM CSS file must be placed in the same location as 'build/element.js',
 which will work fine as-is until you build your own package to a different location. (I
 really don't know how you are supposed to handle this sort of thing via npm and I
 hope someone will <a href="https://github.com/stephband/slide-show/issues">advise</a>.)
