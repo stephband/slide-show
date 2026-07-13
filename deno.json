@@ -1,8 +1,8 @@
 {
     "imports": {
-        "dom/":     "https://cdn.jsdelivr.net/gh/stephband/dom@master/modules/",
-        "fn/":      "https://cdn.jsdelivr.net/gh/stephband/fn@master/modules/",
-        "bolt/":    "https://cdn.jsdelivr.net/gh/stephband/bolt-2@main/",
+        "dom/":     "https://cdn.jsdelivr.net/gh/stephband/dom@1.4.8/modules/",
+        "fn/":      "https://cdn.jsdelivr.net/gh/stephband/fn@1.6.3/modules/",
+        "bolt/":    "https://cdn.jsdelivr.net/gh/stephband/bolt-2@1.0.9/",
         "literal/": "https://cdn.jsdelivr.net/gh/stephband/literal@main/"
     }
 }
